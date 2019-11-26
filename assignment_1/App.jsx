@@ -12,7 +12,8 @@ const styles = StyleSheet.create({
 
 export default function App() {
   return (
+    
     <Main />
 
   );
-}
+};
