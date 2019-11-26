@@ -11,7 +11,6 @@ const Main = () => (
       <Text style={styles.buttonText} >Gallery</Text>
     </TouchableHighlight>
   </View>
-
 );
 
 export default Main;
