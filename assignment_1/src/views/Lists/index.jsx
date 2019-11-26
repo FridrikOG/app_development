@@ -10,12 +10,10 @@ const Lists = () => (
   <View>
     <Toolbar />
     <Text style={{ padding: 100, textAlign: 'center' }}>
-        You're in our list
-
+        You're in our list...
       { boardsList.map(function(item,index) {
-        
-        return ( <Text style={styles.lists}> Item ID: {item.id} Name: {item.name} 
-        color code: {item.color} boardId: {item.boardid}</Text>
+        return ( <Text style={styles.lists, {backgroundColor:  item.color}}> Item ID: {item.id} Name: {item.name} 
+        color code: {item.color} boardId: {item.boardId}</Text>
         
         )
       }
