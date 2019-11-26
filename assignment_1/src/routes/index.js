@@ -4,9 +4,9 @@ import Main from '../views/Main';
 import Board from '../views/Boards';
 
 
-const stackNavigator = createStackNavigator({
+const StackNavigator = createStackNavigator({
   Main,
   Board,
 });
 
-export default createAppContainer(stackNavigator);
+export default createAppContainer(StackNavigator);
