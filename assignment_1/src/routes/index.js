@@ -6,8 +6,8 @@ import Boards from '../views/Boards';
 
 
 const StackNavigator = createStackNavigator({
-  Boards,
   Main,
+  Boards,
 });
 
 export default createAppContainer(StackNavigator);
