@@ -3,7 +3,7 @@ import { View, TouchableHighlight, Text } from 'react-native';
 import styles from './style';
 
 
-const Toolbar = ({ onAdd, onRemove }) => (
+const Toolbar = ({ onAdd, onRemove, onModify }) => (
   <View style={styles.toolbar} styleName="horizontal">
     <TouchableHighlight onPress={onAdd}>
       <Text style={styles.toolbarActionText}>Create</Text>
@@ -11,7 +11,7 @@ const Toolbar = ({ onAdd, onRemove }) => (
     <TouchableHighlight style={styles.toolbarAction} onPress={onRemove}>
       <Text style={styles.toolbarActionText}>Delete</Text>
     </TouchableHighlight>
-    <TouchableHighlight style={styles.toolbarAction} onPress={onRemove}>
+    <TouchableHighlight style={styles.toolbarAction} onPress={onModify}>
       <Text style={styles.toolbarActionText}>Modify</Text>
     </TouchableHighlight>
   </View>
