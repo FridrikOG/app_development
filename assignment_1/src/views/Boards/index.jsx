@@ -5,10 +5,11 @@ import { View, Text } from 'react-native';
 import data from '../../resources/data.json';
 
 const Boards = () => (
-  <View>
-    <Text style={{ padding: 100, textAlign: 'center' }}> This is our board list</Text>
-    console.log(data)
-  </View>
+      <View>
+        <Text style={{ padding: 100, textAlign: 'center' }}>
+        This is our board list
+        </Text>
+      </View>
 );
 
 export default Boards;
