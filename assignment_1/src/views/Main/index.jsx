@@ -6,12 +6,16 @@ import {
 import logo from '../../resources/logo.png';
 import styles from './styles';
 
-const Main = ({ props }) => (
+function logging(navigation) {
+  console.log(navigation.navigation);
+}
+
+const Main = (navigation) => (
   <View style={styles.container}>
     <Image style={styles.logo} source={logo} />
     <Text style={styles.title}>Toddler App</Text>
     <Text style={styles.paragraph}>A fun and efficient way to keep track of your tasks!</Text>
-    <TouchableHighlight style={styles.button} onPress={() => { props(); }}>
+    <TouchableHighlight style={styles.button} onPress={() => logging(navigation)}>
       <Text style={styles.buttonText}>View Board List</Text>
     </TouchableHighlight>
   </View>
