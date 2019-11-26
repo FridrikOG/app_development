@@ -1,7 +1,9 @@
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
-  listContainer: {
-    flex: 1,
+  lists: {
+    fontWeight: 'bold',
+    fontSize: 16,
+    padding: 30,
   },
 });
