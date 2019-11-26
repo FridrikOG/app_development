@@ -1,17 +1,18 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import Toolbar from '../../components/Toolbar';
-// import GalleryList from '../../components/GalleryList';
 import data from '../../resources/data.json';
+import ListLists from '../../components/ListLists';
 
-const Boards = () => (
+const Lists = () => (
   <View>
     <Toolbar />
     <Text style={{ padding: 100, textAlign: 'center' }}>
-        This is our board list
+        You're in our lists
     </Text>
+    <ListLists images={ data.board}/>
+    <Text>  above should be datafsdafdsf</Text>
   </View>
 );
 
-
-export default Boards;
+export default Lists;
