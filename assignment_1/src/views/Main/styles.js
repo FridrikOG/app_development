@@ -1,13 +1,15 @@
 import {StyleSheet} from 'react-native';
+import { lightblue, lightyellow } from '../../styles/colors';
 export default StyleSheet.create({
   container: {
     flex:1,
-    padding:20,
+    padding:30,
     alignItems: 'center',
     justifyContent: 'space-around',
+    backgroundColor: lightyellow,
   },
   title: {
-    fontSize: 23,
+    fontSize: 40,
 
   },
   paragraph:{
@@ -15,27 +17,25 @@ export default StyleSheet.create({
     color: 'black',
   },
   button: {
-    paddingTop: 10,
+    paddingTop: 20,
     paddingBottom: 10,
     paddingLeft: 20,
     paddingRight: 20,
-    width:100,
-    height:50,
-    backgroundColor: 'blue',
-    borderColor: 'black',
-    borderWidth: 2,
+    //width:120,
+    height:65,
+    backgroundColor: lightblue,
+    borderRadius: 12,
+    //borderColor: 'white',
+    //borderWidth: 2,
   },
   buttonText: {
     color: 'white',
     textAlign:'center',
-    fontSize:18,
+    fontSize:20,
   },
   logo: {
-    width: 200,
-    height: 200,
+    width: 250,
+    height: 250,
   }
-
-
-
 
 });
