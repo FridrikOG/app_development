@@ -6,22 +6,29 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
   },
+  title: {
+    fontSize: 23,
+
+  },
   paragraph:{
     textAlign: 'center',
-    color: 'white',
+    color: 'black',
   },
   button: {
-    marginTop: 30,
     paddingTop: 10,
     paddingBottom: 10,
     paddingLeft: 20,
     paddingRight: 20,
+    width:100,
+    height:50,
     backgroundColor: 'blue',
-    borderColor: 'white',
+    borderColor: 'black',
     borderWidth: 2,
   },
   buttonText: {
     color: 'white',
+    textAlign:'center',
+    fontSize:18,
   },
   logo: {
     width: 200,
