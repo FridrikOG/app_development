@@ -9,7 +9,7 @@ const getBoards = ({ navigation: { navigate } }) => (
 
       <ScrollView style={styles.container}>
         <Text style={styles.type}>Board List</Text>
-        { boardsList.map(function(item,index){ 
+        { boardsList.map(function(item,index){
 
           return(
             <TouchableHighlight style={styles.button} onPress={() => {navigate('Lists', {boardId: item.id, title: item.title})}}>
@@ -34,12 +34,13 @@ class Boards extends React.Component {
     return (
       <ScrollView style={styles.container}>
         <Text style={styles.type}>Board List</Text>
-        {data.boards.map(function(item,index){ 
+        {data.boards.map(function(item,index){
+          console.log("ID in BOARDS: ",item.id);
           return(
-            <BoardList images={item.thumbnailPhoto} name={item.name} description={item.description} navigate={props.navigation.navigate}/>
+            <BoardList boardId={item.id} images={item.thumbnailPhoto} name={item.name} description={item.description} navigate={props.navigation.navigate}/>
           )}
         )}
-      </ScrollView> 
+      </ScrollView>
     )
   }
 };
