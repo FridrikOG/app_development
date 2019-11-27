@@ -7,6 +7,7 @@ import Toolbar from '../../components/Toolbar';
 
 
 class Boards extends React.Component {
+  
   state = {
     // All images within the application directory
     ids: [],
@@ -14,21 +15,11 @@ class Boards extends React.Component {
     selectedIds: [],
 }
 
+  
+    
+    onBoardLongPress(boardId) {
+      console.log("sPRINTING here: ", boardId)
 
-  onBoardPress(id){
-    const {selectedIds} = this.state;
-    
-    
-    if (selectedIds.includes(id) == false){
-      console.log("Not there")
-      selectedIds.push(id)
-    } else{
-      console.log('is there')
-      let indexId = selectedIds.indexOf(id)
-      selectedIds[indexId] = null 
-      //this.setState({selectedIds: selectedIds.filter(x => x !== id)})
-      }
-      console.log("LOGGING ARRAY: ",selectedIds)
     }
     
   render() {
@@ -40,7 +31,7 @@ class Boards extends React.Component {
         <Toolbar/> 
         
         
-        <BoardList boards={ data.boards } props={props}/>
+        <BoardList boards={ data.boards } props={props} onLongPress={(id) => this.onBoardLongPress(id)} />
         
       </View>
     )
@@ -75,3 +66,21 @@ class Boards extends React.Component {
 
 
 
+/*
+FUNCTION TO DO BOARD PRESS VERY NICELY WRITTEN WITH NULL
+onBoardPress(id){
+    const {selectedIds} = this.state;
+    
+    
+    if (selectedIds.includes(id) == false){
+      console.log("Not there")
+      selectedIds.push(id)
+    } else{
+      console.log('is there')
+      let indexId = selectedIds.indexOf(id)
+      selectedIds[indexId] = null 
+      //this.setState({selectedIds: selectedIds.filter(x => x !== id)})
+      }
+      console.log("LOGGING ARRAY: ",selectedIds)
+    }
+    */
