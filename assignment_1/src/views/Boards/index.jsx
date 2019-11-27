@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { ScrollView, View, Text, Image, TouchableHighlight } from 'react-native';
-import ImageThumbnail from '../../components/ImageThumbnail';
 import data from '../../resources/data.json';
+import BoardList from '../../components/BoardList';
 import styles from './styles';
 
-
-const boardsList = data.boards;
-
-const Boards = ({ navigation: { navigate } }) => (
+/*
+const getBoards = ({ navigation: { navigate } }) => (
 
       <ScrollView style={styles.container}>
         <Text style={styles.type}>Board List</Text>
@@ -25,5 +23,24 @@ const Boards = ({ navigation: { navigate } }) => (
         )}
       </ScrollView>
 );
+*/
+
+class Boards extends React.Component {
+  onBoardLongPress(name) {
+  }
+
+  render() {
+    return (
+      <ScrollView style={styles.container}>
+        <Text style={styles.type}>Board List</Text>
+        {data.boards.map(function(item,index){ 
+          return(
+            <BoardList images={item.thumbnailPhoto} name={item.name} description={item.description}/>
+          )}
+        )}
+      </ScrollView> 
+    )
+  }
+};
 
 export default Boards;

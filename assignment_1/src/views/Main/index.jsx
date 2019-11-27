@@ -8,7 +8,6 @@ import styles from './styles';
 
 // comment
 const Main = ({ navigation: { navigate } }) => (
-
   <View style={styles.container}>
     <Image style={styles.logo} source={logo} />
     <Text style={styles.title}>Toddler App</Text>
