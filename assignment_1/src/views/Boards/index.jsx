@@ -33,7 +33,7 @@ class Boards extends React.Component {
           return(
             <TouchableOpacity
             onLongPress={this.onBoardLongPress}
-            onPress={() => {props.navigation.navigate('Lists',{boardId: props.boardId, name: props.name})}}
+            onPress={() => {props.navigation.navigate('Lists',{boardId: item.id, name: item.name})}}
             style={styles.button}>
               <BoardList boardId={item.id} images={item.thumbnailPhoto} name={item.name} description={item.description} navigate={props.navigation.navigate}/>
             </TouchableOpacity>

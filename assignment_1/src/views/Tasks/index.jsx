@@ -25,14 +25,12 @@ function newData(){
 }
 
 class Tasks extends React.Component{
-    constructor(props)
-    super(props)
-    this.tasks = data.tasks;
+
 
   render(){
     //const props = this.props.navigation.state.params;
     const listId = 1
-    
+
     const newestTask = newData()
 
 
@@ -58,7 +56,7 @@ class Tasks extends React.Component{
                 </View>
               )
             }
-        } 
+        }
           )
         }
       </ScrollView>
