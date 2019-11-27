@@ -5,6 +5,7 @@ import BoardList from '../../components/BoardList';
 import styles from './styles';
 import Toolbar from '../../components/Toolbar';
 
+
 class Boards extends React.Component {
   state = {
     // All images within the application directory
@@ -13,8 +14,10 @@ class Boards extends React.Component {
     selectedIds: [],
 }
 
+
   onBoardPress(id){
     const {selectedIds} = this.state;
+    
     
     if (selectedIds.includes(id) == false){
       console.log("Not there")
@@ -26,22 +29,28 @@ class Boards extends React.Component {
       //this.setState({selectedIds: selectedIds.filter(x => x !== id)})
       }
       console.log("LOGGING ARRAY: ",selectedIds)
-      }
-
-
-  render() {
-    const props = this.props;
-    handler = (id) =>{
-      console.log("YOU MADE IT");
-      this.onBoardPress(id);
-
     }
+    
+  render() {
+    //console.log("LOGGING DATA BOARDS: ", data.boards)
+    const props = this.props;
+    console.log("LOGGING: ", this.props)
     return (
-
-
+      <View style = {{ flex: 1}}>
+        <Toolbar/> 
+        
+        
+        <BoardList boards={ data.boards } props={props}/>
+        
+      </View>
+    )
+  }
+};
+    export default Boards;
+/*
       <ScrollView style={styles.container}>
         <Text style={styles.type}>Board List</Text>
-
+        <Toolbar/>
         {data.boards.map(function(item,index){
           onBoardLongPress = (id) => {
             console.log("THIS IS A LONG ONE");
@@ -59,13 +68,10 @@ class Boards extends React.Component {
         )}
 
       </ScrollView>
-
-    )
-  }
-};
+*/
+  
 
 
 
 
 
-export default Boards;
