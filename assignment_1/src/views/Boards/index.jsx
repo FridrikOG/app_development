@@ -14,8 +14,6 @@ class Boards extends React.Component {
     // All selected images
     selectedIds: [],
 }
-
-  
     
     onBoardLongPress(boardId) {
       console.log("sPRINTING here: ", boardId)
@@ -31,7 +29,7 @@ class Boards extends React.Component {
         <Toolbar/> 
         
         
-        <BoardList boards={ data.boards } props={props} onLongPress={(id) => this.onBoardLongPress(id)} />
+        <BoardList boards={ data.boards } props={props} onLongPress={(boardId) => this.onBoardLongPress(id)} />
         
       </View>
     )

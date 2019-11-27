@@ -11,16 +11,9 @@ export default StyleSheet.create({
     padding:20,
     fontSize:20,
   },
-  text: {
-    borderColor:'black',
-    borderWidth:1,
-    borderRadius:12,
-    fontSize:15,
-    margin: 15,
-    padding:20,
-  },
-  finished: {
-    borderColor:'green',
+  unfinished: {
+
+    borderColor:'blue',
     borderWidth:3,
     borderRadius:12,
     fontSize:15,
@@ -38,5 +31,13 @@ export default StyleSheet.create({
   },
   listsContainer: {
     borderColor: 'red'
-  }
+  },
+  finished: {
+    borderColor:'green',
+    borderWidth:3,
+    borderRadius:12,
+    fontSize:15,
+    margin: 15,
+    padding:20,
+  },
 });
