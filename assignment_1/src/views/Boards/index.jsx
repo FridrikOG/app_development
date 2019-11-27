@@ -11,9 +11,10 @@ const Boards = ({ navigation: { navigate } }) => (
 
       <ScrollView style={styles.container}>
         <Text style={styles.type}>Board List</Text>
-        { boardsList.map(function(item,index) {
+        { boardsList.map(function(item,index){ 
+
           return(
-            <TouchableHighlight style={styles.button} onPress={() => navigate('Lists')}>
+            <TouchableHighlight style={styles.button} onPress={() => {navigate('Lists', {boardId: item.id, title: item.title})}}>
             <View style={styles.board}>
               <ImageThumbnail file={item.thumbnailPhoto}/>
               <Text style={styles.title}>{item.name}</Text>
