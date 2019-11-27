@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
-import { ScrollView, View, Text, Image, TouchableHighlight } from 'react-native';
+import { ScrollView, View, Text, Image, TouchableHighlight, TextInput } from 'react-native';
 import ImageThumbnail from '../../components/ImageThumbnail';
 import data from '../../resources/data.json';
 import styles from './styles';
+import Toolbar from '../../components/Toolbar';
 
 
 const boardsList = data.boards;
 
 const Boards = ({ navigation: { navigate } }) => (
-
+      
       <ScrollView style={styles.container}>
+        
+        <Toolbar/>
         <Text style={styles.type}>Board List</Text>
+        
         { boardsList.map(function(item,index){ 
 
           return(
@@ -22,8 +26,14 @@ const Boards = ({ navigation: { navigate } }) => (
             </View>
             </TouchableHighlight>
           )}
+          
         )}
+        <TextInput/> 
       </ScrollView>
 );
+
+
+
+
 
 export default Boards;
