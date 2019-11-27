@@ -6,10 +6,11 @@ container: {
     flex:1,
     padding:30,
     backgroundColor:lightestblue,
+
   },
-  type:{
+  type: {
     fontSize: 30,
     fontWeight: 'bold',
-    textAlign:'center',
+    textAlign:'center',  
   }
 });

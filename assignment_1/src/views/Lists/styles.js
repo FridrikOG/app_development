@@ -1,7 +1,26 @@
 import { StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
+import { blue, lightyellow, babyblue,lightestblue } from '../../styles/colors';
 
 export default StyleSheet.create({
+  container: {
+
+  },
+  title: {
+    backgroundColor: lightyellow,
+    padding:20,
+    fontSize:20,
+  },
+  text: {
+
+    borderColor:'black',
+    borderWidth:1,
+    borderRadius:12,
+    fontSize:15,
+    margin: 15,
+    padding:20,
+  },
+
   lists: {
     fontWeight: 'bold',
     fontSize: 16,
