@@ -1,21 +1,18 @@
 import React, { Component } from 'react';
-import { ScrollView, View, Text, Image, TouchableHighlight, TextInput } from 'react-native';
-import ImageThumbnail from '../../components/ImageThumbnail';
+import { ScrollView, View, Text, Image, TouchableHighlight } from 'react-native';
 import data from '../../resources/data.json';
+import BoardList from '../../components/BoardList';
 import styles from './styles';
 import Toolbar from '../../components/Toolbar';
 
+/*
+const getBoards = ({ navigation: { navigate } }) => (
 
-const boardsList = data.boards;
-
-const Boards = ({ navigation: { navigate } }) => (
-      
       <ScrollView style={styles.container}>
         
         <Toolbar/>
         <Text style={styles.type}>Board List</Text>
-        
-        { boardsList.map(function(item,index){ 
+        { boardsList.map(function(item,index){
 
           return(
             <TouchableHighlight style={styles.button} onPress={() => {navigate('Lists', {boardId: item.id, title: item.title})}}>
@@ -31,6 +28,27 @@ const Boards = ({ navigation: { navigate } }) => (
         <TextInput/> 
       </ScrollView>
 );
+*/
+
+class Boards extends React.Component {
+  onBoardLongPress(name) {
+  }
+
+  render() {
+    const props = this.props;
+    return (
+      <ScrollView style={styles.container}>
+        <Text style={styles.type}>Board List</Text>
+        {data.boards.map(function(item,index){
+          console.log("ID in BOARDS: ",item.id);
+          return(
+            <BoardList boardId={item.id} images={item.thumbnailPhoto} name={item.name} description={item.description} navigate={props.navigation.navigate}/>
+          )}
+        )}
+      </ScrollView>
+    )
+  }
+};
 
 
 
