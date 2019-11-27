@@ -1,35 +1,37 @@
 import React from 'react';
-import { View, Text, TextInput } from 'react-native';
+import { ScrollView, View, Text } from 'react-native';
 import Toolbar from '../../components/Toolbar';
-import data from '../../resources/data.json';;
+import data from '../../resources/data.json';
 import styles from './styles';
 import getParameters from '../../components/Parameters/getParameters';
-import ListInputComponent from '../../components/Inputs/ListInputComponent'
-const boardsList = data.lists;
 
 class Lists extends React.Component{
   render(){
     const props = this.props.navigation.state.params;
     console.log(props);
     console.log('ID in LISTS: ',props.boardId);
-    return(
-      <View>
-        <Toolbar />
-        <Text style={{ padding: 100, textAlign: 'center' }}>
-            You're in our list...
 
-          { boardsList.map(function(item,index) {
+    return(
+      <ScrollView>
+        <Toolbar />
+        <Text style={styles.title}>Currently in Board: {props.boardId}</Text>
+          { data.lists.map(function(item,index) {
             if (item.boardId == props.boardId){
               return (
-                <Text style={styles.lists, {backgroundColor:  item.color}}> Item ID: {item.id} Name: {item.name}
-              color code: {item.color} boardId: {item.boardId}</Text>
+                <View style={styles.container}>
+                  <Text style={[styles.text, {backgroundColor:item.color}]}>
+                    List: {item.id} {"\n"}
+                    Name: {item.name} {"\n"}
+                    Color code: {item.color} {"\n"}
+                  </Text>
+                </View>
               )
             }
           }
           )
         }
-        </Text>
-      </View>
+
+      </ScrollView>
 
     )
 
