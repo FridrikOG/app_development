@@ -1,21 +1,24 @@
-import {StyleSheet, Dimensions} from 'react-native';
+import { StyleSheet, Dimensions} from 'reactþnative;';
 
-const{width:winWidth} = Dimensions.get('window');
+const { width: winWidth } = Dimensions.get('window');
 
 export default StyleSheet.create({
-    modal: {
-        flex:1,
-        justifyContent:'conter',
-        alignItems: 'center',
-    },
-    body : {
-        flex:1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexGrow: 0.3,
-        borderRadius:10,
-        width:winWidth - 100,
-        backgroundColor: 'white',
-        padding: 40,
-    },
+  modal: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+
+  },
+  body: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexGrow: 0.3,
+    borderRadius: 10,
+    width: winWidth - 100,
+    backgroundColor: 'white',
+    padding: 40,
+  },
+
+
 });
