@@ -30,12 +30,13 @@ class Boards extends React.Component {
   }
 
   render() {
+    const props = this.props;
     return (
       <ScrollView style={styles.container}>
         <Text style={styles.type}>Board List</Text>
         {data.boards.map(function(item,index){ 
           return(
-            <BoardList images={item.thumbnailPhoto} name={item.name} description={item.description}/>
+            <BoardList images={item.thumbnailPhoto} name={item.name} description={item.description} navigate={props.navigation.navigate}/>
           )}
         )}
       </ScrollView> 
