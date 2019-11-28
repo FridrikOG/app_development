@@ -14,10 +14,9 @@ class Lists extends React.Component{
     isAddModalOpen: false,
   }
 
-  addList(){
-
-
-
+  addList(c){
+    console.log(c);
+    this.setState({ lists: [ ...lists, c ], isAddModalOpen: false });
   }
 
   render(){

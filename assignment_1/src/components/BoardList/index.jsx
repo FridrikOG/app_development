@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 const BoardList = ({ boards, props, onLongPress, selectedIds }) => {
     console.log("Logging in props: ", props)
     console.log("LOGGING ID's in board " , selectedIds)
-    
+
     return (
         <View style={styles.container}>
         <Text style = {styles.type} > Board List </Text>
@@ -19,14 +19,14 @@ const BoardList = ({ boards, props, onLongPress, selectedIds }) => {
             renderItem={( {item: {name, description, thumbnailPhoto, id }}) => {
                 console.log(selectedIds.indexOf(id) !== -1)
                 const isSelected = selectedIds.indexOf(id) !== -1
-                //isSelected = false 
+                //isSelected = false
                 return (
-                    <TouchableOpacity 
-                    activeOpacity={0.75} 
-                    onLongPress={() => onLongPress(id)} 
+                    <TouchableOpacity
+                    activeOpacity={0.75}
+                    onLongPress={() => onLongPress(id)}
                     onPress={() => props.navigation.navigate('Lists', {boardId:id, name:name})}>
                     {isSelected ? <AntDesign name = "checkcircleo"/> : <></>}
-                    <View style={styles.boards} >
+                    <View style={styles.board} >
                         <View style={{opacity: isSelected ? 0.5 : 1 }} >
                         <ImageThumbnail file={thumbnailPhoto} />
                         <Text style={styles.title}> {name} </Text>
@@ -37,11 +37,11 @@ const BoardList = ({ boards, props, onLongPress, selectedIds }) => {
                     </View>
                     </TouchableOpacity>
                 )
-            } 
+            }
         }
         keyExtractor={ (board) => board.id }/>
         </View>
-    
+
     )
 }
 
