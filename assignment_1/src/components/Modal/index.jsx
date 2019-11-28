@@ -34,7 +34,7 @@ class Modal extends React.Component {
             type={List} />
           <Button
             title="Submit"
-            onPress={(c) => addList(c)}/>
+            onPress={() => addList(this._form.getValue())}/>
         </View>
       </NativeModal>
     );

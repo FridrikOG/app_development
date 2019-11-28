@@ -15,11 +15,12 @@ function someFunction(){
 
 class AddModal extends React.Component {
     render() {
-      const { isOpen, closeModal } = this.props;
+      const { isOpen, closeModal, addList } = this.props;
       return(
         <Modal
           isOpen={isOpen}
-          closeModal={closeModal}>
+          closeModal={closeModal}
+          addList={addList}>
 
         </Modal>
       )

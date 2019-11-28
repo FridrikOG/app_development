@@ -30,15 +30,13 @@ class Boards extends React.Component {
   
   }
 }
-
   removeSelectedBoards(){
     const {selectedIds,boards} = this.state;
     this.setState({
       // Only retrieve images which were NOT part of the selected images list
       boards: boards.filter(board => selectedIds.indexOf(board.id) == -1),
       selectedImages: [],
-    })
-    }
+    })}
 // This one should display a caption whenever someone selects a board
 // How this one also shows if it should be plural or not
   displayCaption() {
@@ -55,6 +53,7 @@ class Boards extends React.Component {
   render() {
     const props = this.props;
     const {selectedIds, boards} = this.state
+    //console.log("Logging boards: ", this.state.boards)
     //console.log("LOGGING SELECTED ID's " ,this.selectedIds)
     return (
       <View style = {{ flex: 1}}>
