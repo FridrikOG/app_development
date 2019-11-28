@@ -6,7 +6,6 @@ import styles from './styles';
 import Toolbar from '../../components/Toolbar';
 import BoardModal from '../../components/BoardModal';
 
-
 class Boards extends React.Component {
   // this.props.navigation.state.params.data
   state = {
@@ -18,7 +17,6 @@ class Boards extends React.Component {
     selectedIds: [],
     isAddModalOpen: false,
   }
-  
   onBoardLongPress(id){
   const {selectedIds} = this.state;
   if (selectedIds.indexOf(id) !== -1){
@@ -39,8 +37,6 @@ class Boards extends React.Component {
       boards: boards.filter(board => selectedIds.indexOf(board.id) == -1),
       selectedIds: [],
     })
-
-    
   }
   // This one should display a caption whenever someone selects a board
   // How this one also shows if it should be plural or not
@@ -58,16 +54,11 @@ class Boards extends React.Component {
     console.log("AT THE ADD FUNCTION");
     console.log(info);
     const { boards } = this.state;
-    let description = info.description
-    let id = info.id
-    let name = info.name
-    let thumbnailPhoto = info.thumbnailPhoto
-    
     let newObject =  {
-          "id": id,
-          "name": name,
-          "description": description,
-          "thumbnailPhoto": thumbnailPhoto
+          "id": info.id,
+          "name": info.name,
+          "description": info.description,
+          "thumbnailPhoto": info.thumbnailPhoto
       }
     this.setState({ boards: [ ...boards, newObject ], isAddModalOpen: false });
     console.log(boards);
