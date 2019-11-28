@@ -30,16 +30,15 @@ class Boards extends React.Component {
   
   }
 }
+
   removeSelectedBoards(){
-    const {selectedIds, boards} = this.state;
-    for (var boardId in selectedIds){
-      console.log('in foor loop');
-      this.setState({
-        boards: boards.filter(x => x.id !== selectedIds[boardId])
-      })
+    const {selectedIds,boards} = this.state;
+    this.setState({
+      // Only retrieve images which were NOT part of the selected images list
+      boards: boards.filter(board => selectedIds.indexOf(board.id) == -1),
+      selectedImages: [],
+    })
     }
-    console.log("Logging boards: ", this.state.boards)
-  }
 // This one should display a caption whenever someone selects a board
 // How this one also shows if it should be plural or not
   displayCaption() {
