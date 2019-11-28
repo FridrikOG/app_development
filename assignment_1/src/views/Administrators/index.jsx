@@ -17,11 +17,7 @@ class Administrators extends React.Component{
           const {administrators} = this.state
           console.log("LOGGING FOR STUFF: ", administrators)
       return(
-        <ScrollView>
           <AdministratorList administrators = {administrators}/>
-        
-          <Text>Here you can contact the administrators if you have any trouble with the system!</Text>
-        </ScrollView>
       )
     }
   };
