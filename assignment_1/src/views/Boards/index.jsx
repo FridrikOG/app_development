@@ -33,7 +33,7 @@ class Boards extends React.Component {
   removeSelectedBoards(){
     const {selectedIds, boards} = this.state;
     for (var boardId in selectedIds){
-      
+      console.log('in foor loop');
       this.setState({
         boards: boards.filter(x => x.id !== selectedIds[boardId])
       })
