@@ -7,29 +7,25 @@ import Toolbar from '../../components/Toolbar';
 
 
 class Boards extends React.Component {
-  
   state = {
     // All images within the application directory
     ids: [],
     // All selected images
     selectedIds: [],
 }
-    
     onBoardLongPress(boardId) {
       console.log("sPRINTING here: ", boardId)
 
     }
-    
   render() {
     //console.log("LOGGING DATA BOARDS: ", data.boards)
     const props = this.props;
-    console.log("LOGGING: ", this.props)
     return (
       <View style = {{ flex: 1}}>
         <Toolbar/> 
         
         
-        <BoardList boards={ data.boards } props={props} onLongPress={(boardId) => this.onBoardLongPress(id)} />
+        <BoardList boards={ data.boards } props={props} onLongPress={(boardId) => this.onBoardLongPress()} />
         
       </View>
     )
