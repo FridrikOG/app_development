@@ -22,8 +22,11 @@ class Lists extends React.Component{
     });
     // We get the highest id of any list
     maxId += 1
+    
+    const boards = this.props.navigation.state.params.boards
+    console.log("Inside addList in lists", boards)
     // The id of the board corresponding to the board name picked
-    data.boards.map(function(board){
+    boards.map(function(board){
       if(board.name == submittedInfo.boardName)
         boardId = board.id;
     })
@@ -32,13 +35,12 @@ class Lists extends React.Component{
     // Color selected by the user
     let color = submittedInfo.color
     // Creating a new object to be combined with our lists
-    newTask = {
+    newList = {
       "id": maxId,
       "name": name,
       "color": color,
       "boardId": boardId
   }
-    console.log("Printing max id: ", maxId)
     this.setState({ lists: [ ...lists, newTask ], isAddModalOpen: false });
 
   }
@@ -82,8 +84,9 @@ class Lists extends React.Component{
     const { lists, selectedIds, isAddModalOpen } = this.state;
     const toShow = [];
     const boardNames = [];
-    //console.log("Logging selected IDs: ", this.state.selectedIds);
-    data.boards.map(function(item,index){
+    const boards = this.props.navigation.state.params.boards
+    
+    boards.map(function(item,index){
         boardNames.push(item.name);
       })
     return(

@@ -1,9 +1,6 @@
 import React from 'react';
 import { View, FormLabel, FormInput, FormValidationMessage } from 'react-native-elements'
 
-function someFunction(){
-  console.log("hello");
-}
 
 const CreateForm = ({ isOpen }) => (
 <View isOpen = {isOpen}>
