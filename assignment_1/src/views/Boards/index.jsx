@@ -30,15 +30,21 @@ class Boards extends React.Component {
   
   }
 }
+  filterBoard(index, boards, selectedIds){
+    //console.log("Logging in iflterboard: ", index, boards, selectedIds)
+    this.setState({
+      boards: boards.filter(x => x.id !== selectedIds[index])
+    })
+    return boards
+  }
   removeSelectedBoards(){
     const {selectedIds, boards} = this.state;
-    for (var boardId in selectedIds){
-      console.log('in foor loop');
-      this.setState({
-        boards: boards.filter(x => x.id !== selectedIds[boardId])
-      })
-    }
-    console.log("Logging boards: ", this.state.boards)
+    for (var y in selectedIds){
+      this.board = this.filterBoard(y, boards, selectedIds)
+  }
+  this.setState({
+    selectedIds: []
+  })
   }
 // This one should display a caption whenever someone selects a board
 // How this one also shows if it should be plural or not
@@ -56,6 +62,7 @@ class Boards extends React.Component {
   render() {
     const props = this.props;
     const {selectedIds, boards} = this.state
+    //console.log("Logging boards: ", this.state.boards)
     //console.log("LOGGING SELECTED ID's " ,this.selectedIds)
     return (
       <View style = {{ flex: 1}}>
