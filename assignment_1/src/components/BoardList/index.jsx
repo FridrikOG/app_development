@@ -6,8 +6,6 @@ import {AntDesign} from '@expo/vector-icons';
 import PropTypes from 'prop-types';
 
 const BoardList = ({ boards, props, onLongPress, selectedIds }) => {
-    console.log("Logging in props: ", props)
-    console.log("LOGGING ID's in board " , selectedIds)
 
     return (
         <View style={styles.container}>
@@ -17,7 +15,7 @@ const BoardList = ({ boards, props, onLongPress, selectedIds }) => {
             data={boards}
             extraData={selectedIds}
             renderItem={( {item: {name, description, thumbnailPhoto, id }}) => {
-                console.log(selectedIds.indexOf(id) !== -1)
+                //console.log(selectedIds.indexOf(id) !== -1)
                 const isSelected = selectedIds.indexOf(id) !== -1
                 //isSelected = false
                 return (
