@@ -14,9 +14,12 @@ class Lists extends React.Component{
     isAddModalOpen: false,
   }
 
-  addList(c){
-    console.log(c);
-    this.setState({ lists: [ ...lists, c ], isAddModalOpen: false });
+  addList = (info) => {
+    console.log("AT THE ADD FUNCTION");
+    console.log(info);
+    const { lists } = this.state;
+    this.setState({ lists: [ ...lists, info ], isAddModalOpen: false });
+    console.log(lists);
   }
 
   render(){
@@ -26,6 +29,7 @@ class Lists extends React.Component{
     console.log(props);
     console.log('ID in LISTS: ',props.boardId);
     console.log("TO SHOW: ", toShow)
+
     return(
       <ScrollView>
         <Toolbar
@@ -42,7 +46,7 @@ class Lists extends React.Component{
         <AddModal
           isOpen={isAddModalOpen}
           closeModal={() => this.setState({isAddModalOpen: false})}
-          addList={() => this.addList()}
+          addList={(info) => this.addList(info)}
         />
       </ScrollView>
     )
