@@ -2,7 +2,7 @@ import React from 'react';
 import { ScrollView, View, Text } from 'react-native';
 import Toolbar from '../../components/Toolbar';
 import ListLists from '../../components/ListLists';
-import AddModal from '../../components/AddModal';
+import ListModal from '../../components/ListModal';
 import data from '../../resources/data.json';
 import styles from './styles';
 import getParameters from '../../components/Parameters/getParameters';
@@ -17,7 +17,7 @@ class Lists extends React.Component{
   addList = (info) => {
     const { lists } = this.state;
     this.setState({ lists: [ ...lists, info ], isAddModalOpen: false });
-    
+
   }
   onListLongPress(id){
     const {selectedIds} = this.state;
@@ -31,7 +31,7 @@ class Lists extends React.Component{
       this.setState({
         selectedIds: [...selectedIds, id]
       })
-    
+
     }
   }
   removeSelectedBoards(){
@@ -63,21 +63,21 @@ class Lists extends React.Component{
         <Toolbar
           onAdd={() => this.setState({ isAddModalOpen: true})}
           hasSelectedIds = {selectedIds.length > 0 }
-          onRemove ={() => this.removeSelectedBoards()} 
+          onRemove ={() => this.removeSelectedBoards()}
           />
           { this.displayCaption()}
         <Text style={styles.title}>Currently in Board: {params.boardId}</Text>
         {lists.map(function(item,index){
-          if (item.boardId == params.boardId){ 
+          if (item.boardId == params.boardId){
             toShow.push(item);
           }
         })}
-        <ListLists 
+        <ListLists
         lists={toShow}
         onLongPress={(listId) => this.onListLongPress(listId)}
-        
+
         />
-        <AddModal
+        <ListModal
           isOpen={isAddModalOpen}
           closeModal={() => this.setState({isAddModalOpen: false})}
           addList={(info) => this.addList(info)}

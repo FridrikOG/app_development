@@ -4,7 +4,7 @@ import data from '../../resources/data.json';
 import BoardList from '../../components/BoardList';
 import styles from './styles';
 import Toolbar from '../../components/Toolbar';
-import AddBoardModal from '../../components/AddBoardModal';
+import BoardModal from '../../components/BoardModal';
 
 
 class Boards extends React.Component {
@@ -73,7 +73,7 @@ class Boards extends React.Component {
         props={props}
         onLongPress={(boardId) => this.onBoardLongPress(boardId)}
         selectedIds = {selectedIds} />
-        <AddBoardModal
+        <BoardModal
           isOpen={isAddModalOpen}
           closeModal={() => this.setState({isAddModalOpen: false})}
           addBoard={(info) => this.addBoard(info)}
