@@ -17,7 +17,7 @@ const ListLists = ({lists, onLongPress, selectedIds, props})  => (
               <TouchableOpacity
               activeOpacity={0.75}
               onLongPress={() => onLongPress(id)}
-              onPress={() => props.navigation.navigate('Tasks')}
+              onPress={() => props.navigation.navigate('Tasks',id)}
               >
               {isSelected ? <AntDesign name = "checkcircleo"/> : <></>}
               <View style={[styles.container, {opacity: isSelected ? 0.5 : 1 }]}>

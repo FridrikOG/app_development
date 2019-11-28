@@ -4,17 +4,6 @@ import Toolbar from '../../components/Toolbar';
 import data from '../../resources/data';
 import TaskList from '../../components/TaskList';
 
-
-function newData(){
-  return [{
-      "id": null,
-      "name": "Rotterdam port",
-      "description": "See the biggest shipping port in Europe!",
-      "isFinished": false,
-      "listId": 1
-  }];
-}
-
 class Tasks extends React.Component{
   state = {
     tasks: data.tasks,
@@ -60,14 +49,11 @@ class Tasks extends React.Component{
 }
 
   render(){
-    const listId = 1;
+    // Fetching the listId to only display the tasks in the list we clicked on
+    const listId = this.props.navigation.state.params;
     const {props} = this.props;
     const {tasks,selectedIds} = this.state;
     const toShow = []
-
-    console.log()
-    //console.log(props);
-    //console.log('\n',Tasks);
 
     return(
       <View>
