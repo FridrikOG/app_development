@@ -15,9 +15,8 @@ class Boards extends React.Component {
 }
   onBoardLongPress(id){
   const {selectedIds} = this.state;
-  
-  
-  if (selectedIds.indexOf(id) == false){
+  if (selectedIds.indexOf(id) !== -1){
+    // Is not in selected ID's
     this.setState({
       selectedIds: selectedIds.filter(x => x !== id)
     });
@@ -27,23 +26,17 @@ class Boards extends React.Component {
     })
   
   }
-  console.log("IDS : ", selectedIds)
+  console.log(this.state.selectedIds)  
 }
-    /*
-    console.log('is there')
-    let indexId = selectedIds.indexOf(id)
-    selectedIds[indexId] = null 
-    //this.setState({selectedIds: selectedIds.filter(x => x !== id)})
-    }
-    console.log("LOGGING ARRAY: ",selectedIds)
-    */
-  
 
   render() {
     //console.log("LOGGING DATA BOARDS: ", data.boards)
     const props = this.props;
+    //console.log("IDS : ", this.selectedIds)  
     return (
+      
       <View style = {{ flex: 1}}>
+        
         <Toolbar/> 
         <BoardList boards={ data.boards } props={props} onLongPress={(boardId) => this.onBoardLongPress(boardId)} />
       </View>
