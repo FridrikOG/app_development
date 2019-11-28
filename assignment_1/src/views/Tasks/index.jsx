@@ -59,7 +59,8 @@ class Tasks extends React.Component{
       <View>
         <Toolbar
         hasSelectedIds = {selectedIds.length > 0}
-        onRemove={() => this.removeSelectedTasks()}/>
+        onRemove={() => this.removeSelectedTasks()}
+        canModify = {!(selectedIds.length == 0 || selectedIds.length > 1)}/>
         {/* You have selected x task/s*/}
         {this.displayCaption()}
         {tasks.map(function(item,index){
