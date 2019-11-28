@@ -15,6 +15,7 @@ const StackNavigator = createStackNavigator({
   Lists,
   Tasks,
   Administrators,
+  
 });
 
 export default createAppContainer(StackNavigator);
