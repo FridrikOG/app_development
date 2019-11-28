@@ -13,7 +13,6 @@ const BoardList = ({ boards, props, onLongPress }) => {
             numColumns = {1}
             data={boards}
             renderItem={( {item: {name, description, thumbnailPhoto, id }}) => {
-                
                 return (
                     <TouchableOpacity onLongPress={() => onLongPress(id)} onPress={() => props.navigation.navigate('Lists', {boardId:boards.id, name:boards.name})}>
                     <View style={styles.boards} >
