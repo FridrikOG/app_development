@@ -15,20 +15,18 @@ class Lists extends React.Component{
   }
 
   addList = (info) => {
-    console.log("AT THE ADD FUNCTION");
-    console.log(info);
     const { lists } = this.state;
     this.setState({ lists: [ ...lists, info ], isAddModalOpen: false });
-    console.log(lists);
+    
+  }
+  onListLongPress(){
+    console.log("On List Long press")
   }
 
   render(){
     const props = this.props.navigation.state.params;
     const { lists, selectedLists, isAddModalOpen } = this.state;
     const toShow = []
-    console.log(props);
-    console.log('ID in LISTS: ',props.boardId);
-    console.log("TO SHOW: ", toShow)
 
     return(
       <ScrollView>
@@ -37,12 +35,15 @@ class Lists extends React.Component{
           />
         <Text style={styles.title}>Currently in Board: {props.boardId}</Text>
         {lists.map(function(item,index){
-          if (item.boardId == props.boardId){
-            console.log("ITEM ID: ", item.boardId, props.boardId, item);
+          if (item.boardId == props.boardId){ 
             toShow.push(item);
           }
         })}
-        <ListLists lists={toShow}/>
+        <ListLists 
+        lists={toShow}
+        onLongPress={(listId) => this.onListLongPress(listId)}
+        
+        />
         <AddModal
           isOpen={isAddModalOpen}
           closeModal={() => this.setState({isAddModalOpen: false})}

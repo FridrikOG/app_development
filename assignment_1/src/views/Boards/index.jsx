@@ -15,6 +15,7 @@ class Boards extends React.Component {
     // All selected boards
     selectedIds: [],
 }
+   
   onBoardLongPress(id){
   const {selectedIds} = this.state;
   if (selectedIds.indexOf(id) !== -1){
@@ -37,6 +38,7 @@ class Boards extends React.Component {
     })
     return boards
   }
+  // TODO: Need to be able to delete more than 1 board!
   removeSelectedBoards(){
     const {selectedIds, boards} = this.state;
     for (var y in selectedIds){
