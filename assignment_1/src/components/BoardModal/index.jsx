@@ -19,6 +19,7 @@ class BoardModal extends React.Component {
   updateDescription(description){
     this.setState({description});
   }
+
   render() {
     const { isOpen, closeModal, addBoard} = this.props;
     return(
@@ -33,11 +34,15 @@ class BoardModal extends React.Component {
         <TextInput
           style={styles.textInput}
           placeholder="Name"
+          placeholderTextColor="black"
           value={this.state.name}
           onChangeText={ text => this.updateName(text)}/>
         <TextInput
-          style={styles.textInput}
+          style={[styles.textInput, {height:200}]}
           placeholder="Description (optional)"
+          placeholderTextColor="black"
+          editable={true}
+          multiline = {true}
           value={this.state.description}
           onChangeText={ text => this.updateDescription(text)}/>
         <View style={{flexDirection:'row'}}>

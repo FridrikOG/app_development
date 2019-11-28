@@ -51,7 +51,6 @@ class ListModal extends React.Component {
             <View style={styles.picker}>
             <Picker
               style={{fontSize: 10, height:30}}
-              
               selectedValue={ this.state.boardName }
               onValueChange={ boardName => this.updateBoard(boardName)}>
               {
