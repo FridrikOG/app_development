@@ -8,9 +8,11 @@ import Toolbar from '../../components/Toolbar';
 
 class Boards extends React.Component {
   state = {
-    // All images within the application directory
+    // The board data list
+    boards: data.boards,
+    // All boards within the application directory
     ids: [],
-    // All selected images
+    // All selected boards
     selectedIds: [],
 }
   onBoardLongPress(id){
@@ -29,18 +31,27 @@ class Boards extends React.Component {
   }
   console.log(this.state.selectedIds)  
 }
+  displayCaption() {
+    const { selectedIds } = this.state
+    if (selectedIds.length === 0) { return;}
+
+    let itemCaption = 'boards';
+    if (selectedIds.length === 1) {
+      itemCaption = 'board';
+    }
+    return <Text>You have {selectedIds.length} selected {itemCaption} </Text>
+  }
 
   render() {
     //console.log("LOGGING DATA BOARDS: ", data.boards)
     const props = this.props;
-    const {selectedIds} = this.state
+    const {selectedIds, boards} = this.state
     //console.log("IDS : ", this.selectedIds)  
     return (
-      
       <View style = {{ flex: 1}}>
-        
-        <Toolbar/> 
-        <BoardList boards={ data.boards } props={props} onLongPress={(boardId) => this.onBoardLongPress(boardId)} selectedIds = {selectedIds} />
+        <Toolbar hasSelectedIds = {selectedIds.length > 0 }/> 
+        { this.displayCaption()}
+        <BoardList boards={ boards } props={props} onLongPress={(boardId) => this.onBoardLongPress(boardId)} selectedIds = {selectedIds} />
       </View>
     )
   }

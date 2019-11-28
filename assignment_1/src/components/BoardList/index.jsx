@@ -20,10 +20,10 @@ const BoardList = ({ boards, props, onLongPress, selectedIds }) => {
                 const isSelected = selectedIds.indexOf(id) !== -1
                 //isSelected = false 
                 return (
-                    <TouchableOpacity onLongPress={() => onLongPress(id)} onPress={() => props.navigation.navigate('Lists', {boardId:boards.id, name:boards.name})}>
+                    <TouchableOpacity activeOpacity={0.75} onLongPress={() => onLongPress(id)} onPress={() => props.navigation.navigate('Lists', {boardId:boards.id, name:boards.name})}>
                     {isSelected ? <AntDesign name = "checkcircleo"/> : <></>}
                     <View style={styles.boards} >
-                        <View style={{opacity: isSelected ? 0.5 : 1}} >
+                        <View style={{opacity: isSelected ? 0.5 : 1 }} >
                         <ImageThumbnail file={thumbnailPhoto} />
                         <Text style={styles.title}> {name} </Text>
                         <Text style={styles.description}>{description} </Text>
