@@ -1,22 +1,32 @@
 import React from 'react';
-import { View, Text, FlatList } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 import styles from './styles';
+import {AntDesign} from '@expo/vector-icons';
 
-const ListLists = ({lists})  => (
+const ListLists = ({lists, onLongPress, selectedIds})  => (
     <View style={ styles.listContainer }>
         <FlatList
           numColumns={ 1 }
           data={ lists }
+          extraData={selectedIds}
           renderItem={ ({ item: { id, name, color, boardId } }) => {
+            const isSelected = selectedIds.indexOf(id) !== -1
             return(
-              <View style={styles.container}>
+              <TouchableOpacity
+              activeOpacity={0.75}
+              onLongPress={() => onLongPress(id)}
+              >
+              {isSelected ? <AntDesign name = "checkcircleo"/> : <></>}
+              <View style={[styles.container, {opacity: isSelected ? 0.5 : 1 }]}>
                 <Text style={[styles.text, {backgroundColor:color}]}>
                   List: {id} {"\n"}
                   Name: {name} {"\n"}
                   Color code: {color} {"\n"}
                 </Text>
               </View>
+              </TouchableOpacity>
             )
+            
           }}
             keyExtractor={ item => item.id } />
     </View>
