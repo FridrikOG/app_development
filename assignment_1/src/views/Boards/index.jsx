@@ -31,23 +31,13 @@ class Boards extends React.Component {
   
   }
 }
-  filterBoard(index, boards, selectedIds){
-    //console.log("Logging in iflterboard: ", index, boards, selectedIds)
-    this.setState({
-      boards: boards.filter(x => x.id !== selectedIds[index])
-    })
-    return boards
-  }
-  // TODO: Need to be able to delete more than 1 board!
   removeSelectedBoards(){
-    const {selectedIds, boards} = this.state;
-    for (var y in selectedIds){
-      this.board = this.filterBoard(y, boards, selectedIds)
-  }
-  this.setState({
-    selectedIds: []
-  })
-  }
+    const {selectedIds,boards} = this.state;
+    this.setState({
+      // Only retrieve images which were NOT part of the selected images list
+      boards: boards.filter(board => selectedIds.indexOf(board.id) == -1),
+      selectedImages: [],
+    })}
 // This one should display a caption whenever someone selects a board
 // How this one also shows if it should be plural or not
   displayCaption() {
