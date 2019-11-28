@@ -15,9 +15,7 @@ const BoardList = ({ boards, props, onLongPress, selectedIds }) => {
             data={boards}
             extraData={selectedIds}
             renderItem={( {item: {name, description, thumbnailPhoto, id }}) => {
-                //console.log(selectedIds.indexOf(id) !== -1)
                 const isSelected = selectedIds.indexOf(id) !== -1
-                //isSelected = false
                 return (
                     <TouchableOpacity
                     activeOpacity={0.75}

@@ -66,6 +66,7 @@ class Boards extends React.Component {
         <Toolbar
         onAdd={() => this.setState({ isAddModalOpen: true})}
         hasSelectedIds = {selectedIds.length > 0 }
+        canModify = {!(selectedIds.length == 0 || selectedIds.length > 1)}
         onRemove ={() => this.removeSelectedBoards()} />
         { this.displayCaption()}
         <BoardList
@@ -82,4 +83,5 @@ class Boards extends React.Component {
     )
   }
 };
-    export default Boards;
+
+export default Boards;
