@@ -22,9 +22,9 @@ class Lists extends React.Component{
     });
     // We get the highest id of any list
     maxId += 1
-    
+
     const boards = this.props.navigation.state.params.boards
-    console.log("Inside addList in lists", boards)
+    //console.log("Inside addList in lists", boards)
     // The id of the board corresponding to the board name picked
     boards.map(function(board){
       if(board.name == submittedInfo.boardName)
@@ -83,11 +83,10 @@ class Lists extends React.Component{
     const params = this.props.navigation.state.params;
     const { lists, selectedIds, isAddModalOpen } = this.state;
     const toShow = [];
-    const boardNames = [];
-    const boards = this.props.navigation.state.params.boards
-    
+    const  boardNames = []
+    const boards = this.props.navigation.state.params.boards;
     boards.map(function(item,index){
-        boardNames.push(item.name);
+        boardNames.push({value: item.name});
       })
     return(
       <ScrollView>
