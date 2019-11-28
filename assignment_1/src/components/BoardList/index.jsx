@@ -6,7 +6,7 @@ import {AntDesign} from '@expo/vector-icons';
 import PropTypes from 'prop-types';
 
 const BoardList = ({ boards, props, onLongPress, selectedIds }) => {
-
+    console.log("Inside board list: ", boards)
     return (
         <View style={styles.container}>
         <Text style = {styles.type} > Board List </Text>
@@ -20,7 +20,7 @@ const BoardList = ({ boards, props, onLongPress, selectedIds }) => {
                     <TouchableOpacity
                     activeOpacity={0.75}
                     onLongPress={() => onLongPress(id)}
-                    onPress={() => props.navigation.navigate('Lists', {boardId:id, name:name})}>
+                    onPress={() => props.navigation.navigate('Lists', {boardId:id, boards : boards})}>
                     {isSelected ? <AntDesign name = "checkcircleo"/> : <></>}
                     <View style={[styles.board, {opacity: isSelected ? 0.5 : 1 }]} >
                         <ImageThumbnail file={thumbnailPhoto} />

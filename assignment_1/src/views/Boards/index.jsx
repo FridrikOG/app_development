@@ -8,6 +8,7 @@ import BoardModal from '../../components/BoardModal';
 
 
 class Boards extends React.Component {
+  // this.props.navigation.state.params.data
   state = {
     // The board data list
     boards: data.boards,
@@ -17,6 +18,7 @@ class Boards extends React.Component {
     selectedIds: [],
     isAddModalOpen: false,
   }
+  
   onBoardLongPress(id){
   const {selectedIds} = this.state;
   if (selectedIds.indexOf(id) !== -1){
@@ -35,8 +37,11 @@ class Boards extends React.Component {
     this.setState({
       // Only retrieve images which were NOT part of the selected images list
       boards: boards.filter(board => selectedIds.indexOf(board.id) == -1),
-      selectedImages: [],
-    })}
+      selectedIds: [],
+    })
+
+    
+  }
   // This one should display a caption whenever someone selects a board
   // How this one also shows if it should be plural or not
   displayCaption() {
@@ -53,10 +58,22 @@ class Boards extends React.Component {
     console.log("AT THE ADD FUNCTION");
     console.log(info);
     const { boards } = this.state;
-    this.setState({ boards: [ ...boards, info ], isAddModalOpen: false });
+    let description = info.description
+    let id = info.id
+    let name = info.name
+    let thumbnailPhoto = info.thumbnailPhoto
+    
+    let newObject =  {
+          "id": id,
+          "name": name,
+          "description": description,
+          "thumbnailPhoto": thumbnailPhoto
+      }
+    this.setState({ boards: [ ...boards, newObject ], isAddModalOpen: false });
     console.log(boards);
   }
   render() {
+    console.log("LOGGING PROPS: ", this.props)
     const props = this.props;
     const {selectedIds, boards, isAddModalOpen} = this.state
     //console.log("Logging boards: ", this.state.boards)
@@ -69,6 +86,7 @@ class Boards extends React.Component {
         canModify = {!(selectedIds.length == 0 || selectedIds.length > 1)}
         onRemove ={() => this.removeSelectedBoards()} />
         { this.displayCaption()}
+        
         <BoardList
         boards={ boards }
         props={props}
