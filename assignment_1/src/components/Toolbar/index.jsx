@@ -17,11 +17,14 @@ const Toolbar = ({ onAdd, onRemove, onModify, hasSelectedIds }) => (
     </TouchableHighlight>
   </View>
 );
+export default Toolbar;
 
-
+/*
 Toolbar.propTypes = {
   onAdd: PropTypes.func.isRequired,
   onRemove : PropTypes.func.isRequired,
   hasSelectedIds : PropTypes.bool.isRequired
 }
-export default Toolbar;
+
+
+*/
