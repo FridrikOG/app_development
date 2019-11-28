@@ -10,7 +10,7 @@ const Toolbar = ({ onAdd, onRemove, onModify, hasSelectedIds }) => (
       <Text style={styles.toolbarActionText}>Create</Text>
     </TouchableHighlight>
     <TouchableHighlight style={styles.toolbarAction} onPress={onRemove} disabled={!hasSelectedIds}>
-      <Text style={[styles.toolbarActionText, hasSelectedIds ? {} : {color: 'rgba(155, 155, 155, 0.5)'}]}>Delete</Text>
+      <Text style={[styles.toolbarActionText, hasSelectedIds ? {} : {color: 'rgba(155, 155, 155, 0.5)'}]}>Remove</Text>
     </TouchableHighlight>
     <TouchableHighlight style={styles.toolbarAction} onPress={onModify}>
       <Text style={styles.toolbarActionText}>Modify</Text>

@@ -29,8 +29,17 @@ class Boards extends React.Component {
     })
   
   }
-  console.log(this.state.selectedIds)  
 }
+  removeSelectedBoards(){
+    const {selectedIds, boards} = this.state;
+    for (var boardId in selectedIds){
+      
+      this.setState({
+        boards: boards.filter(x => x.id !== selectedIds[boardId])
+      })
+    }
+    console.log("Logging boards: ", this.state.boards)
+  }
 // This one should display a caption whenever someone selects a board
 // How this one also shows if it should be plural or not
   displayCaption() {
@@ -47,11 +56,18 @@ class Boards extends React.Component {
   render() {
     const props = this.props;
     const {selectedIds, boards} = this.state
+    //console.log("LOGGING SELECTED ID's " ,this.selectedIds)
     return (
       <View style = {{ flex: 1}}>
-        <Toolbar hasSelectedIds = {selectedIds.length > 0 }/> 
+        <Toolbar 
+        hasSelectedIds = {selectedIds.length > 0 } 
+        onRemove ={() => this.removeSelectedBoards()} /> 
         { this.displayCaption()}
-        <BoardList boards={ boards } props={props} onLongPress={(boardId) => this.onBoardLongPress(boardId)} selectedIds = {selectedIds} />
+        <BoardList 
+        boards={ boards } 
+        props={props} 
+        onLongPress={(boardId) => this.onBoardLongPress(boardId)} 
+        selectedIds = {selectedIds} />
       </View>
     )
   }
