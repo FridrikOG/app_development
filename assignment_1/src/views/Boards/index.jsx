@@ -16,11 +16,12 @@ class Boards extends React.Component {
   onBoardLongPress(id){
   const {selectedIds} = this.state;
   if (selectedIds.indexOf(id) !== -1){
-    // Is not in selected ID's
+    // ID is already within the list
     this.setState({
       selectedIds: selectedIds.filter(x => x !== id)
     });
   } else{
+    // IDs need to be added
     this.setState({
       selectedIds: [...selectedIds, id]
     })
@@ -32,13 +33,14 @@ class Boards extends React.Component {
   render() {
     //console.log("LOGGING DATA BOARDS: ", data.boards)
     const props = this.props;
+    const {selectedIds} = this.state
     //console.log("IDS : ", this.selectedIds)  
     return (
       
       <View style = {{ flex: 1}}>
         
         <Toolbar/> 
-        <BoardList boards={ data.boards } props={props} onLongPress={(boardId) => this.onBoardLongPress(boardId)} />
+        <BoardList boards={ data.boards } props={props} onLongPress={(boardId) => this.onBoardLongPress(boardId)} selectedIds = {selectedIds} />
       </View>
     )
   }
