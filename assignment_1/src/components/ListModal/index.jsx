@@ -1,18 +1,29 @@
 import React from 'react';
 import NativeModal from 'react-native-modal';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import styles from './styles';
 import { FormLabel, FormInput, FormValidationMessage, Button } from 'react-native-elements';
 import t from 'tcomb-form-native';
 
 const Form = t.form.Form;
 
-const List = t.struct({
-  id: t.Integer,
+const createList = t.struct({
+  //id: t.Integer,
   name: t.String,
   color: t.String,
-  boardId: t.String,
+  //boardId: t.String,
 });
+
+const options = {
+  fields: {
+    name: {
+      error: 'Please name the list?'
+    },
+  },
+};
+
+
+
 
 class Modal extends React.Component {
   handleSubmit = () => {
@@ -31,7 +42,10 @@ class Modal extends React.Component {
         <View style={[styles.container]}><Text>Creating a New list</Text>
           <Form
             ref={c => this._form = c}
-            type={List} />
+            type={createList} 
+            options={options}
+            />
+           
           <Button
             title="Submit"
             onPress={() => addList(this._form.getValue())}/>
