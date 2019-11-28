@@ -21,7 +21,6 @@ const BoardList = ({ boards, props, onLongPress }) => {
                         <Text style={styles.title}> {name} </Text>
                         <Text style={styles.description}>{description} </Text>
                         <Text style={styles.description}>{id} </Text>
-                        
                     </View>
                     </TouchableOpacity>
                 )
