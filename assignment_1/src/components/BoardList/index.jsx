@@ -2,7 +2,8 @@ import React from 'react';
 import { View,Text, FlatList, TouchableOpacity } from 'react-native';
 import ImageThumbnail from '../ImageThumbnail';
 import styles from './styles';
-import {AntDesign} from '@expo/vector-icons'
+import {AntDesign} from '@expo/vector-icons';
+import PropTypes from 'prop-types';
 
 const BoardList = ({ boards, props, onLongPress, selectedIds }) => {
     console.log("Logging in props: ", props)
@@ -40,5 +41,17 @@ const BoardList = ({ boards, props, onLongPress, selectedIds }) => {
     
     )
 }
+
+BoardList.propTypes = {
+    boards: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
+        thumbnailPhoto: PropTypes.string.isRequired
+    })).isRequired,
+    ongLongPress: PropTypes.func.isRequired,
+    selectedIds: PropTypes.arrayOf(PropTypes.integer).isRequired
+}
+
 
 export default BoardList;
