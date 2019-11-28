@@ -37,8 +37,9 @@ class ListModal extends React.Component {
         <ScrollView style={[styles.container]}>
           <Text style={styles.title}>Creating a New list</Text>
           <TextInput
-            style={styles.textInput}
             placeholder="Name"
+            placeholderTextColor = "black"
+            style={styles.textInput}
             value={this.state.name}
             onChangeText={ text => this.updateName(text)}/>
           <Text>Pick a color then press the middle to select!</Text>
@@ -50,6 +51,7 @@ class ListModal extends React.Component {
             <View style={styles.picker}>
             <Picker
               style={{fontSize: 10, height:30}}
+              
               selectedValue={ this.state.boardName }
               onValueChange={ boardName => this.updateBoard(boardName)}>
               {
