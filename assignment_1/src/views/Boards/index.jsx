@@ -23,10 +23,7 @@ class Boards extends React.Component {
     return (
       <View style = {{ flex: 1}}>
         <Toolbar/> 
-        
-        
-        <BoardList boards={ data.boards } props={props} onLongPress={(boardId) => this.onBoardLongPress()} />
-        
+        <BoardList boards={ data.boards } props={props} onLongPress={(boardId) => this.onBoardLongPress(boardId)} />
       </View>
     )
   }
