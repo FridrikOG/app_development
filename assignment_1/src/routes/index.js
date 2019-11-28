@@ -9,11 +9,11 @@ import Tasks from '../views/Tasks';
 
 
 const StackNavigator = createStackNavigator({
-
   Boards,
   Lists,
   Tasks,
   Main,
+  
 });
 
 export default createAppContainer(StackNavigator);
