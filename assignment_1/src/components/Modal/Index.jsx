@@ -1,31 +1,37 @@
 import React from 'react';
 import NativeModal from 'react-native-modal';
-import {View, Text} from 'react-native';
-import styles from 'styles';
+import { View, Text } from 'react-native';
+import styles from './styles';
+import { FormLabel, FormInput, FormValidationMessage, Button } from 'react-native-elements';
+import t from 'tcomb-form-native';
 
+const Form = t.form.Form;
 
-const Modal = ({ isOpen, closeModal, title, children}) => (
-    <NativeModal
-        isVisible = {isOpen}
-        hasBackdrop
-        onBackButtonPress={closeModal}
-        onSwipeComplete={closeModal}
-        swipeDirection={['up','down']}
-        style={styles.modal}
-        >
-        <View style={styles.body}>
-            <Text>{title}</Text>
-            {children}
-        </View>
-    </NativeModal>
+const List = t.struct({
+  id: t.Integer,
+  name: t.String,
+  color: t.String,
+  boardId: t.String,
+});
+
+const Modal = ({ isOpen, closeModal, addList }) => (
+  <NativeModal
+    isVisible={isOpen}
+    hasBackdrop
+    onBackButtonPress={closeModal}
+    onSwipeComplete={['up','down']}
+    style={styles.modal}>
+    <View style={[styles.container]}><Text>Creating a New list</Text><Form type={List} />
+      <Button
+        title="Submit"
+        onPress={addList()}/>
+    </View>
+  </NativeModal>
 );
 
-Modal.propTypes = {
-    isOpen:PropTypes.bool.isRequired,
-    closeModal: propTypes.func.isRequired,
-    title: propTypes.string,
-    children: propTypes.string,
-    children: propTypes.node.isRequired,
+Modal.PropTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  closeModal: PropTypes.func.isRequired,
 };
 
 Modal.defaultProps = {

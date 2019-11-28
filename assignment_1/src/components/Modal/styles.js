@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions} from 'reactþnative;';
+import { StyleSheet, Dimensions} from 'react-native';
 
 const { width: winWidth } = Dimensions.get('window');
 
@@ -18,6 +18,12 @@ export default StyleSheet.create({
     width: winWidth - 100,
     backgroundColor: 'white',
     padding: 40,
+  },
+  container: {
+    padding:40,
+    backgroundColor:'white',
+    width: winWidth - 50,
+
   },
 
 

@@ -20,7 +20,8 @@
     "react-native-modal": "^11.5.3",
     "react-native-web": "^0.11.7",
     "react-navigation": "^4.0.10",
-    "react-navigation-stack": "^1.10.3"
+    "react-navigation-stack": "^1.10.3",
+    "tcomb-form-native": "^0.6.20"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.3",

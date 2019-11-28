@@ -4,7 +4,6 @@ import styles from './styles';
 
 const ListLists = ({lists})  => (
     <View style={ styles.listContainer }>
-        <Text>hdsajaksa</Text>
         <FlatList
           numColumns={ 1 }
           data={ lists }
