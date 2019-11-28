@@ -50,11 +50,21 @@ class Boards extends React.Component {
     return <Text>You have {selectedIds.length} selected {itemCaption} </Text>
   }
   addBoard = (info) => {
-    console.log("AT THE ADD FUNCTION");
-    console.log(info);
     const { boards } = this.state;
-    this.setState({ boards: [ ...boards, info ], isAddModalOpen: false });
-    console.log(boards);
+    var maxId = 0;
+    var maxobj;
+    boards.map(function(obj){
+      if (obj.id > maxId) maxId = obj.id;
+    });
+    // We get the highest id of any list
+    maxId += 1
+    newBoard = {
+      "id": maxId,
+      "name": info.name,
+      "description": info.description,
+      "thumbnailPhoto": info.thumbnailPhoto
+    }
+    this.setState({ boards: [ ...boards, newBoard ], isAddModalOpen: false });
   }
   render() {
     const props = this.props;
