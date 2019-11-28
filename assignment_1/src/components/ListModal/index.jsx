@@ -1,6 +1,6 @@
 import React from 'react';
 import NativeModal from 'react-native-modal';
-import { View, Text, StyleSheet, TextInput, Picker, Button } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Picker, TouchableOpacity, ScrollView } from 'react-native';
 import styles from './styles';
 import { ColorPicker } from 'react-native-color-picker'
 
@@ -34,7 +34,7 @@ class ListModal extends React.Component {
         onBackButtonPress={closeModal}
         onSwipeComplete={['up','down']}
         style={styles.modal}>
-        <View style={[styles.container]}>
+        <ScrollView style={[styles.container]}>
           <Text style={styles.title}>Creating a New list</Text>
           <TextInput
             style={styles.textInput}
@@ -49,6 +49,7 @@ class ListModal extends React.Component {
             <Text style={styles.pickerText}>Pick a Board:</Text>
             <View style={styles.picker}>
             <Picker
+              style={{fontSize: 10, height:30}}
               selectedValue={ this.state.boardName }
               onValueChange={ boardName => this.updateBoard(boardName)}>
               {
@@ -56,10 +57,11 @@ class ListModal extends React.Component {
               }
             </Picker>
           </View>
-          <Button
-            title="Submit"
-            onPress={() => addList(this.state)}/>
-        </View>
+          <View style={{flexDirection:'row'}}>
+            <TouchableOpacity style={styles.button} onPress={() => addList(this.state)}><Text style={styles.btntxt}>Submit</Text></TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={closeModal}><Text style={styles.btntxt}>Go Back</Text></TouchableOpacity>
+          </View>
+        </ScrollView>
       </NativeModal>
     );
   }
