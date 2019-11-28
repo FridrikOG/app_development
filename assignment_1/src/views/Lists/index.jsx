@@ -98,6 +98,7 @@ class Lists extends React.Component{
         lists={toShow}
         onLongPress={(listId) => this.onListLongPress(listId)}
         selectedIds = {selectedIds}
+        props= {this.props}
         
         />
         <ListModal

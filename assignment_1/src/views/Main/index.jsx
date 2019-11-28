@@ -6,9 +6,11 @@ import {
 import logo from '../../resources/logo.png';
 import styles from './styles';
 
-// comment
 const Main = ({ navigation: { navigate } }) => (
   <View style={styles.container}>
+    <TouchableHighlight style={styles.button} onPress={() => navigate('Administrators')}>
+      <Text style={styles.buttonText}>Contact Administrators</Text>
+    </TouchableHighlight>
     <Image style={styles.logo} source={logo} />
     <Text style={styles.title}>Toddler App</Text>
     <Text style={styles.paragraph}>A fun and efficient way to keep track of your tasks!</Text>
