@@ -86,6 +86,7 @@ class Lists extends React.Component{
           onAdd={() => this.setState({ isAddModalOpen: true})}
           hasSelectedIds = {selectedIds.length > 0 }
           onRemove ={() => this.removeSelectedLists()}
+          canModify = {!(selectedIds.length == 0 || selectedIds.length > 1)}
           />
           { this.displayCaption()}
         <Text style={styles.title}>Currently in Board: {params.boardId}</Text>
