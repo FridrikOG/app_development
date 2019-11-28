@@ -1,37 +1,32 @@
 import React from 'react';
 import NativeModal from 'react-native-modal';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Picker, Button } from 'react-native';
 import styles from './styles';
-import { FormLabel, FormInput, FormValidationMessage, Button } from 'react-native-elements';
-import t from 'tcomb-form-native';
-
-const Form = t.form.Form;
-
-const createList = t.struct({
-  //id: t.Integer,
-  name: t.String,
-  color: t.String,
-  //boardId: t.String,
-});
-
-const options = {
-  fields: {
-    name: {
-      error: 'Please name the list?'
-    },
-  },
-};
+import { ColorPicker } from 'react-native-color-picker'
 
 
+class ListModal extends React.Component {
+  state = {
+    name: '',
+    color: '',
+    boardName:'',
+  }
 
-
-class Modal extends React.Component {
   handleSubmit = () => {
-    const value = this._form.getValue(); // use that ref to get the form value
-    console.log('value: ', value);
+    console.log(this.state);
+  }
+  updateName(name) {
+    this.setState({name});
+  }
+  updateColor(color) {
+    this.setState({color});
+  }
+  updateBoard(boardName) {
+    this.setState({boardName});
   }
   render() {
-    const { isOpen, closeModal, addList} = this.props;
+    const { isOpen, closeModal, addList, boardOptions} = this.props;
+    console.log(boardOptions);
     return(
       <NativeModal
         isVisible={isOpen}
@@ -39,16 +34,31 @@ class Modal extends React.Component {
         onBackButtonPress={closeModal}
         onSwipeComplete={['up','down']}
         style={styles.modal}>
-        <View style={[styles.container]}><Text>Creating a New list</Text>
-          <Form
-            ref={c => this._form = c}
-            type={createList} 
-            options={options}
-            />
-           
+        <View style={[styles.container]}>
+          <Text style={styles.title}>Creating a New list</Text>
+          <TextInput
+            style={styles.textInput}
+            placeholder="Name"
+            value={this.state.name}
+            onChangeText={ text => this.updateName(text)}/>
+          <Text>Pick a color then press the middle to select!</Text>
+          <ColorPicker
+            onColorSelected={color => this.updateColor(color)}
+            style={{height:200,width:200}}/>
+          <Text style={styles.colorText}>Selected color: {this.state.color}</Text>
+            <Text style={styles.pickerText}>Pick a Board:</Text>
+            <View style={styles.picker}>
+            <Picker
+              selectedValue={ this.state.boardName }
+              onValueChange={ boardName => this.updateBoard(boardName)}>
+              {
+                boardOptions.map(name => (<Picker.Item label={name} value={name}/>))
+              }
+            </Picker>
+          </View>
           <Button
             title="Submit"
-            onPress={() => addList(this._form.getValue())}/>
+            onPress={() => addList(this.state)}/>
         </View>
       </NativeModal>
     );
@@ -56,4 +66,4 @@ class Modal extends React.Component {
 
 }
 
-export default Modal;
+export default ListModal;

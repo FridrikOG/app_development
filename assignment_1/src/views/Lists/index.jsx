@@ -18,14 +18,16 @@ class Lists extends React.Component{
     const { lists } = this.state;
     var maxId = 0;
     var maxobj;
-    lists.map(function(obj){     
-      if (obj.id > maxId) maxId = obj.id;    
+    lists.map(function(obj){
+      if (obj.id > maxId) maxId = obj.id;
     });
     // We get the highest id of any list
     maxId += 1
-    // The id of the board that the user is currently in
-    // It was passed in the parameters
-    const boardId = this.props.navigation.state.params.boardId;
+    // The id of the board corresponding to the board name picked
+    data.boards.map(function(board){
+      if(board.name == submittedInfo.boardName)
+        boardId = board.id;
+    })
     // Name input by the user
     let name = submittedInfo.name
     // Color selected by the user
@@ -41,6 +43,7 @@ class Lists extends React.Component{
     this.setState({ lists: [ ...lists, newTask ], isAddModalOpen: false });
 
   }
+
   onListLongPress(id){
     const {selectedIds} = this.state;
     if (selectedIds.indexOf(id) !== -1){
@@ -78,8 +81,12 @@ class Lists extends React.Component{
   render(){
     const params = this.props.navigation.state.params;
     const { lists, selectedIds, isAddModalOpen } = this.state;
-    const toShow = []
-    console.log("Logging selected IDs: ", this.state.selectedIds)
+    const toShow = [];
+    const boardNames = [];
+    //console.log("Logging selected IDs: ", this.state.selectedIds);
+    data.boards.map(function(item,index){
+        boardNames.push(item.name);
+      })
     return(
       <ScrollView>
         <Toolbar
@@ -98,12 +105,13 @@ class Lists extends React.Component{
         lists={toShow}
         onLongPress={(listId) => this.onListLongPress(listId)}
         selectedIds = {selectedIds}
-        
+
         />
         <ListModal
           isOpen={isAddModalOpen}
           closeModal={() => this.setState({isAddModalOpen: false})}
           addList={(info) => this.addList(info)}
+          boardOptions={boardNames}
         />
       </ScrollView>
     )
