@@ -14,28 +14,32 @@ const List = t.struct({
   boardId: t.String,
 });
 
-const Modal = ({ isOpen, closeModal, addList }) => (
-  <NativeModal
-    isVisible={isOpen}
-    hasBackdrop
-    onBackButtonPress={closeModal}
-    onSwipeComplete={['up','down']}
-    style={styles.modal}>
-    <View style={[styles.container]}><Text>Creating a New list</Text><Form type={List} />
-      <Button
-        title="Submit"
-        onPress={addList()}/>
-    </View>
-  </NativeModal>
-);
+class Modal extends React.Component {
+  handleSubmit = () => {
+    const value = this._form.getValue(); // use that ref to get the form value
+    console.log('value: ', value);
+  }
+  render() {
+    const { isOpen, closeModal, addList} = this.props;
+    return(
+      <NativeModal
+        isVisible={isOpen}
+        hasBackdrop
+        onBackButtonPress={closeModal}
+        onSwipeComplete={['up','down']}
+        style={styles.modal}>
+        <View style={[styles.container]}><Text>Creating a New list</Text>
+          <Form
+            ref={c => this._form = c}
+            type={List} />
+          <Button
+            title="Submit"
+            onPress={(c) => addList(c)}/>
+        </View>
+      </NativeModal>
+    );
+  }
 
-Modal.PropTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  closeModal: PropTypes.func.isRequired,
-};
-
-Modal.defaultProps = {
-    title: '',
-};
+}
 
 export default Modal;
