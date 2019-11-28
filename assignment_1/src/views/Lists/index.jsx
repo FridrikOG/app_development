@@ -34,7 +34,7 @@ class Lists extends React.Component{
     
     }
   }
-  removeSelectedBoards(){
+  removeSelectedLists(){
     const {selectedIds,lists} = this.state;
     this.setState({
       // Only retrieve images which were NOT part of the selected images list
@@ -63,7 +63,7 @@ class Lists extends React.Component{
         <Toolbar
           onAdd={() => this.setState({ isAddModalOpen: true})}
           hasSelectedIds = {selectedIds.length > 0 }
-          onRemove ={() => this.removeSelectedBoards()} 
+          onRemove ={() => this.removeSelectedLists()} 
           />
           { this.displayCaption()}
         <Text style={styles.title}>Currently in Board: {params.boardId}</Text>
@@ -75,6 +75,7 @@ class Lists extends React.Component{
         <ListLists 
         lists={toShow}
         onLongPress={(listId) => this.onListLongPress(listId)}
+        selectedIds = {selectedIds}
         
         />
         <AddModal

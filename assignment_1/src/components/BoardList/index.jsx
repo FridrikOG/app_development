@@ -24,14 +24,12 @@ const BoardList = ({ boards, props, onLongPress, selectedIds }) => {
                     onLongPress={() => onLongPress(id)}
                     onPress={() => props.navigation.navigate('Lists', {boardId:id, name:name})}>
                     {isSelected ? <AntDesign name = "checkcircleo"/> : <></>}
-                    <View style={styles.board} >
-                        <View style={{opacity: isSelected ? 0.5 : 1 }} >
+                    <View style={[styles.board, {opacity: isSelected ? 0.5 : 1 }]} >
                         <ImageThumbnail file={thumbnailPhoto} />
                         <Text style={styles.title}> {name} </Text>
                         <Text style={styles.description}>{description} </Text>
                         <Text style={styles.description}>{id} </Text>
                         <Text> {isSelected ? 'Selected' : 'Not selected'}</Text>
-                        </View>
                     </View>
                     </TouchableOpacity>
                 )
