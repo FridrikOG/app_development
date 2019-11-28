@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import NativeModal from 'react-native-modal';
 import { View, Text } from 'react-native';
 import styles from './styles';
@@ -36,8 +35,7 @@ Modal.PropTypes = {
 };
 
 Modal.defaultProps = {
-  title: '',
-
+    title: '',
 };
 
 export default Modal;
