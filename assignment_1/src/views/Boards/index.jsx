@@ -13,10 +13,32 @@ class Boards extends React.Component {
     // All selected images
     selectedIds: [],
 }
-    onBoardLongPress(boardId) {
-      console.log("sPRINTING here: ", boardId)
-
+  onBoardLongPress(id){
+  const {selectedIds} = this.state;
+  
+  
+  if (selectedIds.indexOf(id) == false){
+    this.setState({
+      selectedIds: selectedIds.filter(x => x !== id)
+    });
+  } else{
+    this.setState({
+      selectedIds: [...selectedIds, id]
+    })
+  
+  }
+  console.log("IDS : ", selectedIds)
+}
+    /*
+    console.log('is there')
+    let indexId = selectedIds.indexOf(id)
+    selectedIds[indexId] = null 
+    //this.setState({selectedIds: selectedIds.filter(x => x !== id)})
     }
+    console.log("LOGGING ARRAY: ",selectedIds)
+    */
+  
+
   render() {
     //console.log("LOGGING DATA BOARDS: ", data.boards)
     const props = this.props;
@@ -56,8 +78,8 @@ class Boards extends React.Component {
 
 
 
-
 /*
+
 FUNCTION TO DO BOARD PRESS VERY NICELY WRITTEN WITH NULL
 onBoardPress(id){
     const {selectedIds} = this.state;
@@ -74,4 +96,4 @@ onBoardPress(id){
       }
       console.log("LOGGING ARRAY: ",selectedIds)
     }
-    */
+*/
