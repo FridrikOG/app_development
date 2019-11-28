@@ -26,8 +26,9 @@ export default StyleSheet.create({
 
   },
   title: {
-    fontSize: 20,
-    marginBottom: 20,
+    fontSize: 25,
+    textAlign:'center',
+    marginBottom: 10,
     fontWeight: 'bold',
     color: blue,
   },
@@ -50,9 +51,25 @@ export default StyleSheet.create({
     padding: 5,
   },
   picker: {
-    backgroundColor: babyblue,
+    borderWidth: 1,
     marginBottom:15,
+    fontSize:11,
   },
-
+  button: {
+    height: 50,
+    width: 110,
+    marginTop: 10,
+    backgroundColor: blue,
+    padding:10,
+    marginRight:10,
+    borderWidth:2,
+    borderColor: 'white',
+    borderRadius:12,
+  },
+  btntxt: {
+    textAlign: 'center',
+    color:'white',
+    fontSize:20,
+  },
 
 });

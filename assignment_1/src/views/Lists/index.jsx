@@ -5,7 +5,6 @@ import ListLists from '../../components/ListLists';
 import ListModal from '../../components/ListModal';
 import data from '../../resources/data.json';
 import styles from './styles';
-import getParameters from '../../components/Parameters/getParameters';
 
 class Lists extends React.Component{
   state = {
