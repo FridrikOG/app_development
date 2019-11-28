@@ -7,15 +7,12 @@ import Lists from '../views/Lists';
 import Tasks from '../views/Tasks';
 import Administrators from '../views/Administrators';
 
-
-
 const StackNavigator = createStackNavigator({
   Main,
   Boards,
   Lists,
   Tasks,
   Administrators,
-  
 });
 
 export default createAppContainer(StackNavigator);
