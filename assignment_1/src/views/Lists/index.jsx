@@ -2,7 +2,7 @@ import React from 'react';
 import { ScrollView, View, Text } from 'react-native';
 import Toolbar from '../../components/Toolbar';
 import ListLists from '../../components/ListLists';
-import AddModal from '../../components/AddModal';
+import ListModal from '../../components/ListModal';
 import data from '../../resources/data.json';
 import styles from './styles';
 import getParameters from '../../components/Parameters/getParameters';
@@ -13,11 +13,33 @@ class Lists extends React.Component{
     selectedIds: [],
     isAddModalOpen: false,
   }
-
-  addList = (info) => {
+// This function should take in information from our form and add it to our board list
+  addList = (submittedInfo) => {
     const { lists } = this.state;
-    this.setState({ lists: [ ...lists, info ], isAddModalOpen: false });
-    
+    var maxId = 0;
+    var maxobj;
+    lists.map(function(obj){     
+      if (obj.id > maxId) maxId = obj.id;    
+    });
+    // We get the highest id of any list
+    maxId += 1
+    // The id of the board that the user is currently in
+    // It was passed in the parameters
+    const boardId = this.props.navigation.state.params.boardId;
+    // Name input by the user
+    let name = submittedInfo.name
+    // Color selected by the user
+    let color = submittedInfo.color
+    // Creating a new object to be combined with our lists
+    newTask = {
+      "id": maxId,
+      "name": name,
+      "color": color,
+      "boardId": boardId
+  }
+    console.log("Printing max id: ", maxId)
+    this.setState({ lists: [ ...lists, newTask ], isAddModalOpen: false });
+
   }
   onListLongPress(id){
     const {selectedIds} = this.state;
@@ -31,7 +53,7 @@ class Lists extends React.Component{
       this.setState({
         selectedIds: [...selectedIds, id]
       })
-    
+
     }
   }
   removeSelectedLists(){
@@ -63,22 +85,22 @@ class Lists extends React.Component{
         <Toolbar
           onAdd={() => this.setState({ isAddModalOpen: true})}
           hasSelectedIds = {selectedIds.length > 0 }
-          onRemove ={() => this.removeSelectedLists()} 
+          onRemove ={() => this.removeSelectedLists()}
           />
           { this.displayCaption()}
         <Text style={styles.title}>Currently in Board: {params.boardId}</Text>
         {lists.map(function(item,index){
-          if (item.boardId == params.boardId){ 
+          if (item.boardId == params.boardId){
             toShow.push(item);
           }
         })}
-        <ListLists 
+        <ListLists
         lists={toShow}
         onLongPress={(listId) => this.onListLongPress(listId)}
         selectedIds = {selectedIds}
         
         />
-        <AddModal
+        <ListModal
           isOpen={isAddModalOpen}
           closeModal={() => this.setState({isAddModalOpen: false})}
           addList={(info) => this.addList(info)}
