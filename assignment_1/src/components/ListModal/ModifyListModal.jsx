@@ -18,6 +18,7 @@ class ModifyListModal extends React.Component {
     colorRequired: '',
     boardRequired: '',
     hasRecievedNameInput: true,
+    hasRecievedColorInput: true,
 
   }
 
@@ -36,6 +37,10 @@ class ModifyListModal extends React.Component {
   }
 
   updateColor(color) {
+    const {hasRecievedColorInput} = this.state;
+    if (hasRecievedColorInput){
+      
+    }
     this.setState({
       color: color,
       colorIsValid: true,
@@ -84,7 +89,7 @@ class ModifyListModal extends React.Component {
       nameRequired: '',
       colorRequired: '',
       boardRequired: '',
-      hasRecievedNameInput: true,
+      hasRecievedNameInput: true
     })
     // If Submit was pressed we add the board to our data
     if(Submit){
@@ -111,10 +116,20 @@ class ModifyListModal extends React.Component {
         return 'error'
       }
     }
+    getColor() {
+      let list = this.getList()
+      try {
+        return list.color
+      }
+      catch(err){
+        return 'error'
+      }
+    }
 
 
   render() {
-    const {nameIsValid,colorIsValid,boardIsValid, nameRequired,colorRequired,boardRequired, hasRecievedNameInput} = this.state;
+    const {nameIsValid,colorIsValid,boardIsValid, nameRequired,colorRequired,boardRequired, 
+      hasRecievedNameInput, hasRecievedColorInput} = this.state;
     const { isOpen, closeModal, boardOptions, lists} = this.props;
     value = null;
     console.log(hasRecievedNameInput)
@@ -137,7 +152,7 @@ class ModifyListModal extends React.Component {
           <Text>Pick a color then press the middle to select!</Text>
           <Text style={{color:'red'}}>{colorRequired}</Text>
           <ColorPicker
-            onColorSelected={color => this.updateColor(color)}
+            onColorSelected= {color => this.updateColor(color)}
             style={{height:200,width:200}}/>
           <Text style={styles.colorText}>Selected color: {this.state.color}</Text>
           <Text style={styles.pickerText}>Pick a Board:</Text>
