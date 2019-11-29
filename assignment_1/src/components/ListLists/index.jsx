@@ -24,7 +24,7 @@ class ListLists extends React.Component{
         toSendTasks.push(item);
       }
     })}
-    this.setState({currentTasks: [ ...currentTasks, toSendTasks ], isTaskOpen: true});
+    this.setState({currentTasks: [ toSendTasks ], isTaskOpen: true});
 
   }
   render(){
@@ -60,7 +60,7 @@ class ListLists extends React.Component{
         <TaskList
           isOpen={isTaskOpen}
           closeModal={() => this.setState({isTaskOpen: false})}
-          tasks={currentTasks}
+          tasks={this.state.currentTasks}
         />
       </ScrollView>
     )

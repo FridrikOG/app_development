@@ -1,13 +1,19 @@
 import React from 'react';
-import { View,Text, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, Image } from 'react-native';
 import ImageThumbnail from '../ImageThumbnail';
 import styles from './styles';
 import {AntDesign} from '@expo/vector-icons';
 import PropTypes from 'prop-types';
 import NativeModal from 'react-native-modal';
+import leftArrow from '../../resources/left-arrow.png';
+import plus from '../../resources/plus.png';
 
 
 class TaskList extends React.Component {
+    state = {
+      createModal: false,
+    }
+
     booleanToString(b) {
       if( b == true){
         return 'Yes';
@@ -42,7 +48,8 @@ class TaskList extends React.Component {
                   )}}
                 keyExtractor={ (task) => tasks.id }/>
             <View style={{flexDirection:'row'}}>
-              <TouchableOpacity style={styles.button} onPress={closeModal}><Text style={styles.btntxt}>Go Back</Text></TouchableOpacity>
+              <TouchableOpacity style={styles.button} onPress={closeModal}><Image style={styles.icon} source={leftArrow} /></TouchableOpacity>
+              <TouchableOpacity style={styles.button}><Image style={styles.icon} source={plus} /></TouchableOpacity>
             </View>
           </View>
         </NativeModal>
