@@ -19,11 +19,9 @@ class ListLists extends React.Component{
     isOpenTaskModal: false,
   }
   correspondingTasks = (id) => {
-    console.log("ID IN CORRESPONDING: ",id);
     const { currentTasks, allTasks, currentListId} = this.state;
     this.setState({currentListId: ''});
     this.setState({currentListId: id});
-    console.log("UPDATED ID IN LISTS",this.state.currentListId);
     toSendTasks =[];
     { allTasks.map(function(item){
       if(item.listId == id){
