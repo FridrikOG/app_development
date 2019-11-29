@@ -11,7 +11,6 @@ class ListModal extends React.Component {
     name: '',
     color: '',
     boardName:'',
-
   }
 
   handleSubmit = () => {

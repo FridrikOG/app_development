@@ -74,13 +74,10 @@ class Boards extends React.Component {
   addModifiedBoard = (newBoard) => {
     const {boards, isModifyModalOpen} = this.state;
     this.setState({ boards: [ ...boards, newBoard ], isModifyModalOpen: false });
-    console.log("Logging boards : ", boards)
+
   }
   
   modifyBoard = (info, boardId) => {
-
-    console.log("Logging info: ", info);
-    console.log("Logging id: ", boardId[0])
     const {selectedIds,boards} = this.state;
     newBoard = {
       "id": boardId[0],

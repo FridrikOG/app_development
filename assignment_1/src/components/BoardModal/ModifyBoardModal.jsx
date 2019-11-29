@@ -79,8 +79,8 @@ class ModifyBoardModal extends React.Component {
           <TouchableOpacity 
           disabled = {isInvalid} 
           style={[styles.button, {opacity: isInvalid ? 0.5 : 1 }]} 
-          onPress={() => modifyBoard(this.state)}><Text 
-          style={styles.btntxt}>Submit</Text></TouchableOpacity>
+          onPress={() => modifyBoard(this.state)}>
+            <Text style={styles.btntxt}>Submit</Text></TouchableOpacity>
           <TouchableOpacity 
           style={styles.button} 
           onPress={closeModal}><Text 
