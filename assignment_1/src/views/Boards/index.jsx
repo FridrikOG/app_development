@@ -68,7 +68,7 @@ class Boards extends React.Component {
     this.setState({ boards: [ ...boards, newBoard ], isAddModalOpen: false });
   }
   render() {
-    console.log("LOGGING PROPS: ", this.props)
+    //console.log("LOGGING PROPS: ", this.props)
     const props = this.props;
     const {selectedIds, boards, isAddModalOpen} = this.state
     //console.log("Logging boards: ", this.state.boards)
