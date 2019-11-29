@@ -20,18 +20,18 @@ export default StyleSheet.create({
     fontWeight: 'bold',
   },
   task: {
-    borderWidth:1,
     padding:15,
     fontSize: 15,
     backgroundColor: 'white',
     marginTop:15,
+    borderRadius:12,
   },
   button:{
     backgroundColor:blue,
     borderWidth:1,
     borderColor: blue,
     borderRadius:12,
-    margin:20,
+    margin:10,
     padding:10,
 
   },
@@ -39,5 +39,9 @@ export default StyleSheet.create({
     fontSize:20,
     color: 'white',
   },
+  icon: {
+    width:30,
+    height:30,
+  }
 
 });
