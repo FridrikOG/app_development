@@ -121,20 +121,26 @@ class ModifyBoardModal extends React.Component {
             placeholderTextColor="black"
             editable={true}
             multiline={true}
-
             value={hasRecievedDescriptionInput ? this.getDescription() : this.state.description}
-
             onChangeText={text => this.updateDescription(text)} />
 
           <View style={{ flexDirection: 'row' }}>
             <TouchableOpacity
+
+
               style={styles.button}
               onPress={isValid ? () => this.cleanUp(true): () => this.determineErrorMsg()}>
+
+
               <Text style={styles.btntxt}>Submit</Text></TouchableOpacity>
             <TouchableOpacity
+
+
               style={styles.button}
-              onPress={() => this.cleanUp(false)}><Text
-                style={styles.btntxt}>Go Back</Text>
+              onPress={() => this.cleanUp(false)}>
+
+
+                <Text style={styles.btntxt}>Go Back</Text>
             </TouchableOpacity>
           </View>
         </ScrollView>
