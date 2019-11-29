@@ -56,7 +56,7 @@ class ListModal extends React.Component {
       this.setState({nameRequired: ''})
     }
     if(colorIsValid == false){
-      this.setState({colorRequired: 'The color of the list was not picked!'}) 
+      this.setState({colorRequired: 'The color of the list was not picked!'})
     }
     else{
       this.setState({colorRequired: ''})
@@ -103,7 +103,8 @@ class ListModal extends React.Component {
         isVisible={isOpen}
         hasBackdrop
         onBackButtonPress={closeModal}
-        onSwipeComplete={['up','down']}
+        onSwipeComplete={closeModal}
+        SwipeDirection={['up','down']}
         style={styles.modal}>
         <ScrollView style={[styles.container]}>
           <Text style={styles.title}>Creating a New list</Text>
@@ -128,13 +129,13 @@ class ListModal extends React.Component {
             value={this.state.boardName}
             onChangeText={(value) => this.updateBoard(value)}/>
           <View style={{flexDirection:'row'}}>
-            <TouchableOpacity 
+            <TouchableOpacity
             onPress={isValid ? () => this.cleanUp(true): () => this.determineErrorMsg()}
             style={styles.button}>
               <Text style={styles.btntxt}>Submit</Text>
             </TouchableOpacity>
-            <TouchableOpacity 
-            style={styles.button} 
+            <TouchableOpacity
+            style={styles.button}
             onPress={() => this.cleanUp(false)}>
               <Text style={styles.btntxt}>Go Back</Text></TouchableOpacity>
           </View>

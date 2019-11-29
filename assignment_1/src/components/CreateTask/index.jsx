@@ -40,7 +40,8 @@ class CreateTask extends React.Component {
         isVisible={isOpen}
         hasBackdrop
         onBackButtonPress={closeModal}
-        onSwipeComplete={['up','down']}
+        onSwipeComplete={closeModal}
+        SwipeDirection={['up','down']}
         style={styles.modal}>
         <ScrollView style={[styles.container]}>
           <Text style={styles.title}>Creating a New list</Text>
