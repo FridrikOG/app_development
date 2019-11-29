@@ -6,14 +6,12 @@ import { ColorPicker } from 'react-native-color-picker';
 import { Dropdown } from 'react-native-material-dropdown';
 
 
-class ListModal extends React.Component {
+class ModifyListModal extends React.Component {
   state = {
     name: '',
     color: '',
     boardName:'',
-
   }
-
   handleSubmit = () => {
     console.log(this.state);
   }
@@ -27,10 +25,8 @@ class ListModal extends React.Component {
     this.setState({boardName});
   }
   render() {
-    const { isOpen, closeModal, addList, boardOptions} = this.props;
-
+    const { isOpen, closeModal, addList, boardOptions, modifyList} = this.props;
     value = null;
-
     return(
       <NativeModal
         isVisible={isOpen}
@@ -39,7 +35,7 @@ class ListModal extends React.Component {
         onSwipeComplete={['up','down']}
         style={styles.modal}>
         <ScrollView style={[styles.container]}>
-          <Text style={styles.title}>Creating a New list</Text>
+          <Text style={styles.title}>Modifying an existing list</Text>
           <TextInput
             placeholder="Name"
             placeholderTextColor = "black"
@@ -58,7 +54,7 @@ class ListModal extends React.Component {
             value={this.state.boardName}
             onChangeText={(value) => this.updateBoard(value)}/>
           <View style={{flexDirection:'row'}}>
-            <TouchableOpacity style={styles.button} onPress={() => addList(this.state)}><Text style={styles.btntxt}>Submit</Text></TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={() => modifyList(this.state)}><Text style={styles.btntxt}>Submit</Text></TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={closeModal}><Text style={styles.btntxt}>Go Back</Text></TouchableOpacity>
           </View>
         </ScrollView>
@@ -68,4 +64,4 @@ class ListModal extends React.Component {
 
 }
 
-export default ListModal;
+export default ModifyListModal;

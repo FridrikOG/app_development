@@ -3,6 +3,7 @@ import { ScrollView, View, Text } from 'react-native';
 import Toolbar from '../../components/Toolbar';
 import ListLists from '../../components/ListLists';
 import ListModal from '../../components/ListModal';
+import ModifyListModal from '../../components/ListModal/ModifyListModal';
 import data from '../../resources/data.json';
 import styles from './styles';
 class Lists extends React.Component{
@@ -10,6 +11,7 @@ class Lists extends React.Component{
     lists: data.lists,
     selectedIds: [],
     isAddModalOpen: false,
+    isModifyModalOpen : false,
   }
 // This function should take in information from our form and add it to our board list
   addList = (submittedInfo) => {
@@ -59,7 +61,7 @@ class Lists extends React.Component{
 
     }
   }
-  removeSelectedLists(){
+  removeSelectedLists(info, selectedids){
     const {selectedIds,lists} = this.state;
     this.setState({
       // Only retrieve images which were NOT part of the selected images list
@@ -77,10 +79,32 @@ class Lists extends React.Component{
     }
     return <Text>You have {selectedIds.length} selected {itemCaption} </Text>
   }
+  modifyList (info, selectedIds) {
+    
+    const {lists} = this.state;
+    const boards = this.props.navigation.state.params.boards
+    boards.map(function(board){
+      if(board.name == info.boardName)
+        boardId = board.id;
+    })
+    newList = {
+      "id": selectedIds[0],
+      "name": info.name,
+      "color": info.color,
+      "boardId": boardId,
+    }
+    console.log("Logging info: ", info);
+    
+  
+    let newLists = lists.filter(list => selectedIds.indexOf(list.id) == -1)
+    this.setState({lists: [...newLists,newList], isModifyModalOpen: false, selectedIds: []})
+    console.log("Logging lists: ", lists)
+
+  }
 
   render(){
     const params = this.props.navigation.state.params;
-    const { lists, selectedIds, isAddModalOpen } = this.state;
+    const { lists, selectedIds, isAddModalOpen, isModifyModalOpen } = this.state;
     const toShow = [];
     const  boardNames = []
     const boards = this.props.navigation.state.params.boards;
@@ -91,9 +115,11 @@ class Lists extends React.Component{
       <ScrollView>
         <Toolbar
           onAdd={() => this.setState({ isAddModalOpen: true})}
+          onModify={() => this.setState({ isModifyModalOpen: true})}
           hasSelectedIds = {selectedIds.length > 0 }
           onRemove ={() => this.removeSelectedLists()}
           canModify = {!(selectedIds.length == 0 || selectedIds.length > 1)}
+
           />
           { this.displayCaption()}
         <Text style={styles.title}>Currently in Board: {params.boardId}</Text>
@@ -107,7 +133,6 @@ class Lists extends React.Component{
         onLongPress={(listId) => this.onListLongPress(listId)}
         selectedIds = {selectedIds}
         props= {this.props}
-
         />
         <ListModal
           isOpen={isAddModalOpen}
@@ -115,7 +140,14 @@ class Lists extends React.Component{
           addList={(info) => this.addList(info)}
           boardOptions={boardNames}
         />
-
+        <ModifyListModal
+          lists = {boards}
+          listId = {selectedIds}
+          isOpen={isModifyModalOpen}
+          closeModal={() => this.setState({isModifyModalOpen:false})}
+          modifyList={(info) => this.modifyList(info, selectedIds)}
+          boardOptions = {boardNames}
+        />
       </ScrollView>
     )
   }

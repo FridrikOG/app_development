@@ -52,6 +52,7 @@ class Boards extends React.Component {
     }
     return <Text>You have {selectedIds.length} selected {itemCaption} </Text>
   }
+
   addBoard = (info) => {
     const { boards } = this.state;
     var maxId = 0;
@@ -68,6 +69,29 @@ class Boards extends React.Component {
       "thumbnailPhoto": info.thumbnailPhoto
     }
     this.setState({ boards: [ ...boards, newBoard ], isAddModalOpen: false });
+  }
+
+  addModifiedBoard = (newBoard) => {
+    const {boards, isModifyModalOpen} = this.state;
+    this.setState({ boards: [ ...boards, newBoard ], isModifyModalOpen: false });
+    console.log("Logging boards : ", boards)
+  }
+  
+  modifyBoard = (info, boardId) => {
+
+    console.log("Logging info: ", info);
+    console.log("Logging id: ", boardId[0])
+    const {selectedIds,boards} = this.state;
+    newBoard = {
+      "id": boardId[0],
+      "name": info.name,
+      "description": info.description,
+      "thumbnailPhoto": info.thumbnailPhoto,
+    }
+  
+    let newBoards = boards.filter(board => selectedIds.indexOf(board.id) == -1)
+    this.setState({boards: [...newBoards,newBoard], isModifyModalOpen: false, selectedIds: []})
+
   }
   render() {
 
@@ -98,7 +122,7 @@ class Boards extends React.Component {
           boardId = {selectedIds}
           isOpen={isModifyModalOpen}
           closeModal={() => this.setState({isModifyModalOpen:false})}
-          modifyBoard={(info) => this.modifyBoard(info)}
+          modifyBoard={(info) => this.modifyBoard(info, selectedIds)}
         />
       </View>
     )
