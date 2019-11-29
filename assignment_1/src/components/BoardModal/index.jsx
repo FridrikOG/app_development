@@ -19,7 +19,7 @@ class BoardModal extends React.Component {
     if (name.length > 2){
       this.setState({isValid: true})
     // If name of board becomes less than 3 characters we make the form invalid for submission
-    } 
+    }
     else {
       this.setState({isValid: false})
     }
@@ -68,7 +68,8 @@ class BoardModal extends React.Component {
       isVisible={isOpen}
       hasBackdrop
       onBackButtonPress={closeModal}
-      onSwipeComplete={['up','down']}
+      onSwipeComplete={closeModal}
+      SwipeDirection={['up','down']}
       style={styles.modal}>
       <ScrollView style={[styles.container]}>
         <Text style={styles.title}>Creating a New Board</Text>
@@ -87,9 +88,9 @@ class BoardModal extends React.Component {
           multiline = {true}
           value={this.state.description}
           onChangeText={ text => this.updateDescription(text)}/>
-          
+
         <View style={{flexDirection:'row'}}>
-          <TouchableOpacity 
+          <TouchableOpacity
           style={styles.button}
           onPress={isValid ? () => this.cleanUp(true): () => this.determineErrorMsg()}>
           <Text style={styles.btntxt}>Submit</Text>
