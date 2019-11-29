@@ -3,7 +3,7 @@ import NativeModal from 'react-native-modal';
 import { View, Text, StyleSheet, TextInput, Picker, TouchableOpacity, ScrollView } from 'react-native';
 import styles from './styles';
 
-class BoardModal extends React.Component {
+class ModifyBoardModal extends React.Component {
   state = {
     name: '',
     description: '',
@@ -15,7 +15,6 @@ class BoardModal extends React.Component {
   
   }
   updateName(name){
-    console.log("Logging the name: ", name)
     //name = 'Name needs to be longer!'
     const {isInvalid} = this.state
     // Name of board has to be at least 3 characters
@@ -37,9 +36,14 @@ class BoardModal extends React.Component {
 
 
   render() {
-    const { isOpen, closeModal, addBoard} = this.props;
+    const { isOpen, closeModal, ModifyBoardModal, boardId, boards} = this.props;
     const {isInvalid} = this.state;
+    theBoard = boards.filter(x => x.id == boardId)
+    console.log("Logging the board", theBoard)
 
+    this.state.name = theBoard.name;
+
+    //console.log("Printing selIds : ", boardId)
     return(
     <NativeModal
       isVisible={isOpen}
@@ -48,10 +52,10 @@ class BoardModal extends React.Component {
       onSwipeComplete={['up','down']}
       style={styles.modal}>
       <ScrollView style={[styles.container]}>
-        <Text style={styles.title}>Creating a New Board</Text>
+        <Text style={styles.title}>Modifying existing board</Text>
         <TextInput
           style={styles.textInput}
-          placeholder="Name"
+          placeholder="Insert Name"
           placeholderTextColor="black"
           value={this.state.name}
           onChangeText={ (text) => this.updateName(text)}/>
@@ -65,7 +69,7 @@ class BoardModal extends React.Component {
           onChangeText={ text => this.updateDescription(text)}/>
           
         <View style={{flexDirection:'row'}}>
-          <TouchableOpacity disabled = {isInvalid} style={[styles.button, {opacity: isInvalid ? 0.5 : 1 }]} onPress={() => addBoard(this.state)}><Text style={styles.btntxt}>Submit</Text></TouchableOpacity>
+          <TouchableOpacity disabled = {isInvalid} style={[styles.button, {opacity: isInvalid ? 0.5 : 1 }]} onPress={() => ModifyBoardModal(this.state)}><Text style={styles.btntxt}>Submit</Text></TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={closeModal}><Text style={styles.btntxt}>Go Back</Text></TouchableOpacity>
         </View>
       </ScrollView>
@@ -74,4 +78,4 @@ class BoardModal extends React.Component {
   }
 }
 
-export default BoardModal;
+export default ModifyBoardModal;

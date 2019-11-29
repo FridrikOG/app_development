@@ -6,7 +6,6 @@ import {AntDesign} from '@expo/vector-icons';
 import PropTypes from 'prop-types';
 
 const BoardList = ({ boards, props, onLongPress, selectedIds }) => {
-    console.log("Inside board list: ", boards)
     return (
         <View style={styles.container}>
         <Text style = {styles.type} > Board List </Text>
