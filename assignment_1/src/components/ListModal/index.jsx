@@ -53,7 +53,9 @@ class ListModal extends React.Component {
           <Text style={styles.pickerText}>Pick a Board:</Text>
           <Dropdown
             label='Boards'
-            data={boardOptions}/>
+            data={boardOptions}
+            value={this.state.boardName}
+            onChangeText={(value) => this.updateBoard(value)}/>
           <View style={{flexDirection:'row'}}>
             <TouchableOpacity style={styles.button} onPress={() => addList(this.state)}><Text style={styles.btntxt}>Submit</Text></TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={closeModal}><Text style={styles.btntxt}>Go Back</Text></TouchableOpacity>
