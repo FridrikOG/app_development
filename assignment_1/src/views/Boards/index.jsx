@@ -16,7 +16,9 @@ class Boards extends React.Component {
     ids: [],
     // All selected boards
     selectedIds: [],
+    // This one starts as false and is used in the Modal (located in components)
     isAddModalOpen: false,
+    
     isModifyModalOpen : false
   }
   onBoardLongPress(id){
@@ -45,10 +47,9 @@ class Boards extends React.Component {
   displayCaption() {
     const { selectedIds } = this.state
     if (selectedIds.length === 0) { return;}
-
     let itemCaption = 'boards';
     if (selectedIds.length === 1) {
-      itemCaption = 'board';
+      let itemCaption = 'board';
     }
     return <Text>You have {selectedIds.length} selected {itemCaption} </Text>
   }
