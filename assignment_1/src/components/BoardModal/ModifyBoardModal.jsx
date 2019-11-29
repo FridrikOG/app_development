@@ -10,19 +10,20 @@ class ModifyBoardModal extends React.Component {
     description: '',
     thumbnailPhoto: '',
     isInvalid: true,
-    hasRecievedInput: true
+    hasRecievedNameInput: true,
+    hasRecievedDescriptionInput: true
   }
   handleSubmit = () => {
     const value = this._form.getValue(); // use that ref to get the form value
   }
   updateName(name) {
     //name = 'Name needs to be longer!'
-    const { isInvalid, hasRecievedInput } = this.state
+    const { isInvalid, hasRecievedNameInput } = this.state
     // Name of board has to be at least 3 characters
     if (name.length > 2) {
       this.setState({
         isInvalid: false,
-        hasRecievedInput: false
+        hasRecievedNameInput: false,
       })
       // If name of board becomes less than 3 characters we make the form invalid for submission
     } else {
@@ -33,22 +34,61 @@ class ModifyBoardModal extends React.Component {
     this.setState({ name });
   }
   updateDescription(description) {
+    const { hasRecievedDescriptionInput } = this.state;
+
+    if (hasRecievedDescriptionInput){
+        this.setState({hasRecievedDescriptionInput : false})
+      }
     this.setState({ description });
   }
 
-  getName() {
-
- 
-    return 'NAME YO';
+  getBoard() {
+    const { boards,boardId } = this.props;
+    let board = boards.filter(x => x.id == boardId);
+    return board[0];
   }
 
+  getName() {
+    let board = this.getBoard()
+    try {
+      return board.name
+    }
+    catch(err){
+      return 'error'
+    }
+  }
+  getDescription() {
+    let board = this.getBoard()
+    try {
+      return board.description
+    }
+    catch(err){
+      return 'error'
+    }
+  }
+
+  cleanUp(Submit){
+    const {modifyBoard, closeModal} = this.props;
+    // Clean up error meassges
+    // Resetting the states
+    this.setState({
+      hasRecievedNameInput: true,
+      hasRecievedDescriptionInput: true
+    })
+    if(Submit){
+      // If the submit button is pushed we modify the board
+      modifyBoard(this.state);
+    }
+    else{
+      closeModal();
+    }
+  }
 
   render() {
-    const { isOpen, closeModal, modifyBoard, boardId, boards, } = this.props;
-    const { isInvalid, hasRecievedInput: hasReceivedInput } = this.state;
+    const { isOpen, closeModal, boardId, boards, } = this.props;
+    const { isInvalid, hasRecievedNameInput, hasRecievedDescriptionInput   } = this.state;
     let theBoard = boards.filter(x => x.id == boardId);
     let outBoardAr = theBoard[0];
-    console.log("Logging the board", boardId);
 
     
     return (
@@ -63,7 +103,9 @@ class ModifyBoardModal extends React.Component {
           <TextInput
             style={styles.textInput}
             placeholderTextColor="black"
-            value={hasReceivedInput ?  this.getName()  : this.state.name}
+
+            value={hasRecievedNameInput ?  this.getName()  : this.state.name}
+
             onChangeText={(text) => this.updateName(text)} />
           <TextInput
             style={[styles.textInput, { height: 200 }]}
@@ -71,18 +113,21 @@ class ModifyBoardModal extends React.Component {
             placeholderTextColor="black"
             editable={true}
             multiline={true}
-            value={this.state.description}
+
+            value={hasRecievedDescriptionInput ? this.getDescription() : this.state.description}
+
             onChangeText={text => this.updateDescription(text)} />
 
           <View style={{ flexDirection: 'row' }}>
             <TouchableOpacity
               disabled={isInvalid}
               style={[styles.button, { opacity: isInvalid ? 0.5 : 1 }]}
-              onPress={() => modifyBoard(this.state)}>
+              onPress={
+                () => this.cleanUp(true)}>
               <Text style={styles.btntxt}>Submit</Text></TouchableOpacity>
             <TouchableOpacity
               style={styles.button}
-              onPress={closeModal}><Text
+              onPress={() => this.cleanUp(false)}><Text
                 style={styles.btntxt}>Go Back</Text>
             </TouchableOpacity>
           </View>
