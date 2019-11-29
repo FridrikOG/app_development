@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, FlatList, TouchableOpacity, Image } from 'react-native';
+import { ScrollView, View, Text, FlatList, TouchableOpacity, Image } from 'react-native';
 import ImageThumbnail from '../ImageThumbnail';
 import styles from './styles';
 import {AntDesign} from '@expo/vector-icons';
@@ -25,10 +25,9 @@ class TaskList extends React.Component {
         <NativeModal
           isVisible={isOpen}
           hasBackdrop
-          onBackButtonPress={closeModal}
-          onSwipeComplete={['up','down']}
+          onBackButtonPress={['up','down']}
           style={styles.modal}>
-          <View style={styles.container}>
+          <ScrollView style={styles.container}>
             <Text style = {styles.type} > Task List </Text>
             <FlatList
                 numColumns = {1}
@@ -51,7 +50,7 @@ class TaskList extends React.Component {
               <TouchableOpacity style={styles.button} onPress={closeModal}><Image style={styles.icon} source={leftArrow} /></TouchableOpacity>
               <TouchableOpacity style={styles.button} onPress={addAnew}><Image style={styles.icon} source={plus} /></TouchableOpacity>
             </View>
-          </View>
+          </ScrollView>
         </NativeModal>
       )
     }

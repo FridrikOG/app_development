@@ -30,21 +30,29 @@ class CreateTask extends React.Component {
   updateFinished(finished) {
     this.setState({finished});
   }
-
+  cleanUp(){
+    console.log("cleaning up!");
+    const { maxId, name, description, finished } = this.state;
+    this.setState({
+      maxId: '',
+      name: '',
+      description:'',
+      finished: false
+    })
+    this.props.addTask(this.state);
+  }
   render() {
     const { isOpen, closeModal, addTask, listId} = this.props;
     const { name, description, finished } = this.state;
-    value = null;
     return(
       <NativeModal
         isVisible={isOpen}
         hasBackdrop
         onBackButtonPress={closeModal}
-        onSwipeComplete={closeModal}
-        SwipeDirection={['up','down']}
+        onSwipeComplete={['up','down']}
         style={styles.modal}>
         <ScrollView style={[styles.container]}>
-          <Text style={styles.title}>Creating a New list</Text>
+          <Text style={styles.title}>Creating a New Task</Text>
           <TextInput
             placeholder="Name"
             placeholderTextColor = "black"
@@ -63,7 +71,7 @@ class CreateTask extends React.Component {
             onValueChange={finished => this.updateFinished(finished)}
             value={this.state.finished}/>
           <View style={{flexDirection:'row'}}>
-            <TouchableOpacity style={styles.button} onPress={(info) => addTask(this.state)}><Text style={styles.btntxt}>Submit</Text></TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={() => this.cleanUp()}><Text style={styles.btntxt}>Submit</Text></TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={closeModal}><Text style={styles.btntxt}>Go Back</Text></TouchableOpacity>
           </View>
         </ScrollView>
@@ -72,5 +80,5 @@ class CreateTask extends React.Component {
   }
 
 }
-
+//
 export default CreateTask;
