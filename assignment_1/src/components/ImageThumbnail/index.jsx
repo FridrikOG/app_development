@@ -10,8 +10,10 @@ const ImageThumbnail = ({ file }) => (
     source={{uri:file}} />
 );
 
+/*
 ImageThumbnail.propTypes = {
   file: PropTypes.string.isRequired,
 };
+*/
 
 export default ImageThumbnail;
