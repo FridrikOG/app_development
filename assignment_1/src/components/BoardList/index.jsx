@@ -37,16 +37,15 @@ const BoardList = ({ boards, props, onLongPress, selectedIds }) => {
 
     )
 }
-
 BoardList.propTypes = {
     boards: PropTypes.arrayOf(PropTypes.shape({
-        id: PropTypes.string.isRequired,
+        id: PropTypes.number.isRequired,
         name: PropTypes.string.isRequired,
-        description: PropTypes.string.isRequired,
+        description: PropTypes.string,
         thumbnailPhoto: PropTypes.string.isRequired
     })).isRequired,
-    ongLongPress: PropTypes.func.isRequired,
-    selectedIds: PropTypes.arrayOf(PropTypes.integer).isRequired
+    ongLongPress: PropTypes.func,
+    selectedIds: PropTypes.arrayOf(PropTypes.number).isRequired
 }
 
 

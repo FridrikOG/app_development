@@ -7,8 +7,8 @@ import Lists from '../views/Lists';
 import Administrators from '../views/Administrators';
 
 const StackNavigator = createStackNavigator({
-  Boards,
   Main,
+  Boards,
   Lists,
   Administrators,
 });

@@ -8,6 +8,7 @@ import styles from './styles';
 import TaskList from '../../components/TaskList';
 import data from '../../resources/data.json';
 import CreateTask from '../CreateTask';
+import PropTypes from 'prop-types';
 
 class ListLists extends React.Component{
   state ={
@@ -92,6 +93,16 @@ class ListLists extends React.Component{
     )
   }
 
+}
+
+ListLists.propTypes = {
+  lists: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      description: PropTypes.string,
+  })).isRequired,
+  ongLongPress: PropTypes.func,
+  selectedIds: PropTypes.arrayOf(PropTypes.number).isRequired
 }
 
 

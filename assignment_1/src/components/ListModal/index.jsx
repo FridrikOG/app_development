@@ -23,9 +23,6 @@ class ListModal extends React.Component {
     console.log(this.state);
   }
   updateName(name) {
-    console.log("Logging the name: ", name)
-    //name = 'Name needs to be longer!'
-    const {isInvalid} = this.state
     // Name of board has to be at least 3 characters
     if (name.length > 2){
       this.setState({
@@ -51,7 +48,7 @@ class ListModal extends React.Component {
     });
   }
   determineErrorMsg(){
-    const {nameIsValid, colorIsValid,boardIsValid,nameRequired} = this.state;
+    const {nameIsValid, colorIsValid,boardIsValid} = this.state;
     if(nameIsValid == false){
       this.setState({nameRequired: 'Name must be more than two characters.'})
     }
@@ -71,18 +68,31 @@ class ListModal extends React.Component {
       this.setState({boardRequired: ''})
     }
   }
-  cleanUp(closeModal){
-    // Clearing the error messages
+  cleanUp(Submit){
+    const { closeModal,addList } = this.props;
+    // Resetting vars
     this.setState({
+      name: '',
+      color: '',
+      boardName:'',
+      nameIsValid: false,
+      colorIsValid: false,
+      boardIsValid: false,
       nameRequired: '',
       colorRequired: '',
       boardRequired: '',
     })
-    // Closing the model after clearing the error message
-    closeModal();
+    // If Submit was pressed we add the board to our data
+    if(Submit){
+      addList(this.state)
+    }
+    // GoBack was pressed - Closing the model after clearing the error message
+    else{
+      closeModal();
+    }
     }
   render() {
-    const { isOpen, closeModal, addList, boardOptions} = this.props;
+    const { isOpen, closeModal, boardOptions} = this.props;
     const {nameIsValid,colorIsValid,boardIsValid, nameRequired,colorRequired,boardRequired} = this.state;
     const isValid = nameIsValid && colorIsValid && boardIsValid;
 
@@ -119,13 +129,13 @@ class ListModal extends React.Component {
             onChangeText={(value) => this.updateBoard(value)}/>
           <View style={{flexDirection:'row'}}>
             <TouchableOpacity 
-            onPress={isValid ? () => addList(this.state): () => this.determineErrorMsg()}
+            onPress={isValid ? () => this.cleanUp(true): () => this.determineErrorMsg()}
             style={styles.button}>
               <Text style={styles.btntxt}>Submit</Text>
             </TouchableOpacity>
             <TouchableOpacity 
             style={styles.button} 
-            onPress={() => this.cleanUp(closeModal)}>
+            onPress={() => this.cleanUp(false)}>
               <Text style={styles.btntxt}>Go Back</Text></TouchableOpacity>
           </View>
         </ScrollView>
