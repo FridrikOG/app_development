@@ -5,6 +5,7 @@ import BoardList from '../../components/BoardList';
 import styles from './styles';
 import Toolbar from '../../components/Toolbar';
 import BoardModal from '../../components/BoardModal';
+import ModifyBoardModal from '../../components/BoardModal/ModifyBoardModal';
 
 class Boards extends React.Component {
   // this.props.navigation.state.params.data
@@ -16,6 +17,7 @@ class Boards extends React.Component {
     // All selected boards
     selectedIds: [],
     isAddModalOpen: false,
+    isModifyModalOpen : false
   }
   onBoardLongPress(id){
   const {selectedIds} = this.state;
@@ -68,15 +70,14 @@ class Boards extends React.Component {
     this.setState({ boards: [ ...boards, newBoard ], isAddModalOpen: false });
   }
   render() {
-    console.log("LOGGING PROPS: ", this.props)
+ 
     const props = this.props;
-    const {selectedIds, boards, isAddModalOpen} = this.state
-    //console.log("Logging boards: ", this.state.boards)
-    //console.log("LOGGING SELECTED ID's " ,this.selectedIds)
+    const {selectedIds, boards, isAddModalOpen, isModifyModalOpen} = this.state
     return (
       <View style = {{ flex: 1}}>
         <Toolbar
         onAdd={() => this.setState({ isAddModalOpen: true})}
+        onModify={() => this.setState({ isModifyModalOpen: true})}
         hasSelectedIds = {selectedIds.length > 0 }
         canModify = {!(selectedIds.length == 0 || selectedIds.length > 1)}
         onRemove ={() => this.removeSelectedBoards()} />
@@ -91,6 +92,13 @@ class Boards extends React.Component {
           isOpen={isAddModalOpen}
           closeModal={() => this.setState({isAddModalOpen: false})}
           addBoard={(info) => this.addBoard(info)}
+        />
+        <ModifyBoardModal
+          boards = {boards}
+          boardId = {selectedIds}
+          isOpen={isModifyModalOpen}
+          closeModal={() => this.setState({isModifyModalOpen:false})}
+          modifyBoard={(info) => this.modifyBoard(info)}
         />
       </View>
     )
