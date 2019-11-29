@@ -16,8 +16,15 @@ class ListLists extends React.Component{
     currentTasks: [],
     allTasks: data.tasks,
     currentListId: '',
-    isOpenTaskModal: false,
+    isOpenTaskModal: false
   }
+
+  creatingAnewTask = () => {
+    console.log("creating a new task!!!");
+    const { isOpenTaskModal } = this.state;
+    this.setState({ isOpenTaskModal: true});
+  }
+
   correspondingTasks = (id) => {
     const { currentTasks, allTasks, currentListId} = this.state;
     this.setState({currentListId: ''});
@@ -32,6 +39,7 @@ class ListLists extends React.Component{
 
   }
   addTask = (info) => {
+    console.log("in addtask in listlists");
     const { currentTasks, currentListId } = this.state;
     newTask = {
       "id": info.maxId,
@@ -41,9 +49,6 @@ class ListLists extends React.Component{
       "listId": currentListId
     }
     this.setState({currentTasks: [ ...currentTasks, newTask],isOpenTaskModal:false});
-  }
-  creatingAnewTask(){
-       this.setState({isOpenTaskModal:true})
   }
   render(){
     const { lists, onLongPress, selectedIds, props } = this.props;
