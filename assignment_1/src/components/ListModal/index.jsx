@@ -26,7 +26,6 @@ class ListModal extends React.Component {
   }
   render() {
     const { isOpen, closeModal, addList, boardOptions} = this.props;
-    console.log(boardOptions);
     return(
       <NativeModal
         isVisible={isOpen}
