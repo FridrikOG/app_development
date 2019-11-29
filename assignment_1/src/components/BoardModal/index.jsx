@@ -8,7 +8,7 @@ class BoardModal extends React.Component {
     name: '',
     description: '',
     thumbnailPhoto:'',
-    isInvalid: true
+    isInvalid: false
   }
   handleSubmit = () => {
     const value = this._form.getValue(); // use that ref to get the form value
@@ -21,11 +21,11 @@ class BoardModal extends React.Component {
     // Name of board has to be at least 3 characters
     if (name.length > 2){
       this.setState({
-        isInvalid:false,
+        isInvalid:true,
       })
     // If name of board becomes less than 3 characters we make the form invalid for submission
     } else {this.setState({
-      isInvalid:true
+      isInvalid:false
     })
   }
     this.setState({name});
@@ -65,7 +65,11 @@ class BoardModal extends React.Component {
           onChangeText={ text => this.updateDescription(text)}/>
           
         <View style={{flexDirection:'row'}}>
-          <TouchableOpacity disabled = {isInvalid} style={[styles.button, {opacity: isInvalid ? 0.5 : 1 }]} onPress={() => addBoard(this.state)}><Text style={styles.btntxt}>Submit</Text></TouchableOpacity>
+          <TouchableOpacity 
+          disabled = {!isInvalid} 
+          style={[styles.button, {opacity: isInvalid ? 1 : 0.5 }]} 
+          onPress={() => addBoard(this.state)}><Text 
+          style={styles.btntxt}>Submit</Text></TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={closeModal}><Text style={styles.btntxt}>Go Back</Text></TouchableOpacity>
         </View>
       </ScrollView>
