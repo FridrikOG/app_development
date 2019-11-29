@@ -22,35 +22,45 @@ class BoardModal extends React.Component {
     } 
     else {
       this.setState({isValid: false})
-  }
+    }
     // Actually updating the name to the state
     this.setState({name});
   }
+
   updateDescription(description){
     this.setState({description});
   }
   determineErrorMsg(){
     const {isValid} = this.state;
     if(isValid == false){
-      this.setState({nameRequired: 'Name must be more than two characters.'});
+      this.setState({nameRequired: 'Name of the board must be more than two characters.'});
       }
     else{
       this.setState({nameRequired: ''});
     }
   }
-  cleanUp(closeModal){
+  cleanUp(Submit){
+    const {closeModal,addBoard} = this.props;
     // Clearing the error messages
     this.setState({
-      nameRequired: '',
-      colorRequired: '',
-      boardRequired: '',
+      name: '',
+      description: '',
+      thumbnailPhoto:'',
+      isValid: false,
+      nameRequired: ''
     })
-    // Closing the model after clearing the error message
+    // If Submit was pressed we add the board to our data
+    if(Submit){
+      addBoard(this.state)
+    }
+    else{
+    // GoBack was pressed - Closing the model after clearing the error message
     closeModal();
+    }
     }
 
   render() {
-    const { isOpen, closeModal, addBoard} = this.props;
+    const { isOpen, closeModal} = this.props;
     const {isValid,nameRequired} = this.state;
 
     return(
@@ -81,11 +91,10 @@ class BoardModal extends React.Component {
         <View style={{flexDirection:'row'}}>
           <TouchableOpacity 
           style={styles.button}
-          onPress={isValid ? () => addBoard(this.state): () => this.determineErrorMsg()}>
-          <Text 
-            style={styles.btntxt}>Submit</Text>
+          onPress={isValid ? () => this.cleanUp(true): () => this.determineErrorMsg()}>
+          <Text style={styles.btntxt}>Submit</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={() => this.cleanUp(closeModal)}>
+          <TouchableOpacity style={styles.button} onPress={() => this.cleanUp(false)}>
             <Text style={styles.btntxt}>Go Back</Text>
           </TouchableOpacity>
         </View>
