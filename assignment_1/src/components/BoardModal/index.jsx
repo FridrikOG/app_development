@@ -8,7 +8,7 @@ class BoardModal extends React.Component {
     name: '',
     description: '',
     thumbnailPhoto:'',
-    isInvalid: false
+    isValid: false
   }
   handleSubmit = () => {
     const value = this._form.getValue(); // use that ref to get the form value
@@ -17,17 +17,18 @@ class BoardModal extends React.Component {
   updateName(name){
     console.log("Logging the name: ", name)
     //name = 'Name needs to be longer!'
-    const {isInvalid} = this.state
+    const {isValid} = this.state
     // Name of board has to be at least 3 characters
     if (name.length > 2){
       this.setState({
-        isInvalid:true,
+        isValid:true
       })
     // If name of board becomes less than 3 characters we make the form invalid for submission
     } else {this.setState({
-      isInvalid:false
+      isValid:false
     })
   }
+    // Actually updating the name to the state
     this.setState({name});
   }
   updateDescription(description){
@@ -38,7 +39,7 @@ class BoardModal extends React.Component {
 
   render() {
     const { isOpen, closeModal, addBoard} = this.props;
-    const {isInvalid} = this.state;
+    const {isValid} = this.state;
 
     return(
     <NativeModal
@@ -66,8 +67,8 @@ class BoardModal extends React.Component {
           
         <View style={{flexDirection:'row'}}>
           <TouchableOpacity 
-          disabled = {!isInvalid} 
-          style={[styles.button, {opacity: isInvalid ? 1 : 0.5 }]} 
+          disabled = {!isValid} 
+          style={[styles.button, {opacity: isValid ? 1 : 0.5 }]} 
           onPress={() => addBoard(this.state)}><Text 
           style={styles.btntxt}>Submit</Text></TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={closeModal}><Text style={styles.btntxt}>Go Back</Text></TouchableOpacity>
