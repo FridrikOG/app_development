@@ -11,45 +11,16 @@ import CreateTask from '../CreateTask';
 import data from '../../resources/data.json';
 
 class TaskList extends React.Component {
-    state = {
-      isOpenTaskModal: false,
-      tasksList: [],
 
-
-    }
-/*
-var maxId = 0;
-lists.map(function(obj){
-  if (obj.id > maxId) maxId = obj.id;
-});
-// We get the highest id of any list
-maxId += 1
-
-*/
     booleanToString(b) {
       if( b == true){
         return 'Yes';
       }
       return 'No';
     }
-    logprops(){
-      console.log("PROPS IN TASKLIST",this.props);
 
-    }
-    addTask = (info) =>{
-      const { tasks, currentListId } = this.props;
-      const { tasksList } = this.state;
-
-      this.setState
-      this.props.tasks.push(info);
-
-
-    }
     render() {
-      const { isOpen, closeModal, tasks, currentListId} = this.props;
-      const { isOpenTaskModal } = this.state;
-      console.log("CURRENT LIST ID IN TASKS:",currentListId);
-      this.logprops();
+      const { isOpen, closeModal, tasks, addAnew} = this.props;
       return (
         <NativeModal
           isVisible={isOpen}
@@ -61,7 +32,7 @@ maxId += 1
             <Text style = {styles.type} > Task List </Text>
             <FlatList
                 numColumns = {1}
-                data={tasks[0]}
+                data={tasks}
                 renderItem={( {item: {id,name, description, isFinished,listId }}) => {
                     return(
                       <View>
@@ -75,17 +46,11 @@ maxId += 1
                       </View>
                   )}}
                 keyExtractor={ (task) => tasks.id }/>
-            <CreateTask
-              isOpen={isOpenTaskModal}
-              closeModal={() => this.setState({isOpenTaskModal:false})}
-              addTask={(info) => this.addTask(info)}
-              listId={currentListId}
-            />
+
             <View style={{flexDirection:'row'}}>
               <TouchableOpacity style={styles.button} onPress={closeModal}><Image style={styles.icon} source={leftArrow} /></TouchableOpacity>
-              <TouchableOpacity style={styles.button} onPress={() => this.setState({isOpenTaskModal: true})}><Image style={styles.icon} source={plus} /></TouchableOpacity>
+              <TouchableOpacity style={styles.button} onPress={addAnew}><Image style={styles.icon} source={plus} /></TouchableOpacity>
             </View>
-
           </View>
         </NativeModal>
       )

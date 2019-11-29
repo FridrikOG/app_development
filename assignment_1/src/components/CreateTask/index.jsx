@@ -9,14 +9,20 @@ import data from '../../resources/data.json';
 
 class CreateTask extends React.Component {
   state = {
+    maxId: '',
     name: '',
     description:'',
     finished: false,
   }
 
-
   updateName(name) {
     this.setState({name});
+    var maxId = 0;
+    data.tasks.map(function(obj){
+      if (obj.id > maxId) maxId = obj.id;
+    });
+    maxId += 1
+    this.setState({maxId});
   }
   updateDescription(description) {
     this.setState({description});
@@ -24,24 +30,7 @@ class CreateTask extends React.Component {
   updateFinished(finished) {
     this.setState({finished});
   }
-  sendInfo(listId) {
-    console.log("LIST ID :",listId);
-    const { name, description, finished } = this.state;
-    var maxId = 0;
-    data.tasks.map(function(obj){
-      if (obj.id > maxId) maxId = obj.id;
-    });
-    maxId += 1
-    newTask = {
-      "id": maxId,
-      "name": name,
-      "description": description,
-      "finished": finished,
-      "listId": listId
-    }
-    //console.log("called sendinfo in CreateTask");
-    return newTask;
-  }
+
   render() {
     const { isOpen, closeModal, addTask, listId} = this.props;
     const { name, description, finished } = this.state;
@@ -73,7 +62,7 @@ class CreateTask extends React.Component {
             onValueChange={finished => this.updateFinished(finished)}
             value={this.state.finished}/>
           <View style={{flexDirection:'row'}}>
-            <TouchableOpacity style={styles.button} onPress={(info) => addTask(this.sendInfo({listId}))}><Text style={styles.btntxt}>Submit</Text></TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={(info) => addTask(this.state)}><Text style={styles.btntxt}>Submit</Text></TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={closeModal}><Text style={styles.btntxt}>Go Back</Text></TouchableOpacity>
           </View>
         </ScrollView>

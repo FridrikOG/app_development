@@ -7,6 +7,7 @@ import { AntDesign } from '@expo/vector-icons';
 import styles from './styles';
 import TaskList from '../../components/TaskList';
 import data from '../../resources/data.json';
+import CreateTask from '../CreateTask';
 
 class ListLists extends React.Component{
   state ={
@@ -14,9 +15,10 @@ class ListLists extends React.Component{
     currentTasks: [],
     allTasks: data.tasks,
     currentListId: '',
+    isOpenTaskModal: false,
   }
   correspondingTasks = (id) => {
-
+    console.log("ID IN CORRESPONDING: ",id);
     const { currentTasks, allTasks, currentListId} = this.state;
     this.setState({currentListId: ''});
     this.setState({currentListId: id});
@@ -27,17 +29,26 @@ class ListLists extends React.Component{
         toSendTasks.push(item);
       }
     })}
-    this.setState({currentTasks: [ toSendTasks ], isTaskOpen: true});
+    this.setState({currentTasks: toSendTasks, isTaskOpen: true});
 
   }
   addTask = (info) => {
-    const { currentTasks } = this.state;
-    this.setState({currentTasks: [ ...currentTasks, info]});
-    console.log("called add in lists");
+    const { currentTasks, currentListId } = this.state;
+    newTask = {
+      "id": info.maxId,
+      "name": info.name,
+      "description": info.description,
+      "finished": info.finished,
+      "listId": currentListId
+    }
+    this.setState({currentTasks: [ ...currentTasks, newTask],isOpenTaskModal:false});
+  }
+  creatingAnewTask(){
+       this.setState({isOpenTaskModal:true})
   }
   render(){
     const { lists, onLongPress, selectedIds, props } = this.props;
-    const { isTaskOpen, currentTasks } = this.state;
+    const { isTaskOpen, currentTasks, isOpenTaskModal } = this.state;
     return(
       <ScrollView style={styles.listContainer}>
 
@@ -69,7 +80,13 @@ class ListLists extends React.Component{
           isOpen={isTaskOpen}
           closeModal={() => this.setState({isTaskOpen: false})}
           tasks={this.state.currentTasks}
-          currentListId={this.state.currentListId}
+          addAnew={() => this.creatingAnewTask()}
+        />
+        <CreateTask
+          isOpen={isOpenTaskModal}
+          closeModal={() => this.setState({isOpenTaskModal:false})}
+          addTask={(info) => this.addTask(info)}
+          listId={this.state.currentListId}
         />
       </ScrollView>
     )
