@@ -140,7 +140,7 @@ class Lists extends React.Component{
           boardOptions={boardNames}
         />
         <ModifyListModal
-          lists = {boards}
+          lists = {lists}
           listId = {selectedIds}
           isOpen={isModifyModalOpen}
           closeModal={() => this.setState({isModifyModalOpen:false})}

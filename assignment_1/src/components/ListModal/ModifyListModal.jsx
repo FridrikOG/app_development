@@ -17,11 +17,10 @@ class ModifyListModal extends React.Component {
     nameRequired: '',
     colorRequired: '',
     boardRequired: '',
+    hasRecievedNameInput: true,
+
   }
 
-  handleSubmit = () => {
-    console.log(this.state);
-  }
   updateName(name) {
     // Name of board has to be at least 3 characters
     if (name.length > 2){
@@ -85,6 +84,7 @@ class ModifyListModal extends React.Component {
       nameRequired: '',
       colorRequired: '',
       boardRequired: '',
+      hasRecievedNameInput: true,
     })
     // If Submit was pressed we add the board to our data
     if(Submit){
@@ -96,13 +96,28 @@ class ModifyListModal extends React.Component {
     }
     }
 
+    getList() {
+      const { lists,listId } = this.props;
+      let list = lists.filter(x => x.id == listId[0]);
+      return list[0];
+    }
+  
+    getName() {
+      let list = this.getList()
+      try {
+        return list.name
+      }
+      catch(err){
+        return 'error'
+      }
+    }
+
 
   render() {
-    const {nameIsValid,colorIsValid,boardIsValid, nameRequired,colorRequired,boardRequired} = this.state;
-    const { isOpen, closeModal, boardOptions} = this.props;
+    const {nameIsValid,colorIsValid,boardIsValid, nameRequired,colorRequired,boardRequired, hasRecievedNameInput} = this.state;
+    const { isOpen, closeModal, boardOptions, lists} = this.props;
     value = null;
-
-    console.log('This shit valid?????',nameIsValid&&colorIsValid&&boardIsValid);
+    console.log(hasRecievedNameInput)
     return(
       <NativeModal
         isVisible={isOpen}
@@ -117,7 +132,7 @@ class ModifyListModal extends React.Component {
             placeholder="Name"
             placeholderTextColor = "black"
             style={styles.textInput}
-            value={this.state.name}
+            value={hasRecievedNameInput ?  this.getName()  : this.state.name}
             onChangeText={ text => this.updateName(text)}/>
           <Text>Pick a color then press the middle to select!</Text>
           <Text style={{color:'red'}}>{colorRequired}</Text>
