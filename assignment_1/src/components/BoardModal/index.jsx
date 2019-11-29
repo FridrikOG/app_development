@@ -8,24 +8,20 @@ class BoardModal extends React.Component {
     name: '',
     description: '',
     thumbnailPhoto:'',
-    isValid: false
+    isValid: false,
+    nameRequired: ''
   }
   handleSubmit = () => {
     const value = this._form.getValue(); // use that ref to get the form value
   }
   updateName(name){
-    console.log("Logging the name: ", name)
-    //name = 'Name needs to be longer!'
-    const {isValid} = this.state
     // Name of board has to be at least 3 characters
     if (name.length > 2){
-      this.setState({
-        isValid:true
-      })
+      this.setState({isValid: true})
     // If name of board becomes less than 3 characters we make the form invalid for submission
-    } else {this.setState({
-      isValid:false
-    })
+    } 
+    else {
+      this.setState({isValid: false})
   }
     // Actually updating the name to the state
     this.setState({name});
@@ -33,10 +29,29 @@ class BoardModal extends React.Component {
   updateDescription(description){
     this.setState({description});
   }
+  determineErrorMsg(){
+    const {isValid} = this.state;
+    if(isValid == false){
+      this.setState({nameRequired: 'Name must be more than two characters.'});
+      }
+    else{
+      this.setState({nameRequired: ''});
+    }
+  }
+  cleanUp(closeModal){
+    // Clearing the error messages
+    this.setState({
+      nameRequired: '',
+      colorRequired: '',
+      boardRequired: '',
+    })
+    // Closing the model after clearing the error message
+    closeModal();
+    }
 
   render() {
     const { isOpen, closeModal, addBoard} = this.props;
-    const {isValid} = this.state;
+    const {isValid,nameRequired} = this.state;
 
     return(
     <NativeModal
@@ -47,6 +62,7 @@ class BoardModal extends React.Component {
       style={styles.modal}>
       <ScrollView style={[styles.container]}>
         <Text style={styles.title}>Creating a New Board</Text>
+        <Text style={{color:'red'}}>{nameRequired}</Text>
         <TextInput
           style={styles.textInput}
           placeholder="Name"
@@ -64,11 +80,14 @@ class BoardModal extends React.Component {
           
         <View style={{flexDirection:'row'}}>
           <TouchableOpacity 
-          disabled = {!isValid} 
-          style={[styles.button, {opacity: isValid ? 1 : 0.5 }]} 
-          onPress={() => addBoard(this.state)}><Text 
-          style={styles.btntxt}>Submit</Text></TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={closeModal}><Text style={styles.btntxt}>Go Back</Text></TouchableOpacity>
+          style={styles.button}
+          onPress={isValid ? () => addBoard(this.state): () => this.determineErrorMsg()}>
+          <Text 
+            style={styles.btntxt}>Submit</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={() => this.cleanUp(closeModal)}>
+            <Text style={styles.btntxt}>Go Back</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </NativeModal>

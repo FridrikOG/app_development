@@ -121,8 +121,6 @@ class ListModal extends React.Component {
             <TouchableOpacity 
             onPress={isValid ? () => addList(this.state): () => this.determineErrorMsg()}
             style={styles.button}>
-            {/*, {opacity: isValid ? 1 : 0.5 }]} */}
-            {/*disabled={!isValid}>*/}
               <Text style={styles.btntxt}>Submit</Text>
             </TouchableOpacity>
             <TouchableOpacity 
