@@ -12,7 +12,6 @@ class BoardModal extends React.Component {
   }
   handleSubmit = () => {
     const value = this._form.getValue(); // use that ref to get the form value
-  
   }
   updateName(name){
     console.log("Logging the name: ", name)
@@ -34,12 +33,9 @@ class BoardModal extends React.Component {
     this.setState({description});
   }
 
-
-
   render() {
     const { isOpen, closeModal, addBoard} = this.props;
     const {isInvalid} = this.state;
-
     return(
     <NativeModal
       isVisible={isOpen}
