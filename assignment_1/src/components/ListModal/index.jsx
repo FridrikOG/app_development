@@ -104,8 +104,8 @@ class ListModal extends React.Component {
             style={styles.textInput}
             value={this.state.name}
             onChangeText={ text => this.updateName(text)}/>
-          <Text style={{color:'red'}}>{colorRequired}</Text>
           <Text>Pick a color then press the middle to select!</Text>
+          <Text style={{color:'red'}}>{colorRequired}</Text>
           <ColorPicker
             onColorSelected={color => this.updateColor(color)}
             style={{height:200,width:200}}/>
