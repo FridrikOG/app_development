@@ -5,7 +5,6 @@ import ListLists from '../../components/ListLists';
 import ListModal from '../../components/ListModal';
 import data from '../../resources/data.json';
 import styles from './styles';
-
 class Lists extends React.Component{
   state = {
     lists: data.lists,
@@ -116,6 +115,7 @@ class Lists extends React.Component{
           addList={(info) => this.addList(info)}
           boardOptions={boardNames}
         />
+
       </ScrollView>
     )
   }

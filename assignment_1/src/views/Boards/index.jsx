@@ -94,7 +94,7 @@ class Boards extends React.Component {
 
   }
   render() {
- 
+
     const props = this.props;
     const {selectedIds, boards, isAddModalOpen, isModifyModalOpen} = this.state
     return (
