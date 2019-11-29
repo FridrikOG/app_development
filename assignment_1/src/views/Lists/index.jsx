@@ -17,7 +17,6 @@ class Lists extends React.Component{
   addList = (submittedInfo) => {
     const { lists } = this.state;
     var maxId = 0;
-    var maxobj;
     lists.map(function(obj){
       if (obj.id > maxId) maxId = obj.id;
     });
@@ -80,7 +79,7 @@ class Lists extends React.Component{
     return <Text>You have {selectedIds.length} selected {itemCaption} </Text>
   }
   modifyList (info, selectedIds) {
-    
+
     const {lists} = this.state;
     const boards = this.props.navigation.state.params.boards
     boards.map(function(board){
@@ -94,8 +93,8 @@ class Lists extends React.Component{
       "boardId": boardId,
     }
     console.log("Logging info: ", info);
-    
-  
+
+
     let newLists = lists.filter(list => selectedIds.indexOf(list.id) == -1)
     this.setState({lists: [...newLists,newList], isModifyModalOpen: false, selectedIds: []})
     console.log("Logging lists: ", lists)

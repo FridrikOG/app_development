@@ -13,19 +13,27 @@ class ListLists extends React.Component{
     isTaskOpen: false,
     currentTasks: [],
     allTasks: data.tasks,
+    currentListId: '',
   }
   correspondingTasks = (id) => {
-    const { currentTasks, allTasks } = this.state;
-    console.log("TASKS", currentTasks);
+
+    const { currentTasks, allTasks, currentListId} = this.state;
+    this.setState({currentListId: ''});
+    this.setState({currentListId: id});
+    console.log("UPDATED ID IN LISTS",this.state.currentListId);
     toSendTasks =[];
     { allTasks.map(function(item){
       if(item.listId == id){
-        console.log("ONE ITEM",item);
         toSendTasks.push(item);
       }
     })}
     this.setState({currentTasks: [ toSendTasks ], isTaskOpen: true});
 
+  }
+  addTask = (info) => {
+    const { currentTasks } = this.state;
+    this.setState({currentTasks: [ ...currentTasks, info]});
+    console.log("called add in lists");
   }
   render(){
     const { lists, onLongPress, selectedIds, props } = this.props;
@@ -61,6 +69,7 @@ class ListLists extends React.Component{
           isOpen={isTaskOpen}
           closeModal={() => this.setState({isTaskOpen: false})}
           tasks={this.state.currentTasks}
+          currentListId={this.state.currentListId}
         />
       </ScrollView>
     )
