@@ -12,7 +12,6 @@ class ModifyBoardModal extends React.Component {
   }
   handleSubmit = () => {
     const value = this._form.getValue(); // use that ref to get the form value
-  
   }
   updateName(name){
     //name = 'Name needs to be longer!'
@@ -34,14 +33,22 @@ class ModifyBoardModal extends React.Component {
   }
 
 
-
   render() {
-    const { isOpen, closeModal, ModifyBoardModal, boardId, boards} = this.props;
-    const {isInvalid} = this.state;
-    theBoard = boards.filter(x => x.id == boardId)
-    console.log("Logging the board", theBoard)
-
-    this.state.name = theBoard.name;
+    const { isOpen, closeModal, modifyBoard, boardId, boards} = this.props;
+    const { isInvalid} = this.state;
+    let theBoard = boards.filter(x => x.id == boardId);
+    let outBoardAr = theBoard[0];
+    console.log("Logging the board", theBoard);
+    
+    // this.setState({name: 'something'});
+   /* if (outBoardAr !== undefined){
+        console.log("Logging the name inside the IF statement", outBoardAr.name);
+        
+        //this.updateName(outBoardAr.name)
+        // this.setState({name:outBoardAr.name})
+    }
+    */ 
+    
 
     //console.log("Printing selIds : ", boardId)
     return(
@@ -69,8 +76,16 @@ class ModifyBoardModal extends React.Component {
           onChangeText={ text => this.updateDescription(text)}/>
           
         <View style={{flexDirection:'row'}}>
-          <TouchableOpacity disabled = {isInvalid} style={[styles.button, {opacity: isInvalid ? 0.5 : 1 }]} onPress={() => ModifyBoardModal(this.state)}><Text style={styles.btntxt}>Submit</Text></TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={closeModal}><Text style={styles.btntxt}>Go Back</Text></TouchableOpacity>
+          <TouchableOpacity 
+          disabled = {isInvalid} 
+          style={[styles.button, {opacity: isInvalid ? 0.5 : 1 }]} 
+          onPress={() => modifyBoard(this.state)}><Text 
+          style={styles.btntxt}>Submit</Text></TouchableOpacity>
+          <TouchableOpacity 
+          style={styles.button} 
+          onPress={closeModal}><Text 
+          style={styles.btntxt}>Go Back</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </NativeModal>
