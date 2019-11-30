@@ -90,9 +90,9 @@ class Lists extends React.Component {
     const { selectedIds } = this.state;
     if (selectedIds.length === 0) { return; }
 
-    let itemCaption = 'boards';
+    let itemCaption = 'lists';
     if (selectedIds.length === 1) {
-      itemCaption = 'board';
+      itemCaption = 'list';
     }
     // eslint-disable-next-line consistent-return
     return (
@@ -158,9 +158,12 @@ class Lists extends React.Component {
           onRemove={() => this.removeSelectedLists()}
           canModify={selectedIds.length === 1}
         />
-        {this.displayCaption()}
+        <Text style={styles.caption}>
+          {this.displayCaption()}
+        </Text>
         <Text style={styles.title}>
-          Currently in Board:
+          Currently in Board
+          {' '}
           {params.boardId}
         </Text>
         {lists.map(

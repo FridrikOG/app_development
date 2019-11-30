@@ -7,9 +7,10 @@ export default StyleSheet.create({
 
   },
   title: {
-    backgroundColor: lightyellow,
-    padding:20,
+    height:50,
     fontSize:20,
+    padding:10,
+    backgroundColor:babyblue,
   },
   text: {
     borderColor:'black',
@@ -38,5 +39,9 @@ export default StyleSheet.create({
   },
   listsContainer: {
     borderColor: 'red'
+  },
+  caption: {
+    padding:10,
+    color:blue,
   }
 });

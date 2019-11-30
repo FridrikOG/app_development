@@ -18,7 +18,7 @@ class Boards extends React.Component {
     selectedIds: [],
     // This one starts as false and is used in the Modal (located in components)
     isAddModalOpen: false,
-    
+
     isModifyModalOpen : false
   }
   onBoardLongPress(id){
@@ -77,7 +77,7 @@ class Boards extends React.Component {
     this.setState({ boards: [ ...boards, newBoard ], isModifyModalOpen: false });
 
   }
-  
+
   modifyBoard = (info, boardId) => {
     const {selectedIds,boards} = this.state;
     newBoard = {
@@ -86,7 +86,7 @@ class Boards extends React.Component {
       "description": info.description,
       "thumbnailPhoto": info.thumbnailPhoto,
     }
-  
+
     let newBoards = boards.filter(board => selectedIds.indexOf(board.id) == -1)
     this.setState({boards: [...newBoards,newBoard], isModifyModalOpen: false, selectedIds: []})
 
@@ -103,7 +103,7 @@ class Boards extends React.Component {
         hasSelectedIds = {selectedIds.length > 0 }
         canModify = {!(selectedIds.length == 0 || selectedIds.length > 1)}
         onRemove ={() => this.removeSelectedBoards()} />
-        { this.displayCaption()}
+        <Text style={styles.caption}>{this.displayCaption()}</Text>
 
         <BoardList
         boards={ boards }

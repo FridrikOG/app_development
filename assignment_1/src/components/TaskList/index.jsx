@@ -1,58 +1,46 @@
 import React from 'react';
-import { ScrollView, View, Text, FlatList, TouchableOpacity, Image } from 'react-native';
-import ImageThumbnail from '../ImageThumbnail';
+import { View,Text, FlatList, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import {AntDesign} from '@expo/vector-icons';
 import PropTypes from 'prop-types';
-import NativeModal from 'react-native-modal';
-import leftArrow from '../../resources/left-arrow.png';
-import plus from '../../resources/plus.png';
-import CreateTask from '../CreateTask';
-import data from '../../resources/data.json';
 
-class TaskList extends React.Component {
-
-    booleanToString(b) {
-      if( b == true){
-        return 'Yes';
-      }
-      return 'No';
+const TaskList = ({ tasks, props, onLongPress, selectedIds }) => {
+  function toBool(finished){
+    if(finished) {
+      return 'Yes';
     }
-
-    render() {
-      const { isOpen, closeModal, tasks, addAnew} = this.props;
-      return (
-        <NativeModal
-          isVisible={isOpen}
-          hasBackdrop
-          onBackButtonPress={['up','down']}
-          style={styles.modal}>
-          <ScrollView style={styles.container}>
-            <Text style = {styles.type} > Task List </Text>
-            <FlatList
-                numColumns = {1}
-                data={tasks}
-                renderItem={( {item: {id,name, description, isFinished,listId }}) => {
-                    return(
-                      <View>
-                        <Text style={styles.task}>
-                          Task: {id} {"\n"}
-                          Name: {name} {"\n"}
-                          Description: {description} {"\n"}
-                          Finished: {this.booleanToString(isFinished)} {"\n"}
-                          List Id: {listId} {"\n"}
-                        </Text>
-                      </View>
-                  )}}
-                keyExtractor={ (task) => tasks.id }/>
-
-            <View style={{flexDirection:'row'}}>
-              <TouchableOpacity style={styles.button} onPress={closeModal}><Image style={styles.icon} source={leftArrow} /></TouchableOpacity>
-              <TouchableOpacity style={styles.button} onPress={addAnew}><Image style={styles.icon} source={plus} /></TouchableOpacity>
-            </View>
-          </ScrollView>
-        </NativeModal>
-      )
-    }
+    return 'No';
+  }
+  return (
+    <View style={styles.container}>
+    <Text style = {styles.type} > Task List </Text>
+    <FlatList
+        numColumns = {1}
+        data={tasks}
+        //extraData={selectedIds}
+        renderItem={( {item: {id,name, description, isFinished,listId }}) => {
+          const isSelected = selectedIds.indexOf(id) !== -1
+          return(
+            <TouchableOpacity
+              activeOpacity={0.75}
+              onLongPress={() => onLongPress(id)}>
+              {isSelected ? <AntDesign style={styles.selectIcon} name = "checkcircleo"/> : <></>}
+              <View style= {styles.container}>
+                <View style={{opacity: isSelected ? 0.5 : 1 }} >
+                  <Text style={styles.task}>
+                    <Text style={styles.tasktitle}>Task:</Text> {id} {"\n"}{"\n"}
+                    <Text style={styles.tasktitle}>Name:</Text> {name} {"\n"}{"\n"}
+                    <Text style={styles.tasktitle}>Description:</Text> {description} {"\n"}{"\n"}
+                    <Text style={styles.tasktitle}>Finished:</Text> {toBool(isFinished)} {"\n"}{"\n"}
+                    <Text style={styles.tasktitle}>List Id:</Text> {listId}
+                  </Text>
+                  <Text style={styles.isSelected}> {isSelected ? 'Selected' : 'Not selected'}</Text>
+                </View>
+              </View>
+            </TouchableOpacity>
+          )}}
+        keyExtractor={ (task) => tasks.id }/>
+    </View>
+    )
 }
 export default TaskList;

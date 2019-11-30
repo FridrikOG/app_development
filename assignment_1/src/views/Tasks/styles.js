@@ -23,4 +23,14 @@ export default StyleSheet.create({
   listsContainer: {
     borderColor: 'red'
   },
+  currentlyIn: {
+    height:50,
+    fontSize:20,
+    padding:10,
+    backgroundColor:babyblue,
+  },
+  caption: {
+    padding:10,
+    color:blue,
+  }
 });

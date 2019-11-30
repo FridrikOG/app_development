@@ -4,7 +4,6 @@ import {
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import styles from './styles';
-import TaskList from '../../components/TaskList';
 import data from '../../resources/data.json';
 import CreateTask from '../CreateTask';
 import PropTypes from 'prop-types';
@@ -52,6 +51,7 @@ class ListLists extends React.Component{
   render(){
     const { lists, onLongPress, selectedIds, props } = this.props;
     const { isTaskOpen, currentTasks, isOpenTaskModal } = this.state;
+    console.log(isOpenTaskModal);
     return(
       <ScrollView style={styles.listContainer}>
 
@@ -65,7 +65,7 @@ class ListLists extends React.Component{
               <TouchableOpacity
                 activeOpacity={0.75}
                 onLongPress={() => onLongPress(id)}
-                onPress={() => this.correspondingTasks(id)}>
+                onPress={() => props.navigation.navigate('Tasks', {listId: id})}>
                 {isSelected ? <AntDesign name = "checkcircleo"/> : <></>}
                 <View style={[styles.container, { opacity: isSelected ? 0.5 : 1 }]}>
                   <Text style={[styles.text, { backgroundColor: color }]}>
@@ -79,18 +79,7 @@ class ListLists extends React.Component{
           }}
           keyExtractor={item => item.id}
         />
-        <TaskList
-          isOpen={isTaskOpen}
-          closeModal={() => this.setState({isTaskOpen: false})}
-          tasks={this.state.currentTasks}
-          addAnew={() => this.creatingAnewTask()}
-        />
-        <CreateTask
-          isOpen={isOpenTaskModal}
-          closeModal={() => this.setState({isOpenTaskModal:false})}
-          addTask={(info) => this.addTask(info)}
-          listId={this.state.currentListId}
-        />
+
       </ScrollView>
     )
   }
