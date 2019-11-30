@@ -6,14 +6,14 @@ import PropTypes from 'prop-types';
 
 const Toolbar = ({ onAdd, onRemove, onModify, hasSelectedIds, canModify }) => (
   <View style={styles.toolbar} styleName="horizontal">
-    <TouchableHighlight onPress={onAdd} disabled={hasSelectedIds}>
-      <Text style={[styles.toolbarActionText, hasSelectedIds ? {color: 'rgba(155, 155, 155, 0.5)'} : {}]}>Add</Text>
+    <TouchableHighlight style={styles.toolbarAction} onPress={onAdd} disabled={hasSelectedIds}>
+      <Text style={[styles.toolbarActionText, hasSelectedIds ? {color: '#85adad'} : {}]}>Add</Text>
     </TouchableHighlight>
     <TouchableHighlight style={styles.toolbarAction} onPress={onRemove} disabled={!hasSelectedIds}>
-      <Text style={[styles.toolbarActionText, hasSelectedIds ? {} : {color: 'rgba(155, 155, 155, 0.5)'}]}>Remove</Text>
+      <Text style={[styles.toolbarActionText, hasSelectedIds ? {} : {color: '#85adad'}]}>Remove</Text>
     </TouchableHighlight>
     <TouchableHighlight style={styles.toolbarAction} onPress={onModify} disabled={!canModify}>
-      <Text style={[styles.toolbarActionText, canModify ? {} : {color: 'rgba(155, 155, 155, 0.5)'}]}>Modify</Text>
+      <Text style={[styles.toolbarActionText, canModify ? {} : {color: '#85adad'}]}>Modify</Text>
     </TouchableHighlight>
   </View>
 );

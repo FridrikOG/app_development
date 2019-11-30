@@ -53,7 +53,6 @@ class CreateTask extends React.Component {
   render() {
     const { isOpen, closeModal, addTask, listId} = this.props;
     const { name, description, finished } = this.state;
-    console.log("is open value: ", isOpen);
     return(
       <NativeModal
         isVisible={isOpen}
@@ -81,7 +80,7 @@ class CreateTask extends React.Component {
           <View style={{flexDirection:'row'}}>
             <Text style={{marginRight:15}}>Is the task finished?</Text>
             <Switch
-              onValueChange={finished => this.updateFinished(finished)}
+              onValueChange={value => this.updateFinished(value)}
               value={this.state.finished}/>
           </View>
           <View style={{flexDirection:'row'}}>

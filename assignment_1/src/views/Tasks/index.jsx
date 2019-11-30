@@ -17,7 +17,7 @@ class Tasks extends React.Component{
   }
   addTask = (info) => {
     const { tasks, isOpenTaskModal } = this.state;
-    console.log(info);
+    console.log("NEW TASK IN TASKS" ,info);
     this.setState({ tasks: [ ...tasks, info ], isOpenTaskModal: false });
 
   }
@@ -95,6 +95,7 @@ class Tasks extends React.Component{
   render(){
     // Fetching the listId to only display the tasks in the list we clicked on
     // uncomment this when you want to get the id from lists
+    console.log(tasks);
     const listId = this.props.navigation.state.params.listId;
     const lists = this.props.navigation.state.params.lists;
     const {props} = this.props;
@@ -107,6 +108,7 @@ class Tasks extends React.Component{
         listLists.push({ value: item.name });
       },
     );
+
     return(
       <ScrollView>
         <Toolbar

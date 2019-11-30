@@ -111,7 +111,7 @@ class ModifyBoardModal extends React.Component {
     const {
       description, name, nameRequired, isValid, hasRecievedNameInput, hasRecievedDescriptionInput,
     } = this.state;
- 
+
     const bool = true;
     return (
       <NativeModal
@@ -127,9 +127,7 @@ class ModifyBoardModal extends React.Component {
           <TextInput
             style={styles.textInput}
             placeholderTextColor="black"
-
             value={hasRecievedNameInput ? this.getName() : name}
-
             onChangeText={(text) => this.updateName(text)}
           />
           <TextInput
