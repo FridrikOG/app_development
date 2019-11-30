@@ -34,7 +34,10 @@ class Lists extends React.Component {
     );
     // We get the highest id of any list
     maxId += 1;
-    const { boards } = this.props;
+    const { navigation } = this.props;
+    const { state } = navigation;
+    const { params } = state;
+    const { boards } = params;
     // The id of the board corresponding to the board name picked
     boards.map(
       // eslint-disable-next-line prefer-arrow-callback
