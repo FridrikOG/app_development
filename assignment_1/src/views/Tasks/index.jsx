@@ -85,7 +85,7 @@ class Tasks extends React.Component{
         };
 
         const newTasks = tasks.filter((task) => selectedIds.indexOf(task.id) === -1);
-        this.setState({ tasks: [...newTasks, newTask], isModifyModalOpen: false, selectedIds: [] });
+        this.setState({ tasks: [...newTasks, newTask], isModifyOpen: false, selectedIds: [] });
 
 
       }
