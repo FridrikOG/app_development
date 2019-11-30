@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
-import Constants from 'expo-constants';
-import { blue, lightyellow, babyblue,lightestblue } from '../../styles/colors';
+import {
+  blue, lightyellow,
+} from '../../styles/colors';
 
 export default StyleSheet.create({
   container: {
@@ -8,29 +9,29 @@ export default StyleSheet.create({
   },
   title: {
     backgroundColor: lightyellow,
-    padding:20,
-    fontSize:20,
+    padding: 20,
+    fontSize: 20,
   },
   selectIcon: {
-    borderWidth:2,
-    borderColor:blue,
-    borderRadius:22,
-    width:20,
-    height:20,
-    marginBottom:15,
+    borderWidth: 2,
+    borderColor: blue,
+    borderRadius: 22,
+    width: 20,
+    height: 20,
+    marginBottom: 15,
     alignItems: 'center',
     alignContent: 'center',
   },
   text: {
-    borderWidth:2,
-    borderRadius:12,
-    fontSize:15,
+    borderWidth: 2,
+    borderRadius: 12,
+    fontSize: 15,
     margin: 15,
-    padding:20,
-    shadowColor: "#000",
+    padding: 20,
+    shadowColor: '#000',
     shadowOffset: {
-    	width: 0,
-    	height: 1,
+      width: 0,
+      height: 1,
     },
     shadowOpacity: 0.20,
     shadowRadius: 1.41,
@@ -39,18 +40,18 @@ export default StyleSheet.create({
   },
   listtitle: {
     marginTop: 15,
-    fontWeight:'bold',
+    fontWeight: 'bold',
   },
   listvalue: {
 
   },
   finished: {
-    borderColor:'green',
-    borderWidth:3,
-    borderRadius:12,
-    fontSize:15,
+    borderColor: 'green',
+    borderWidth: 3,
+    borderRadius: 12,
+    fontSize: 15,
     margin: 15,
-    padding:20,
+    padding: 20,
   },
 
   lists: {
@@ -62,7 +63,7 @@ export default StyleSheet.create({
     borderColor: 'red',
   },
   listsContainer: {
-    borderColor: 'red'
+    borderColor: 'red',
   },
 
 });
