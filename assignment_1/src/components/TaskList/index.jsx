@@ -1,8 +1,9 @@
 import React from 'react';
-import { View,Text, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, Image, FlatList, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import {AntDesign} from '@expo/vector-icons';
 import PropTypes from 'prop-types';
+import checkmark from '../../resources/select2.png';
 
 const TaskList = ({ tasks, props, onLongPress, selectedIds }) => {
   function toBool(finished){
@@ -24,17 +25,48 @@ const TaskList = ({ tasks, props, onLongPress, selectedIds }) => {
             <TouchableOpacity
               activeOpacity={0.75}
               onLongPress={() => onLongPress(id)}>
-              {isSelected ? <AntDesign style={styles.selectIcon} name = "checkcircleo"/> : <></>}
               <View style= {styles.container}>
                 <View style={{opacity: isSelected ? 0.5 : 1 }} >
-                  <Text style={styles.task}>
-                    <Text style={styles.tasktitle}>Task:</Text> {id} {"\n"}{"\n"}
-                    <Text style={styles.tasktitle}>Name:</Text> {name} {"\n"}{"\n"}
-                    <Text style={styles.tasktitle}>Description:</Text> {description} {"\n"}{"\n"}
-                    <Text style={styles.tasktitle}>Finished:</Text> {toBool(isFinished)} {"\n"}{"\n"}
-                    <Text style={styles.tasktitle}>List Id:</Text> {listId}
-                  </Text>
-                  <Text style={styles.isSelected}> {isSelected ? 'Selected' : 'Not selected'}</Text>
+                  <View style={styles.task}>
+                    {isSelected ? <Image source={checkmark} style={styles.selectIcon} name = "checkcircleo"/> : <></>}
+                    <View style={{flexDirection:'row', borderBottomWidth:2,borderColor:'#f2f2f2'}}>
+                      <View style={styles.square}>
+                        <Text style={styles.tasktitle}>
+                          Task:
+                        </Text>
+                        <Text>
+                        {id}
+                        </Text>
+                      </View>
+                      <View style={styles.square}>
+                        <Text style={styles.tasktitle}>
+                          Name:
+                        </Text>
+                        <Text>
+                        {name}
+                        </Text>
+                      </View>
+                    </View>
+                    <View style={{flexDirection:'row',borderBottomWidth:2,borderColor:'#f2f2f2'}}>
+                      <View style={styles.square}>
+                        <Text style={styles.tasktitle}>
+                          Description:
+                        </Text>
+                        <Text>
+                        {description}
+                        </Text>
+                      </View>
+                      <View style={styles.square}>
+                        <Text style={styles.tasktitle}>
+                        Finished:
+                        </Text>
+                        <Text>
+                        {toBool(isFinished)}
+                        </Text>
+                      </View>
+                    </View>
+                    <Text style={styles.isSelected}> {isSelected ? 'Selected' : 'Not selected'}</Text>
+                  </View>
                 </View>
               </View>
             </TouchableOpacity>
