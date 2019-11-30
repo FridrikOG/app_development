@@ -21,7 +21,6 @@ export default StyleSheet.create({
   },
   task: {
     padding:15,
-    marginTop:15,
     borderWidth:1,
     fontSize:15,
     borderColor: lightestblue,
@@ -51,6 +50,10 @@ export default StyleSheet.create({
   icon: {
     width:30,
     height:30,
+  },
+  selectIcon: {
+    padding:10,
+    alignItems: 'center',
   }
 
 });
