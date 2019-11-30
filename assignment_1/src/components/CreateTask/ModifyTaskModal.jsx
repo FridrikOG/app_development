@@ -27,10 +27,10 @@ class ModifyTask extends React.Component {
       if (obj.id > maxId) maxId = obj.id;
     });
     maxId += 1
-    this.setState({maxId, hasRecievedNameInput: false});
+    this.setState({maxId, hasRecievedNameInput: false });
   }
   updateDescription(description) {
-    this.setState({description});
+    this.setState({description, hasRecievedDescriptionInput: false});
   }
   updateFinished(finished) {
     this.setState({finished});
@@ -75,12 +75,13 @@ class ModifyTask extends React.Component {
     });
   }
 
+
   getName() {
-    const board = this.getTask();
+    const task = this.getTask();
     try {
-      return board.name;
+      return task.name;
     } catch (err) {
-      return 'error';
+      return '';
     }
   }
   getTask() {
@@ -89,9 +90,19 @@ class ModifyTask extends React.Component {
     return task[0];
   }
 
+  getDescription() {
+    const task = this.getTask()
+    try {
+      return task.description
+    } catch (err) {
+      return ''
+    }
+
+  }
+
   render() {
     const { isOpen, closeModal, addTask, listId, lists, listOptions, tasks} = this.props;
-    const { name, description, finished, hasRecievedNameInput} = this.state;
+    const { name, description, finished, hasRecievedNameInput,hasRecievedDescriptionInput } = this.state;
     console.log("is open value: ", isOpen);
     return(
       <NativeModal
@@ -115,7 +126,7 @@ class ModifyTask extends React.Component {
             placeholderTextColor="black"
             editable={true}
             multiline = {true}
-            value={this.state.description}
+            value={hasRecievedDescriptionInput ? this.getDescription() : this.state.description}
             onChangeText={ text => this.updateDescription(text)}/>
           <View style={{flexDirection:'row'}}>
             <Text style={{marginRight:15}}>Is the task finished?</Text>
