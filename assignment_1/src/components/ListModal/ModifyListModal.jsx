@@ -11,7 +11,7 @@ class ModifyListModal extends React.Component {
     name: '',
     color: '',
     boardName:'',
-    nameIsValid: false,
+    nameIsValid: true,
     colorIsValid: false,
     boardIsValid: false,
     nameRequired: '',
@@ -23,10 +23,11 @@ class ModifyListModal extends React.Component {
   }
 
   updateName(name) {
+    const {nameIsValid} = this.state;
     // Name of board has to be at least 3 characters
-    if (name.length > 2){
+    if (nameIsValid){
       this.setState({
-        nameIsValid:true
+        hasRecievedNameInput:false
       })
     // If name of board becomes less than 3 characters we make the form invalid for submission
     } else {this.setState({
