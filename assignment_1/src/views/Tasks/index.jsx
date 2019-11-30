@@ -134,6 +134,8 @@ class Tasks extends React.Component{
           closeModal={() => this.setState({isOpenTaskModal: false})}
           addTask={(info) => this.addTask(info)}
           listId={listId}
+          lists = {lists}
+
         />
 
         <ModifyTask
@@ -141,7 +143,6 @@ class Tasks extends React.Component{
         closeModal={() => this.setState({isModifyOpen: false})}
         addTask={(info) => this.updateTask(info)}
         listId={listId}
-        lists = {lists}
         listOptions = {listLists}
         tasks = {tasks}
         taskId = {selectedIds[0]}

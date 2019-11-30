@@ -15,19 +15,28 @@ class ModifyTask extends React.Component {
     finished: false,
     listId: '',
     listName: '',
+    nameIsValid: true,
     listIsValid: false,
+    nameRequired: '',
+    listRequired: '',
     hasRecievedNameInput: true,
     hasRecievedDescriptionInput: true,
   }
 
   updateName(name) {
-    this.setState({name});
+    // Name of board has to be at least 3 characters
+    if (name.length > 2) {
+      this.setState({ nameIsValid: true });
+    // If name of board becomes less than 3 characters we make the form invalid for submission
+    } else {
+      this.setState({ nameIsValid: false });
+    }
     var maxId = 0;
     data.tasks.map(function(obj){
       if (obj.id > maxId) maxId = obj.id;
     });
     maxId += 1
-    this.setState({maxId, hasRecievedNameInput: false });
+    this.setState({name,maxId, hasRecievedNameInput: false });
   }
   updateDescription(description) {
     this.setState({description, hasRecievedDescriptionInput: false});
@@ -35,19 +44,27 @@ class ModifyTask extends React.Component {
   updateFinished(finished) {
     this.setState({finished});
   }
-  cleanUp(listId){
-    console.log("cleaning up!");
-    const { maxId, name, description, finished, listName } = this.state;
-    const { lists } = this.props;
 
-    lists.map(
-      // eslint-disable-next-line prefer-arrow-callback
-      function (list) {
-        if (list.name === listName) {
-          listId = list.id;
-        }
-      }
-    )
+  determineErrorMsg(){
+    const {nameIsValid, listIsValid } = this.state;
+      if(nameIsValid == false){
+      this.setState({nameRequired: 'Name must be more than two characters.'})
+    }
+    else{
+      this.setState({nameRequired: ''})
+    }
+    if(listIsValid == false){
+      this.setState({listRequired: 'The list for the task was not picked!'})
+    }
+    else{
+      this.setState({listRequired: ''})
+    }
+  }
+  cleanUp(Submit){
+    console.log("cleaning up!");
+    const {maxId, name, description, finished } = this.state;
+    const {listId,closeModal} = this.props;
+
     newTask = {
       "id": maxId,
       "name": name,
@@ -61,11 +78,19 @@ class ModifyTask extends React.Component {
       description:'',
       finished: false,
       listId: '',
-      hasRecievedNameInput : true,
-      hasRecievedDescriptionInput : true,
-
+      listName: '',
+      nameIsValid: true,
+      listIsValid: false,
+      nameRequired: '',
+      listRequired: '',
+      hasRecievedNameInput: true,
+      hasRecievedDescriptionInput: true,
     })
-    this.props.addTask(newTask);
+    if (Submit){
+      this.props.addTask(newTask);
+    }
+    closeModal()
+    
   }
 
   updateList(boardName) {
@@ -101,8 +126,8 @@ class ModifyTask extends React.Component {
   }
 
   render() {
-    const { isOpen, closeModal, addTask, listId, lists, listOptions, tasks} = this.props;
-    const { name, description, finished, hasRecievedNameInput,hasRecievedDescriptionInput } = this.state;
+    const { isOpen, closeModal, listOptions} = this.props;
+    const { nameIsValid, nameRequired, listIsValid, listRequired, name, description, finished, hasRecievedNameInput,hasRecievedDescriptionInput } = this.state;
     console.log("is open value: ", isOpen);
     return(
       <NativeModal
@@ -114,6 +139,7 @@ class ModifyTask extends React.Component {
         style={styles.modal}>
         <ScrollView style={styles.container}>
       <Text style={styles.title}>Modifying A Task</Text>
+      <Text style={{ color: 'red' }}>{nameRequired}</Text>
           <TextInput
             placeholder="Name"
             placeholderTextColor = "black"
@@ -134,6 +160,7 @@ class ModifyTask extends React.Component {
               onValueChange={finished => this.updateFinished(finished)}
               value={this.state.finished}/>
           </View>
+          <Text style={{ color: 'red' }}>{listRequired}</Text>
           <Dropdown
             label='Select a list...'
             data={listOptions} //send in list names to modifytaskmodal and then put that var here
@@ -141,8 +168,16 @@ class ModifyTask extends React.Component {
             onChangeText={(value) => this.updateList(value)} //create a function to update the value of the state
           /> 
           <View style={{flexDirection:'row'}}>
-            <TouchableOpacity style={styles.button} onPress={() => this.cleanUp(listId)}><Text style={styles.btntxt}>Submit</Text></TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={closeModal}><Text style={styles.btntxt}>Go Back</Text></TouchableOpacity>
+          <TouchableOpacity
+              style={styles.button} 
+              onPress={(nameIsValid&&listIsValid) ? () => this.cleanUp(true) : () => this.determineErrorMsg()}>
+                <Text 
+                style={styles.btntxt}
+                >
+                  Submit
+                </Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={() => this.cleanUp(false)}><Text style={styles.btntxt}>Go Back</Text></TouchableOpacity>
           </View>
         </ScrollView>
       </NativeModal>
