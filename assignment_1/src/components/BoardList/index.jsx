@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  View, Text, Image, FlatList, TouchableOpacity,
+  View, ScrollView, Text, Image, FlatList, TouchableOpacity,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import ImageThumbnail from '../ImageThumbnail';
@@ -11,7 +11,7 @@ import checkmark from '../../resources/select2.png';
 const BoardList = ({
   boards, props, onLongPress, selectedIds,
 }) => (
-  <View style={styles.container}>
+  <ScrollView style={styles.container}>
     <Text style={styles.type}>
           Board List
     </Text>
@@ -59,7 +59,7 @@ const BoardList = ({
       }}
       keyExtractor={(board) => board.id}
     />
-  </View>
+  </ScrollView>
 );
 BoardList.propTypes = {
   boards: PropTypes.arrayOf(PropTypes.shape({
