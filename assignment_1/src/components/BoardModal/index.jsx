@@ -31,7 +31,9 @@ class BoardModal extends React.Component {
   updateDescription(description) {
     this.setState({ description });
   }
-
+  updatePhoto(thumbnailPhoto) {
+    this.setState({ thumbnailPhoto });
+  }
   determineErrorMsg() {
     const { isValid } = this.state;
     if (isValid === false) {
@@ -63,7 +65,7 @@ class BoardModal extends React.Component {
   render() {
     const { isOpen, closeModal } = this.props;
     const {
-      description, name, isValid, nameRequired,
+      description, name, thumbnailPhoto, isValid, nameRequired,
     } = this.state;
     const bool = true;
 
@@ -95,7 +97,15 @@ class BoardModal extends React.Component {
             value={description}
             onChangeText={(text) => this.updateDescription(text)}
           />
-
+          <TextInput
+            style={styles.textInput}
+            placeholder="Input link for thumbnail"
+            placeholderTextColor="black"
+            editable={bool}
+            multiline={bool}
+            value={thumbnailPhoto}
+            onChangeText={(text) => this.updatePhoto(text)}
+          />
           <View style={{ flexDirection: 'row' }}>
             <TouchableOpacity
               style={styles.button}
