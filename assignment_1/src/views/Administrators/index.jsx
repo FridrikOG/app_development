@@ -6,20 +6,17 @@ import AdministratorList from '../../components/AdministratorList';
 
 
 class Administrators extends React.Component{
-    
+
       //const props = this.props.navigation.state.params;
       state = {
         administrators: data.administrators,
       }
-      
       render(){
-          
           const {administrators} = this.state
-          console.log("LOGGING FOR STUFF: ", administrators)
       return(
           <AdministratorList administrators = {administrators}/>
       )
     }
   };
-  
+
   export default Administrators;

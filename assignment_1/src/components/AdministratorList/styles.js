@@ -5,27 +5,25 @@ export default StyleSheet.create({
     flex:1,
     padding:30,
     backgroundColor:lightestblue,
+    alignItems:'center',
   },
   type:{
     fontSize: 30,
     fontWeight: 'bold',
+    backgroundColor: 'white',
+    color:blue,
+    borderRadius:12,
+    padding:10,
+    marginBottom:15,
+  },
+  name: {
+    fontSize:20,
+    color:blue,
+    fontWeight:'bold',
     textAlign:'center',
   },
-  board:{
-    flex: 4,
-    width:300,
-    marginTop:15,
-    padding:20,
-    borderRadius:12,
-    backgroundColor:'white',
-  },
-  title:{
-    paddingTop:10,
-    fontWeight: 'bold',
-  },
-  description:{
-    paddingTop:10,
-
+  email: {
+    fontSize:20,
+    textAlign:'center',
   }
-
 });

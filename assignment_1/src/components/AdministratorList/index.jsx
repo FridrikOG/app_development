@@ -7,27 +7,28 @@ import PropTypes from 'prop-types';
 
 
 const AdministratorList = ({ administrators}) => {
-    console.log(" LOGGING IN ADMIN LIST: " , administrators)
     return (
-        <View style={styles.container}>
+      <View style={styles.container}>
         <Text style = {styles.type} > Administrator view </Text>
         <FlatList
-            numColumns = {1}
-            data={administrators}
-            renderItem={( {item: {name, id, email, photo }}) => {
-                return (
-                    <View style={styles.type}>
-                          <Image
-                            style={{width:250,height:250}}
-                            resizeMode="cover"
-                            source={{uri:photo}}
-                            margin={15}/>
-                    </View>
-                )
-            }
+          numColumns = {1}
+          data={administrators}
+          renderItem={( {item: {name, id, email, photo }}) => {
+            return (
+              <View>
+                <Text style={styles.name}>{name}</Text>
+                <Text style={styles.email}>{email}</Text>
+                <Image
+                  style={{width:100,height:100, alignSelf:'center'}}
+                  resizeMode="cover"
+                  source={{uri:photo}}
+                  margin={15}/>
+              </View>
+            )
+          }
         }
         keyExtractor={ (administrators) => administrators.id }/>
-        </View>
+      </View>
     )
 }
 export default AdministratorList;

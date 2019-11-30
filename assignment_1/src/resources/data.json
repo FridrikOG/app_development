@@ -39,17 +39,23 @@
     "administrators": [
         {
             "id": 1,
-            "name": "John Johnson",
-            "email": "johnJ@gmail.com",
-            "photo" : "https://cdn.pixabay.com/photo/2019/10/07/11/26/wintry-4532412_1280.jpg"
+            "name": "Sofia Basilio",
+            "email": "sofia17@ru.is",
+            "photo" : "https://www.sanrio.com/media/W1siZiIsIjIwMTgvMTAvMzAvMjEvMzIvMzQvMjYzL2NoYXJhY3RlcnNfaGVhZGVyX2Jhbm5lcnNfaW1nX2FnZy5qcGciXV0/characters-header-banners-img-agg.jpg?sha=b8be75815d72c8c8"
 
-        
+
         },
         {
-            "id": 1,
-            "name": "Johanna Johannason",
-            "email": "JohannJ@gmail.com",
-            "photo" : "https://cdn.pixabay.com/photo/2019/11/04/20/39/wadi-rum-4602118_1280.jpg"
+            "id": 2,
+            "name": "Friðrik Gunnarsson",
+            "email": "fridrik15@ru.is",
+            "photo" : "https://i.redd.it/yp9cfi2lmu721.jpg"
+        },
+        {
+            "id": 3,
+            "name": "Þorarin Gunnarsson",
+            "email": "thoraring18@ru.is",
+            "photo" : "https://www.pinclipart.com/picdir/middle/346-3464039_aggretsuko-character-director-ton-the-pig-retsuko-pig.png"
         }
     ],
 

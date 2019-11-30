@@ -8,10 +8,10 @@ import Administrators from '../views/Administrators';
 import Tasks from '../views/Tasks';
 
 const StackNavigator = createStackNavigator({
-  Boards,
-  Tasks,
-  Lists,
   Main,
+  Boards,
+  Lists,
+  Tasks,
   Administrators,
 });
 

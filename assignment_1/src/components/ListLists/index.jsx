@@ -52,17 +52,6 @@ const ListLists = (mainProps) => {
                       {name}
                     </Text>
                   </Text>
-                  <Text style={{ flexDirection: 'row' }}>
-                    <Text style={styles.listtitle}>
-                      Color code:
-                      {' '}
-                    </Text>
-                    <Text style={styles.listvalue}>
-                      Color code:
-                      {' '}
-                      {color}
-                    </Text>
-                  </Text>
                 </View>
               </View>
             </TouchableOpacity>

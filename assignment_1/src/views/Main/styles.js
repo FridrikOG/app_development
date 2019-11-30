@@ -21,12 +21,9 @@ export default StyleSheet.create({
     paddingBottom: 10,
     paddingLeft: 20,
     paddingRight: 20,
-    //width:120,
     height:65,
     backgroundColor: blue,
     borderRadius: 12,
-    //borderColor: 'white',
-    //borderWidth: 2,
   },
   buttonText: {
     color: 'white',
@@ -36,6 +33,18 @@ export default StyleSheet.create({
   logo: {
     width: 250,
     height: 250,
-  }
+  },
+  adminButton: {
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 20,
+    paddingRight: 20,
+    height:50,
+    borderColor: 'white',
+    borderWidth:2,
+    borderRadius: 12,
+    fontSize:25,
+    backgroundColor:'#00b3b3'
+  },
 
 });
