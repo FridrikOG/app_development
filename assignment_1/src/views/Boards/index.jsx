@@ -1,7 +1,7 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable func-names */
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, ScrollView, Text } from 'react-native';
 import data from '../../resources/data.json';
 import BoardList from '../../components/BoardList';
 import styles from './styles';
@@ -126,7 +126,7 @@ class Boards extends React.Component {
       selectedIds, boards, isAddModalOpen, isModifyModalOpen,
     } = this.state;
     return (
-      <View>
+      <ScrollView>
         <Toolbar
           onAdd={() => this.setState({ isAddModalOpen: true })}
           onModify={() => this.setState({ isModifyModalOpen: true })}
@@ -154,7 +154,7 @@ class Boards extends React.Component {
           closeModal={() => this.setState({ isModifyModalOpen: false })}
           modifyBoard={(info) => this.modifyBoard(info, selectedIds)}
         />
-      </View>
+      </ScrollView>
     );
   }
 }
