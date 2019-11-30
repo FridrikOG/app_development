@@ -35,20 +35,24 @@ const BoardList = ({
             <View style={[styles.board, { opacity: isSelected ? 0.5 : 1 }]}>
               {isSelected ? <Image source={checkmark} style={styles.selectIcon} name="checkcircleo" /> : <></>}
               <ImageThumbnail file={thumbnailPhoto} />
+              <Text style={styles.titleboard}>
+                Board
+                {' '}
+                {id}
+              </Text>
               <Text style={styles.title}>
                 Name:
                 {' '}
+              </Text>
+              <Text style={styles.description}>
                 {name}
               </Text>
-              <Text style={styles.description}>
+              <Text style={styles.title}>
                 Description:
                 {' '}
-                {description}
               </Text>
               <Text style={styles.description}>
-                ID:
-                {' '}
-                {id}
+                {description}
               </Text>
               <Text style={styles.isSelected}>
                 {isSelected ? 'Selected' : 'Not selected'}
