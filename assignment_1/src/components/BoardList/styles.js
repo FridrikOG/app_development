@@ -48,12 +48,22 @@ export default StyleSheet.create({
     elevation: 2,
     backgroundColor:'white',
   },
-  title:{
-    paddingTop:10,
+  titleboard: {
+    marginTop:10,
     fontWeight: 'bold',
+    fontSize:20,
+    color:blue,
+  },
+  title:{
+    marginTop:10,
+    fontWeight: 'bold',
+    fontSize:18,
   },
   description:{
-    paddingTop:10,
+    fontSize:18,
+    borderBottomWidth:2,
+    borderColor:babyblue,
+    paddingBottom:10,
   },
   isSelected: {
     backgroundColor:blue,

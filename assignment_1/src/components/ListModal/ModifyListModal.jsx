@@ -40,7 +40,7 @@ class ModifyListModal extends React.Component {
   updateColor(color) {
     const {hasRecievedColorInput} = this.state;
     if (hasRecievedColorInput){
-      
+
     }
     this.setState({
       color: color,
@@ -64,7 +64,7 @@ class ModifyListModal extends React.Component {
       this.setState({nameRequired: ''})
     }
     if(colorIsValid == false){
-      this.setState({colorRequired: 'The color of the list was not picked!'}) 
+      this.setState({colorRequired: 'The color of the list was not picked!'})
     }
     else{
       this.setState({colorRequired: ''})
@@ -107,7 +107,7 @@ class ModifyListModal extends React.Component {
       let list = lists.filter(x => x.id == listId[0]);
       return list[0];
     }
-  
+
     getName() {
       let list = this.getList()
       try {
@@ -129,7 +129,7 @@ class ModifyListModal extends React.Component {
 
 
   render() {
-    const {nameIsValid,colorIsValid,boardIsValid, nameRequired,colorRequired,boardRequired, 
+    const {nameIsValid,colorIsValid,boardIsValid, nameRequired,colorRequired,boardRequired,
       hasRecievedNameInput, hasRecievedColorInput} = this.state;
     const { isOpen, closeModal, boardOptions, lists} = this.props;
     value = null;
@@ -150,32 +150,35 @@ class ModifyListModal extends React.Component {
             style={styles.textInput}
             value={hasRecievedNameInput ?  this.getName()  : this.state.name}
             onChangeText={ text => this.updateName(text)}/>
-          <Text>Pick a color then press the middle to select!</Text>
+          <Text style={styles.colorText}>Selected color: {this.state.color}</Text>
           <Text style={{color:'red'}}>{colorRequired}</Text>
           <ColorPicker
             onColorSelected= {color => this.updateColor(color)}
-            style={{height:200,width:200}}/>
-          <Text style={styles.colorText}>Selected color: {this.state.color}</Text>
-          <Text style={styles.pickerText}>Pick a Board:</Text>
-          <Text style={{color:'red'}}>{boardRequired}</Text>
+            style={{height:150,width:150}}/>
+          <Text style={styles.pickerText}>
+            Pick a Board:
+            <Text style={{color:'red'}}>
+            {boardRequired}
+            </Text>
+          </Text>
           <Dropdown
             label='Boards'
             data={boardOptions}
             value={this.state.boardName}
             onChangeText={(value) => this.updateBoard(value)}/>
           <View style={{flexDirection:'row'}}>
-            <TouchableOpacity 
+            <TouchableOpacity
 
 
-            style={styles.button} 
+            style={styles.button}
             onPress={ (nameIsValid && colorIsValid && boardIsValid) ? () => this.cleanUp(true): () => this.determineErrorMsg()}>
 
 
               <Text style={styles.btntxt}> Submit </Text></TouchableOpacity>
-            <TouchableOpacity 
+            <TouchableOpacity
 
 
-            style={styles.button} 
+            style={styles.button}
             onPress={() => this.cleanUp(false)}>
 
 

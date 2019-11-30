@@ -105,6 +105,19 @@ class Boards extends React.Component {
 
   modifyBoard = (info, boardId) => {
     const { selectedIds, boards } = this.state;
+
+    const oldBoard = boards.filter((x) => x.id === boardId[0]);
+    // Making sure if the name submitted is the old one then we fix it
+    if (info.name == '') {
+      info.name = oldBoard[0].name
+    }
+    if (info.description == '') {
+      info.description = oldBoard[0].description
+    }
+
+
+    console.log("LOGGING IN INFO for name: ", oldBoard[0].name)
+    
     const newBoard = {
       // eslint-disable-next-line quote-props
       'id': boardId[0],
@@ -115,7 +128,6 @@ class Boards extends React.Component {
       // eslint-disable-next-line quote-props
       'thumbnailPhoto': info.thumbnailPhoto,
     };
-
     const newBoards = boards.filter((board) => selectedIds.indexOf(board.id) === -1);
     this.setState({ boards: [...newBoards, newBoard], isModifyModalOpen: false, selectedIds: [] });
   };

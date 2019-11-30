@@ -48,7 +48,6 @@ export default StyleSheet.create({
   },
   pickerText: {
     fontWeight: 'bold',
-    padding: 5,
   },
   picker: {
     borderWidth: 1,
