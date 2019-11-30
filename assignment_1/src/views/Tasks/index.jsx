@@ -11,6 +11,7 @@ class Tasks extends React.Component{
     tasks: data.tasks,
     selectedIds: [],
     isOpenTaskModal: false,
+    isMofifyOpen: false,
   }
   addTask = (info) => {
     const { tasks, isOpenTaskModal } = this.state;
@@ -69,6 +70,7 @@ class Tasks extends React.Component{
         onAdd={() => this.setState({isOpenTaskModal:true})}
         hasSelectedIds = {selectedIds.length > 0}
         onRemove={() => this.removeSelectedTasks()}
+        onMofify={() => this.setState({isMofifyOpen:true})}
         canModify = {!(selectedIds.length == 0 || selectedIds.length > 1)}/>
         {tasks.map(function(item,index){
           if (item.listId == listId){
@@ -87,6 +89,12 @@ class Tasks extends React.Component{
           closeModal={() => this.setState({isOpenTaskModal: false})}
           addTask={(info) => this.addTask(info)}
           listId={listId}
+        />
+
+        <ModifyTask
+        isOpen={isMofifyOpen}
+        closeModal={() => this.setState({isMofifyOpen: false})}
+        
         />
       </ScrollView>
     )
