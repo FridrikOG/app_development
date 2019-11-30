@@ -7,21 +7,24 @@ import CreateTask from '../../components/CreateTask';
 import ModifyTask from '../../components/CreateTask/ModifyTaskModal';
 import styles from './styles';
 
+// Class takes care of the tasks
 class Tasks extends React.Component{
   state = {
+    // Takes the tasks straight from the data since boards/lists aren't modifying them
     tasks: data.tasks,
     selectedIds: [],
     isOpenTaskModal: false,
     isModifyOpen: false,
 
   }
+
+  // Called from the create task modal
   addTask = (info) => {
     const { tasks, isOpenTaskModal } = this.state;
-    console.log("NEW TASK IN TASKS" ,info);
     this.setState({ tasks: [ ...tasks, info ], isOpenTaskModal: false });
 
   }
-  // id = TaskId
+  // Uses our selection system
   onTaskLongPress(id){
     const {selectedIds} = this.state;
     if (selectedIds.indexOf(id) !== -1){
@@ -38,12 +41,13 @@ class Tasks extends React.Component{
     }
   }
 
+  // Called when remove is pressed, 
   removeSelectedTasks(){
     const {selectedIds,tasks} = this.state;
     this.setState({
       // Only retrieve images which were NOT part of the selected images list
       tasks: tasks.filter(task => selectedIds.indexOf(task.id) == -1),
-      selectedImages: [],
+      selectedIds: [],
     })}
 
   // This one should display a caption whenever someone selects a board
@@ -62,8 +66,6 @@ class Tasks extends React.Component{
     // const { tasks, isModifyOpen, lists } = this.props;
     const lists = this.props.navigation.state.params.lists;
     const { tasks, isModifyOpen, selectedIds } = this.state;
-    console.log("logging lists : ", info)
-    // console.log("logging info : ", info.listId)
 
     lists.map(
       // eslint-disable-next-line prefer-arrow-callback
