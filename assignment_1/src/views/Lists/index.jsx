@@ -97,10 +97,10 @@ class Lists extends React.Component {
     // eslint-disable-next-line consistent-return
     return (
       <Text>
-        You have
-        {selectedIds.length}
-        selected
-        {itemCaption}
+        You have {' '}
+        {selectedIds.length} {' '}
+        selected {' '}
+        {itemCaption} {' '}
       </Text>
     );
   }
@@ -158,13 +158,13 @@ class Lists extends React.Component {
           onRemove={() => this.removeSelectedLists()}
           canModify={selectedIds.length === 1}
         />
-        <Text style={styles.caption}>
-          {this.displayCaption()}
-        </Text>
         <Text style={styles.title}>
           Currently in Board
           {' '}
           {params.boardId}
+        </Text>
+        <Text style={styles.caption}>
+          {this.displayCaption()}
         </Text>
         {lists.map(
           // eslint-disable-next-line prefer-arrow-callback

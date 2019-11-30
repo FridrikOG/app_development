@@ -1,12 +1,13 @@
 import React from 'react';
 import {
- ScrollView, View, Text, FlatList, TouchableOpacity
+ ScrollView, View, Text, Image, FlatList, TouchableOpacity
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import styles from './styles';
 import data from '../../resources/data.json';
 import CreateTask from '../CreateTask';
 import PropTypes from 'prop-types';
+import checkmark from '../../resources/select2.png';
 
 class ListLists extends React.Component{
   state = {
@@ -54,7 +55,6 @@ class ListLists extends React.Component{
     console.log(isOpenTaskModal);
     return(
       <ScrollView style={styles.listContainer}>
-
         <FlatList
           numColumns={1}
           data={lists}
@@ -66,13 +66,37 @@ class ListLists extends React.Component{
                 activeOpacity={0.75}
                 onLongPress={() => onLongPress(id)}
                 onPress={() => props.navigation.navigate('Tasks', {listId: id})}>
-                {isSelected ? <AntDesign name = "checkcircleo"/> : <></>}
                 <View style={[styles.container, { opacity: isSelected ? 0.5 : 1 }]}>
-                  <Text style={[styles.text, { backgroundColor: color }]}>
-                  List: {id} {'\n'}
-                  Name: {name} {'\n'}
-                  Color code: {color} {'\n'}
-                  </Text>
+                  <View style={[styles.text, {backgroundColor: 'white', borderColor: color}]}>
+                    {isSelected ? <Image source={checkmark} style={styles.selectIcon} name = "checkcircleo"/> : <></>}
+                    <Text style={{flexDirection:'row'}}>
+                      <Text style={styles.listtitle}>
+                        List:
+                        {' '}
+                      </Text>
+                      <Text style={styles.listvalue}>
+                        {id}
+                      </Text>
+                    </Text>
+                    <Text style={{flexDirection:'row'}}>
+                      <Text style={styles.listtitle}>
+                        Name:
+                        {' '}
+                      </Text>
+                      <Text style={styles.listvalue}>
+                        {name}
+                      </Text>
+                    </Text>
+                    <Text style={{flexDirection:'row'}}>
+                      <Text style={styles.listtitle}>
+                        Color code:
+                        {' '}
+                      </Text>
+                      <Text style={styles.listvalue}>
+                        {color}
+                      </Text>
+                    </Text>
+                  </View>
                 </View>
               </TouchableOpacity>
             );
