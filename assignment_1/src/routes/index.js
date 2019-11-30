@@ -9,8 +9,8 @@ import Tasks from '../views/Tasks';
 
 const StackNavigator = createStackNavigator({
   Boards,
-  Lists,
   Tasks,
+  Lists,
   Main,
   Administrators,
 });
