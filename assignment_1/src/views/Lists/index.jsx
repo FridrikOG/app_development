@@ -72,9 +72,9 @@ class Lists extends React.Component{
     const { selectedIds } = this.state
     if (selectedIds.length === 0) { return;}
 
-    let itemCaption = 'boards';
+    let itemCaption = 'lists';
     if (selectedIds.length === 1) {
-      itemCaption = 'board';
+      itemCaption = 'list';
     }
     return <Text>You have {selectedIds.length} selected {itemCaption} </Text>
   }
@@ -120,8 +120,8 @@ class Lists extends React.Component{
           canModify = {!(selectedIds.length == 0 || selectedIds.length > 1)}
 
           />
-          { this.displayCaption()}
-        <Text style={styles.title}>Currently in Board: {params.boardId}</Text>
+        <Text style={styles.title}>Currently in Board {params.boardId}</Text>
+        <Text style={styles.caption}>{ this.displayCaption()}</Text>
         {lists.map(function(item,index){
           if (item.boardId == params.boardId){
             toShow.push(item);

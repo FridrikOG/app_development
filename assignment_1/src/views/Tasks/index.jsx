@@ -4,6 +4,7 @@ import Toolbar from '../../components/Toolbar';
 import data from '../../resources/data';
 import TaskList from '../../components/TaskList';
 import CreateTask from '../../components/CreateTask';
+import styles from './styles';
 
 class Tasks extends React.Component{
   state = {
@@ -69,12 +70,12 @@ class Tasks extends React.Component{
         hasSelectedIds = {selectedIds.length > 0}
         onRemove={() => this.removeSelectedTasks()}
         canModify = {!(selectedIds.length == 0 || selectedIds.length > 1)}/>
-        {/* You have selected x task/s*/}
-        {this.displayCaption()}
         {tasks.map(function(item,index){
           if (item.listId == listId){
             toShow.push(item);}})}
-
+        <Text style={styles.currentlyIn}>Currently in list {listId}</Text>
+        {/* You have selected x task/s*/}
+        <Text style={styles.caption}>{this.displayCaption()}</Text>
         <TaskList
         tasks={toShow}
         props={props}

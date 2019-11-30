@@ -12,8 +12,8 @@ export default StyleSheet.create({
 
   },
   container: {
-    margin:20,
-
+    margin:10,
+    fontSize: 20,
   },
   type: {
     fontSize: 20,
@@ -21,10 +21,19 @@ export default StyleSheet.create({
   },
   task: {
     padding:15,
-    fontSize: 15,
-    backgroundColor: 'white',
     marginTop:15,
-    borderRadius:12,
+    borderWidth:1,
+    fontSize:15,
+    borderColor: lightestblue,
+  },
+  isSelected: {
+    padding:5,
+    backgroundColor:lightestblue,
+  },
+  tasktitle: {
+    fontWeight:'bold',
+    color:blue,
+    paddingRight: 10,
   },
   button:{
     backgroundColor:blue,

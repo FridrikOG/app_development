@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import {
- blue, lightyellow, babyblue, lightestblue 
+ blue, lightyellow, babyblue, lightestblue
 } from '../../styles/colors';
 
 export default StyleSheet.create({
@@ -15,4 +15,8 @@ export default StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
+  caption: {
+    padding:10,
+    backgroundColor:babyblue,
+  }
 });

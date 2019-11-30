@@ -24,14 +24,14 @@ const TaskList = ({ tasks, props, onLongPress, selectedIds }) => {
                     {isSelected ? <AntDesign name = "checkcircleo"/> : <></>}
                     <View style= {styles.container}>
                         <View style={{opacity: isSelected ? 0.5 : 1 }} >
-                            <Text style={styles.container}>
-                            Task: {id} {"\n"}
-                            Name: {name} {"\n"}
-                            Description: {description} {"\n"}
-                            Finished: {isFinished} {"\n"}
-                            List Id: {listId} {"\n"}
+                            <Text style={styles.task}>
+                              <Text style={styles.tasktitle}>Task:</Text> {id} {"\n"}{"\n"}
+                              <Text style={styles.tasktitle}>Name:</Text> {name} {"\n"}{"\n"}
+                              <Text style={styles.tasktitle}>Description:</Text> {description} {"\n"}{"\n"}
+                              <Text style={styles.tasktitle}>Finished:</Text> {isFinished} {"\n"}{"\n"}
+                              <Text style={styles.tasktitle}>List Id:</Text> {listId}
                             </Text>
-                            <Text> {isSelected ? 'Selected' : 'Not selected'}</Text>
+                            <Text style={styles.isSelected}> {isSelected ? 'Selected' : 'Not selected'}</Text>
                         </View>
                 </View>
                 </TouchableOpacity>
