@@ -34,7 +34,10 @@ class Lists extends React.Component {
     );
     // We get the highest id of any list
     maxId += 1;
-    const { boards } = this.props;
+    const { navigation } = this.props;
+    const { state } = navigation;
+    const { params } = state;
+    const { boards } = params;
     // The id of the board corresponding to the board name picked
     boards.map(
       // eslint-disable-next-line prefer-arrow-callback
@@ -97,10 +100,10 @@ class Lists extends React.Component {
     // eslint-disable-next-line consistent-return
     return (
       <Text>
-        You have
-        {selectedIds.length}
-        selected
-        {itemCaption}
+        You have {' '}
+        {selectedIds.length} {' '}
+        selected {' '}
+        {itemCaption} {' '}
       </Text>
     );
   }
@@ -158,13 +161,13 @@ class Lists extends React.Component {
           onRemove={() => this.removeSelectedLists()}
           canModify={selectedIds.length === 1}
         />
-        <Text style={styles.caption}>
-          {this.displayCaption()}
-        </Text>
         <Text style={styles.title}>
           Currently in Board
           {' '}
           {params.boardId}
+        </Text>
+        <Text style={styles.caption}>
+          {this.displayCaption()}
         </Text>
         {lists.map(
           // eslint-disable-next-line prefer-arrow-callback
