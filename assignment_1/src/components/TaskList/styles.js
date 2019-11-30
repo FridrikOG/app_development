@@ -1,6 +1,6 @@
 import { StyleSheet, Dimensions } from 'react-native';
 import Constants from 'expo-constants';
-import { blue, lightyellow, babyblue,lightestblue } from '../../styles/colors';
+import { blue, bgwhite, lightyellow, babyblue,lightestblue } from '../../styles/colors';
 const { width: winWidth } = Dimensions.get('window');
 
 export default StyleSheet.create({
@@ -11,19 +11,39 @@ export default StyleSheet.create({
     backgroundColor: lightestblue,
 
   },
-  container: {
-    margin:10,
-    fontSize: 20,
-  },
   type: {
-    fontSize: 20,
+    fontSize: 30,
+    height:70,
+    padding:10,
+    width: winWidth,
     fontWeight: 'bold',
+    textAlign:'center',
+    backgroundColor:bgwhite,
+    color:blue,
   },
   task: {
+    margin:10,
     padding:15,
-    borderWidth:1,
+    borderWidth:3,
     fontSize:15,
+    flex:2,
     borderColor: lightestblue,
+  },
+  selectIcon: {
+    borderWidth:2,
+    borderColor:blue,
+    borderRadius:22,
+    width:20,
+    height:20,
+    marginBottom:15,
+    alignItems: 'center',
+    alignContent: 'center',
+  },
+  square:{
+    width:winWidth/2-30,
+    height:100,
+    textAlign: 'center',
+    padding:10,
   },
   isSelected: {
     padding:5,
@@ -51,9 +71,4 @@ export default StyleSheet.create({
     width:30,
     height:30,
   },
-  selectIcon: {
-    padding:10,
-    alignItems: 'center',
-  }
-
 });
