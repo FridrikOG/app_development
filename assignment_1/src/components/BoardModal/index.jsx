@@ -5,12 +5,12 @@ import styles from './styles';
 
 class BoardModal extends React.Component {
   state = {
-    name: '',
-    description: '',
-    thumbnailPhoto:'',
-    isValid: false,
-    nameRequired: ''
-  }
+  name: '',
+  description: '',
+  thumbnailPhoto:'',
+  isValid: false,
+  nameRequired: ''
+}
   handleSubmit = () => {
     const value = this._form.getValue(); // use that ref to get the form value
   }
@@ -98,6 +98,8 @@ class BoardModal extends React.Component {
           <TouchableOpacity style={styles.button} onPress={() => this.cleanUp(false)}>
             <Text style={styles.btntxt}>Go Back</Text>
           </TouchableOpacity>
+
+          
         </View>
       </ScrollView>
     </NativeModal>

@@ -33,7 +33,7 @@ class ModifyListModal extends React.Component {
       nameIsValid:false
     })
   }
-    this.setState({name});
+    this.setState({name:name});
   }
 
   updateColor(color) {
