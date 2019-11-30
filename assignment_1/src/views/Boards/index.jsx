@@ -63,9 +63,13 @@ class Boards extends React.Component {
     return (
       <Text>
         You have
+        {' '}
         {selectedIds.length}
+        {' '}
         selected
+        {' '}
         {itemCaption}
+        {' '}
       </Text>
     );
   }
@@ -122,7 +126,7 @@ class Boards extends React.Component {
       selectedIds, boards, isAddModalOpen, isModifyModalOpen,
     } = this.state;
     return (
-      <View style={{ flex: 1 }}>
+      <View>
         <Toolbar
           onAdd={() => this.setState({ isAddModalOpen: true })}
           onModify={() => this.setState({ isModifyModalOpen: true })}

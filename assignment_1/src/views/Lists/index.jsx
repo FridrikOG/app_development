@@ -100,10 +100,14 @@ class Lists extends React.Component {
     // eslint-disable-next-line consistent-return
     return (
       <Text>
-        You have {' '}
-        {selectedIds.length} {' '}
-        selected {' '}
-        {itemCaption} {' '}
+        You have
+        {' '}
+        {selectedIds.length}
+        {' '}
+        selected
+        {' '}
+        {itemCaption}
+        {' '}
       </Text>
     );
   }

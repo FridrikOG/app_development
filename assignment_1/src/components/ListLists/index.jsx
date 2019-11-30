@@ -93,6 +93,8 @@ class ListLists extends React.Component{
                         {' '}
                       </Text>
                       <Text style={styles.listvalue}>
+                        Color code:
+                        {' '}
                         {color}
                       </Text>
                     </Text>

@@ -1,11 +1,12 @@
 import React from 'react';
 import {
-  View, Text, FlatList, TouchableOpacity,
+  View, Text, Image, FlatList, TouchableOpacity,
 } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
 import ImageThumbnail from '../ImageThumbnail';
 import styles from './styles';
+import checkmark from '../../resources/select2.png';
+
 
 const BoardList = ({
   boards, props, onLongPress, selectedIds,
@@ -18,6 +19,7 @@ const BoardList = ({
       numColumns={1}
       data={boards}
       extraData={selectedIds}
+      style={styles.flatlist}
       renderItem={({
         item: {
           name, description, thumbnailPhoto, id,
@@ -30,19 +32,25 @@ const BoardList = ({
             onLongPress={() => onLongPress(id)}
             onPress={() => props.navigation.navigate('Lists', { boardId: id, boards })}
           >
-            {isSelected ? <AntDesign name="checkcircleo" /> : <></>}
             <View style={[styles.board, { opacity: isSelected ? 0.5 : 1 }]}>
+              {isSelected ? <Image source={checkmark} style={styles.selectIcon} name="checkcircleo" /> : <></>}
               <ImageThumbnail file={thumbnailPhoto} />
               <Text style={styles.title}>
+                Name:
+                {' '}
                 {name}
               </Text>
               <Text style={styles.description}>
+                Description:
+                {' '}
                 {description}
               </Text>
               <Text style={styles.description}>
-                {id} 
+                ID:
+                {' '}
+                {id}
               </Text>
-              <Text>
+              <Text style={styles.isSelected}>
                 {isSelected ? 'Selected' : 'Not selected'}
               </Text>
             </View>
