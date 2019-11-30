@@ -14,6 +14,8 @@ class ModifyTask extends React.Component {
     description:'',
     finished: false,
     listId: '',
+    listName: '',
+    listIsValid: false,
   }
 
   updateName(name) {
@@ -33,13 +35,23 @@ class ModifyTask extends React.Component {
   }
   cleanUp(listId){
     console.log("cleaning up!");
-    const { maxId, name, description, finished } = this.state;
+    const { maxId, name, description, finished, listName } = this.state;
+    const { lists } = this.props;
+
+    lists.map(
+      // eslint-disable-next-line prefer-arrow-callback
+      function (list) {
+        if (list.name === listName) {
+          listId = list.id;
+        }
+      }
+    )
     newTask = {
       "id": maxId,
       "name": name,
       "description": description,
       "finished": finished,
-      "listId": listId
+      "listId": listId,
     }
     this.setState({
       maxId: '',
@@ -50,8 +62,16 @@ class ModifyTask extends React.Component {
     })
     this.props.addTask(newTask);
   }
+
+  updateList(boardName) {
+    this.setState({
+      listName: boardName,
+      listIsValid: true,
+    });
+  }
+
   render() {
-    const { isOpen, closeModal, addTask, listId, lists} = this.props;
+    const { isOpen, closeModal, addTask, listId, lists, listOptions} = this.props;
     const { name, description, finished } = this.state;
     console.log("is open value: ", isOpen);
     return(
@@ -84,6 +104,12 @@ class ModifyTask extends React.Component {
               onValueChange={finished => this.updateFinished(finished)}
               value={this.state.finished}/>
           </View>
+          <Dropdown
+            label='Select a list...'
+            data={listOptions} //send in list names to modifytaskmodal and then put that var here
+            value={this.state.listName} //create a state that will contain the selected item of the list, declared as empty
+            onChangeText={(value) => this.updateList(value)} //create a function to update the value of the state
+          /> 
           <View style={{flexDirection:'row'}}>
             <TouchableOpacity style={styles.button} onPress={() => this.cleanUp(listId)}><Text style={styles.btntxt}>Submit</Text></TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={closeModal}><Text style={styles.btntxt}>Go Back</Text></TouchableOpacity>

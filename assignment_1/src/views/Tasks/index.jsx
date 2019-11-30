@@ -89,7 +89,6 @@ class Tasks extends React.Component{
 
         const newTasks = tasks.filter((task) => selectedIds.indexOf(task.id) === -1);
 
-        console.log(" Putting this inside setState: ", newTasks, newTask)
         this.setState({ tasks: [...newTasks, newTask], isModifyModalOpen: false, selectedIds: [] });
       }
     //const newLists = lists.filter((list) => selectedIds.indexOf(list.id) === -1);
@@ -103,7 +102,13 @@ class Tasks extends React.Component{
     const {props} = this.props;
     const {tasks,selectedIds, isOpenTaskModal,isModifyOpen} = this.state;
     const toShow = []
-    console.log("logging lists: ", lists)
+    const listLists = [];
+    lists.map(
+      // eslint-disable-next-line prefer-arrow-callback
+      function (item) {
+        listLists.push({ value: item.name });
+      },
+    );
     return(
       <ScrollView>
         <Toolbar
@@ -137,6 +142,7 @@ class Tasks extends React.Component{
         addTask={(info) => this.updateTask(info)}
         listId={listId}
         lists = {lists}
+        listOptions = {listLists}
 
         />
       </ScrollView>
