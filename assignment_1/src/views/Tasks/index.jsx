@@ -4,7 +4,7 @@ import Toolbar from '../../components/Toolbar';
 import data from '../../resources/data';
 import TaskList from '../../components/TaskList';
 import CreateTask from '../../components/CreateTask';
-import ModifyTask from '../../components/ModifyTask';
+import ModifyTask from '../../components/CreateTask/ModifyTaskModal';
 import styles from './styles';
 
 class Tasks extends React.Component{
@@ -13,6 +13,7 @@ class Tasks extends React.Component{
     selectedIds: [],
     isOpenTaskModal: false,
     isModifyOpen: false,
+
   }
   addTask = (info) => {
     const { tasks, isOpenTaskModal } = this.state;
@@ -57,14 +58,52 @@ class Tasks extends React.Component{
     }
     return <Text>You have {selectedIds.length} selected {itemCaption} </Text>
 }
+  updateTask(info) {
+    // const { tasks, isModifyOpen, lists } = this.props;
+    const lists = this.props.navigation.state.params.lists;
+    const { tasks, isModifyOpen, selectedIds } = this.state;
+    console.log("logging lists : ", info)
+    // console.log("logging info : ", info.listId)
+
+    lists.map(
+      // eslint-disable-next-line prefer-arrow-callback
+      function (lists) {
+        if (lists.id === info.listId) {
+          listId = info.listId;
+        }
+      });
+        const newTask = {
+          // eslint-disable-next-line quote-props
+          'id': selectedIds[0],
+          // eslint-disable-next-line quote-props
+          'name': info.name,
+          // eslint-disable-next-line quote-props
+          'description': info.description,
+          // eslint-disable-next-line quote-props
+          'isFinished': true,
+          'listId' : listId
+        };
+
+
+  
+
+        const newTasks = tasks.filter((task) => selectedIds.indexOf(task.id) === -1);
+
+        console.log(" Putting this inside setState: ", newTasks, newTask)
+        this.setState({ tasks: [...newTasks, newTask], isModifyModalOpen: false, selectedIds: [] });
+      }
+    //const newLists = lists.filter((list) => selectedIds.indexOf(list.id) === -1);
+    //this.setState({ lists: [...newLists, newList], isModifyModalOpen: false, selectedIds: [] });
 
   render(){
     // Fetching the listId to only display the tasks in the list we clicked on
-
+    // uncomment this when you want to get the id from lists
     const listId = this.props.navigation.state.params.listId;
+    const lists = this.props.navigation.state.params.lists;
     const {props} = this.props;
     const {tasks,selectedIds, isOpenTaskModal,isModifyOpen} = this.state;
     const toShow = []
+    console.log("logging lists: ", lists)
     return(
       <ScrollView>
         <Toolbar
@@ -95,6 +134,9 @@ class Tasks extends React.Component{
         <ModifyTask
         isOpen={isModifyOpen}
         closeModal={() => this.setState({isModifyOpen: false})}
+        addTask={(info) => this.updateTask(info)}
+        listId={listId}
+        lists = {lists}
 
         />
       </ScrollView>

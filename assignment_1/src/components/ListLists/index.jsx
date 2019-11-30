@@ -65,7 +65,7 @@ class ListLists extends React.Component{
               <TouchableOpacity
                 activeOpacity={0.75}
                 onLongPress={() => onLongPress(id)}
-                onPress={() => props.navigation.navigate('Tasks', {listId: id})}>
+                onPress={() => props.navigation.navigate('Tasks', {listId: id, lists: lists})}>
                 {isSelected ? <AntDesign name = "checkcircleo"/> : <></>}
                 <View style={[styles.container, { opacity: isSelected ? 0.5 : 1 }]}>
                   <Text style={[styles.text, { backgroundColor: color }]}>
