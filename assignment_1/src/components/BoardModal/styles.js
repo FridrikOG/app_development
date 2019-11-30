@@ -39,6 +39,7 @@ export default StyleSheet.create({
     borderColor: 'gray',
     padding: 8,
     marginBottom: 10,
+    textAlignVertical: 'top',
   },
   colorText: {
     fontWeight: 'bold',

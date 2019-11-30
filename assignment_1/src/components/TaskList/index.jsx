@@ -6,12 +6,14 @@ import PropTypes from 'prop-types';
 import checkmark from '../../resources/select2.png';
 
 const TaskList = ({ tasks, props, onLongPress, selectedIds }) => {
-  function toBool(finished){
-    if(finished) {
+  function toBool(isFinished){
+    console.log("is finished in task list: ",isFinished);
+    if(isFinished) {
       return 'Yes';
     }
     return 'No';
   }
+  console.log('TASKS IN TASKLIST:',tasks);
   return (
     <View style={styles.container}>
     <Text style = {styles.type} > Task List </Text>
@@ -19,7 +21,7 @@ const TaskList = ({ tasks, props, onLongPress, selectedIds }) => {
         numColumns = {1}
         data={tasks}
         //extraData={selectedIds}
-        renderItem={( {item: {id,name, description, isFinished,listId }}) => {
+        renderItem={( {item: {id,name, description, finished, listId }}) => {
           const isSelected = selectedIds.indexOf(id) !== -1
           return(
             <TouchableOpacity
@@ -61,7 +63,7 @@ const TaskList = ({ tasks, props, onLongPress, selectedIds }) => {
                         Finished:
                         </Text>
                         <Text>
-                        {toBool(isFinished)}
+                        {toBool(finished)}
                         </Text>
                       </View>
                     </View>
