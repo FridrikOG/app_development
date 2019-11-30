@@ -1,43 +1,75 @@
-import React from 'react';
-import NativeModal from 'react-native-modal';
-import { View, Text, StyleSheet, TextInput, Picker, TouchableOpacity, ScrollView } from 'react-native';
-import styles from './styles';
+import { StyleSheet, Dimensions} from 'react-native';
+import { blue, lightyellow, babyblue,lightestblue } from '../../styles/colors';
+const { width: winWidth } = Dimensions.get('window');
 
-const message = 'lol'
-class ModifyTask extends React.Component {
-  state = {
-    listID ='',
-    listOption = '',
-  }
-  updateTask(listOption){
-    this.setState({listOptions});
-  }
+export default StyleSheet.create({
+  modal: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
 
-  render() {
-    const { isOpen, closeModal, listNames, taskName} = this.props;
+  },
+  body: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexGrow: 0.3,
+    borderRadius: 10,
+    width: winWidth - 100,
+    backgroundColor: 'white',
+    padding: 40,
+  },
+  container: {
+    padding:40,
+    backgroundColor:'white',
+    width: winWidth - 50,
 
-    // let theBoard = boards.filter(x => x.id == boardId);
-    // let outBoardAr = theBoard[0];
+  },
+  title: {
+    fontSize: 25,
+    textAlign:'center',
+    marginBottom: 10,
+    fontWeight: 'bold',
+    color: blue,
+  },
+  textInput: {
+    height:40,
+    borderWidth: 1,
+    borderRadius: 8,
+    borderColor: 'gray',
+    padding: 8,
+    marginBottom: 10,
+  },
+  colorText: {
+    fontWeight: 'bold',
+    borderWidth: 1,
+    padding: 5,
+    margin: 10,
+  },
+  pickerText: {
+    fontWeight: 'bold',
+    padding: 5,
+  },
+  picker: {
+    borderWidth: 1,
+    marginBottom:15,
+    fontSize:11,
+  },
+  button: {
+    height: 50,
+    width: 110,
+    marginTop: 10,
+    backgroundColor: blue,
+    padding:10,
+    marginRight:10,
+    borderWidth:2,
+    borderColor: 'white',
+    borderRadius:12,
+  },
+  btntxt: {
+    textAlign: 'center',
+    color:'white',
+    fontSize:20,
+  },
 
-
-    return (
-      <NativeModal
-        isVisible={isOpen}
-        hasBackdrop
-        onBackButtonPress={closeModal}
-        onSwipeComplete={['up', 'down']}
-        style={styles.modal}>
-        <ScrollView style={[styles.container]}>
-          <Text style={styles.title}>Move task</Text>
-          <Dropdown
-            label='Move to list...'
-            data={listNames}
-            value={this.state.listOption}
-            onChangeText={(value) => this.updateTask(value)}/>
-        </ScrollView>
-      </NativeModal>
-    );
-  }
-}
-
-export default ModifyTask;
+});

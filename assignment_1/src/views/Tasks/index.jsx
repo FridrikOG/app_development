@@ -4,6 +4,7 @@ import Toolbar from '../../components/Toolbar';
 import data from '../../resources/data';
 import TaskList from '../../components/TaskList';
 import CreateTask from '../../components/CreateTask';
+import ModifyTask from '../../components/ModifyTask';
 import styles from './styles';
 
 class Tasks extends React.Component{
@@ -11,7 +12,7 @@ class Tasks extends React.Component{
     tasks: data.tasks,
     selectedIds: [],
     isOpenTaskModal: false,
-    isMofifyOpen: false,
+    isModifyOpen: false,
   }
   addTask = (info) => {
     const { tasks, isOpenTaskModal } = this.state;
@@ -62,7 +63,7 @@ class Tasks extends React.Component{
 
     const listId = this.props.navigation.state.params.listId;
     const {props} = this.props;
-    const {tasks,selectedIds, isOpenTaskModal} = this.state;
+    const {tasks,selectedIds, isOpenTaskModal,isModifyOpen} = this.state;
     const toShow = []
     return(
       <ScrollView>
@@ -70,7 +71,7 @@ class Tasks extends React.Component{
         onAdd={() => this.setState({isOpenTaskModal:true})}
         hasSelectedIds = {selectedIds.length > 0}
         onRemove={() => this.removeSelectedTasks()}
-        onMofify={() => this.setState({isMofifyOpen:true})}
+        onModify={() => this.setState({isModifyOpen:true})}
         canModify = {!(selectedIds.length == 0 || selectedIds.length > 1)}/>
         {tasks.map(function(item,index){
           if (item.listId == listId){
@@ -92,9 +93,9 @@ class Tasks extends React.Component{
         />
 
         <ModifyTask
-        isOpen={isMofifyOpen}
-        closeModal={() => this.setState({isMofifyOpen: false})}
-        
+        isOpen={isModifyOpen}
+        closeModal={() => this.setState({isModifyOpen: false})}
+
         />
       </ScrollView>
     )
