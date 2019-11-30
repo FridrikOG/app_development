@@ -46,7 +46,7 @@ class ModifyBoardModal extends React.Component {
 
   getBoard() {
     const { boards, boardId } = this.props;
-    const board = boards.filter((x) => x.id === boardId);
+    const board = boards.filter((x) => x.id === boardId[0]);
     return board[0];
   }
 
@@ -97,13 +97,12 @@ class ModifyBoardModal extends React.Component {
 
   render() {
     const {
-      isOpen, closeModal,
+      isOpen, closeModal,boards, boardId
     } = this.props;
     const {
       description, name, nameRequired, isValid, hasRecievedNameInput, hasRecievedDescriptionInput,
     } = this.state;
-    // const theBoard = boards.filter(x => x.id === boardId);
-    // const outBoardAr = theBoard[0];
+ 
     const bool = true;
     return (
       <NativeModal

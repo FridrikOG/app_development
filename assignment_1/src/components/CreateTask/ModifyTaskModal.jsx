@@ -16,6 +16,8 @@ class ModifyTask extends React.Component {
     listId: '',
     listName: '',
     listIsValid: false,
+    hasRecievedNameInput: true,
+    hasRecievedDescriptionInput: true,
   }
 
   updateName(name) {
@@ -25,7 +27,7 @@ class ModifyTask extends React.Component {
       if (obj.id > maxId) maxId = obj.id;
     });
     maxId += 1
-    this.setState({maxId});
+    this.setState({maxId, hasRecievedNameInput: false});
   }
   updateDescription(description) {
     this.setState({description});
@@ -59,6 +61,9 @@ class ModifyTask extends React.Component {
       description:'',
       finished: false,
       listId: '',
+      hasRecievedNameInput : true,
+      hasRecievedDescriptionInput : true,
+
     })
     this.props.addTask(newTask);
   }
@@ -70,9 +75,23 @@ class ModifyTask extends React.Component {
     });
   }
 
+  getName() {
+    const board = this.getTask();
+    try {
+      return board.name;
+    } catch (err) {
+      return 'error';
+    }
+  }
+  getTask() {
+    const { tasks, taskId } = this.props;
+    const task = tasks.filter((x) => x.id === taskId);
+    return task[0];
+  }
+
   render() {
-    const { isOpen, closeModal, addTask, listId, lists, listOptions} = this.props;
-    const { name, description, finished } = this.state;
+    const { isOpen, closeModal, addTask, listId, lists, listOptions, tasks} = this.props;
+    const { name, description, finished, hasRecievedNameInput} = this.state;
     console.log("is open value: ", isOpen);
     return(
       <NativeModal
@@ -83,12 +102,12 @@ class ModifyTask extends React.Component {
         SwipeDirection={[ "up", "down" ]}
         style={styles.modal}>
         <ScrollView style={styles.container}>
-          <Text style={styles.title}>Creating a New Task</Text>
+      <Text style={styles.title}>Modifying A Task</Text>
           <TextInput
             placeholder="Name"
             placeholderTextColor = "black"
             style={[styles.textInput,{height: 50}]}
-            value={this.state.name}
+            value={hasRecievedNameInput ? this.getName() : this.state.name}
             onChangeText={ text => this.updateName(text)}/>
           <TextInput
             style={[styles.textInput, {height:200}]}

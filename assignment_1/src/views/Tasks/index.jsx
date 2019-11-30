@@ -84,12 +84,10 @@ class Tasks extends React.Component{
           'listId' : listId
         };
 
-
-  
-
         const newTasks = tasks.filter((task) => selectedIds.indexOf(task.id) === -1);
-
         this.setState({ tasks: [...newTasks, newTask], isModifyModalOpen: false, selectedIds: [] });
+
+
       }
     //const newLists = lists.filter((list) => selectedIds.indexOf(list.id) === -1);
     //this.setState({ lists: [...newLists, newList], isModifyModalOpen: false, selectedIds: [] });
@@ -143,6 +141,8 @@ class Tasks extends React.Component{
         listId={listId}
         lists = {lists}
         listOptions = {listLists}
+        tasks = {tasks}
+        taskId = {selectedIds[0]}
 
         />
       </ScrollView>

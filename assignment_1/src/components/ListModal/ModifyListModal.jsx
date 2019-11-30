@@ -84,7 +84,7 @@ class ModifyListModal extends React.Component {
       name: '',
       color: '',
       boardName:'',
-      nameIsValid: false,
+      nameIsValid: true,
       colorIsValid: false,
       boardIsValid: false,
       nameRequired: '',

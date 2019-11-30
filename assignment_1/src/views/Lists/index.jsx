@@ -115,7 +115,10 @@ class Lists extends React.Component {
   modifyList(info, selectedIds) {
     let boardId = null;
     const { lists } = this.state;
-    const { boards } = this.props;
+    const { navigation } = this.props;
+    const { state } = navigation;
+    const { params } = state;
+    const { boards } = params;
     boards.map(
       // eslint-disable-next-line prefer-arrow-callback
       function (board) {
