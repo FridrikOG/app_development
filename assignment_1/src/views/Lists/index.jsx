@@ -11,8 +11,8 @@ class Lists extends React.Component{
     lists: data.lists,
     selectedIds: [],
     isAddModalOpen: false,
-    isModifyModalOpen : false,
-  }
+    isModifyModalOpen : false
+  };
 // This function should take in information from our form and add it to our board list
   addList = (submittedInfo) => {
     const { lists } = this.state;

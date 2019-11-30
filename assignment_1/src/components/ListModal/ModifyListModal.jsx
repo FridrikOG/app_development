@@ -11,7 +11,7 @@ class ModifyListModal extends React.Component {
     name: '',
     color: '',
     boardName:'',
-    nameIsValid: true,
+    nameIsValid: false,
     colorIsValid: false,
     boardIsValid: false,
     nameRequired: '',
@@ -33,7 +33,7 @@ class ModifyListModal extends React.Component {
       nameIsValid:false
     })
   }
-    this.setState({name});
+    this.setState({name:name});
   }
 
   updateColor(color) {
@@ -83,7 +83,7 @@ class ModifyListModal extends React.Component {
       name: '',
       color: '',
       boardName:'',
-      nameIsValid: true,
+      nameIsValid: false,
       colorIsValid: false,
       boardIsValid: false,
       nameRequired: '',

@@ -9,7 +9,7 @@ import ModifyBoardModal from '../../components/BoardModal/ModifyBoardModal';
 
 class Boards extends React.Component {
   // this.props.navigation.state.params.data
-  state = {
+  state={
     // The board data list
     boards: data.boards,
     // All boards within the application directory

@@ -1,4 +1,3 @@
-/* eslint-disable arrow-parens */
 import React from 'react';
 import {
  ScrollView, View, Text, FlatList, TouchableOpacity
@@ -11,7 +10,7 @@ import CreateTask from '../CreateTask';
 import PropTypes from 'prop-types';
 
 class ListLists extends React.Component{
-  state ={
+  state = {
     isTaskOpen: false,
     currentTasks: [],
     allTasks: data.tasks,

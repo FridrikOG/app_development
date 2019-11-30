@@ -1,6 +1,5 @@
 import { StyleSheet } from 'react-native';
-import Constants from 'expo-constants';
-import { blue, lightyellow, babyblue,lightestblue } from '../../styles/colors';
+import { lightyellow } from '../../styles/colors';
 
 export default StyleSheet.create({
   container: {
@@ -8,24 +7,24 @@ export default StyleSheet.create({
   },
   title: {
     backgroundColor: lightyellow,
-    padding:20,
-    fontSize:20,
+    padding: 20,
+    fontSize: 20,
   },
   text: {
-    borderColor:'black',
-    borderWidth:1,
-    borderRadius:12,
-    fontSize:15,
+    borderColor: 'black',
+    borderWidth: 1,
+    borderRadius: 12,
+    fontSize: 15,
     margin: 15,
-    padding:20,
+    padding: 20,
   },
   finished: {
-    borderColor:'green',
-    borderWidth:3,
-    borderRadius:12,
-    fontSize:15,
+    borderColor: 'green',
+    borderWidth: 3,
+    borderRadius: 12,
+    fontSize: 15,
     margin: 15,
-    padding:20,
+    padding: 20,
   },
 
   lists: {
@@ -37,6 +36,6 @@ export default StyleSheet.create({
     borderColor: 'red',
   },
   listsContainer: {
-    borderColor: 'red'
-  }
+    borderColor: 'red',
+  },
 });
