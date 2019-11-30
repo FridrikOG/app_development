@@ -67,6 +67,15 @@ class Tasks extends React.Component{
     const lists = this.props.navigation.state.params.lists;
     const { tasks, isModifyOpen, selectedIds } = this.state;
 
+    const oldTask = tasks.filter((x) => x.id === selectedIds[0]);
+    // Making sure if the name submitted is the old one then we fix it
+    if (info.name == '') {
+      info.name = oldTask[0].name
+    }
+    if (info.description == '') {
+      info.description = oldTask[0].description;
+    }
+
     lists.map(
       // eslint-disable-next-line prefer-arrow-callback
       function (lists) {
@@ -82,7 +91,7 @@ class Tasks extends React.Component{
           // eslint-disable-next-line quote-props
           'description': info.description,
           // eslint-disable-next-line quote-props
-          'isFinished': true,
+          'finished': info.finished,
           'listId' : listId
         };
 
