@@ -119,6 +119,16 @@ class Lists extends React.Component {
     const { state } = navigation;
     const { params } = state;
     const { boards } = params;
+    
+
+    const oldList = lists.filter((x) => x.id === selectedIds[0]);
+    // Making sure if the name submitted is the old one then we fix it
+
+    if (info.name == '') {
+      info.name = oldList[0].name
+
+    }
+
     boards.map(
       // eslint-disable-next-line prefer-arrow-callback
       function (board) {
