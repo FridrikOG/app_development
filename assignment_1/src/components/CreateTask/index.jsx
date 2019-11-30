@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 import NativeModal from 'react-native-modal';
-import { View, Text, StyleSheet, TextInput, Picker, TouchableOpacity, ScrollView , Switch} from 'react-native';
+import {  ScrollView, View, Text, StyleSheet, TextInput, Picker, TouchableOpacity, Switch} from 'react-native';
 import styles from './styles';
 import { ColorPicker } from 'react-native-color-picker';
 import { Dropdown } from 'react-native-material-dropdown';
@@ -13,6 +13,7 @@ class CreateTask extends React.Component {
     name: '',
     description:'',
     finished: false,
+    listId: '',
   }
 
   updateName(name) {
@@ -30,33 +31,43 @@ class CreateTask extends React.Component {
   updateFinished(finished) {
     this.setState({finished});
   }
-  cleanUp(){
+  cleanUp(listId){
     console.log("cleaning up!");
     const { maxId, name, description, finished } = this.state;
+    newTask = {
+      "id": maxId,
+      "name": name,
+      "description": description,
+      "finished": finished,
+      "listId": listId
+    }
     this.setState({
       maxId: '',
       name: '',
       description:'',
-      finished: false
+      finished: false,
+      listId: '',
     })
-    this.props.addTask(this.state);
+    this.props.addTask(newTask);
   }
   render() {
     const { isOpen, closeModal, addTask, listId} = this.props;
     const { name, description, finished } = this.state;
+    console.log("is open value: ", isOpen);
     return(
       <NativeModal
         isVisible={isOpen}
         hasBackdrop
         onBackButtonPress={closeModal}
-        onSwipeComplete={['up','down']}
+        onSwipeComplete={closeModal}
+        SwipeDirection={[ "up", "down" ]}
         style={styles.modal}>
-        <ScrollView style={[styles.container]}>
+        <ScrollView style={styles.container}>
           <Text style={styles.title}>Creating a New Task</Text>
           <TextInput
             placeholder="Name"
             placeholderTextColor = "black"
-            style={styles.textInput}
+            style={[styles.textInput,{height: 50}]}
             value={this.state.name}
             onChangeText={ text => this.updateName(text)}/>
           <TextInput
@@ -67,18 +78,20 @@ class CreateTask extends React.Component {
             multiline = {true}
             value={this.state.description}
             onChangeText={ text => this.updateDescription(text)}/>
-          <Switch
-            onValueChange={finished => this.updateFinished(finished)}
-            value={this.state.finished}/>
           <View style={{flexDirection:'row'}}>
-            <TouchableOpacity style={styles.button} onPress={() => this.cleanUp()}><Text style={styles.btntxt}>Submit</Text></TouchableOpacity>
+            <Text style={{marginRight:15}}>Is the task finished?</Text>
+            <Switch
+              onValueChange={finished => this.updateFinished(finished)}
+              value={this.state.finished}/>
+          </View>
+          <View style={{flexDirection:'row'}}>
+            <TouchableOpacity style={styles.button} onPress={() => this.cleanUp(listId)}><Text style={styles.btntxt}>Submit</Text></TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={closeModal}><Text style={styles.btntxt}>Go Back</Text></TouchableOpacity>
           </View>
         </ScrollView>
       </NativeModal>
     );
   }
-
 }
-//
+
 export default CreateTask;

@@ -6,17 +6,14 @@ export default StyleSheet.create({
   modal: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
 
   },
   body: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
     flexGrow: 0.3,
     borderRadius: 10,
     width: winWidth - 100,
-    backgroundColor: 'white',
+    backgroundColor: 'black',
     padding: 40,
   },
   container: {
@@ -33,10 +30,11 @@ export default StyleSheet.create({
     color: blue,
   },
   textInput: {
+    textAlignVertical: 'top',
     borderWidth: 1,
     borderRadius: 8,
     borderColor: 'gray',
-    padding: 8,
+    padding: 15,
     marginBottom: 10,
   },
   colorText: {
@@ -44,15 +42,6 @@ export default StyleSheet.create({
     borderWidth: 1,
     padding: 5,
     margin: 10,
-  },
-  pickerText: {
-    fontWeight: 'bold',
-    padding: 5,
-  },
-  picker: {
-    borderWidth: 1,
-    marginBottom:15,
-    fontSize:11,
   },
   button: {
     height: 50,
@@ -70,5 +59,9 @@ export default StyleSheet.create({
     color:'white',
     fontSize:20,
   },
+  switch: {
+    alignItems: 'flex-start',
+    borderWidth:1,
 
+  }
 });
