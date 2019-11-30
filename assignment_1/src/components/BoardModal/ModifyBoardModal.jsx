@@ -62,6 +62,7 @@ class ModifyBoardModal extends React.Component {
   getDescription() {
     const board = this.getBoard();
     try {
+      // this.setState({ description : board.description, name: board.name })
       return board.description;
     } catch (err) {
       return 'error';
@@ -86,10 +87,18 @@ class ModifyBoardModal extends React.Component {
     this.setState({
       hasRecievedNameInput: true,
       hasRecievedDescriptionInput: true,
+      name : '',
+      description : '',
+      thumbnailPhoto : '',
+      sValid: true,
+      nameRequired: ''
+
     });
     if (Submit) {
+
       // If the submit button is pushed we modify the board
       modifyBoard(this.state);
+      
     } else {
       closeModal();
     }
