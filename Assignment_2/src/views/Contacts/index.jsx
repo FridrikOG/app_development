@@ -19,30 +19,34 @@ class Contacts extends React.Component {
     searchedContacts: [],
   };
 
+  // This method Should filter the contact list everytime a new character is added to the search bar
   searchContacts = (searchString) => {
+    // Getting all contacts
     const {
       allContacts,
     } = this.state;
-    console.log('Search string: ', searchString);
-    // const oldBoard = boards.filter((x) => x.id === boardId[0]);
     const nameList = [];
+    // All map
     allContacts.map(
       (obj) => {
         nameList.push(obj.name);
       },
     );
-    let foundNames = [];
+    // New array that will be populated will all the names that match the searchString
+    const foundNames = [];
     for (x in nameList) {
+      // Making contact name lower case for comparison
       const lowerContactName = nameList[x].toLowerCase();
+      // Making search string lower case for comparison
       const lowerSearchString = searchString.toLowerCase();
+      // if it finds matching substrings it adds it to the foundNames array
       if (lowerContactName.search(lowerSearchString) !== -1) {
-        console.log("match");
         foundNames.push(nameList[x]);
       }
     }
-    console.log('Found : ', nameList);
-    const searchedContacts = allContacts.filter((x) => x.name in foundNames);
-    // console.log('Logging searched : ', searchedContacts);
+    // Now we filter grabbing only names that are inside the foundNames array
+    const searchedContacts = allContacts.filter((x) => foundNames.includes(x.name));
+    this.setState(searchedContacts);
   }
 
   render() {
