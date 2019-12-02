@@ -28,7 +28,7 @@ class SearchBar extends React.Component {
           <TextInput
             placeholder="Search..."
             placeholderTextColor="black"
-            style={{ fontSize: 20 }}
+            style={{ fontSize: 15, width: 300 }}
             value={searchString}
             onChangeText={(text) => this.updateName(text)}
           />
