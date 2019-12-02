@@ -1,3 +1,6 @@
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable guard-for-in */
+/* eslint-disable no-console */
 /* eslint-disable react/state-in-constructor */
 /* eslint-disable no-undef */
 /* eslint-disable react/prefer-stateless-function */
@@ -17,10 +20,30 @@ class Contacts extends React.Component {
   };
 
   searchContacts = (searchString) => {
+    const {
+      allContacts,
+    } = this.state;
     console.log('Search string: ', searchString);
-    
+    // const oldBoard = boards.filter((x) => x.id === boardId[0]);
+    const nameList = [];
+    allContacts.map(
+      (obj) => {
+        nameList.push(obj.name);
+      },
+    );
+    let foundNames = [];
+    for (x in nameList) {
+      const lowerContactName = nameList[x].toLowerCase();
+      const lowerSearchString = searchString.toLowerCase();
+      if (lowerContactName.search(lowerSearchString) !== -1) {
+        console.log("match");
+        foundNames.push(nameList[x]);
+      }
+    }
+    console.log('Found : ', nameList);
+    const searchedContacts = allContacts.filter((x) => x.name in foundNames);
+    // console.log('Logging searched : ', searchedContacts);
   }
-
 
   render() {
     // const back = FileSystem.readAsStringAsync('file:///../../components/');
