@@ -2,15 +2,13 @@ import React from 'react';
 import {
   View, ScrollView, Text, FlatList,
 } from 'react-native';
-import Gradient from 'react-native-css-gradient';
 import ImageThumbnail from '../ImageThumbnail/ImageThumbnail';
 import styles from './styles';
 
-
 const ContactList = ({ contacts }) => (
   <ScrollView style={styles.container}>
-    <Text>
-      Contat List
+    <Text style={styles.title}>
+      Contact List
     </Text>
     <FlatList
       numColumns={2}

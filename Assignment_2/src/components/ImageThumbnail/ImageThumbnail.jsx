@@ -6,7 +6,7 @@ const ImageThumbnail = ({ file }) => (
   <Image
     style={
       {
-        width: 100, height: 100, alignSelf: 'center',borderRadius: 200 / 2
+        width: 100, height: 100, alignSelf: 'center', borderRadius: 200 / 2
       }
     }
     resizeMode="cover"

@@ -6,6 +6,14 @@ export default StyleSheet.create({
   container: {
 
   },
+  title: {
+    backgroundColor: 'black',
+    textAlign: 'center',
+    color: 'white',
+    padding: 10,
+    fontSize: 30,
+    width: winWidth,
+  },
   flatlist: {
     width: winWidth,
     padding: 20,
@@ -15,6 +23,9 @@ export default StyleSheet.create({
     flex: 2,
     marginBottom: 20,
     width: 200,
+    borderLeftWidth: 2,
+    borderColor: 'white',
+    backgroundColor: 'black',
   },
   name: {
     marginTop: 20,
