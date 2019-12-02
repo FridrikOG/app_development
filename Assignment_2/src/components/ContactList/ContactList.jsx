@@ -7,9 +7,6 @@ import styles from './styles';
 
 const ContactList = ({ contacts }) => (
   <ScrollView style={styles.container}>
-    <Text style={styles.title}>
-      Contact List
-    </Text>
     <FlatList
       numColumns={2}
       data={contacts}
