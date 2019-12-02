@@ -1,3 +1,4 @@
+/* eslint-disable react/prefer-stateless-function */
 import React from 'react';
 import { View, Text } from 'react-native';
 // import Toolbar from '../../components/Toolbar';
