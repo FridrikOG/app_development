@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const ImageThumbnail = ({ file }) => (
   <Image
-    style={{ width: 100, height: 100 }}
+    style={{ width: 100, height: 100, alignSelf: 'center' }}
     resizeMode="cover"
     source={{ uri: file }}
   />
