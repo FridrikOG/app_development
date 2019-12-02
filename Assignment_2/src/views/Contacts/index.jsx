@@ -10,12 +10,10 @@ import data from '../../resources/data.json';
 
 class Contacts extends React.Component {
   // const props = this.props.navigation.state.params;
-  constructor() {
-    super();
-    state = {
-      contacts: data.contacts,
-    };
-  }
+  state = {
+    contacts: data.contacts,
+  };
+
 
   render() {
     return (
