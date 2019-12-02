@@ -1,76 +1,28 @@
-import {StyleSheet, Dimensions} from 'react-native';
-import { bgwhite, blue, lightyellow, babyblue,lightestblue } from '../../styles/colors';
+import { StyleSheet, Dimensions } from 'react-native';
+
 const { width: winWidth } = Dimensions.get('window');
 
 export default StyleSheet.create({
   container: {
 
   },
-  flatlist:{
-    margin:30,
-
-  },
-  type:{
-    fontSize: 30,
-    height:70,
+  flatlist: {
     width: winWidth,
-    fontWeight: 'bold',
-    textAlign:'center',
-    backgroundColor:bgwhite,
-    color:blue,
-    padding:15,
+    padding: 20,
   },
-  selectIcon: {
-    borderWidth:2,
-    borderColor:blue,
-    borderRadius:22,
-    width:20,
-    height:20,
-    marginBottom:15,
-    alignItems: 'center',
-    alignContent: 'center',
+  contact: {
+    paddingTop: 15,
+    flex: 2,
+    marginBottom: 20,
+    width: 200,
   },
-  board:{
-    flex: 4,
-    width:300,
-    marginTop:15,
-    padding:20,
-    borderRadius:12,
-    borderColor:bgwhite,
-    borderWidth:1,
-    shadowColor: "#000",
-    shadowOffset: {
-    	width: 0,
-    	height: 1,
-    },
-    shadowOpacity: 0.20,
-    shadowRadius: 1.41,
-    elevation: 2,
-    backgroundColor:'white',
+  name: {
+    marginTop: 20,
+    marginBottom: 20,
+    alignSelf: 'center',
+    color: 'white',
   },
-  titleboard: {
-    marginTop:10,
-    fontWeight: 'bold',
-    fontSize:20,
-    color:blue,
+  image: {
+    borderRadius: 200 / 2,
   },
-  title:{
-    marginTop:10,
-    fontWeight: 'bold',
-    fontSize:18,
-  },
-  description:{
-    fontSize:18,
-    borderBottomWidth:2,
-    borderColor:babyblue,
-    paddingBottom:10,
-  },
-  isSelected: {
-    backgroundColor:blue,
-    color:'black',
-    padding:10,
-    borderRadius:12,
-    marginTop:15,
-  }
-
 });

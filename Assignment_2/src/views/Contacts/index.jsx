@@ -5,29 +5,36 @@
 /* eslint-disable no-undef */
 /* eslint-disable react/prefer-stateless-function */
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ImageBackground } from 'react-native';
 import * as FileSystem from 'expo-file-system';
 import data from '../../resources/data.json';
-
 import ContactList from '../../components/ContactList/ContactList';
 import SearchBar from '../../components/SearchBar/SearchBar';
+import styles from './styles';
 
 class Contacts extends React.Component {
   // const props = this.props.navigation.state.params;
   state = {
+    // This one is never changed
+    alwaysAllContacts : data.contacts,
     allContacts: data.contacts,
-    searchedContacts: [],
   };
 
   // This method Should filter the contact list everytime a new character is added to the search bar
   searchContacts = (searchString) => {
-    // Getting all contacts
+    console.log("Search string : ", searchString);
     const {
-      allContacts,
+      allContacts, alwaysAllContacts
     } = this.state;
+
+    if (searchString === '') {
+      this.setState({ allContacts: data.contacts });
+      return;
+    }
+    // Getting all contacts
     const nameList = [];
     // All map
-    allContacts.map(
+    alwaysAllContacts.map(
       (obj) => {
         nameList.push(obj.name);
       },
@@ -45,23 +52,21 @@ class Contacts extends React.Component {
       }
     }
     // Now we filter grabbing only names that are inside the foundNames array
-    const searchedContacts = allContacts.filter((x) => foundNames.includes(x.name));
-    this.setState(searchedContacts);
+    const searchedContacts = alwaysAllContacts.filter((x) => foundNames.includes(x.name));
+    this.setState({ allContacts: searchedContacts });
   }
 
   render() {
-    // const back = FileSystem.readAsStringAsync('file:///../../components/');
-    // console.log(back);
-    const {
-      allContacts,
-      searchedContacts,
-    } = this.state;
-
+    const { allContacts } = this.state;
     return (
-      <View>
-        <SearchBar searchContacts={(searchString) => this.searchContacts(searchString)} />
-        <ContactList searchedContacts={allContacts} />
-        <Text> le goooooo</Text>
+      <View style={styles.container}>
+        <ImageBackground style={styles.backgroundImage} source={{ uri: 'https://ph-files.imgix.net/651adc69-1ed9-47b3-8f6f-3a83ed0e2322?auto=format%2Ccompress%2Cenhance&dpr=2&crop=false&fit=max&w&h=500' }}>
+          <View style={styles.container}>
+            <SearchBar searchContacts={(searchString) => this.searchContacts(searchString)} />
+            <ContactList contacts={allContacts} />
+            <Text> le goooooo</Text>
+          </View>
+        </ImageBackground>
       </View>
     );
   }

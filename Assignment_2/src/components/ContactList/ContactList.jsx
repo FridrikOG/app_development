@@ -1,44 +1,30 @@
 import React from 'react';
 import {
-  View, ScrollView, Text, Image, FlatList, TouchableOpacity,
+  View, ScrollView, Text, FlatList,
 } from 'react-native';
-import PropTypes from 'prop-types';
-// import ImageThumbnail from '../ImageThumbnail/ImageThumbnail';
-// import styles from './styles';
+import Gradient from 'react-native-css-gradient';
+import ImageThumbnail from '../ImageThumbnail/ImageThumbnail';
+import styles from './styles';
 
 
-const ContactList = ({
-  boards,
-}) => (
-  <ScrollView >
-    <Text >
-          Board List
+const ContactList = ({ contacts }) => (
+  <ScrollView style={styles.container}>
+    <Text>
+      Contat List
     </Text>
     <FlatList
-      numColumns={1}
-      data={boards}
-      renderItem={({
-        item: {
-          name,
-        },
-      }) => {
-        return (
-            <View>
-              <Text>
-                Name:
-                {' '}
-              </Text>
-              <Text>
-                {name}
-              </Text>
-              <Text>
-                Description:
-                {' '}
-              </Text>
-            </View>
-        );
-      }}
-      keyExtractor={(board) => board.id}
+      numColumns={2}
+      data={contacts}
+      style={styles.flatlist}
+      renderItem={({ item: { name, image } }) => (
+        <View style={styles.contact}>
+          <ImageThumbnail style={styles.image} file={image} />
+          <Text style={styles.name}>
+            {name}
+          </Text>
+        </View>
+      )}
+      keyextractor={() => contacts.id}
     />
   </ScrollView>
 );
