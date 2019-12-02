@@ -28,10 +28,10 @@ const ContactList = ({
                 Name:
                 {' '}
               </Text>
-              <Text >
+              <Text>
                 {name}
               </Text>
-              <Text >
+              <Text>
                 Description:
                 {' '}
               </Text>
