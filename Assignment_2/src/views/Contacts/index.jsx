@@ -1,6 +1,8 @@
+/* eslint-disable no-undef */
 /* eslint-disable react/prefer-stateless-function */
 import React from 'react';
 import { View, Text } from 'react-native';
+import data from '../../resources/data.json';
 // import Toolbar from '../../components/Toolbar';
 // import data from '../../resources/data';
 // import AdministratorList from '../../components/AdministratorList';
@@ -8,6 +10,13 @@ import { View, Text } from 'react-native';
 
 class Contacts extends React.Component {
   // const props = this.props.navigation.state.params;
+  constructor() {
+    super();
+    state = {
+      contacts: data.contacts,
+    };
+  }
+
   render() {
     return (
       <View>
