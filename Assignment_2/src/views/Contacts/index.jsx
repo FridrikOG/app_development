@@ -3,26 +3,37 @@
 /* eslint-disable react/prefer-stateless-function */
 import React from 'react';
 import { View, Text } from 'react-native';
+import * as FileSystem from 'expo-file-system';
 import data from '../../resources/data.json';
-// import Toolbar from '../../components/Toolbar';
-// import data from '../../resources/data';
-// import AdministratorList from '../../components/AdministratorList';
+
 import ContactList from '../../components/ContactList/ContactList';
+import SearchBar from '../../components/SearchBar/SearchBar';
 
 class Contacts extends React.Component {
   // const props = this.props.navigation.state.params;
   state = {
-    contacts: data.contacts,
+    allContacts: data.contacts,
+    searchedContacts: [],
   };
 
+  searchContacts = (searchString) => {
+    console.log('Search string: ', searchString);
+    
+  }
+
+
   render() {
+    // const back = FileSystem.readAsStringAsync('file:///../../components/');
+    // console.log(back);
     const {
-      contacts,
+      allContacts,
+      searchedContacts,
     } = this.state;
-    console.log(contacts);
+
     return (
       <View>
-        <ContactList boards={contacts} />
+        <SearchBar searchContacts={(searchString) => this.searchContacts(searchString)} />
+        <ContactList searchedContacts={allContacts} />
         <Text> le goooooo</Text>
       </View>
     );
