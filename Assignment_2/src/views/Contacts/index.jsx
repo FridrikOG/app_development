@@ -64,7 +64,6 @@ class Contacts extends React.Component {
           <View style={styles.container}>
             <SearchBar searchContacts={(searchString) => this.searchContacts(searchString)} />
             <ContactList contacts={allContacts} />
-            <Text> le goooooo</Text>
           </View>
         </ImageBackground>
       </View>

@@ -1,10 +1,9 @@
 /* eslint-disable no-console */
 /* eslint-disable react/state-in-constructor */
 import React from 'react';
-import { View, Text, TextInput } from 'react-native';
-
-// import ImageThumbnail from '../ImageThumbnail/ImageThumbnail';
-// import styles from './styles';
+import { View, Text, TextInput, Image } from 'react-native';
+import styles from './styles';
+import search from '../../resources/search.png';
 
 // This class should send a string a search string t contacts
 class SearchBar extends React.Component {
@@ -14,23 +13,25 @@ class SearchBar extends React.Component {
 
     // This updates the name
     updateName(searchString) {
-			// Updating name
-			this.setState({ searchString });
-			// Updating search string
-			this.props.searchContacts(searchString);
+      // Updating name
+      this.setState({ searchString });
+      // Updating search string
+      this.props.searchContacts(searchString);
     }
 
     render() {
       const { searchString } = this.state;
       const { searchContacts } = this.props;
       return (
-        <View>
+        <View style={styles.searchBar}>
+          <Image source={search} style={styles.icon} />
           <TextInput
             placeholder="Search..."
+            placeholderTextColor="black"
+            style={{ fontSize: 20 }}
             value={searchString}
             onChangeText={(text) => this.updateName(text)}
           />
-          <Text> dsfkasdfksdkf</Text>
         </View>
 
 
