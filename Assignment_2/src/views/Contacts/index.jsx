@@ -1,12 +1,13 @@
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable guard-for-in */
 /* eslint-disable no-console */
 /* eslint-disable react/state-in-constructor */
 /* eslint-disable no-undef */
 /* eslint-disable react/prefer-stateless-function */
-import React from 'react';
+import React, { cloneElement } from 'react';
 import {
-  View, Text, ImageBackground, TouchableOpacity, Image
+  View, Text, ImageBackground, TouchableOpacity, Image,
 } from 'react-native';
 import * as FileSystem from 'expo-file-system';
 import data from '../../resources/data.json';
@@ -15,17 +16,31 @@ import ContactList from '../../components/ContactList/ContactList';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import CreateModal from '../../components/Modal';
 import styles from './styles';
+import { getAllContacts, createContact } from '../../services/contactService';
 import bg from '../../resources/2407.jpg';
 
 class Contacts extends React.Component {
   // const props = this.props.navigation.state.params;
   state = {
     // This one is never changed
-    alwaysAllContacts: data.contacts,
-    allContacts: data.contacts,
+    alwaysAllContacts: [],
+    allContacts: [],
     openCCModal: false,
   };
 
+
+  // This one runs after the render
+  async componentDidMount() {
+    // Getting all contacts so we can add the ones on the phoen to the state
+    const { alwaysAllContacts } = this.state;
+    const contacts = await getAllContacts();
+    for (x in contacts) {
+      let aContact = JSON.parse(contacts[x]);
+      console.log("loggin a cont " , aContact);
+      alwaysAllContacts.push(aContact);
+    }
+    this.setState({ alwaysAllContacts: alwaysAllContacts, allContacts: alwaysAllContacts });
+  }
 
   addContanct = (contact) => {
     console.log('Adding contact: ', contact);
@@ -38,7 +53,7 @@ class Contacts extends React.Component {
     } = this.state;
 
     if (searchString === '') {
-      this.setState({ allContacts: data.contacts });
+      this.setState({ allContacts: alwaysAllContacts });
       return;
     }
     // Getting all contacts
@@ -63,12 +78,16 @@ class Contacts extends React.Component {
     }
     // Now we filter grabbing only names that are inside the foundNames array
     const searchedContacts = alwaysAllContacts.filter((x) => foundNames.includes(x.name));
+
+    const newVar = FileSystem.readAsStringAsync(imageDirectory);
+    // console.log('reading out from newVar LOL : ', newVar);
     this.setState({ allContacts: searchedContacts });
   }
 
+
   render() {
     const { navigate } = this.props.navigation;
-    const { allContacts, openCCModal } = this.state;
+    const { allContacts, openCCModal, alwaysAllContacts } = this.state;
     return (
       <View style={styles.container}>
         <View style={styles.toolbar}>
