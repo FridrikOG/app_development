@@ -44,7 +44,7 @@ class Contacts extends React.Component {
   // This method Should filter the contact list everytime a new character is added to the search bar
   searchContacts = (searchString) => {
     const {
-      allContacts, alwaysAllContacts,
+      alwaysAllContacts,
     } = this.state;
 
     if (searchString === '') {
