@@ -12,11 +12,13 @@ import ContactList from '../../components/ContactList/ContactList';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import styles from './styles';
 
+const imageDirectory = `${FileSystem.documentDirectory}images`;
+
 class Contacts extends React.Component {
   // const props = this.props.navigation.state.params;
   state = {
     // This one is never changed
-    alwaysAllContacts : data.contacts,
+    alwaysAllContacts: data.contacts,
     allContacts: data.contacts,
   };
 
@@ -52,11 +54,22 @@ class Contacts extends React.Component {
     }
     // Now we filter grabbing only names that are inside the foundNames array
     const searchedContacts = alwaysAllContacts.filter((x) => foundNames.includes(x.name));
+
+    const newVar = FileSystem.readAsStringAsync(imageDirectory);
+    console.log('reading out from newVar LOL : ', newVar);
     this.setState({ allContacts: searchedContacts });
   }
 
+
   render() {
     const { allContacts } = this.state;
+    // const newContact = await addImage('imageLoc');
+    /* const fileUri = FileSystem.documentDirectory;
+    console.log("contact location: ", fileUri);
+    FileSystem.makeDirectoryAsync(fileUri);
+    const newVar = FileSystem.readDirectoryAsync(imageDirectory);
+    console.log("promise: ", newVar);
+    */
     return (
       <View style={styles.container}>
         <ImageBackground style={styles.backgroundImage} source={{ uri: 'https://ph-files.imgix.net/651adc69-1ed9-47b3-8f6f-3a83ed0e2322?auto=format%2Ccompress%2Cenhance&dpr=2&crop=false&fit=max&w&h=500' }}>
