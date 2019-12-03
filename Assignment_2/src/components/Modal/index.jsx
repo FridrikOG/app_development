@@ -6,6 +6,8 @@ import {
 import styles from './styles';
 import arrow from '../../resources/left-arroww.png';
 import plus from '../../resources/add.png';
+import Camera from '../Camera';
+
 
 class ContactModal extends React.Component {
   // eslint-disable-next-line react/state-in-constructor
@@ -40,22 +42,24 @@ class ContactModal extends React.Component {
     this.setState({ phone });
   }
 
+  updateImage(image) {
+    this.setState({ image });
+  }
 
   cleanUp(Submit) {
-    const { closeModal, addBoard } = this.props;
+    const { closeModal, addContanct } = this.props;
+    // If Submit was pressed we add the board to our data
+    if (Submit) {
+      addContanct(this.state);
+    }
     // Clearing the error messages
     this.setState({
       name: '',
       phone: '',
       image: '',
     });
-    // If Submit was pressed we add the board to our data
-    if (Submit) {
-      addBoard(this.state);
-    } else {
     // GoBack was pressed - Closing the model after clearing the error message
-      closeModal();
-    }
+    closeModal();
   }
 
   render() {
@@ -88,10 +92,13 @@ class ContactModal extends React.Component {
             value={phone}
             onChangeText={(text) => this.updatePhone(text)}
           />
+          <Text>Image:</Text>
+          <Camera
+            updateImage ={(image) => this.updateImage(image)} />
           <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
             <TouchableOpacity
               style={[styles.button, { marginRight: 10 }]}
-              onPress={() => addContanct(this.state)}
+              onPress={() => this.cleanUp(true)}
             >
               <Image source={plus} style={styles.arrow} />
               <Text style={styles.btntxt}>SUBMIT</Text>
