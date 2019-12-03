@@ -13,9 +13,19 @@ import {
 import styles from './styles';
 import repair from '../../resources/repairing-service.png';
 import bg from '../../resources/2407.jpg';
+import ModifyContact from '../../components/Modal/ModifyContact';
 
-class Contacts extends React.Component {
+
+class Details extends React.Component {
+  state = {
+    openMCModal: false,
+  };
+  // Function to update the details of the contact
+  updateDetails = (contact) => {
+  }
+
   render() {
+    const { openMCModal } = this.state;
     const { name, image, phone } = this.props.navigation.state.params;
     return (
       <ScrollView style={styles.details}>
@@ -23,6 +33,7 @@ class Contacts extends React.Component {
           <Text style={styles.title}>Contact Details</Text>
           <TouchableOpacity
             style={styles.createBtn}
+            onPress={() => this.setState({ openMCModal: true })}
           >
             <Image source={repair} style={styles.plus} />
             <Text style={styles.createText}>EDIT</Text>
@@ -36,8 +47,13 @@ class Contacts extends React.Component {
             <Text style={styles.phoneValue}>{phone}</Text>
           </View>
         </ImageBackground>
+        <ModifyContact
+          isOpen={openMCModal}
+          closeModal={() => this.setState({openMCModal: false})}
+          updateDetails={(contact) => this.updateDetails(contact)}
+          />
       </ScrollView>
     );
   }
 }
-export default Contacts;
+export default Details;

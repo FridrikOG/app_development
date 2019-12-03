@@ -28,7 +28,7 @@ class Contacts extends React.Component {
     alwaysAllContacts: [],
     allContacts: [],
     openCCModal: false,
-    defaultImage: 'https://s.pngix.com/pngfile/s/468-4685538_bear-default-avatar-default-avatar-hd-png-download.png',
+    defaultImage: 'https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg',
   };
 
   // This one runs after the render
