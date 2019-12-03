@@ -9,7 +9,7 @@ const ContactList = ({ contacts }) => (
   <ScrollView style={styles.container}>
     <FlatList
       numColumns={2}
-      data={contacts}
+      data={contacts.sort((a,b) => a.name.localeCompare(b.name))}
       style={styles.flatlist}
       renderItem={({ item: { name, image } }) => (
         <View style={styles.contact}>
