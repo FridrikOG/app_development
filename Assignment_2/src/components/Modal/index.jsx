@@ -85,7 +85,7 @@ class ContactModal extends React.Component {
             style={styles.textInput}
             placeholder="Phone number"
             placeholderTextColor="black"
-            value={name}
+            value={phone}
             onChangeText={(text) => this.updatePhone(text)}
           />
           <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
