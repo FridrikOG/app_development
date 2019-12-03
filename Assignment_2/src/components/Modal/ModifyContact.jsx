@@ -12,6 +12,7 @@ import Camera from '../Camera';
 class ModifyContact extends React.Component {
   // eslint-disable-next-line react/state-in-constructor
   state = {
+    id: 0,
     name: '',
     phone: '',
     image: '',
@@ -47,13 +48,14 @@ class ModifyContact extends React.Component {
   }
 
   cleanUp(Submit) {
-    const { closeModal, updateDetails } = this.props;
+    const { closeModal, updateDetails, oldName } = this.props;
     // If Submit was pressed we add the board to our data
     if (Submit) {
-      updateDetails(this.state);
+      updateDetails(this.state, oldName);
     }
     // Clearing the error messages
     this.setState({
+      id: 0,
       name: '',
       phone: '',
       image: '',
@@ -64,7 +66,8 @@ class ModifyContact extends React.Component {
 
   render() {
     const { isOpen, closeModal, updateDetails } = this.props;
-    const { name, phone, image } = this.state;
+    const { name, phone, image, id } = this.state;
+    
     return (
       <NativeModal
         isVisible={isOpen}

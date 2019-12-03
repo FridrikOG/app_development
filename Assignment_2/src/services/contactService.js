@@ -32,5 +32,12 @@ export const createContact = (contact) => {
   // REplace the spaces with an '-' as per the assignment description
   const fileName = contact.name.replace(' ', '-');
   // Writing the object to the
-  FileSystem.writeAsStringAsync((`${FileSystem.documentDirectory}contacts/${fileName }.json`), objStringified);
+  FileSystem.writeAsStringAsync((`${baseDirectory}${fileName}.json`), objStringified);
+};
+
+export const deleteContact = (name) => {
+  // console.log("Inside deleteContact ... ", contact.name);
+  const fileName = name.replace(' ', '-');
+  console.log("Goes to delete this filename: ", fileName);
+  FileSystem.deleteAsync(`${baseDirectory}${fileName}.json`);
 };

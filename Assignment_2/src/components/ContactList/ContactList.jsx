@@ -6,20 +6,21 @@ import ImageThumbnail from '../ImageThumbnail/ImageThumbnail';
 import styles from './styles';
 import call from '../../resources/telephone.png';
 
-const ContactList = ({ contacts, navigate }) => (
+const ContactList = ({ contacts, navigate, updateState }) => (
+  
   <ScrollView style={styles.container}>
     {navigate}
     <FlatList
       numColumns={1}
       data={contacts.sort((a, b) => a.name.localeCompare(b.name))}
       style={styles.flatlist}
-      renderItem={({ item: { name, phone, image } }) => (
+      renderItem={({ item: { name, phone, image, id } }) => (
         <View style={styles.contact}>
           <TouchableOpacity
             style={{ flexDirection: 'row' }}
             onPress={() => navigate('Details',
               {
-                navigate: { navigate }, name, phone, image
+                navigate: { navigate }, name, phone, image, id, updateState,
               })}
           >
             <ImageThumbnail style={styles.image} file={image} />

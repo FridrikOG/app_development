@@ -12,7 +12,7 @@ import {
   View, Text, ImageBackground, TouchableOpacity, Image,
 } from 'react-native';
 import * as FileSystem from 'expo-file-system';
-//import data from '../../resources/data.json';
+// import data from '../../resources/data.json';
 import plus from '../../resources/plus.png';
 import ContactList from '../../components/ContactList/ContactList';
 import SearchBar from '../../components/SearchBar/SearchBar';
@@ -34,13 +34,7 @@ class Contacts extends React.Component {
   // This one runs after the render
   async componentDidMount() {
     // Getting all contacts so we can add the ones on the phoen to the state
-    const { alwaysAllContacts } = this.state;
-    const contacts = await getAllContacts();
-    for (x in contacts) {
-      const aContact = JSON.parse(contacts[x]);
-      alwaysAllContacts.push(aContact);
-    }
-    this.setState({ alwaysAllContacts, allContacts: alwaysAllContacts });
+    this.updateState();
   }
 
   // Gets the next id needed for a contact
@@ -114,8 +108,24 @@ class Contacts extends React.Component {
     this.setState({ alwaysAllContacts: newObject, allContacts: newObject });
   }
 
+  async updateState() {
+    // TODO
+    // 1. Supposed to just read from the contact directory from the device
+    // and update the state
+    console.log('Updating state to file directory');
+    const { alwaysAllContacts } = this.state;
+    const contacts = await getAllContacts();
+    const emptyList = [];
+    for (x in contacts) {
+      const aContact = JSON.parse(contacts[x]);
+      emptyList.push(aContact);
+    }
+    this.setState({ alwaysAllContacts: emptyList, allContacts: emptyList });
+  }
+
   render() {
-    const { navigate } = this.props.navigation;
+    const { navigation } = this.props;
+    const { navigate } = navigation;
     const { allContacts, openCCModal, alwaysAllContacts } = this.state;
     return (
       <View style={styles.container}>
@@ -133,7 +143,7 @@ class Contacts extends React.Component {
           <ImageBackground style={styles.backgroundImage} source={bg}>
             <View>
               <SearchBar searchContacts={(searchString) => this.searchContacts(searchString)} />
-              <ContactList contacts={allContacts} navigate={navigate} />
+              <ContactList contacts={allContacts} navigate={navigate} updateState={() => this.updateState()} />
             </View>
           </ImageBackground>
         </View>
