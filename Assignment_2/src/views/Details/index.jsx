@@ -28,16 +28,28 @@ class Details extends React.Component {
     // 1. Delete from file direct
     // 2. createUser
     // 3. Update state
-    
     const { navigation } = this.props;
     const { state } = navigation;
     const { params } = state;
     const { id, updateState, name, image, phone } = params;
     console.log(id);
     // Sending in the old name
+    if (contact.name === '') {
+      contact.name = name;
+    }
+    if (contact.phone ==='') {
+      contact.phone = phone;
+    }
+    const alteredContact = {
+      id: id,
+      name: contact.name,
+      phone: contact.phone,
+      image: contact.image,
+    };
     console.log("logging name: ", name);
     await deleteContact(name);
-    console.log("now done");
+    await createContact(alteredContact);
+
     updateState(contact);
   }
 
