@@ -1,7 +1,9 @@
 /* eslint-disable no-console */
 /* eslint-disable react/state-in-constructor */
 import React from 'react';
-import { View, Text, TextInput, Image } from 'react-native';
+import {
+  View, TextInput, Image,
+} from 'react-native';
 import styles from './styles';
 import search from '../../resources/search.png';
 
