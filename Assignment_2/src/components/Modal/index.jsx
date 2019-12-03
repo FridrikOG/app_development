@@ -13,7 +13,7 @@ class ContactModal extends React.Component {
     name: '',
     phone: '',
     image: '',
-    isValid: sfalse,
+    isValid: false,
   }
 
   updateName(name) {
