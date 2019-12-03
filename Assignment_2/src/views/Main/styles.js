@@ -12,13 +12,14 @@ export default StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    opacity: 0.7
   },
   title: {
     fontSize: 30,
     color: '#003333',
     marginBottom: 20,
     fontWeight: 'bold',
+    backgroundColor: 'white',
+    padding: 20,
   },
   logo: {
     width: 50,
