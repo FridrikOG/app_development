@@ -4,8 +4,10 @@
 /* eslint-disable react/state-in-constructor */
 /* eslint-disable no-undef */
 /* eslint-disable react/prefer-stateless-function */
-import React from 'react';
-import { View, Text, ImageBackground, TouchableOpacity, Image } from 'react-native';
+import React, { cloneElement } from 'react';
+import {
+ View, Text, ImageBackground, TouchableOpacity, Image 
+} from 'react-native';
 import * as FileSystem from 'expo-file-system';
 import data from '../../resources/data.json';
 import plus from '../../resources/plus.png';
@@ -13,6 +15,7 @@ import ContactList from '../../components/ContactList/ContactList';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import CreateModal from '../../components/Modal';
 import styles from './styles';
+import { getAllContacts, createContact } from '../../services/contactService';
 
 const imageDirectory = `${FileSystem.documentDirectory}images`;
 
@@ -25,10 +28,17 @@ class Contacts extends React.Component {
     openCCModal: false,
   };
 
+  async componentDidMount() {
+    const contacts = await getAllContacts();
+    console.log('Logging all contacts: ', contacts[0]);
+    // allContacts = contacts.map((x) => (x.JSON.parse()));
+    // console.log('Logging all contacts: ', allContacts);
+    // console.group("here");
+    // console.log('Logging all contacts: ', news);
+  }
 
   addContanct = (contact) => {
     console.log('Adding contact: ', contact);
-
   }
 
   // This method Should filter the contact list everytime a new character is added to the search bar
@@ -72,6 +82,7 @@ class Contacts extends React.Component {
 
   render() {
     const { allContacts, openCCModal } = this.state;
+    createContact();
     return (
       <View style={styles.container}>
         <View style={styles.toolbar}>
