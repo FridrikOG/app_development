@@ -5,7 +5,9 @@
 /* eslint-disable no-undef */
 /* eslint-disable react/prefer-stateless-function */
 import React from 'react';
-import { View, Text, ImageBackground, TouchableOpacity, Image } from 'react-native';
+import {
+  View, Text, ImageBackground, TouchableOpacity, Image
+} from 'react-native';
 import * as FileSystem from 'expo-file-system';
 import data from '../../resources/data.json';
 import plus from '../../resources/plus.png';
@@ -13,6 +15,7 @@ import ContactList from '../../components/ContactList/ContactList';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import CreateModal from '../../components/Modal';
 import styles from './styles';
+import bg from '../../resources/2407.jpg';
 
 class Contacts extends React.Component {
   // const props = this.props.navigation.state.params;
@@ -26,7 +29,6 @@ class Contacts extends React.Component {
 
   addContanct = (contact) => {
     console.log('Adding contact: ', contact);
-
   }
 
   // This method Should filter the contact list everytime a new character is added to the search bar
@@ -65,6 +67,7 @@ class Contacts extends React.Component {
   }
 
   render() {
+    const { navigate } = this.props.navigation;
     const { allContacts, openCCModal } = this.state;
     return (
       <View style={styles.container}>
@@ -75,14 +78,14 @@ class Contacts extends React.Component {
             onPress={() => this.setState({ openCCModal: true })}
           >
             <Image source={plus} style={styles.plus} />
-            <Text style={styles.createText}>Create</Text>
+            <Text style={styles.createText}>CREATE</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.content}>
-          <ImageBackground style={styles.backgroundImage} source={{ uri: 'https://ph-files.imgix.net/651adc69-1ed9-47b3-8f6f-3a83ed0e2322?auto=format%2Ccompress%2Cenhance&dpr=2&crop=false&fit=max&w&h=500' }}>
+          <ImageBackground style={styles.backgroundImage} source={bg}>
             <View>
               <SearchBar searchContacts={(searchString) => this.searchContacts(searchString)} />
-              <ContactList contacts={allContacts} />
+              <ContactList contacts={allContacts} navigate={navigate} />
             </View>
           </ImageBackground>
         </View>

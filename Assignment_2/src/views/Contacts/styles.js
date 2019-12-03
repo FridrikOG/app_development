@@ -17,19 +17,19 @@ export default StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    opacity: 0.7
   },
   toolbar: {
     flexDirection: 'row',
     padding: 10,
-    backgroundColor: '#001a33',
+    backgroundColor: '#00141a',
     width: winWidth,
   },
   title: {
     fontSize: 25,
     width: winWidth / 2,
     marginLeft: 10,
-    color: '#e6f2ff',
+    marginTop: 5,
+    color: 'white',
   },
   createBtn: {
     marginLeft: 10,
@@ -43,8 +43,11 @@ export default StyleSheet.create({
   plus: {
     width: 20,
     height: 20,
+    marginTop: 3,
   },
   createText: {
     marginLeft: 10,
-  }
+    fontSize: 15,
+    marginTop: 5,
+  },
 });

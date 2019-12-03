@@ -25,6 +25,7 @@ export default StyleSheet.create({
     borderColor: 'white',
     backgroundColor: 'black',
     flexDirection: 'row',
+    opacity: 0.9,
   },
   image: {
     alignSelf: 'flex-start',
