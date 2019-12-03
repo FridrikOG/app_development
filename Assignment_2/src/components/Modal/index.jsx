@@ -47,10 +47,10 @@ class ContactModal extends React.Component {
   }
 
   cleanUp(Submit) {
-    const { closeModal, addContanct } = this.props;
+    const { closeModal, addContact } = this.props;
     // If Submit was pressed we add the board to our data
     if (Submit) {
-      addContanct(this.state);
+      addContact(this.state);
     }
     // Clearing the error messages
     this.setState({
@@ -63,7 +63,7 @@ class ContactModal extends React.Component {
   }
 
   render() {
-    const { isOpen, closeModal, addContanct } = this.props;
+    const { isOpen, closeModal, addContact } = this.props;
     const { name, phone, image } = this.state;
     return (
       <NativeModal

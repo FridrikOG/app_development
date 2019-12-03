@@ -1,3 +1,5 @@
+/* eslint-disable class-methods-use-this */
+/* eslint-disable array-callback-return */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable guard-for-in */
@@ -10,7 +12,7 @@ import {
   View, Text, ImageBackground, TouchableOpacity, Image,
 } from 'react-native';
 import * as FileSystem from 'expo-file-system';
-import data from '../../resources/data.json';
+//import data from '../../resources/data.json';
 import plus from '../../resources/plus.png';
 import ContactList from '../../components/ContactList/ContactList';
 import SearchBar from '../../components/SearchBar/SearchBar';
@@ -27,8 +29,8 @@ class Contacts extends React.Component {
     alwaysAllContacts: [],
     allContacts: [],
     openCCModal: false,
+    defaultImage: 'https://s.pngix.com/pngfile/s/468-4685538_bear-default-avatar-default-avatar-hd-png-download.png',
   };
-
 
   // This one runs after the render
   async componentDidMount() {
@@ -36,15 +38,23 @@ class Contacts extends React.Component {
     const { alwaysAllContacts } = this.state;
     const contacts = await getAllContacts();
     for (x in contacts) {
-      let aContact = JSON.parse(contacts[x]);
-      console.log("loggin a cont " , aContact);
+      const aContact = JSON.parse(contacts[x]);
       alwaysAllContacts.push(aContact);
     }
-    this.setState({ alwaysAllContacts: alwaysAllContacts, allContacts: alwaysAllContacts });
+    this.setState({ alwaysAllContacts, allContacts: alwaysAllContacts });
   }
 
-  addContanct = (contact) => {
-    console.log('Adding contact: ', contact);
+  // Gets the next id needed for a contact
+  getMaxId(contacts) {
+    let maxId = 0;
+    // Loops through to grab the highest id since JSON objects arent in order
+    contacts.map(
+      (obj) => {
+        if (obj.id > maxId) maxId = obj.id;
+      },
+    );
+    // returns the max ID
+    return maxId;
   }
 
   // This method Should filter the contact list everytime a new character is added to the search bar
@@ -79,16 +89,34 @@ class Contacts extends React.Component {
     }
     // Now we filter grabbing only names that are inside the foundNames array
     const searchedContacts = alwaysAllContacts.filter((x) => foundNames.includes(x.name));
-
     const newVar = FileSystem.readAsStringAsync(imageDirectory);
-    // console.log('reading out from newVar LOL : ', newVar);
     this.setState({ allContacts: searchedContacts });
   }
 
+  // Adds contact to the state and to the device directory
+  async addContact(contact) {
+    const { defaultImage, alwaysAllContacts } = this.state;
+    // Checks for default image
+    if (contact.image === '') {
+      contact.image = defaultImage;
+    }
+    // new JSON object out of the infroamtion necessary
+    const newContact = {
+      id: this.getMaxId(alwaysAllContacts),
+      name: contact.name,
+      phone: contact.phone,
+      image: contact.image,
+    };
+    // Calls the function that inserts the contact into the device directory
+    await createContact(newContact);
+    // Combines awlaysAllContacts with the newContact
+    const newObject = [...alwaysAllContacts, newContact];
+    // Updates the state with the new object
+    this.setState({ alwaysAllContacts: newObject, allContacts: newObject });
+  }
 
   render() {
     const { allContacts, openCCModal, alwaysAllContacts } = this.state;
-    createContact();
     return (
       <View style={styles.container}>
         <View style={styles.toolbar}>
@@ -112,11 +140,10 @@ class Contacts extends React.Component {
         <CreateModal
           isOpen={openCCModal}
           closeModal={() => this.setState({ openCCModal: false })}
-          addContanct={(contact) => this.addContanct(contact)}
+          addContact={(contact) => this.addContact(contact)}
         />
       </View>
     );
   }
 }
-
 export default Contacts;
