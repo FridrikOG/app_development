@@ -6,7 +6,9 @@ export default StyleSheet.create({
   searchBar: {
     backgroundColor: 'white',
     width: winWidth,
-    padding: 20,
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 20,
     flexDirection: 'row',
   },
   icon: {

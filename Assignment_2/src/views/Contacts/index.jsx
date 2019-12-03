@@ -5,11 +5,13 @@
 /* eslint-disable no-undef */
 /* eslint-disable react/prefer-stateless-function */
 import React from 'react';
-import { View, Text, ImageBackground } from 'react-native';
+import { View, Text, ImageBackground, TouchableOpacity, Image } from 'react-native';
 import * as FileSystem from 'expo-file-system';
 import data from '../../resources/data.json';
+import plus from '../../resources/plus.png';
 import ContactList from '../../components/ContactList/ContactList';
 import SearchBar from '../../components/SearchBar/SearchBar';
+import CreateModal from '../../components/Modal';
 import styles from './styles';
 
 class Contacts extends React.Component {
@@ -18,7 +20,14 @@ class Contacts extends React.Component {
     // This one is never changed
     alwaysAllContacts : data.contacts,
     allContacts: data.contacts,
+    openCCModal: false,
   };
+
+
+  addContanct = (contact) => {
+    console.log('Adding contact: ', contact);
+
+  }
 
   // This method Should filter the contact list everytime a new character is added to the search bar
   searchContacts = (searchString) => {
@@ -57,15 +66,32 @@ class Contacts extends React.Component {
   }
 
   render() {
-    const { allContacts } = this.state;
+    const { allContacts, openCCModal } = this.state;
     return (
       <View style={styles.container}>
-        <ImageBackground style={styles.backgroundImage} source={{ uri: 'https://ph-files.imgix.net/651adc69-1ed9-47b3-8f6f-3a83ed0e2322?auto=format%2Ccompress%2Cenhance&dpr=2&crop=false&fit=max&w&h=500' }}>
-          <View style={styles.container}>
-            <SearchBar searchContacts={(searchString) => this.searchContacts(searchString)} />
-            <ContactList contacts={allContacts} />
-          </View>
-        </ImageBackground>
+        <View style={styles.toolbar}>
+          <Text style={styles.title}>Contacts</Text>
+          <TouchableOpacity
+            style={styles.createBtn}
+            onPress={() => this.setState({ openCCModal: true })}
+          >
+            <Image source={plus} style={styles.plus} />
+            <Text style={styles.createText}>Create</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.content}>
+          <ImageBackground style={styles.backgroundImage} source={{ uri: 'https://ph-files.imgix.net/651adc69-1ed9-47b3-8f6f-3a83ed0e2322?auto=format%2Ccompress%2Cenhance&dpr=2&crop=false&fit=max&w&h=500' }}>
+            <View>
+              <SearchBar searchContacts={(searchString) => this.searchContacts(searchString)} />
+              <ContactList contacts={allContacts} />
+            </View>
+          </ImageBackground>
+        </View>
+        <CreateModal
+          isOpen={openCCModal}
+          closeModal={() => this.setState({ openCCModal: false })}
+          addContanct={(contact) => this.addContanct(contact)}
+        />
       </View>
     );
   }
