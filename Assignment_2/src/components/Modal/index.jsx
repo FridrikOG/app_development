@@ -7,12 +7,13 @@ import styles from './styles';
 import arrow from '../../resources/left-arroww.png';
 import plus from '../../resources/add.png';
 
-class BoardModal extends React.Component {
+class ContactModal extends React.Component {
   // eslint-disable-next-line react/state-in-constructor
   state = {
     name: '',
     phone: '',
     image: '',
+    isValid: sfalse,
   }
 
   updateName(name) {
@@ -25,6 +26,18 @@ class BoardModal extends React.Component {
     }
     // Actually updating the name to the state
     this.setState({ name });
+  }
+
+  updatePhone(phone) {
+    // Name of board has to be at least 3 characters
+    if (phone.length > 2) {
+      this.setState({ isValid: true });
+    // If name of board becomes less than 3 characters we make the form invalid for submission
+    } else {
+      this.setState({ isValid: false });
+    }
+    // Actually updating the name to the state
+    this.setState({ phone });
   }
 
 
@@ -68,6 +81,13 @@ class BoardModal extends React.Component {
             value={name}
             onChangeText={(text) => this.updateName(text)}
           />
+          <TextInput
+            style={styles.textInput}
+            placeholder="Phone number"
+            placeholderTextColor="black"
+            value={name}
+            onChangeText={(text) => this.updatePhone(text)}
+          />
           <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
             <TouchableOpacity
               style={[styles.button, { marginRight: 10 }]}
@@ -87,4 +107,4 @@ class BoardModal extends React.Component {
   }
 }
 
-export default BoardModal;
+export default ContactModal;

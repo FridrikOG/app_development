@@ -6,8 +6,8 @@ import Main from '../views/Main';
 
 
 const StackNavigator = createStackNavigator({
-  Contacts,
   Main,
+  Contacts,
 });
 
 export default createAppContainer(StackNavigator);
