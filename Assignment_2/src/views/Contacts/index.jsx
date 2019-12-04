@@ -18,7 +18,7 @@ import ContactList from '../../components/ContactList/ContactList';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import CreateModal from '../../components/Modal';
 import styles from './styles';
-import { getAllContacts, createContact } from '../../services/contactService';
+import { getAllContacts, createContact, containsContact } from '../../services/contactService';
 import bg from '../../resources/2407.jpg';
 
 class Contacts extends React.Component {
