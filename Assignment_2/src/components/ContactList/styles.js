@@ -52,19 +52,4 @@ export default StyleSheet.create({
     width: 20,
     height: 20,
   },
-  deleteButton: {
-    backgroundColor: '#009999',
-    padding: 10,
-    flexDirection: 'row',
-    color: 'white',
-  },
-  deleteIcon: {
-    width: 20,
-    height: 20,
-    marginLeft: 10,
-    marginRight: 10,
-  },
-  deleteText: {
-    color: 'white',
-  }
 });

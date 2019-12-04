@@ -5,7 +5,7 @@ import {
   View, Text, Image, TouchableOpacity, ImageBackground,
 } from 'react-native';
 import bg from '../../resources/2407.jpg';
-import logo from '../../resources/phone.png';
+import logo from '../../resources/smartphone.png';
 import styles from './styles';
 // import data from '../../resources/data';
 

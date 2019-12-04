@@ -13,6 +13,7 @@ import {
 import styles from './styles';
 import repair from '../../resources/repairing-service.png';
 import bg from '../../resources/2407.jpg';
+import deleteIcon from '../../resources/delete.png';
 import ModifyContact from '../../components/Modal/ModifyContact';
 import { deleteContact, createContact } from '../../services/contactService';
 
@@ -20,8 +21,12 @@ class Details extends React.Component {
   state = {
     openMCModal: false,
   };
-  // Function to update the details of the contact
 
+  deleteContact = () => {
+    this.props.navigation.navigate('Contacts');
+  }
+
+  // Function to update the details of the contact
   async updateDetails(contact) {
     // console.log("The name to be changed: ", oldName);
     // TODO
@@ -32,8 +37,8 @@ class Details extends React.Component {
     const { state } = navigation;
     const { params } = state;
     const {
- id, updateState, name, image, phone 
-} = params;
+      id, updateState, name, image, phone
+    } = params;
     console.log(id);
 
     // Sending in the old name
@@ -63,6 +68,8 @@ class Details extends React.Component {
     updateState(contact);
   }
 
+
+
   render() {
     const { openMCModal } = this.state;
     const {
@@ -71,7 +78,13 @@ class Details extends React.Component {
     return (
       <ScrollView style={styles.details}>
         <View style={styles.toolbar}>
-          <Text style={styles.title}>Contact Details</Text>
+          <TouchableOpacity
+            style={styles.deleteBtn}
+            onPress={() => this.deleteContact()}
+          >
+            <Image source={deleteIcon} style={styles.plus} />
+            <Text style={styles.deleteText}>DELETE</Text>
+          </TouchableOpacity>
           <TouchableOpacity
             style={styles.createBtn}
             onPress={() => this.setState({ openMCModal: true })}
