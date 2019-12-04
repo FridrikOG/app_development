@@ -18,16 +18,18 @@ export default StyleSheet.create({
   },
   createBtn: {
     marginLeft: 10,
+    marginRight: 10,
     padding: 10,
     backgroundColor: '#e6f2ff',
     borderRadius: 12,
-    width: winWidth / 2,
+    width: 150,
     alignSelf: 'flex-end',
     flexDirection: 'row',
   },
   plus: {
     width: 20,
     height: 20,
+    marginTop: 3,
   },
   createText: {
     marginLeft: 10,
@@ -79,5 +81,19 @@ export default StyleSheet.create({
     borderRadius: Platform.OS === 'ios' ? 300 / 2 : 400 / 2,
     borderWidth: 10,
     borderColor: 'black',
+  },
+  deleteBtn: {
+    marginLeft: 10,
+    marginRight: 10,
+    padding: 10,
+    backgroundColor: '#009999',
+    borderRadius: 12,
+    width: 150,
+    flexDirection: 'row',
+  },
+  deleteText: {
+    marginLeft: 10,
+    fontSize: 18,
+    color: 'white',
   },
 });
