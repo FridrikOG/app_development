@@ -107,10 +107,12 @@ class ContactModal extends React.Component {
       image: '',
       nameLenIsValid: false,
       nameAvail: false,
-      phoneIsValid: false,
+      phoneLenIsValid: false,
+      phoneIsDigit: false,
       nameLenIsValidRequired: '',
       nameAvailRequired: '',
-      phoneRequired: '',
+      phoneLenIsValidRequired: '',
+      phoneIsDigitRequired: '',
     });
     // GoBack was pressed - Closing the model after clearing the error message
     closeModal();
