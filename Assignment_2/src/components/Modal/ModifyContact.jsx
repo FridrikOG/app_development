@@ -168,7 +168,7 @@ class ModifyContact extends React.Component {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.button}
-              onPress={this.cleanUp(false)}
+              onPress={ () => this.cleanUp(false)}
             >
               <Image source={arrow} style={styles.arrow} />
               <Text style={styles.btntxt}>GO BACK</Text>
