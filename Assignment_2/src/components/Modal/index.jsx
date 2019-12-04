@@ -167,5 +167,4 @@ class ContactModal extends React.Component {
     );
   }
 }
-
 export default ContactModal;

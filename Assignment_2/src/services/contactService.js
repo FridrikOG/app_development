@@ -46,6 +46,6 @@ export const containsContact = async (name) => {
 export const deleteContact = (name) => {
   // console.log("Inside deleteContact ... ", contact.name);
   const fileName = name.replace(' ', '-');
-  console.log("Goes to delete this filename: ", fileName);
+  console.log('Goes to delete this filename: ', fileName);
   FileSystem.deleteAsync(`${baseDirectory}${fileName}.json`);
 };

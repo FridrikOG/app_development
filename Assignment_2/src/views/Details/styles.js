@@ -31,7 +31,7 @@ export default StyleSheet.create({
   },
   createText: {
     marginLeft: 10,
-    fontSize: 15,
+    fontSize: 18,
   },
   backgroundImage: {
     flex: 1,
