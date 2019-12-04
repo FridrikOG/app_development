@@ -35,6 +35,14 @@ export const createContact = (contact) => {
   FileSystem.writeAsStringAsync((`${baseDirectory}${fileName}.json`), objStringified);
 };
 
+export const containsContact = async (name) => {
+  const directory = await FileSystem.readDirectoryAsync(baseDirectory);
+  const fileName = name.replace(' ', '-');
+
+
+  return directory.indexOf(fileName+'.json');
+};
+
 export const deleteContact = (name) => {
   // console.log("Inside deleteContact ... ", contact.name);
   const fileName = name.replace(' ', '-');

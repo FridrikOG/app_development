@@ -14,7 +14,7 @@ import styles from './styles';
 import repair from '../../resources/repairing-service.png';
 import bg from '../../resources/2407.jpg';
 import ModifyContact from '../../components/Modal/ModifyContact';
-import {deleteContact, createContact} from '../../services/contactService';
+import { deleteContact, createContact } from '../../services/contactService';
 
 class Details extends React.Component {
   state = {
@@ -22,7 +22,7 @@ class Details extends React.Component {
   };
   // Function to update the details of the contact
 
-   async updateDetails(contact) {
+  async updateDetails(contact) {
     // console.log("The name to be changed: ", oldName);
     // TODO
     // 1. Delete from file direct
@@ -31,23 +31,33 @@ class Details extends React.Component {
     const { navigation } = this.props;
     const { state } = navigation;
     const { params } = state;
-    const { id, updateState, name, image, phone } = params;
+    const {
+ id, updateState, name, image, phone 
+} = params;
     console.log(id);
+
     // Sending in the old name
     if (contact.name === '') {
       contact.name = name;
     }
-    if (contact.phone ==='') {
+    // If user does not send a phone number
+    if (contact.phone === '') {
       contact.phone = phone;
     }
+    // If user does not change the image then we use the old one
+    if (contact.image === '') {
+      contact.image = image;
+    }
+    // The object containing the altered contact
     const alteredContact = {
-      id: id,
+      id,
       name: contact.name,
       phone: contact.phone,
       image: contact.image,
     };
-    console.log("logging name: ", name);
+    // First we have to delete
     await deleteContact(name);
+    // After we delete a contact we create a new one
     await createContact(alteredContact);
 
     updateState(contact);
@@ -56,7 +66,7 @@ class Details extends React.Component {
   render() {
     const { openMCModal } = this.state;
     const {
-    name, image, phone, id, updateState
+      name, image, phone, id, updateState,
     } = this.props.navigation.state.params;
     return (
       <ScrollView style={styles.details}>

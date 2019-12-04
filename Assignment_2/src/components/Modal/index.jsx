@@ -7,6 +7,7 @@ import styles from './styles';
 import arrow from '../../resources/left-arroww.png';
 import plus from '../../resources/add.png';
 import Camera from '../Camera';
+import { containsContact } from '../../services/contactService';
 
 
 class ContactModal extends React.Component {
@@ -18,9 +19,9 @@ class ContactModal extends React.Component {
     isValid: false,
   }
 
-  updateName(name) {
+  async updateName(name) {
     // Name of board has to be at least 3 characters
-    if (name.length > 2) {
+    if (name.length > 2 && await containsContact(name) === -1) {
       this.setState({ isValid: true });
     // If name of board becomes less than 3 characters we make the form invalid for submission
     } else {
@@ -50,7 +51,7 @@ class ContactModal extends React.Component {
     const { closeModal, addContact } = this.props;
     // If Submit was pressed we add the board to our data
     if (Submit) {
-      addContact(this.state);
+      const addCont = addContact(this.state);
     }
     // Clearing the error messages
     this.setState({
