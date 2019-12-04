@@ -1,3 +1,5 @@
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/prop-types */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable guard-for-in */
 /* eslint-disable no-console */
@@ -22,8 +24,14 @@ class Details extends React.Component {
     openMCModal: false,
   };
 
-  deleteContact = () => {
+  async delContact() {
+    const {
+      name, updateState,
+    } = this.props.navigation.state.params;
     this.props.navigation.navigate('Contacts');
+    await deleteContact(name);
+    updateState();
+
   }
 
   // Function to update the details of the contact
@@ -69,7 +77,6 @@ class Details extends React.Component {
   }
 
 
-
   render() {
     const { openMCModal } = this.state;
     const {
@@ -80,7 +87,7 @@ class Details extends React.Component {
         <View style={styles.toolbar}>
           <TouchableOpacity
             style={styles.deleteBtn}
-            onPress={() => this.deleteContact()}
+            onPress={() => this.delContact()}
           >
             <Image source={deleteIcon} style={styles.plus} />
             <Text style={styles.deleteText}>DELETE</Text>

@@ -48,10 +48,10 @@ class ModifyContact extends React.Component {
   }
 
   cleanUp(Submit) {
-    const { closeModal, updateDetails, oldName } = this.props;
+    const { closeModal, updateDetails, } = this.props;
     // If Submit was pressed we add the board to our data
     if (Submit) {
-      updateDetails(this.state, oldName);
+      updateDetails(this.state);
     }
     // Clearing the error messages
     this.setState({
