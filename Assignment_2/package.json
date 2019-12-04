@@ -21,6 +21,7 @@
     "react-native-css-gradient": "^0.4.0",
     "react-native-gesture-handler": "^1.5.2",
     "react-native-modal": "^11.5.3",
+    "react-native-phone-call": "^1.0.9",
     "react-native-radial-gradient": "^1.0.6",
     "react-native-web": "^0.11.7",
     "react-navigation": "^4.0.10",
