@@ -18,10 +18,12 @@ class ContactModal extends React.Component {
     image: '',
     nameLenIsValid: false,
     nameAvail: false,
-    phoneIsValid: false,
+    phoneLenIsValid: false,
+    phoneIsDigit: false,
     nameLenIsValidRequired: '',
     nameAvailRequired: '',
-    phoneRequired: '',
+    phoneLenIsValidRequired: '',
+    phoneIsDigitRequired: '',
   }
 
   async updateName(name) {
@@ -48,12 +50,17 @@ class ContactModal extends React.Component {
   updatePhone(phone) {
     // Name of board has to be at least 3 characters
     if (phone.length > 6) {
-      this.setState({ phoneIsValid: true });
+      this.setState({ phoneLenIsValid: true });
     // If name of board becomes less than 3 characters we make the form invalid for submission
     } else {
-      this.setState({ phoneIsValid: false });
+      this.setState({ phoneLenIsValid: false });
     }
-    // Actually updating the name to the state
+    const intPhone = (Number.parseInt(phone));
+    if (Number.isInteger(intPhone)) {
+      this.setState({ phoneIsDigit: true });
+    } else {
+      this.setState({ phoneIsDigit: false });
+    }
     this.setState({ phone });
   }
 
@@ -63,7 +70,7 @@ class ContactModal extends React.Component {
 
   determineErrorMsg() {
     const {
-      nameLenIsValid, nameAvail, phoneIsValid,
+      nameLenIsValid, nameAvail, phoneLenIsValid,phoneIsDigit,
     } = this.state;
     if (nameLenIsValid === false) {
       this.setState({ nameLenIsValidRequired: '* Name must be more than two characters.' });
@@ -75,10 +82,15 @@ class ContactModal extends React.Component {
     } else {
       this.setState({ nameAvailRequired: '' });
     }
-    if (phoneIsValid === false) {
-      this.setState({ phoneRequired: '* Phone needs to have atleast 7 digits.' });
+    if (phoneLenIsValid === false) {
+      this.setState({ phoneLenIsValidRequired: '* Phone number needs to have atleast 7 digits.' });
     } else {
-      this.setState({ phoneRequired: '' });
+      this.setState({ phoneLenIsValidRequired: '' });
+    }
+    if (phoneIsDigit === false) {
+      this.setState({ phoneIsDigitRequired: '* Phone number needs to only be digits' });
+    } else {
+      this.setState({ phoneIsDigitRequired: '' });
     }
   }
 
@@ -95,10 +107,12 @@ class ContactModal extends React.Component {
       image: '',
       nameLenIsValid: false,
       nameAvail: false,
-      phoneIsValid: false,
+      phoneLenIsValid: false,
+      phoneIsDigit: false,
       nameLenIsValidRequired: '',
       nameAvailRequired: '',
-      phoneRequired: '',
+      phoneLenIsValidRequired: '',
+      phoneIsDigitRequired: '',
     });
     // GoBack was pressed - Closing the model after clearing the error message
     closeModal();
@@ -109,9 +123,9 @@ class ContactModal extends React.Component {
       isOpen, closeModal, addContact,
     } = this.props;
     const {
-      name, phone, image, nameLenIsValid, nameAvail, phoneIsValid, nameLenIsValidRequired, nameAvailRequired, phoneRequired,
+      name, phone, image, nameLenIsValid, nameAvail, phoneLenIsValid, phoneIsDigit, nameLenIsValidRequired, nameAvailRequired, phoneIsDigitRequired, phoneLenIsValidRequired,
     } = this.state;
-    const isValid = nameLenIsValid && nameAvail && phoneIsValid;
+    const isValid = nameLenIsValid && nameAvail && phoneLenIsValid && phoneIsDigit;
     return (
       <NativeModal
         isVisible={isOpen}
@@ -134,7 +148,8 @@ class ContactModal extends React.Component {
             value={name}
             onChangeText={(text) => this.updateName(text)}
           />
-          <Text style={{ color: 'red' }}>{phoneRequired}</Text>
+          <Text style={{ color: 'red' }}>{phoneIsDigitRequired}</Text>
+          <Text style={{ color: 'red' }}>{phoneLenIsValidRequired}</Text>
           <TextInput
             style={styles.textInput}
             placeholder="Phone number"

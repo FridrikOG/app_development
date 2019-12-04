@@ -20,17 +20,18 @@ export default StyleSheet.create({
     fontWeight: 'bold',
     backgroundColor: 'white',
     padding: 20,
+    borderWidth: 2,
   },
   logo: {
-    width: 50,
-    height: 50,
+    width: 100,
+    height: 100,
   },
   logoBorder: {
     borderWidth: 6,
-    borderRadius: 200 / 2,
-    borderColor: 'white',
+    borderRadius: 400 / 2,
+    borderColor: '#e6ffff',
     padding: 20,
-    backgroundColor: '#e6ffff',
+    backgroundColor: 'white',
     margin: 20,
   },
   button: {
