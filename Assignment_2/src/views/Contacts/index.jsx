@@ -115,6 +115,7 @@ class Contacts extends React.Component {
     console.log('Updating state to file directory');
     const { alwaysAllContacts } = this.state;
     const contacts = await getAllContacts();
+    console.log("contacts: ", contacts)
     const emptyList = [];
     for (x in contacts) {
       const aContact = JSON.parse(contacts[x]);
