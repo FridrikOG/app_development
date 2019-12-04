@@ -143,7 +143,11 @@ class Contacts extends React.Component {
           <ImageBackground style={styles.backgroundImage} source={bg}>
             <View>
               <SearchBar searchContacts={(searchString) => this.searchContacts(searchString)} />
-              <ContactList contacts={allContacts} navigate={navigate} updateState={() => this.updateState()} />
+              <ContactList
+                contacts={allContacts}
+                navigate={navigate}
+                updateState={() => this.updateState()}
+              />
             </View>
           </ImageBackground>
         </View>
