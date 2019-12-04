@@ -18,28 +18,24 @@ class ModifyContact extends React.Component {
     image: '',
     nameLenIsValid: true,
     nameAvail: true,
-    phoneLenIsValid: true,
-    phoneIsDigit: true,
     hasRecievedNameInput: true,
     hasRecievedPhoneInput: true,
     nameLenIsValidRequired: '',
     nameAvailRequired: '',
-    phoneLenIsValidRequired: '',
-    phoneIsDigitRequired: '',
   }
 
+  // eslint-disable-next-line react/sort-comp
   async updateName(name) {
     // Actually updating the name to the state
     this.setState({ name });
     // Name of board has to be at least 3 characters
-    if (name.length > 2) {
-      this.setState({ nameLenIsValid: true, hasRecievedNameInput: false});
+    if (name.length > 0) {
+      this.setState({ nameLenIsValid: true, hasRecievedNameInput: false });
     // If name of board becomes less than 3 characters we make the form invalid for submission
     } else {
       this.setState({ nameLenIsValid: false });
     }
     // Check if the name exists in the system already
-    const status = await containsContact(name);
     if (await containsContact(name) === -1) {
       this.setState({ nameAvail: true });
     } else {
@@ -48,20 +44,7 @@ class ModifyContact extends React.Component {
   }
 
   updatePhone(phone) {
-    // Name of board has to be at least 3 characters
-    if (phone.length > 6) {
-      this.setState({ phoneLenIsValid: true, hasRecievedPhoneInput: false });
-    // If name of board becomes less than 3 characters we make the form invalid for submission
-    } else {
-      this.setState({ phoneLenIsValid: false });
-    }
-    const intPhone = (Number.parseInt(phone));
-    if (Number.isInteger(intPhone)) {
-      this.setState({ phoneIsDigit: true });
-    } else {
-      this.setState({ phoneIsDigit: false });
-    }
-    this.setState({ phone });
+    this.setState({ phone, hasRecievedPhoneInput: false });
   }
 
   updateImage(image) {
@@ -81,16 +64,6 @@ class ModifyContact extends React.Component {
       this.setState({ nameAvailRequired: '* The name already exists.' });
     } else {
       this.setState({ nameAvailRequired: '' });
-    }
-    if (phoneLenIsValid === false) {
-      this.setState({ phoneLenIsValidRequired: '* Phone number needs to have atleast 7 digits.' });
-    } else {
-      this.setState({ phoneLenIsValidRequired: '' });
-    }
-    if (phoneIsDigit === false) {
-      this.setState({ phoneIsDigitRequired: '* Phone number needs to only be digits' });
-    } else {
-      this.setState({ phoneIsDigitRequired: '' });
     }
   }
 
@@ -120,10 +93,8 @@ class ModifyContact extends React.Component {
       image: '',
       nameLenIsValid: true,
       nameAvail: true,
-      phoneIsValid: true,
       nameLenIsValidRequired: '',
       nameAvailRequired: '',
-      phoneRequired: '',
       hasRecievedNameInput: true,
     });
     // GoBack was pressed - Closing the model after clearing the error message
@@ -135,9 +106,9 @@ class ModifyContact extends React.Component {
       isOpen, closeModal, addContact, oldName, oldImage, oldPhone,
     } = this.props;
     const {
-      hasRecievedNameInput, hasRecievedPhoneInput, name, phone, image, nameLenIsValid, nameAvail, phoneLenIsValid, phoneIsDigit, nameLenIsValidRequired, nameAvailRequired, phoneIsDigitRequired, phoneLenIsValidRequired,
+      hasRecievedNameInput, hasRecievedPhoneInput, name, phone, image, nameLenIsValid, nameAvail, nameLenIsValidRequired, nameAvailRequired,
     } = this.state;
-    const isValid = nameLenIsValid && nameAvail && phoneLenIsValid && phoneIsDigit;
+    const isValid = nameLenIsValid && nameAvail;
     return (
       <NativeModal
         isVisible={isOpen}
@@ -160,8 +131,6 @@ class ModifyContact extends React.Component {
             value={hasRecievedNameInput ? this.getName(oldName) : name}
             onChangeText={(text) => this.updateName(text)}
           />
-          <Text style={{ color: 'red' }}>{phoneIsDigitRequired}</Text>
-          <Text style={{ color: 'red' }}>{phoneLenIsValidRequired}</Text>
           <TextInput
             style={styles.textInput}
             placeholder="Phone number"

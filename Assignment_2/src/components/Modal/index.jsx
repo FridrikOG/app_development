@@ -18,12 +18,8 @@ class ContactModal extends React.Component {
     image: '',
     nameLenIsValid: false,
     nameAvail: false,
-    phoneLenIsValid: false,
-    phoneIsDigit: false,
     nameLenIsValidRequired: '',
     nameAvailRequired: '',
-    phoneLenIsValidRequired: '',
-    phoneIsDigitRequired: '',
   }
 
   async updateName(name) {
@@ -48,20 +44,7 @@ class ContactModal extends React.Component {
   }
 
   updatePhone(phone) {
-    // Name of board has to be at least 3 characters
-    if (phone.length > 6) {
-      this.setState({ phoneLenIsValid: true });
-    // If name of board becomes less than 3 characters we make the form invalid for submission
-    } else {
-      this.setState({ phoneLenIsValid: false });
-    }
-    const intPhone = (Number.parseInt(phone));
-    if (Number.isInteger(intPhone)) {
-      this.setState({ phoneIsDigit: true });
-    } else {
-      this.setState({ phoneIsDigit: false });
-    }
-    this.setState({ phone });
+    this.setState({ phone});
   }
 
   updateImage(image) {
@@ -82,16 +65,6 @@ class ContactModal extends React.Component {
     } else {
       this.setState({ nameAvailRequired: '' });
     }
-    if (phoneLenIsValid === false) {
-      this.setState({ phoneLenIsValidRequired: '* Phone number needs to have atleast 7 digits.' });
-    } else {
-      this.setState({ phoneLenIsValidRequired: '' });
-    }
-    if (phoneIsDigit === false) {
-      this.setState({ phoneIsDigitRequired: '* Phone number needs to only be digits' });
-    } else {
-      this.setState({ phoneIsDigitRequired: '' });
-    }
   }
 
   cleanUp(Submit) {
@@ -107,12 +80,8 @@ class ContactModal extends React.Component {
       image: '',
       nameLenIsValid: false,
       nameAvail: false,
-      phoneLenIsValid: false,
-      phoneIsDigit: false,
       nameLenIsValidRequired: '',
       nameAvailRequired: '',
-      phoneLenIsValidRequired: '',
-      phoneIsDigitRequired: '',
     });
     // GoBack was pressed - Closing the model after clearing the error message
     closeModal();
@@ -123,9 +92,9 @@ class ContactModal extends React.Component {
       isOpen, closeModal, addContact,
     } = this.props;
     const {
-      name, phone, image, nameLenIsValid, nameAvail, phoneLenIsValid, phoneIsDigit, nameLenIsValidRequired, nameAvailRequired, phoneIsDigitRequired, phoneLenIsValidRequired,
+      name, phone, image, nameLenIsValid, nameAvail, nameLenIsValidRequired, nameAvailRequired,
     } = this.state;
-    const isValid = nameLenIsValid && nameAvail && phoneLenIsValid && phoneIsDigit;
+    const isValid = nameLenIsValid && nameAvail;
     return (
       <NativeModal
         isVisible={isOpen}
@@ -148,8 +117,6 @@ class ContactModal extends React.Component {
             value={name}
             onChangeText={(text) => this.updateName(text)}
           />
-          <Text style={{ color: 'red' }}>{phoneIsDigitRequired}</Text>
-          <Text style={{ color: 'red' }}>{phoneLenIsValidRequired}</Text>
           <TextInput
             style={styles.textInput}
             placeholder="Phone number"
