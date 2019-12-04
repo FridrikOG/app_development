@@ -37,14 +37,14 @@ export const createContact = (contact) => {
   // Need to stringify the JSON object so that FileSystem can use it
   const objStringified = JSON.stringify(contact);
   // REplace the spaces with an '-' as per the assignment description
-  const fileName = contact.name.replace(' ', '-').lower();
+  const fileName = contact.name.replace(' ', '-');
   // Writing the object to the
   FileSystem.writeAsStringAsync((`${baseDirectory}${fileName}.json`), objStringified);
 };
 
 export const containsContact = async (name) => {
   const directory = await FileSystem.readDirectoryAsync(baseDirectory);
-  const fileName = name.replace(' ', '-').lower();
+  const fileName = name.replace(' ', '-');
   return directory.indexOf(`${fileName}.json`);
 };
 
