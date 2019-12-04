@@ -3,12 +3,19 @@ import * as FileSystem from 'expo-file-system';
 
 const baseDirectory = `${FileSystem.documentDirectory}contacts/`;
 
+const setupDirectory = async () => {
+  const dir = await FileSystem.getInfoAsync(baseDirectory);
+  if (!dir.exists) {
+    await FileSystem.makeDirectoryAsync(baseDirectory);
+  }
+};
 // TODO:
 // 1. Read the main directory for .json files readDirectoryAsync()
 // 2. Read the files in UTF-8 readAsStringAsync()
 // 3. Convert the content to a valid JS object
 // This function should get all contacts from the file
 export const getAllContacts = async () => {
+  await setupDirectory();
   // Read every file in the directory
   const directory = await FileSystem.readDirectoryAsync(baseDirectory);
   // Reading all content of every file - returning it as an array of json strings
@@ -30,17 +37,15 @@ export const createContact = (contact) => {
   // Need to stringify the JSON object so that FileSystem can use it
   const objStringified = JSON.stringify(contact);
   // REplace the spaces with an '-' as per the assignment description
-  const fileName = contact.name.replace(' ', '-');
+  const fileName = contact.name.replace(' ', '-').lower();
   // Writing the object to the
   FileSystem.writeAsStringAsync((`${baseDirectory}${fileName}.json`), objStringified);
 };
 
 export const containsContact = async (name) => {
   const directory = await FileSystem.readDirectoryAsync(baseDirectory);
-  const fileName = name.replace(' ', '-');
-
-
-  return directory.indexOf(fileName+'.json');
+  const fileName = name.replace(' ', '-').lower();
+  return directory.indexOf(`${fileName}.json`);
 };
 
 export const deleteContact = (name) => {

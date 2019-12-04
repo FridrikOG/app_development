@@ -41,7 +41,7 @@ class ContactModal extends React.Component {
     if (await containsContact(name) === -1) {
       this.setState({ nameAvail: true });
     } else {
-      this.setState({ nameAvail: true });
+      this.setState({ nameAvail: false });
     }
   }
 
