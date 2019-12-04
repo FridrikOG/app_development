@@ -112,6 +112,9 @@ class Details extends React.Component {
           isOpen={openMCModal}
           closeModal={() => this.setState({ openMCModal: false })}
           updateDetails={(contact) => this.updateDetails(contact)}
+          oldName={name}
+          oldImage={image}
+          oldPhone={phone}
         />
       </ScrollView>
     );

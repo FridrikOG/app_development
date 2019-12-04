@@ -1,7 +1,8 @@
+/* eslint-disable no-shadow */
 import React from 'react';
 import NativeModal from 'react-native-modal';
 import {
-  View, Text, TextInput, TouchableOpacity, ScrollView, Image
+  View, Text, TextInput, TouchableOpacity, ScrollView, Image,
 } from 'react-native';
 import styles from './styles';
 import arrow from '../../resources/left-arroww.png';
@@ -19,6 +20,8 @@ class ModifyContact extends React.Component {
     nameAvail: true,
     phoneLenIsValid: true,
     phoneIsDigit: true,
+    hasRecievedNameInput: true,
+    hasRecievedPhoneInput: true,
     nameLenIsValidRequired: '',
     nameAvailRequired: '',
     phoneLenIsValidRequired: '',
@@ -30,15 +33,13 @@ class ModifyContact extends React.Component {
     this.setState({ name });
     // Name of board has to be at least 3 characters
     if (name.length > 2) {
-      this.setState({ nameLenIsValid: true });
+      this.setState({ nameLenIsValid: true, hasRecievedNameInput: false});
     // If name of board becomes less than 3 characters we make the form invalid for submission
     } else {
       this.setState({ nameLenIsValid: false });
     }
     // Check if the name exists in the system already
-    console.log('Name', name);
     const status = await containsContact(name);
-    console.log('avail', status);
     if (await containsContact(name) === -1) {
       this.setState({ nameAvail: true });
     } else {
@@ -49,7 +50,7 @@ class ModifyContact extends React.Component {
   updatePhone(phone) {
     // Name of board has to be at least 3 characters
     if (phone.length > 6) {
-      this.setState({ phoneLenIsValid: true });
+      this.setState({ phoneLenIsValid: true, hasRecievedPhoneInput: false });
     // If name of board becomes less than 3 characters we make the form invalid for submission
     } else {
       this.setState({ phoneLenIsValid: false });
@@ -69,7 +70,7 @@ class ModifyContact extends React.Component {
 
   determineErrorMsg() {
     const {
-      nameLenIsValid, nameAvail, phoneLenIsValid,phoneIsDigit,
+      nameLenIsValid, nameAvail, phoneLenIsValid, phoneIsDigit,
     } = this.state;
     if (nameLenIsValid === false) {
       this.setState({ nameLenIsValidRequired: '* Name must be more than two characters.' });
@@ -93,18 +94,24 @@ class ModifyContact extends React.Component {
     }
   }
 
+  getName(oldName) {
+    return oldName;
+  }
+
+  getPhone(oldPhone) {
+    return oldPhone;
+  }
+
+  getImage(oldImage) {
+    return oldImage;
+  }
+
+
   cleanUp(Submit) {
-<<<<<<< HEAD
-    const { closeModal, updateDetails, } = this.props;
+    const { closeModal, updateDetails } = this.props;
     // If Submit was pressed we add the board to our data
     if (Submit) {
       updateDetails(this.state);
-=======
-    const { closeModal, addContact } = this.props;
-    // If Submit was pressed we add the board to our data
-    if (Submit) {
-      addContact(this.state);
->>>>>>> e6bc303d3844097b83108a15bcd67c4ea11960a8
     }
     // Clearing the error messages
     this.setState({
@@ -117,6 +124,7 @@ class ModifyContact extends React.Component {
       nameLenIsValidRequired: '',
       nameAvailRequired: '',
       phoneRequired: '',
+      hasRecievedNameInput: true,
     });
     // GoBack was pressed - Closing the model after clearing the error message
     closeModal();
@@ -124,13 +132,12 @@ class ModifyContact extends React.Component {
 
   render() {
     const {
-      isOpen, closeModal, addContact,
+      isOpen, closeModal, addContact, oldName, oldImage, oldPhone,
     } = this.props;
     const {
-      name, phone, image, nameLenIsValid, nameAvail, phoneLenIsValid, phoneIsDigit, nameLenIsValidRequired, nameAvailRequired, phoneIsDigitRequired, phoneLenIsValidRequired,
+      hasRecievedNameInput, hasRecievedPhoneInput, name, phone, image, nameLenIsValid, nameAvail, phoneLenIsValid, phoneIsDigit, nameLenIsValidRequired, nameAvailRequired, phoneIsDigitRequired, phoneLenIsValidRequired,
     } = this.state;
     const isValid = nameLenIsValid && nameAvail && phoneLenIsValid && phoneIsDigit;
-    
     return (
       <NativeModal
         isVisible={isOpen}
@@ -150,7 +157,7 @@ class ModifyContact extends React.Component {
             style={styles.textInput}
             placeholder="Name"
             placeholderTextColor="black"
-            value={name}
+            value={hasRecievedNameInput ? this.getName(oldName) : name}
             onChangeText={(text) => this.updateName(text)}
           />
           <Text style={{ color: 'red' }}>{phoneIsDigitRequired}</Text>
@@ -159,12 +166,13 @@ class ModifyContact extends React.Component {
             style={styles.textInput}
             placeholder="Phone number"
             placeholderTextColor="black"
-            value={phone}
+            value={hasRecievedPhoneInput ? this.getPhone(oldPhone) : phone}
             onChangeText={(text) => this.updatePhone(text)}
           />
           <Text>Image:</Text>
           <Camera
-            updateImage ={(image) => this.updateImage(image)} />
+            updateImage={(image) => this.updateImage(image)}
+          />
           <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
             <TouchableOpacity
               style={[styles.button, { marginRight: 10 }]}
@@ -175,7 +183,7 @@ class ModifyContact extends React.Component {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.button}
-              onPress={ () => this.cleanUp(false)}
+              onPress={() => this.cleanUp(false)}
             >
               <Image source={arrow} style={styles.arrow} />
               <Text style={styles.btntxt}>GO BACK</Text>
@@ -186,5 +194,4 @@ class ModifyContact extends React.Component {
     );
   }
 }
-
 export default ModifyContact;
