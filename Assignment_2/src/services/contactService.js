@@ -38,6 +38,6 @@ export const createContact = (contact) => {
 export const deleteContact = (name) => {
   // console.log("Inside deleteContact ... ", contact.name);
   const fileName = name.replace(' ', '-');
-  console.log("Goes to delete this filename: ", fileName);
+  console.log('Goes to delete this filename: ', fileName);
   FileSystem.deleteAsync(`${baseDirectory}${fileName}.json`);
 };

@@ -47,7 +47,6 @@ export default StyleSheet.create({
   },
   createText: {
     marginLeft: 10,
-    fontSize: 15,
-    marginTop: 5,
+    fontSize: 18,
   },
 });
