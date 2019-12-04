@@ -56,7 +56,7 @@ class ModifyContact extends React.Component {
       nameLenIsValid, nameAvail, phoneLenIsValid, phoneIsDigit,
     } = this.state;
     if (nameLenIsValid === false) {
-      this.setState({ nameLenIsValidRequired: '* Name must be more than two characters.' });
+      this.setState({ nameLenIsValidRequired: '* Name must be more than one characters.' });
     } else {
       this.setState({ nameLenIsValidRequired: '' });
     }

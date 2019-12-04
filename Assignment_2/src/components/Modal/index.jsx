@@ -26,7 +26,7 @@ class ContactModal extends React.Component {
     // Actually updating the name to the state
     this.setState({ name });
     // Name of board has to be at least 3 characters
-    if (name.length > 2) {
+    if (name.length > 0) {
       this.setState({ nameLenIsValid: true });
     // If name of board becomes less than 3 characters we make the form invalid for submission
     } else {
@@ -56,7 +56,7 @@ class ContactModal extends React.Component {
       nameLenIsValid, nameAvail, phoneLenIsValid,phoneIsDigit,
     } = this.state;
     if (nameLenIsValid === false) {
-      this.setState({ nameLenIsValidRequired: '* Name must be more than two characters.' });
+      this.setState({ nameLenIsValidRequired: '* Name must be more than one characters.' });
     } else {
       this.setState({ nameLenIsValidRequired: '' });
     }
