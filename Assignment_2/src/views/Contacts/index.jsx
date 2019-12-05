@@ -13,12 +13,16 @@ import {
 } from 'react-native';
 import * as FileSystem from 'expo-file-system';
 // import data from '../../resources/data.json';
+import * as ContactsOS from 'expo-contacts';
+import * as Permissions from 'expo-permissions';
 import plus from '../../resources/plus.png';
 import ContactList from '../../components/ContactList/ContactList';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import CreateModal from '../../components/Modal';
 import styles from './styles';
-import { getAllContacts, createContact, containsContact } from '../../services/contactService';
+import {
+  getAllContacts, createContact, containsContact , getContactsAsync
+} from '../../services/contactService';
 import bg from '../../resources/2407.jpg';
 
 class Contacts extends React.Component {
@@ -35,6 +39,17 @@ class Contacts extends React.Component {
   async componentDidMount() {
     // Getting all contacts so we can add the ones on the phoen to the state
     this.updateState();
+    const { status } = await Permissions.askAsync(Permissions.CONTACTS);
+    if (status === 'granted') {
+      const { data } = await Contacts.getContactsAsync({
+        fields: [ContactsOS.Fields.PhoneNumber],
+      });
+
+      if (data.length > 0) {
+        const contact = data[0];
+        console.log('IMPORTED CONTACTS: ', contact);
+      }
+    }
   }
 
   // Gets the next id needed for a contact
@@ -117,7 +132,7 @@ class Contacts extends React.Component {
     console.log('Updating state to file directory');
     const { alwaysAllContacts } = this.state;
     const contacts = await getAllContacts();
-    console.log("contacts: ", contacts);
+    // console.log('contacts: ', contacts)
     const emptyList = [];
     for (x in contacts) {
       const aContact = JSON.parse(contacts[x]);
@@ -125,6 +140,33 @@ class Contacts extends React.Component {
     }
     this.setState({ alwaysAllContacts: emptyList, allContacts: emptyList });
   }
+
+  async importContacts() {
+    const { data } = await ContactsOS.getContactsAsync({
+      fields: [ContactsOS.Fields.PhoneNumbers, ContactsOS.Fields.Image],
+    });
+    for (index in data) {
+      if (data[index].phoneNumbers !== undefined) {
+        console.log('THE PHONE NUMBER IS: ');
+        // DO NOT LINT THIS, if linted the change to const will crash the loop
+        pn = data[index].phoneNumbers[0].number
+      } else {
+        pn = '';
+      }
+      if (data[index].image !== undefined) {
+        img = data[index].image.uri;
+      } else {
+        img = ''
+      }
+      const newContact = {
+        name: data[index].name,
+        phone: pn,
+        image: img,
+      }
+      await this.addContact(newContact);
+    }
+  }
+
 
   render() {
     const { navigation } = this.props;
@@ -142,6 +184,11 @@ class Contacts extends React.Component {
             <Text style={styles.createText}>CREATE</Text>
           </TouchableOpacity>
         </View>
+        <TouchableOpacity
+          onPress={() => this.importContacts()}
+        >
+          <Text>Import contacts</Text>
+        </TouchableOpacity>
         <View style={styles.content}>
           <ImageBackground style={styles.backgroundImage} source={bg}>
             <View>

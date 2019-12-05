@@ -25,6 +25,12 @@ export const getAllContacts = async () => {
   }));
 };
 
+export const containsContact = async (name) => {
+  const directory = await FileSystem.readDirectoryAsync(baseDirectory);
+  // let fileName = name.toLowerCase();
+  fileName = name.replace(' ', '-');
+  return directory.indexOf(`${fileName}.json`);
+};
 // TODO:
 // 1. Generate a file name
 // const fileName = 'Johann.json';
@@ -34,21 +40,21 @@ export const getAllContacts = async () => {
 // Takes in a contact a JSON object
 // Used to add the contact to the device
 export const createContact = (contact) => {
-  // Need to stringify the JSON object so that FileSystem can use it
-  const objStringified = JSON.stringify(contact);
-  // REplace the spaces with an '-' as per the assignment description
-  // let fileName = contact.name.toLowerCase();
-  fileName = contact.name.replace(' ', '-');
-  // Writing the object to the
-  FileSystem.writeAsStringAsync((`${baseDirectory}${fileName}.json`), objStringified);
+  // checking if the contact already exists
+  if (containsContact(contact.name) === -1) {
+    // Need to stringify the JSON object so that FileSystem can use it
+    const objStringified = JSON.stringify(contact);
+    // REplace the spaces with an '-' as per the assignment description
+    // let fileName = contact.name.toLowerCase();
+    fileName = contact.name.replace(' ', '-');
+    // Writing the object to the
+    FileSystem.writeAsStringAsync((`${baseDirectory}${fileName}.json`), objStringified);
+  }
 };
 
-export const containsContact = async (name) => {
-  const directory = await FileSystem.readDirectoryAsync(baseDirectory);
-  // let fileName = name.toLowerCase();
-  fileName = name.replace(' ', '-');
-  return directory.indexOf(`${fileName}.json`);
-};
+// export const cleanDirectory = async () => {
+//   await FileSystem.deleteAsync(baseDirectory);
+// };
 
 export const deleteContact = (name) => {
   // console.log("Inside deleteContact ... ", contact.name);

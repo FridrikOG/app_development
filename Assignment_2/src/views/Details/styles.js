@@ -25,6 +25,7 @@ export default StyleSheet.create({
     width: 150,
     alignSelf: 'flex-end',
     flexDirection: 'row',
+    justifyContent: 'center',
   },
   plus: {
     width: 20,
@@ -90,6 +91,7 @@ export default StyleSheet.create({
     borderRadius: 12,
     width: 150,
     flexDirection: 'row',
+    justifyContent: 'center',
   },
   deleteText: {
     marginLeft: 10,
