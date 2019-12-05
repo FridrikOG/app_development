@@ -53,20 +53,6 @@ class Contacts extends React.Component {
       }
     }
   }
-
-  // Gets the next id needed for a contact
-  getMaxId(contacts) {
-    let maxId = 0;
-    // Loops through to grab the highest id since JSON objects arent in order
-    contacts.map(
-      (obj) => {
-        if (obj.id > maxId) maxId = obj.id;
-      },
-    );
-    // returns the max ID
-    return maxId + 1;
-  }
-
   // This method Should filter the contact list everytime a new character is added to the search bar
   searchContacts = (searchString) => {
     const {
@@ -101,8 +87,21 @@ class Contacts extends React.Component {
     console.log(foundNames);
     // Now we filter grabbing only names that are inside the foundNames array
     const searchedContacts = alwaysAllContacts.filter((x) => foundNames.includes(x.name));
-    console.log("Searched ocntacts :", searchedContacts)
     this.setState({ allContacts: searchedContacts });
+  }
+
+
+  // Gets the next id needed for a contact
+  getMaxId(contacts) {
+    let maxId = 0;
+    // Loops through to grab the highest id since JSON objects arent in order
+    this.state.alwaysAllContacts.map(
+      (obj) => {
+        if (obj.id > maxId) maxId = obj.id;
+      },
+    );
+    // returns the max ID
+    return maxId + 1;
   }
 
   // Adds contact to the state and to the device directory
