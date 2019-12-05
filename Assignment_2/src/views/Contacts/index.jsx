@@ -1,3 +1,5 @@
+/* eslint-disable no-await-in-loop */
+/* eslint-disable no-param-reassign */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable array-callback-return */
 /* eslint-disable react/destructuring-assignment */
@@ -123,19 +125,25 @@ class Contacts extends React.Component {
     this.setState({ alwaysAllContacts: emptyList, allContacts: emptyList });
   }
 
+  // This method Imports from the device OS
   async importContacts() {
     const { status } = await Permissions.askAsync(Permissions.CONTACTS);
+    // It gets permession
     if (status === 'granted') {
       const { data } = await ContactsOS.getContactsAsync({
         fields: [ContactsOS.Fields.PhoneNumbers, ContactsOS.Fields.Image],
       });
       for (index in data) {
+        // Check if there is a phone number associated
         if (data[index].phoneNumbers !== undefined) {
-          console.log('THE PHONE NUMBER IS: ');
           pn = data[index].phoneNumbers[0].number;
+        // If not phone number associated with contact then empty string
         } else {
           pn = '';
         }
+        // Checks if the person has a picture
+        // Create contact already populates the picture field with a default if empty
+        // string so we send an empty one
         if (data[index].image !== undefined) {
           img = data[index].image.uri;
         } else {
@@ -146,6 +154,7 @@ class Contacts extends React.Component {
           phone: pn,
           image: img,
         };
+        // Send this to the async that tries to add it
         await this.addContact(newContact);
       }
     }
@@ -198,5 +207,4 @@ class Contacts extends React.Component {
 Contacts.propTypes = {
   navigation: PropTypes.objectOf(PropTypes).isRequired,
 };
-
 export default Contacts;
