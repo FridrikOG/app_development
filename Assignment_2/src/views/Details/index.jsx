@@ -33,7 +33,9 @@ class Details extends React.Component {
 
   // Function to update the details of the contact
   async updateDetails(contact) {
-    let { newName, newPhone, newImage } = contact;
+    let newName = contact.name;
+    let newPhone = contact.phone;
+    let newImage = contact.image;
     const { navigation } = this.props;
     const { state } = navigation;
     const { params } = state;
