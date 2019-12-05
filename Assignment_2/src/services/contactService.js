@@ -39,9 +39,9 @@ export const containsContact = async (name) => {
 // Writin to the file
 // Takes in a contact a JSON object
 // Used to add the contact to the device
-export const createContact = (contact) => {
+export const createContact = async (contact) => {
   // checking if the contact already exists
-  if (containsContact(contact.name) === -1) {
+  if (await containsContact(contact.name) === -1) {
     // Need to stringify the JSON object so that FileSystem can use it
     const objStringified = JSON.stringify(contact);
     // REplace the spaces with an '-' as per the assignment description
