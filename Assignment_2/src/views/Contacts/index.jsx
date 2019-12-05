@@ -74,7 +74,7 @@ class Contacts extends React.Component {
     } = this.state;
 
     if (searchString === '') {
-      console.log('Resetting');
+      console.log('Resetting', alwaysAllContacts);
       this.setState({ allContacts: alwaysAllContacts });
       return;
     }
@@ -101,7 +101,7 @@ class Contacts extends React.Component {
     console.log(foundNames);
     // Now we filter grabbing only names that are inside the foundNames array
     const searchedContacts = alwaysAllContacts.filter((x) => foundNames.includes(x.name));
-    const newVar = FileSystem.readAsStringAsync(searchedContacts);
+    console.log("Searched ocntacts :", searchedContacts)
     this.setState({ allContacts: searchedContacts });
   }
 
