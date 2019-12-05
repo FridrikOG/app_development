@@ -205,6 +205,8 @@ class Contacts extends React.Component {
   }
 }
 Contacts.propTypes = {
-  navigation: PropTypes.objectOf(PropTypes).isRequired,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
 };
 export default Contacts;

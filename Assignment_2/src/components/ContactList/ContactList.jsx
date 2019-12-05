@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -21,6 +22,7 @@ class ContactList extends React.Component {
 
   render() {
     const { contacts, navigate, updateState } = this.props;
+    console.disableYellowBox = true;
     return (
       <ScrollView style={styles.container}>
         {navigate}
@@ -51,7 +53,7 @@ class ContactList extends React.Component {
               </TouchableHighlight>
             </View>
           )}
-          keyextractor={() => contacts.id}
+          keyextractor={(item, index) => `${index}`}
         />
       </ScrollView>
 
@@ -59,9 +61,11 @@ class ContactList extends React.Component {
   }
 }
 ContactList.propTypes = {
-  navigate: PropTypes.func.isRequired,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func,
+  }),
   updateState: PropTypes.func.isRequired,
-  contacts: PropTypes.arrayOf(PropTypes.objectOf(PropTypes)).isRequired,
+  contacts: PropTypes.arrayOf(PropTypes.objectOf(PropTypes)),
 };
 
 export default ContactList;

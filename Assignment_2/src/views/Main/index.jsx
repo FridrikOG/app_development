@@ -30,7 +30,9 @@ class Main extends React.Component {
 }
 
 Main.propTypes = {
-  navigation: PropTypes.objectOf(PropTypes).isRequired,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default Main;
