@@ -1,6 +1,7 @@
 /* eslint-disable no-shadow */
 import React from 'react';
 import NativeModal from 'react-native-modal';
+import PropTypes from 'prop-types';
 import {
   View, Text, TextInput, TouchableOpacity, ScrollView, Image,
 } from 'react-native';
@@ -8,6 +9,7 @@ import styles from './styles';
 import arrow from '../../resources/left-arroww.png';
 import plus from '../../resources/add.png';
 import Camera from '../Camera';
+import { containsContact } from '../../services/contactService';
 
 
 class ModifyContact extends React.Component {
@@ -53,7 +55,7 @@ class ModifyContact extends React.Component {
 
   determineErrorMsg() {
     const {
-      nameLenIsValid, nameAvail, phoneLenIsValid, phoneIsDigit,
+      nameLenIsValid, nameAvail,
     } = this.state;
     if (nameLenIsValid === false) {
       this.setState({ nameLenIsValidRequired: '* Name must be more than one characters.' });
@@ -66,19 +68,6 @@ class ModifyContact extends React.Component {
       this.setState({ nameAvailRequired: '' });
     }
   }
-
-  getName(oldName) {
-    return oldName;
-  }
-
-  getPhone(oldPhone) {
-    return oldPhone;
-  }
-
-  getImage(oldImage) {
-    return oldImage;
-  }
-
 
   cleanUp(Submit) {
     const { closeModal, updateDetails } = this.props;
@@ -103,10 +92,12 @@ class ModifyContact extends React.Component {
 
   render() {
     const {
-      isOpen, closeModal, addContact, oldName, oldImage, oldPhone,
+      isOpen, closeModal, oldName, oldPhone,
     } = this.props;
     const {
-      hasRecievedNameInput, hasRecievedPhoneInput, name, phone, image, nameLenIsValid, nameAvail, nameLenIsValidRequired, nameAvailRequired,
+      hasRecievedNameInput,
+      hasRecievedPhoneInput,
+      name, phone, nameLenIsValid, nameAvail, nameLenIsValidRequired, nameAvailRequired,
     } = this.state;
     const isValid = nameLenIsValid && nameAvail;
     return (
@@ -128,14 +119,14 @@ class ModifyContact extends React.Component {
             style={styles.textInput}
             placeholder="Name"
             placeholderTextColor="black"
-            value={hasRecievedNameInput ? this.getName(oldName) : name}
+            value={hasRecievedNameInput ? oldName : name}
             onChangeText={(text) => this.updateName(text)}
           />
           <TextInput
             style={styles.textInput}
             placeholder="Phone number"
             placeholderTextColor="black"
-            value={hasRecievedPhoneInput ? this.getPhone(oldPhone) : phone}
+            value={hasRecievedPhoneInput ? oldPhone : phone}
             onChangeText={(text) => this.updatePhone(text)}
           />
           <Text>Image:</Text>
@@ -163,4 +154,14 @@ class ModifyContact extends React.Component {
     );
   }
 }
+
+ModifyContact.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  closeModal: PropTypes.func.isRequired,
+  oldName: PropTypes.string.isRequired,
+  oldPhone: PropTypes.string.isRequired,
+  updateDetails: PropTypes.func.isRequired,
+
+};
+
 export default ModifyContact;

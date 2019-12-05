@@ -7,12 +7,11 @@
 /* eslint-disable react/state-in-constructor */
 /* eslint-disable no-undef */
 /* eslint-disable react/prefer-stateless-function */
-import React, { cloneElement } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import {
   View, Text, ImageBackground, TouchableOpacity, Image,
 } from 'react-native';
-import * as FileSystem from 'expo-file-system';
-// import data from '../../resources/data.json';
 import * as ContactsOS from 'expo-contacts';
 import * as Permissions from 'expo-permissions';
 import plus from '../../resources/plus.png';
@@ -22,12 +21,11 @@ import SearchBar from '../../components/SearchBar/SearchBar';
 import CreateModal from '../../components/Modal';
 import styles from './styles';
 import {
-  getAllContacts, createContact, containsContact, getContactsAsync, cleanDirectory,
+  getAllContacts, createContact,
 } from '../../services/contactService';
 import bg from '../../resources/2407.jpg';
 
 class Contacts extends React.Component {
-  // const props = this.props.navigation.state.params;
   state = {
     // This one is never changed
     alwaysAllContacts: [],
@@ -41,18 +39,21 @@ class Contacts extends React.Component {
     // cleanDirectory();
     // Getting all contacts so we can add the ones on the phoen to the state
     this.updateState();
-    const { status } = await Permissions.askAsync(Permissions.CONTACTS);
-    if (status === 'granted') {
-      const { data } = await Contacts.getContactsAsync({
-        fields: [ContactsOS.Fields.PhoneNumber],
-      });
-
-      if (data.length > 0) {
-        const contact = data[0];
-        console.log('IMPORTED CONTACTS: ', contact);
-      }
-    }
   }
+
+  // Gets the next id needed for a contact
+  getMaxId() {
+    let maxId = 0;
+    // Loops through to grab the highest id since JSON objects arent in order
+    this.state.alwaysAllContacts.map(
+      (obj) => {
+        if (obj.id > maxId) maxId = obj.id;
+      },
+    );
+    // returns the max ID
+    return maxId + 1;
+  }
+
   // This method Should filter the contact list everytime a new character is added to the search bar
   searchContacts = (searchString) => {
     const {
@@ -60,7 +61,6 @@ class Contacts extends React.Component {
     } = this.state;
 
     if (searchString === '') {
-      console.log('Resetting', alwaysAllContacts);
       this.setState({ allContacts: alwaysAllContacts });
       return;
     }
@@ -84,24 +84,9 @@ class Contacts extends React.Component {
         foundNames.push(nameList[x]);
       }
     }
-    console.log(foundNames);
     // Now we filter grabbing only names that are inside the foundNames array
     const searchedContacts = alwaysAllContacts.filter((x) => foundNames.includes(x.name));
     this.setState({ allContacts: searchedContacts });
-  }
-
-
-  // Gets the next id needed for a contact
-  getMaxId(contacts) {
-    let maxId = 0;
-    // Loops through to grab the highest id since JSON objects arent in order
-    this.state.alwaysAllContacts.map(
-      (obj) => {
-        if (obj.id > maxId) maxId = obj.id;
-      },
-    );
-    // returns the max ID
-    return maxId + 1;
   }
 
   // Adds contact to the state and to the device directory
@@ -113,12 +98,11 @@ class Contacts extends React.Component {
     }
     // new JSON object out of the infroamtion necessary
     const newContact = {
-      id: this.getMaxId(alwaysAllContacts),
+      id: this.getMaxId(),
       name: contact.name,
       phone: contact.phone,
       image: contact.image,
     };
-    console.log('Adding content: ', newContact);
     // Calls the function that inserts the contact into the device directory
     const canAdd = await createContact(newContact);
     // Combines awlaysAllContacts with the newContact
@@ -130,13 +114,7 @@ class Contacts extends React.Component {
   }
 
   async updateState() {
-    // TODO
-    // 1. Supposed to just read from the contact directory from the device
-    // and update the state
-    console.log('Updating state to file directory');
-    const { alwaysAllContacts } = this.state;
     const contacts = await getAllContacts();
-    // console.log('contacts: ', contacts)
     const emptyList = [];
     for (x in contacts) {
       const aContact = JSON.parse(contacts[x]);
@@ -146,28 +124,30 @@ class Contacts extends React.Component {
   }
 
   async importContacts() {
-    const { data } = await ContactsOS.getContactsAsync({
-      fields: [ContactsOS.Fields.PhoneNumbers, ContactsOS.Fields.Image],
-    });
-    for (index in data) {
-      if (data[index].phoneNumbers !== undefined) {
-        console.log('THE PHONE NUMBER IS: ');
-        // DO NOT LINT THIS, if linted the change to const will crash the loop
-        pn = data[index].phoneNumbers[0].number;
-      } else {
-        pn = '';
+    const { status } = await Permissions.askAsync(Permissions.CONTACTS);
+    if (status === 'granted') {
+      const { data } = await ContactsOS.getContactsAsync({
+        fields: [ContactsOS.Fields.PhoneNumbers, ContactsOS.Fields.Image],
+      });
+      for (index in data) {
+        if (data[index].phoneNumbers !== undefined) {
+          console.log('THE PHONE NUMBER IS: ');
+          pn = data[index].phoneNumbers[0].number;
+        } else {
+          pn = '';
+        }
+        if (data[index].image !== undefined) {
+          img = data[index].image.uri;
+        } else {
+          img = '';
+        }
+        const newContact = {
+          name: data[index].name,
+          phone: pn,
+          image: img,
+        };
+        await this.addContact(newContact);
       }
-      if (data[index].image !== undefined) {
-        img = data[index].image.uri;
-      } else {
-        img = '';
-      }
-      const newContact = {
-        name: data[index].name,
-        phone: pn,
-        image: img,
-      };
-      await this.addContact(newContact);
     }
   }
 
@@ -175,7 +155,7 @@ class Contacts extends React.Component {
   render() {
     const { navigation } = this.props;
     const { navigate } = navigation;
-    const { allContacts, openCCModal, alwaysAllContacts } = this.state;
+    const { allContacts, openCCModal } = this.state;
     return (
       <View style={styles.container}>
         <View style={styles.toolbar}>
@@ -215,4 +195,10 @@ class Contacts extends React.Component {
     );
   }
 }
+Contacts.propTypes = {
+  navigation: PropTypes.objectOf(PropTypes).isRequired,
+};
+
+
+
 export default Contacts;

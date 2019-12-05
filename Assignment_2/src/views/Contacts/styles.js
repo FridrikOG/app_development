@@ -6,7 +6,7 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'flex-start',
-    // backgroundColor: '#009999',
+    paddingBottom: 40,
   },
   content: {
     alignItems: 'center',

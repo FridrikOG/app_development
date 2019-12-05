@@ -23,8 +23,8 @@ export default StyleSheet.create({
     marginRight: 5,
   },
   image: {
-    width: 200,
-    height: 200,
+    width: 150,
+    height: 150,
     marginTop: 20,
     marginBottom: 20,
   },

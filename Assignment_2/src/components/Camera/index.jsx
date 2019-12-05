@@ -1,9 +1,11 @@
 import * as React from 'react';
-import { Image, View, Text, TouchableOpacity } from 'react-native';
+import {
+  Image, View, Text, TouchableOpacity,
+} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
-import styles from './styles'
+import styles from './styles';
 import icon from '../../resources/photo-camera.png';
 
 export default class ImagePickerComponent extends React.Component {
@@ -21,9 +23,6 @@ export default class ImagePickerComponent extends React.Component {
   getPermissionAsync = async () => {
     if (Constants.platform.ios) {
       const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-      if (status !== 'granted') {
-        alert('Sorry, we need camera roll permissions to make this work!');
-      }
     }
   }
 
@@ -33,9 +32,8 @@ export default class ImagePickerComponent extends React.Component {
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
       aspect: [4, 3],
-      quality: 1
+      quality: 1,
     });
-    console.log(result);
     if (!result.cancelled) {
       this.setState({ image: result.uri });
       updateImage(result.uri);
@@ -46,8 +44,7 @@ export default class ImagePickerComponent extends React.Component {
     const { image } = this.state;
     return (
       <View style={styles.container}>
-        {image &&
-        <Image source={{ uri: image }} style={styles.image} />}
+        { image && <Image source={{ uri: image }} style={styles.image} /> }
         <TouchableOpacity
           style={styles.button}
           onPress={this.pickImage}

@@ -23,7 +23,6 @@ class SearchBar extends React.Component {
 
     render() {
       const { searchString } = this.state;
-      const { searchContacts } = this.props;
       return (
         <View style={styles.searchBar}>
           <Image source={search} style={styles.icon} />
@@ -40,5 +39,6 @@ class SearchBar extends React.Component {
       );
     }
 }
+
 
 export default SearchBar;
