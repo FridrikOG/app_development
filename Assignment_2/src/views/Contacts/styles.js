@@ -11,6 +11,16 @@ export default StyleSheet.create({
   content: {
     alignItems: 'center',
   },
+  importBtn: {
+    marginLeft: 10,
+    marginRight: 10,
+    padding: 10,
+    borderWidth: 1,
+    borderRadius: 12,
+    backgroundColor: '#009999',
+    justifyContent: 'center',
+    flexDirection: 'row',
+  },
   backgroundImage: {
     flex: 1,
     width: '100%',
@@ -20,6 +30,7 @@ export default StyleSheet.create({
   },
   toolbar: {
     flexDirection: 'row',
+    justifyContent: 'space-around',
     padding: 10,
     backgroundColor: '#00141a',
     width: winWidth,
@@ -33,12 +44,12 @@ export default StyleSheet.create({
   },
   createBtn: {
     marginLeft: 10,
+    marginRight: 10,
     padding: 10,
-    backgroundColor: '#e6f2ff',
+    backgroundColor: '#d6f5f5',
     borderRadius: 12,
-    width: winWidth / 2,
-    alignSelf: 'flex-end',
     flexDirection: 'row',
+    justifyContent: 'center',
   },
   plus: {
     width: 20,
@@ -48,5 +59,10 @@ export default StyleSheet.create({
   createText: {
     marginLeft: 10,
     fontSize: 18,
+  },
+  importText: {
+    marginLeft: 10,
+    fontSize: 18,
+    color: 'white',
   },
 });

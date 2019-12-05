@@ -16,6 +16,7 @@ import * as FileSystem from 'expo-file-system';
 import * as ContactsOS from 'expo-contacts';
 import * as Permissions from 'expo-permissions';
 import plus from '../../resources/plus.png';
+import importIcon from '../../resources/importIcon.png';
 import ContactList from '../../components/ContactList/ContactList';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import CreateModal from '../../components/Modal';
@@ -175,7 +176,13 @@ class Contacts extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.toolbar}>
-          <Text style={styles.title}>Contacts</Text>
+          <TouchableOpacity
+            style={styles.importBtn}
+            onPress={() => this.importContacts()}
+          >
+            <Image source={importIcon} style={styles.plus} />
+            <Text style={styles.importText}>Import contacts</Text>
+          </TouchableOpacity>
           <TouchableOpacity
             style={styles.createBtn}
             onPress={() => this.setState({ openCCModal: true })}
@@ -184,11 +191,6 @@ class Contacts extends React.Component {
             <Text style={styles.createText}>CREATE</Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity
-          onPress={() => this.importContacts()}
-        >
-          <Text>Import contacts</Text>
-        </TouchableOpacity>
         <View style={styles.content}>
           <ImageBackground style={styles.backgroundImage} source={bg}>
             <View>

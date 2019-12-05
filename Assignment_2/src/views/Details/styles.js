@@ -20,7 +20,7 @@ export default StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     padding: 10,
-    backgroundColor: '#e6f2ff',
+    backgroundColor: '#d6f5f5',
     borderRadius: 12,
     width: 150,
     alignSelf: 'flex-end',
