@@ -57,6 +57,7 @@ class Contacts extends React.Component {
     } = this.state;
 
     if (searchString === '') {
+      console.log("Resetting");
       this.setState({ allContacts: alwaysAllContacts });
       return;
     }
@@ -80,9 +81,10 @@ class Contacts extends React.Component {
         foundNames.push(nameList[x]);
       }
     }
+    console.log(foundNames)
     // Now we filter grabbing only names that are inside the foundNames array
     const searchedContacts = alwaysAllContacts.filter((x) => foundNames.includes(x.name));
-    const newVar = FileSystem.readAsStringAsync(imageDirectory);
+    const newVar = FileSystem.readAsStringAsync(searchedContacts);
     this.setState({ allContacts: searchedContacts });
   }
 
@@ -115,7 +117,7 @@ class Contacts extends React.Component {
     console.log('Updating state to file directory');
     const { alwaysAllContacts } = this.state;
     const contacts = await getAllContacts();
-    console.log("contacts: ", contacts)
+    console.log("contacts: ", contacts);
     const emptyList = [];
     for (x in contacts) {
       const aContact = JSON.parse(contacts[x]);

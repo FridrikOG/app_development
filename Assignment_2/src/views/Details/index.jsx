@@ -45,7 +45,7 @@ class Details extends React.Component {
     const { state } = navigation;
     const { params } = state;
     const {
-      id, updateState, name, image, phone
+      id, updateState, name, image, phone,
     } = params;
     console.log(id);
 
@@ -68,14 +68,15 @@ class Details extends React.Component {
       phone: contact.phone,
       image: contact.image,
     };
+    this.props.navigation.navigate('Contacts');
     // First we have to delete
     await deleteContact(name);
     // After we delete a contact we create a new one
     await createContact(alteredContact);
 
     updateState(contact);
-  }
 
+  }
 
   render() {
     const { openMCModal } = this.state;
