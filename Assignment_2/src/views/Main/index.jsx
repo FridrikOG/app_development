@@ -1,6 +1,6 @@
 /* eslint-disable react/prefer-stateless-function */
 import React from 'react';
-import * as FileSystem from 'expo-file-system';
+import PropTypes from 'prop-types';
 import {
   View, Text, Image, TouchableOpacity, ImageBackground,
 } from 'react-native';
@@ -11,8 +11,8 @@ import styles from './styles';
 
 class Main extends React.Component {
   render() {
-    const dir = FileSystem.documentDirectory;
-    const { navigate } = this.props.navigation;
+    const { navigation } = this.props;
+    const { navigate } = navigation;
     return (
       <View style={styles.container}>
         <ImageBackground style={styles.backgroundImage} source={bg}>
@@ -28,5 +28,9 @@ class Main extends React.Component {
     );
   }
 }
+
+Main.propTypes = {
+  navigation: PropTypes.objectOf(PropTypes).isRequired,
+};
 
 export default Main;

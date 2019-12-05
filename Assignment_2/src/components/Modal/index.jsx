@@ -1,5 +1,6 @@
 import React from 'react';
 import NativeModal from 'react-native-modal';
+import PropTypes from 'prop-types';
 import {
   View, Text, TextInput, TouchableOpacity, ScrollView, Image,
 } from 'react-native';
@@ -33,9 +34,7 @@ class ContactModal extends React.Component {
       this.setState({ nameLenIsValid: false });
     }
     // Check if the name exists in the system already
-    console.log('Name', name);
     const status = await containsContact(name);
-    console.log('avail', status);
     if (await containsContact(name) === -1) {
       this.setState({ nameAvail: true });
     } else {
@@ -44,7 +43,7 @@ class ContactModal extends React.Component {
   }
 
   updatePhone(phone) {
-    this.setState({ phone});
+    this.setState({ phone });
   }
 
   updateImage(image) {
@@ -53,7 +52,7 @@ class ContactModal extends React.Component {
 
   determineErrorMsg() {
     const {
-      nameLenIsValid, nameAvail, phoneLenIsValid,phoneIsDigit,
+      nameLenIsValid, nameAvail,
     } = this.state;
     if (nameLenIsValid === false) {
       this.setState({ nameLenIsValidRequired: '* Name must be more than one characters.' });
@@ -89,10 +88,10 @@ class ContactModal extends React.Component {
 
   render() {
     const {
-      isOpen, closeModal, addContact,
+      isOpen, closeModal,
     } = this.props;
     const {
-      name, phone, image, nameLenIsValid, nameAvail, nameLenIsValidRequired, nameAvailRequired,
+      name, phone, nameLenIsValid, nameAvail, nameLenIsValidRequired, nameAvailRequired,
     } = this.state;
     const isValid = nameLenIsValid && nameAvail;
     return (
@@ -149,4 +148,10 @@ class ContactModal extends React.Component {
     );
   }
 }
+
+ContactModal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  closeModal: PropTypes.func.isRequired,
+  addContact: PropTypes.func.isRequired,
+};
 export default ContactModal;

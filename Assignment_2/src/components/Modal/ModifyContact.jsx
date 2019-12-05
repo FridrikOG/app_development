@@ -161,7 +161,6 @@ ModifyContact.propTypes = {
   oldName: PropTypes.string.isRequired,
   oldPhone: PropTypes.string.isRequired,
   updateDetails: PropTypes.func.isRequired,
-
 };
 
 export default ModifyContact;

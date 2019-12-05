@@ -34,8 +34,6 @@ class SearchBar extends React.Component {
             onChangeText={(text) => this.updateName(text)}
           />
         </View>
-
-
       );
     }
 }

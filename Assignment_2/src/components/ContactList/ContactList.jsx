@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   View, ScrollView, Text, FlatList, Image, TouchableOpacity, TouchableHighlight,
 } from 'react-native';
@@ -6,8 +7,6 @@ import makeCall from 'react-native-phone-call';
 import ImageThumbnail from '../ImageThumbnail/ImageThumbnail';
 import styles from './styles';
 import call from '../../resources/telephone.png';
-import deleteIcon from '../../resources/delete.png';
-
 
 class ContactList extends React.Component {
   // Function that calls the react native phone call
@@ -29,7 +28,11 @@ class ContactList extends React.Component {
           numColumns={1}
           data={contacts.sort((a, b) => a.name.localeCompare(b.name))}
           style={styles.flatlist}
-          renderItem={({ item: { name, phone, image, id } }) => (
+          renderItem={({
+            item: {
+              name, phone, image, id,
+            },
+          }) => (
             <View style={styles.contact}>
               <TouchableOpacity
                 style={{ flexDirection: 'row' }}
@@ -53,7 +56,12 @@ class ContactList extends React.Component {
       </ScrollView>
 
     );
-
   }
 }
+ContactList.propTypes = {
+  navigate: PropTypes.func.isRequired,
+  updateState: PropTypes.func.isRequired,
+  contacts: PropTypes.arrayOf(PropTypes.objectOf(PropTypes)).isRequired,
+};
+
 export default ContactList;

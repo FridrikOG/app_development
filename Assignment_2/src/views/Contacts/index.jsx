@@ -199,6 +199,4 @@ Contacts.propTypes = {
   navigation: PropTypes.objectOf(PropTypes).isRequired,
 };
 
-
-
 export default Contacts;

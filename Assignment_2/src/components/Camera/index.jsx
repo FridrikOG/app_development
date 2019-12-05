@@ -1,4 +1,5 @@
 import * as React from 'react';
+import PropTypes from 'prop-types';
 import {
   Image, View, Text, TouchableOpacity,
 } from 'react-native';
@@ -56,3 +57,7 @@ export default class ImagePickerComponent extends React.Component {
     );
   }
 }
+
+ImagePickerComponent.propTypes = {
+  updateImage: PropTypes.func.isRequired,
+};

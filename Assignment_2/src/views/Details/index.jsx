@@ -10,8 +10,6 @@ import React from 'react';
 import {
   View, Text, TouchableOpacity, Image, ScrollView, ImageBackground,
 } from 'react-native';
-// import * as FileSystem from 'expo-file-system';
-// import data from '../../resources/data.json';
 import styles from './styles';
 import repair from '../../resources/repairing-service.png';
 import bg from '../../resources/2407.jpg';
@@ -31,16 +29,11 @@ class Details extends React.Component {
     this.props.navigation.navigate('Contacts');
     await deleteContact(name);
     updateState();
-
   }
 
   // Function to update the details of the contact
   async updateDetails(contact) {
-    // console.log("The name to be changed: ", oldName);
-    // TODO
-    // 1. Delete from file direct
-    // 2. createUser
-    // 3. Update state
+    let { newName, newPhone, newImage } = contact;
     const { navigation } = this.props;
     const { state } = navigation;
     const { params } = state;
@@ -48,25 +41,24 @@ class Details extends React.Component {
       id, updateState, name, image, phone,
     } = params;
     console.log(id);
-
     // Sending in the old name
-    if (contact.name === '') {
-      contact.name = name;
+    if (newName === '') {
+      newName = name;
     }
     // If user does not send a phone number
-    if (contact.phone === '') {
-      contact.phone = phone;
+    if (newPhone === '') {
+      newPhone = phone;
     }
     // If user does not change the image then we use the old one
-    if (contact.image === '') {
-      contact.image = image;
+    if (newImage === '') {
+      newImage = image;
     }
     // The object containing the altered contact
     const alteredContact = {
       id,
-      name: contact.name,
-      phone: contact.phone,
-      image: contact.image,
+      name: newName,
+      phone: newPhone,
+      image: newImage,
     };
     this.props.navigation.navigate('Contacts');
     // First we have to delete
@@ -75,13 +67,12 @@ class Details extends React.Component {
     await createContact(alteredContact);
 
     updateState(contact);
-
   }
 
   render() {
     const { openMCModal } = this.state;
     const {
-      name, image, phone, id, updateState,
+      name, image, phone,
     } = this.props.navigation.state.params;
     return (
       <ScrollView style={styles.details}>
