@@ -28,7 +28,7 @@ export const getAllContacts = async () => {
 export const containsContact = async (name) => {
   const directory = await FileSystem.readDirectoryAsync(baseDirectory);
   // let fileName = name.toLowerCase();
-  fileName = name.replace(' ', '-');
+  let fileName = name.toLowerCase().replace(/ /g, '-');
   return directory.indexOf(`${fileName}.json`);
 };
 // TODO:
@@ -46,7 +46,7 @@ export const createContact = async (contact) => {
     const objStringified = JSON.stringify(contact);
     // REplace the spaces with an '-' as per the assignment description
     // let fileName = contact.name.toLowerCase();
-    fileName = contact.name.replace(' ', '-');
+    let fileName = contact.name.toLowerCase().replace(/ /g, '-');
     // Writing the object to the
     FileSystem.writeAsStringAsync((`${baseDirectory}${fileName}.json`), objStringified);
     return true;
@@ -61,7 +61,7 @@ export const cleanDirectory = async () => {
 export const deleteContact = (name) => {
   // console.log("Inside deleteContact ... ", contact.name);
   // let fileName = name.toLowerCase();
-  fileName = name.replace(' ', '-');
+  let fileName = name.toLowerCase().replace(/ /g, '-');
   console.log('Goes to delete this filename: ', fileName);
   FileSystem.deleteAsync(`${baseDirectory}${fileName}.json`);
 };
