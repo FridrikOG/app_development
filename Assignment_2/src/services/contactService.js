@@ -49,12 +49,14 @@ export const createContact = async (contact) => {
     fileName = contact.name.replace(' ', '-');
     // Writing the object to the
     FileSystem.writeAsStringAsync((`${baseDirectory}${fileName}.json`), objStringified);
+    return true;
   }
+  return false;
 };
 
-// export const cleanDirectory = async () => {
-//   await FileSystem.deleteAsync(baseDirectory);
-// };
+export const cleanDirectory = async () => {
+  await FileSystem.deleteAsync(baseDirectory);
+};
 
 export const deleteContact = (name) => {
   // console.log("Inside deleteContact ... ", contact.name);

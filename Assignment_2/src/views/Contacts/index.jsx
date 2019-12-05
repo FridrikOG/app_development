@@ -22,7 +22,7 @@ import SearchBar from '../../components/SearchBar/SearchBar';
 import CreateModal from '../../components/Modal';
 import styles from './styles';
 import {
-  getAllContacts, createContact, containsContact , getContactsAsync
+  getAllContacts, createContact, containsContact, getContactsAsync, cleanDirectory,
 } from '../../services/contactService';
 import bg from '../../resources/2407.jpg';
 
@@ -38,6 +38,7 @@ class Contacts extends React.Component {
 
   // This one runs after the render
   async componentDidMount() {
+    // cleanDirectory();
     // Getting all contacts so we can add the ones on the phoen to the state
     this.updateState();
     const { status } = await Permissions.askAsync(Permissions.CONTACTS);
@@ -63,7 +64,7 @@ class Contacts extends React.Component {
       },
     );
     // returns the max ID
-    return maxId;
+    return maxId + 1;
   }
 
   // This method Should filter the contact list everytime a new character is added to the search bar
@@ -73,7 +74,7 @@ class Contacts extends React.Component {
     } = this.state;
 
     if (searchString === '') {
-      console.log("Resetting");
+      console.log('Resetting');
       this.setState({ allContacts: alwaysAllContacts });
       return;
     }
@@ -97,7 +98,7 @@ class Contacts extends React.Component {
         foundNames.push(nameList[x]);
       }
     }
-    console.log(foundNames)
+    console.log(foundNames);
     // Now we filter grabbing only names that are inside the foundNames array
     const searchedContacts = alwaysAllContacts.filter((x) => foundNames.includes(x.name));
     const newVar = FileSystem.readAsStringAsync(searchedContacts);
@@ -118,12 +119,15 @@ class Contacts extends React.Component {
       phone: contact.phone,
       image: contact.image,
     };
+    console.log('Adding content: ', newContact);
     // Calls the function that inserts the contact into the device directory
-    await createContact(newContact);
+    const canAdd = await createContact(newContact);
     // Combines awlaysAllContacts with the newContact
-    const newObject = [...alwaysAllContacts, newContact];
-    // Updates the state with the new object
-    this.setState({ alwaysAllContacts: newObject, allContacts: newObject });
+    if (canAdd) {
+      const newObject = [...alwaysAllContacts, newContact];
+      // Updates the state with the new object
+      this.setState({ alwaysAllContacts: newObject, allContacts: newObject });
+    }
   }
 
   async updateState() {
@@ -150,20 +154,20 @@ class Contacts extends React.Component {
       if (data[index].phoneNumbers !== undefined) {
         console.log('THE PHONE NUMBER IS: ');
         // DO NOT LINT THIS, if linted the change to const will crash the loop
-        pn = data[index].phoneNumbers[0].number
+        pn = data[index].phoneNumbers[0].number;
       } else {
         pn = '';
       }
       if (data[index].image !== undefined) {
         img = data[index].image.uri;
       } else {
-        img = ''
+        img = '';
       }
       const newContact = {
         name: data[index].name,
         phone: pn,
         image: img,
-      }
+      };
       await this.addContact(newContact);
     }
   }
