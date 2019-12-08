@@ -5,8 +5,8 @@ import Cinemas from '.././views/Cinemas';
 import Main from '../views/Main';
 
 const StackNavigator = createStackNavigator({
-  Cinemas,
   Main,
+  Cinemas,
 });
 
 export default createAppContainer(StackNavigator);

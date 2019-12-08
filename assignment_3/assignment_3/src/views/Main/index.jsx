@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import {
   View, Text, Image, TouchableOpacity, ImageBackground,
 } from 'react-native';
-import bg from '../../resources/2407.jpg';
-import logo from '../../resources/smartphone.png';
+import bg from '../../resources/2407.png';
+import logo from '../../resources/theatre.png';
 import styles from './styles';
 // import data from '../../resources/data';
 
@@ -19,9 +19,9 @@ class Main extends React.Component {
           <View style={styles.logoBorder}>
             <Image style={styles.logo} source={logo} />
           </View>
-          <Text style={styles.title}>Mr. Contact Johnson</Text>
+          <Text style={styles.title}>Ms. Cinemasdóttir</Text>
           <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText} onPress={() => navigate('Contacts')}>View Contact List</Text>
+            <Text style={styles.buttonText} onPress={() => navigate('Contacts')}>View Movies List</Text>
           </TouchableOpacity>
         </ImageBackground>
       </View>

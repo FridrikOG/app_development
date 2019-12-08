@@ -18,18 +18,19 @@ export default StyleSheet.create({
     color: '#003333',
     marginBottom: 20,
     fontWeight: 'bold',
+    borderColor: '#00e6e6',
     backgroundColor: 'white',
     padding: 20,
-    borderWidth: 2,
+
   },
   logo: {
-    width: 100,
-    height: 100,
+    width: 200,
+    height: 200,
   },
   logoBorder: {
     borderWidth: 6,
     borderRadius: 400 / 2,
-    borderColor: '#e6ffff',
+    borderColor: 'white',
     padding: 20,
     backgroundColor: 'white',
     margin: 20,
@@ -37,13 +38,13 @@ export default StyleSheet.create({
   button: {
     borderWidth: 4,
     borderRadius: 12,
-    borderColor: '#ccffff',
+    borderColor: '#00e6e6',
     padding: 20,
-    backgroundColor: '#009999',
+    backgroundColor: '#1a1a1a',
     margin: 20,
   },
   buttonText: {
     fontSize: 20,
-    color: '#e6ffff',
+    color: '#f2f2f2',
   },
 });
