@@ -7,13 +7,13 @@ import {
 } from 'react-native';
 // import data from '../../resources/data';
 import { Dimensions } from 'react-native';
-
-
-
+import Header from '../../components/Header';
+// import CounterWrapper from '../../components/CounterWrapper';
+// import Counter from '../../components/Counter';
 
 class Cinemas extends React.Component {
 
-  async getCinema(token){
+  async getCinemas(token){
     let response = await  axios.get('http://api.kvikmyndir.is/upcoming?token='+token)
     return response
   }
@@ -28,7 +28,7 @@ class Cinemas extends React.Component {
     // console.log("Returned token: ", token)
     //console.log(newToken)
     //const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1ZGVjZGMyNWQ2MDJkMDc3OTYyOTVhM2UiLCJnbG9iYWxhZG1pbiI6ZmFsc2UsImFkbWluIjpmYWxzZSwiYWN0aXZlIjp0cnVlLCJmdWxsbmFtZSI6IkZyaWRyaWsgw5ZybiBHdW5uYXJzc29uIiwiZW1haWwiOiJmcmlkcmlrb2dAZ21haWwuY29tIiwidXNlcm5hbWUiOiJqb2hhbm4iLCJwYXNzd29yZCI6IiQyYSQwOCR4b2xlamNzdUxVMVVYTXVUZDZyRjlPTVdsam1Ed3ltRUVuRE9nM01lVnJrcUtLNENCQmpuTyIsImRvbWFpbiI6InJ1LmlzIiwibWVzc2FnZSI6IlNrw7NsYXZlcmtlZm5pIMOtIEhSIiwiaWF0IjoxNTc1ODA3MDg0LCJleHAiOjE1NzU4OTM0ODR9.olvJ1j6jgTO9v4S9xnNG5BhmjE3nntGUZ4rcvAFWFug';
-    const upcomingMovies = await this.getCinema(token)
+    const upcomingMovies = await this.getCinemas(token)
     console.log("Logging upcoming movies: ", upcomingMovies);
   }
 
@@ -38,8 +38,8 @@ class Cinemas extends React.Component {
     const { navigate } = navigation;
     return (
       <View>
-        
-        <Text> Display text</Text>
+        <Header />
+
       </View>
     );
   }

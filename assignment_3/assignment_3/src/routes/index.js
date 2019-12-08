@@ -6,8 +6,8 @@ import Main from '../views/Main';
 import UpcomingMovies from '../views/UpcomingMovies';
 
 const StackNavigator = createStackNavigator({
-  UpcomingMovies,
   Cinemas,
+  UpcomingMovies,
   Main,
 });
 
