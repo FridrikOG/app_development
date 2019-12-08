@@ -11,7 +11,7 @@ import { Dimensions } from 'react-native';
 
 
 
-class Cinemas extends React.Component {
+class UpcomingMovies extends React.Component {
 
   async getCinema(token){
     let response = await  axios.get('http://api.kvikmyndir.is/upcoming?token='+token)
@@ -45,4 +45,4 @@ class Cinemas extends React.Component {
   }
 }
 
-export default Cinemas;
+export default UpcomingMovies;
