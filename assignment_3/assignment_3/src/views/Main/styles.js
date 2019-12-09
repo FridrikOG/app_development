@@ -1,4 +1,7 @@
 import { StyleSheet } from 'react-native';
+import {
+  white, darkblue, midblue,
+} from '../../styles/colors';
 
 export default StyleSheet.create({
   container: {
@@ -14,18 +17,16 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    fontSize: 30,
-    color: '#003333',
-    marginBottom: 20,
-    fontWeight: 'bold',
-    borderColor: '#00e6e6',
-    backgroundColor: 'white',
-    padding: 20,
-
+    fontSize: 80,
+    color: white,
+    backgroundColor: darkblue,
+    width: '100%',
+    textAlign: 'center',
   },
   logo: {
-    width: 200,
-    height: 200,
+    paddingLeft: 20,
+    width: 30,
+    height: 30,
   },
   logoBorder: {
     borderWidth: 6,
@@ -38,13 +39,15 @@ export default StyleSheet.create({
   button: {
     borderWidth: 4,
     borderRadius: 12,
-    borderColor: '#00e6e6',
+    borderColor: darkblue,
     padding: 20,
-    backgroundColor: '#1a1a1a',
+    backgroundColor: midblue,
     margin: 20,
+    flexDirection: 'row',
   },
   buttonText: {
+    marginLeft: 10,
     fontSize: 20,
-    color: '#f2f2f2',
+    color: white,
   },
 });

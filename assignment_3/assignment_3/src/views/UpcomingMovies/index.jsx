@@ -33,21 +33,30 @@ class UpcomingMovies extends React.Component {
     //console.log(newToken)
     //const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1ZGVjZGMyNWQ2MDJkMDc3OTYyOTVhM2UiLCJnbG9iYWxhZG1pbiI6ZmFsc2UsImFkbWluIjpmYWxzZSwiYWN0aXZlIjp0cnVlLCJmdWxsbmFtZSI6IkZyaWRyaWsgw5ZybiBHdW5uYXJzc29uIiwiZW1haWwiOiJmcmlkcmlrb2dAZ21haWwuY29tIiwidXNlcm5hbWUiOiJqb2hhbm4iLCJwYXNzd29yZCI6IiQyYSQwOCR4b2xlamNzdUxVMVVYTXVUZDZyRjlPTVdsam1Ed3ltRUVuRE9nM01lVnJrcUtLNENCQmpuTyIsImRvbWFpbiI6InJ1LmlzIiwibWVzc2FnZSI6IlNrw7NsYXZlcmtlZm5pIMOtIEhSIiwiaWF0IjoxNTc1ODA3MDg0LCJleHAiOjE1NzU4OTM0ODR9.olvJ1j6jgTO9v4S9xnNG5BhmjE3nntGUZ4rcvAFWFug';
     const upcomingMovies = await this.getCinema(token);
-    console.log("Logging upcoming movies: ", upcomingMovies);
+    // console.log("Logging upcoming movies: ", upcomingMovies);
     this.setState({ upMovies: upcomingMovies });
   }
 
+  hasTrailer(trailers){
+    console.log(trailers[0].results[0]);
+    if (trailers[0].results[0] == undefined) {
+      return false;
+    }
+    return true;
+  }
 
   render() {
     const { navigation } = this.props;
     const { navigate } = navigation;
     const { upMovies, videoOpen } = this.state;
+    const moviesData = upMovies.data;
+
     return (
-      <ScrollView>
+      <ScrollView style={styles.container}>
         {navigate}
         <FlatList
           numColumns={2}
-          data={upMovies.data}
+          data={moviesData}
           renderItem={({
             item: {
               id, poster, title, year, trailers,
@@ -61,9 +70,9 @@ class UpcomingMovies extends React.Component {
               {title}
             </Text>
             <Text style={styles.year}>
-              {year}
+              Release Date: {year}
             </Text>
-            <TouchableOpacity style={styles.trailerButton} onPress={() => this.setState({videoOpen: true})}>
+            <TouchableOpacity style={styles.trailerButton} onPress={() => console.log(!(this.hasTrailer(trailers)))}>
               <Text>Watch Trailer</Text>
             </TouchableOpacity>
           </View>

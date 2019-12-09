@@ -1,4 +1,7 @@
 import { StyleSheet, Dimensions } from 'react-native';
+import {
+  white, darkblue, midblue, darkerwhite
+} from '../../styles/colors';
 
 const { width: winWidth } = Dimensions.get('window');
 
@@ -9,10 +12,10 @@ export default StyleSheet.create({
   movie: {
     flexDirection: 'column',
     width: 170,
-    height: 280,
+    height: 300,
     alignItems: 'center',
-    borderColor: 'white',
-    backgroundColor: '#e6ffff',
+    borderColor: white,
+    backgroundColor: midblue,
     paddingBottom: 10,
     borderRadius: 12,
     shadowColor: '#000',
@@ -27,26 +30,29 @@ export default StyleSheet.create({
     justifyContent: 'space-around',
   },
   title: {
-    fontSize: 15,
+    fontSize: 20,
     width: '100%',
-    backgroundColor: '#00cccc',
-    color: 'white',
+    backgroundColor: darkblue,
+    color: white,
     paddingTop: 5,
     paddingBottom: 5,
     textAlign: 'center',
   },
   year: {
-    marginTop: 5,
+    padding:10,
+    backgroundColor: darkerwhite,
+    width: '100%',
+    textAlign: 'center',
   },
   image: {
     width: 120,
     height: 120,
   },
   imageWrapper: {
-    paddingTop: 10,
     width: '100%',
     backgroundColor: 'black',
     alignItems: 'center',
+    borderRadius: 12,
   },
   trailerButton: {
     marginTop: 5,
