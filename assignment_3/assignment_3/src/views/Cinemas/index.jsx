@@ -6,38 +6,39 @@ import {
   View, Text,
 } from 'react-native';
 // import data from '../../resources/data';
-import { Dimensions } from 'react-native';
+import data from '../../resources/cinemas';
+import Header from '../../components/CinemaList/index';
 
-
+import CinemaHandler from '../../components/Handler/cinemaHandler';
 
 
 class Cinemas extends React.Component {
 
-  async getCinema(token){
-    let response = await  axios.get('http://api.kvikmyndir.is/theaters?token='+token)
-    return response
+  async getCinemas(token) {
+    return data;
   }
 
-  async getAuthentication(){
-    const promise = await axios.post('http://api.kvikmyndir.is/authenticate', {username : 'johann', password : 'johann123'})
+  async getAuthentication() {
+    const promise = await axios.post('http://api.kvikmyndir.is/authenticate', { username: 'johann', password: 'johann123' });
     return promise.data.token;
   }
 
   async componentDidMount() {
-    const token = await this.getAuthentication()
-    const cinemas = await this.getCinema(token)
-    console.log("Cinemas: ", cinemas );
+    const token = await this.getAuthentication();
+    const cinemas = await this.getCinemas(token);
   }
 
   render() {
     const { navigation } = this.props;
     const { navigate } = navigation;
+
     return (
       <View>
-        <Text> Display text</Text>
+        <CinemaHandler />
+        <Header />
       </View>
     );
   }
 }
-
+// export default connect(null, { updateCinema, incrementCounter, decrementCounter })(Cinemas); // returns a connected component
 export default Cinemas;
