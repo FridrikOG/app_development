@@ -3,15 +3,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import {
-  View, Text,
+  View, Text, ScrollView, FlatList, Image, TouchableOpacity
 } from 'react-native';
 // import data from '../../resources/data';
 import { Dimensions } from 'react-native';
-
-
+import styles from './styles';
+import Video from '../../components/videoPlayer';
 
 
 class UpcomingMovies extends React.Component {
+  state ={
+    upMovies: [],
+    videoOpen: false,
+  };
 
   async getCinema(token){
     let response = await  axios.get('http://api.kvikmyndir.is/upcoming?token='+token)
@@ -28,21 +32,51 @@ class UpcomingMovies extends React.Component {
     // console.log("Returned token: ", token)
     //console.log(newToken)
     //const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1ZGVjZGMyNWQ2MDJkMDc3OTYyOTVhM2UiLCJnbG9iYWxhZG1pbiI6ZmFsc2UsImFkbWluIjpmYWxzZSwiYWN0aXZlIjp0cnVlLCJmdWxsbmFtZSI6IkZyaWRyaWsgw5ZybiBHdW5uYXJzc29uIiwiZW1haWwiOiJmcmlkcmlrb2dAZ21haWwuY29tIiwidXNlcm5hbWUiOiJqb2hhbm4iLCJwYXNzd29yZCI6IiQyYSQwOCR4b2xlamNzdUxVMVVYTXVUZDZyRjlPTVdsam1Ed3ltRUVuRE9nM01lVnJrcUtLNENCQmpuTyIsImRvbWFpbiI6InJ1LmlzIiwibWVzc2FnZSI6IlNrw7NsYXZlcmtlZm5pIMOtIEhSIiwiaWF0IjoxNTc1ODA3MDg0LCJleHAiOjE1NzU4OTM0ODR9.olvJ1j6jgTO9v4S9xnNG5BhmjE3nntGUZ4rcvAFWFug';
-    const upcomingMovies = await this.getCinema(token)
+    const upcomingMovies = await this.getCinema(token);
     console.log("Logging upcoming movies: ", upcomingMovies);
+    this.setState({ upMovies: upcomingMovies });
   }
 
 
   render() {
     const { navigation } = this.props;
     const { navigate } = navigation;
+    const { upMovies, videoOpen } = this.state;
     return (
-      <View>
-        
-        <Text> Display text</Text>
-      </View>
+      <ScrollView>
+        {navigate}
+        <FlatList
+          numColumns={2}
+          data={upMovies.data}
+          renderItem={({
+            item: {
+              id, poster, title, year, trailers,
+            },
+          }) => (
+          <View style={styles.movie}>
+            <View style={styles.imageWrapper}>
+              <Image style={styles.image} source={{uri: poster}} />
+            </View>
+            <Text style={styles.title}>
+              {title}
+            </Text>
+            <Text style={styles.year}>
+              {year}
+            </Text>
+            <TouchableOpacity style={styles.trailerButton} onPress={() => this.setState({videoOpen: true})}>
+              <Text>Watch Trailer</Text>
+            </TouchableOpacity>
+          </View>
+          )}
+          keyextractor={(item, id) => `${id}`}
+        />
+      </ScrollView>
     );
   }
 }
-
+// <Video
+//   isOpen={videoOpen}
+//   closeVideo={() => this.setState({ videoOpen: false })}
+//   url={"https://www.youtube.com/embed/F95Fk255I4M?rel=0"}
+// />
 export default UpcomingMovies;

@@ -21,7 +21,7 @@ class Main extends React.Component {
           </View>
           <Text style={styles.title}>Ms. Cinemasdóttir</Text>
           <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText} onPress={() => navigate('Contacts')}>View Movies List</Text>
+            <Text style={styles.buttonText} onPress={() => navigate('Cinemas')}>View Movies List</Text>
           </TouchableOpacity>
         </ImageBackground>
       </View>
