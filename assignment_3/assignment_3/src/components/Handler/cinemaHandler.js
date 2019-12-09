@@ -10,6 +10,7 @@ class CinemaHandler extends React.Component {
       counter: 0,
       cinema: {},
     }
+
     render() {
       // console.log(this.props)
       const { updateCinema } = this.props;
