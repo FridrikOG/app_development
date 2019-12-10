@@ -14,16 +14,16 @@ import { connect } from 'react-redux';
 class CinemaDetails extends React.Component {
   render() {
     const cinemaId = this.props.navigation.state.params.cinemaId;
-    
-    
-    // cinemas = this.props.cinemas;
-    // for (x in cinemas) {
-
-    // }
-
+    const cinemas = this.props.cinemas;
+    let cinema = ''
+    for (x in cinemas) {
+      if (cinemas[x].id === cinemaId){
+        cinema = cinemas[x]
+      }
+    }
     return (
       <View>
-        <Text> {this.c} </Text>
+        <Text> {cinema.id}  </Text>
       <MovieList cinemaId = {cinemaId}/>
       </View>
     );
@@ -34,7 +34,6 @@ return {
   cinemas: reduxStoreState.cinemas,
 }
 };
-
 
 export default connect(mapStateToProps)(CinemaDetails);
 
