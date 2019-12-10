@@ -2,7 +2,7 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 import {
-  ScrollView,
+  ScrollView, Text
 } from 'react-native';
 // import data from '../../resources/data';
 import { connect } from 'react-redux';
@@ -19,10 +19,10 @@ class CinemaDetails extends React.Component {
       }
     }
     return (
-      <View>
+      <ScrollView>
         <Text> {cinema.id} {cinema.name} {cinema.website} {cinema.phone} {cinema.address} {cinema.city} {cinema.description} </Text>
-      <MovieList cinemaId={cinemaId} navigate={this.props.navigation.navigate} />
-      </View>
+        <MovieList cinemaId={cinemaId} navigate={this.props.navigation.navigate} />
+      </ScrollView>
     );
   }
 }

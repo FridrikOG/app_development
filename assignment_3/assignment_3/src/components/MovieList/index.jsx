@@ -15,6 +15,14 @@ const movieInformation = (movie) => {
   return newMovieInfo;
 };
 
+const getGenresString = (genres) => {
+  console.log('SENDING IN ',genres)
+  let string = '';
+  for(index in genres) {
+    string += genres[index]['NameEN	'] + ',';
+  }
+  return string;
+}
 const MovieList = (props) => {
   let moviesBelongingToCinema = [];
   let movieList = [];
@@ -37,24 +45,23 @@ const MovieList = (props) => {
         {props.cinemaId}
       </Text>
       <FlatList
-        numColumns={2}
+        numColumns={1}
         data={moviesBelongingToCinema}
         style={styles.flatList}
         renderItem={({
           item: {
-            id, released, thumbnail, title, genres
+            released, thumbnail, title, genres
           },
         }) => (
           <TouchableOpacity
-            style={styles.cinema}
+            style={styles.movie}
             onPress={() => props.navigate('MovieDetails', { cinemaId: props.cinemaId, title })}
           >
-            <ImageBackground style={styles.backgroundImage} source={thumbnail}>
-              <Text style={styles.cinemaName}>
-                {released}
-              </Text>
-              <Text style={styles.cinemaWebsite}>{title}</Text>
-            </ImageBackground>
+            <Image style={styles.image} source={{ uri: thumbnail }} />
+            <View style={styles.details}>
+              <Text>{title}</Text>
+              <Text>{getGenresString(genres)}</Text>
+            </View>
           </TouchableOpacity>
         )}
       />

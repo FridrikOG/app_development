@@ -23,38 +23,14 @@ export default StyleSheet.create({
     marginTop: 10,
     flexDirection: 'row',
   },
-  backgroundImage: {
-    width: 150,
-    height: 100,
-    justifyContent: 'center',
+  movie: {
+    flexDirection: 'row',
   },
-  cinema: {
-    width: 150,
-    margin: 15,
-    borderRadius: 12,
-    // backgroundColor: white,
+  image: {
+    width: 100,
+    height: 150,
   },
-  cinemaName: {
-    width: '100%',
-    color: 'black',
-    paddingTop: 5,
-    paddingBottom: 5,
-    marginTop: 15,
-    // fontSize: 20,
-    textAlign: 'center',
-    backgroundColor: white,
-  },
-  icon: {
-    width: 20,
-    height: 20,
-  },
-  cinemaWebsite: {
-    width: '100%',
-    marginBottom: 15,
-    textAlign: 'center',
-    paddingTop: 5,
-    paddingBottom: 5,
-    backgroundColor: black,
-    color: white,
+  details: {
+    flexDirection: 'column',
   },
 });
