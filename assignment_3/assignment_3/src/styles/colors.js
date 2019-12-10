@@ -1,4 +1,6 @@
-export const white = '#ecf2f9';
-export const darkblue = '#19334d';
-export const midblue = '#2f5e8e';
-export const darkerwhite = '#c6d9ec';
+export const white = '#ffffff';
+export const blue = '#00e6e6';
+export const orange = '#ff8080';
+export const lightorange = '#ffcccc';
+export const black = '#333333';
+export const darkorange = '#ff5050';

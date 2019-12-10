@@ -1,9 +1,12 @@
 import React from 'react';
 import {
-  View, Text, ScrollView, FlatList, TouchableOpacity,
+  View, Text, ScrollView, FlatList, TouchableOpacity, Image, ImageBackground
 } from 'react-native';
 import { connect } from 'react-redux';
 import styles from './styles';
+import pop from '../../resources/images/box-of-popcorn.png';
+import bg from '../../resources/images/movie-film.png';
+
 
 const CinemaList = (props) => {
   return (
@@ -21,8 +24,12 @@ const CinemaList = (props) => {
           },
         }) => (
           <TouchableOpacity style={styles.cinema}>
-            <Text style={styles.cinemaName}>{name}</Text>
-            <Text style={styles.cinemaWebsite}>{website}</Text>
+            <ImageBackground style={styles.backgroundImage} source={bg}>
+              <Text style={styles.cinemaName}>
+                {name}
+              </Text>
+              <Text style={styles.cinemaWebsite}>{website}</Text>
+            </ImageBackground>
           </TouchableOpacity>
         )}
       />

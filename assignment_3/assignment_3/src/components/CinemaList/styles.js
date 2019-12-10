@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import {
-  white, darkblue, midblue, darkerwhite,
+  white, blue, orange, lightorange, black, darkorange,
 } from '../../styles/colors';
 
 export default StyleSheet.create({
@@ -13,32 +13,46 @@ export default StyleSheet.create({
     width: '100%',
     fontSize: 30,
     padding: 10,
-    backgroundColor: darkblue,
-    color: white,
+    backgroundColor: blue,
+    color: black,
   },
   flatList: {
     width: '100%',
     marginTop: 10,
     flexDirection: 'row',
-
+  },
+  backgroundImage: {
+    width: 150,
+    height: 100,
+    justifyContent: 'center',
   },
   cinema: {
     width: 150,
     margin: 15,
     borderRadius: 12,
-    backgroundColor: darkerwhite,
+    // backgroundColor: white,
   },
   cinemaName: {
-    backgroundColor: darkblue,
-    color: white,
-    padding: 5,
-    fontSize: 20,
+    width: '100%',
+    color: 'black',
+    paddingTop: 5,
+    paddingBottom: 5,
+    marginTop: 15,
+    // fontSize: 20,
     textAlign: 'center',
+    backgroundColor: white,
+  },
+  icon: {
+    width: 20,
+    height: 20,
   },
   cinemaWebsite: {
-    justifyContent: 'flex-end',
-    paddingTop: 10,
-    paddingBottom: 10,
+    width: '100%',
+    marginBottom: 15,
     textAlign: 'center',
+    paddingTop: 5,
+    paddingBottom: 5,
+    backgroundColor: black,
+    color: white,
   },
 });

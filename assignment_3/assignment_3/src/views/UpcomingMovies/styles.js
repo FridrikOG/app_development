@@ -1,6 +1,6 @@
 import { StyleSheet, Dimensions } from 'react-native';
 import {
-  white, darkblue, midblue, darkerwhite
+  white, blue, orange, lightorange, black
 } from '../../styles/colors';
 
 const { width: winWidth } = Dimensions.get('window');
@@ -15,7 +15,7 @@ export default StyleSheet.create({
     height: 300,
     alignItems: 'center',
     borderColor: white,
-    backgroundColor: midblue,
+    backgroundColor: orange,
     paddingBottom: 10,
     borderRadius: 12,
     shadowColor: '#000',
@@ -32,7 +32,7 @@ export default StyleSheet.create({
   title: {
     fontSize: 20,
     width: '100%',
-    backgroundColor: darkblue,
+    backgroundColor: blue,
     color: white,
     paddingTop: 5,
     paddingBottom: 5,
@@ -40,7 +40,7 @@ export default StyleSheet.create({
   },
   year: {
     padding:10,
-    backgroundColor: darkerwhite,
+    backgroundColor: lightorange,
     width: '100%',
     textAlign: 'center',
   },

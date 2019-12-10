@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import {
-  white, darkblue, midblue,
+  white, blue, orange, black, darkorange
 } from '../../styles/colors';
 
 export default StyleSheet.create({
@@ -18,8 +18,8 @@ export default StyleSheet.create({
   },
   title: {
     fontSize: 80,
-    color: white,
-    backgroundColor: darkblue,
+    color: black,
+    backgroundColor: blue,
     width: '100%',
     textAlign: 'center',
   },
@@ -39,15 +39,15 @@ export default StyleSheet.create({
   button: {
     borderWidth: 4,
     borderRadius: 12,
-    borderColor: darkblue,
+    borderColor: darkorange,
     padding: 20,
-    backgroundColor: midblue,
+    backgroundColor: orange,
     margin: 20,
     flexDirection: 'row',
   },
   buttonText: {
     marginLeft: 10,
     fontSize: 20,
-    color: white,
+    color: black,
   },
 });

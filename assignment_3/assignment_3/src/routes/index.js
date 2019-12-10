@@ -6,9 +6,9 @@ import Main from '../views/Main';
 import UpcomingMovies from '../views/UpcomingMovies';
 
 const StackNavigator = createStackNavigator({
+  Main,
   Cinemas,
   UpcomingMovies,
-  Main,
 });
 
 export default createAppContainer(StackNavigator);
