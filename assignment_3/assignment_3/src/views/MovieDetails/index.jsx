@@ -10,10 +10,14 @@ import MovieDetailList from '../../components/MovieDetailList/index';
 
 class MovieDetails extends React.Component {
 
-  getGenresString = (genres) => {
+  getGenresString (genres) {
     let string = '';
     for(index in genres) {
-      string += genres[index]['NameEN	'] + ',';
+      if(index == 0) {
+        string += genres[index]['NameEN	'];
+      } else {
+        string += ', ' + genres[index]['NameEN	'];
+      }
     }
     return string;
   }
@@ -25,8 +29,8 @@ class MovieDetails extends React.Component {
     const movieShowingArray = array[0]
     const schedule = movieShowingArray.showtimes
     let theCinema = ''
-
-    console.log("OVER HERE : ", movieShowingArray, schedule)
+    console.log("logging genres :", movieShowingArray.genres)
+    // console.log("OVER HERE : ", movieShowingArray, schedule)
 
     return (
       <ScrollView>
@@ -35,6 +39,7 @@ class MovieDetails extends React.Component {
           plot: {movieShowingArray.plot}
           Duration: {movieShowingArray.durationMinutes}
           Year of release: {movieShowingArray.omdb[0].Released}
+          Genre: {this.getGenresString(movieShowingArray.genres)}
         </Text>
           <Image source={{ uri: movieShowingArray.poster }} />
         
