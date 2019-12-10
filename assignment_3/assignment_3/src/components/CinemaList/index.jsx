@@ -9,6 +9,7 @@ import bg from '../../resources/images/movie-film.png';
 
 
 const CinemaList = (props) => {
+  // console.log("logging props ", props)
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.title}>
@@ -39,13 +40,10 @@ const CinemaList = (props) => {
 
 
 const mapStateToProps = (reduxStoreState) => {
-  // console.log("all the stuff: ", reduxStoreState.cinema)
+  console.log("all the stuff: ", reduxStoreState);
   return {
-    counter: 'sdflsaldf',
-    cinema: reduxStoreState.cinema
+    cinema: reduxStoreState.cinema,
+    movies: reduxStoreState.movies,
   }
 };
-
-
-
 export default connect(mapStateToProps)(CinemaList);

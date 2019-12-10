@@ -11,6 +11,7 @@ import axios from 'axios';
 import CinemaHandler from '../../components/Handler/cinemaHandler';
 import { connect } from 'react-redux';
 import { updateCinema } from '../../actions/cinemaActions';
+import { updateMovie } from '../../actions/movieActions';
 
 // import data from '../../resources/data';
 
@@ -18,14 +19,20 @@ class Main extends React.Component {
 
   state = {
     cinema: {},
+    movies: {},
   }
 
   async getCinemas(token) {
     const url = 'http://api.kvikmyndir.is/theaters'
     const header = { 'x-access-token ' : token }
     const test = await axios.get(url, {headers: {'x-access-token' : token}})
-    console.log(test)
     return test;
+  }
+  async getMovies(token) {
+    const url = 'http://api.kvikmyndir.is/movies'
+    const header = { 'x-access-token ' : token }
+    const movies = await axios.get(url, {headers: {'x-access-token' : token}})
+    return movies;
   }
 
   async getAuthentication() {
@@ -34,11 +41,14 @@ class Main extends React.Component {
   }
 
   async componentDidMount() {
-    const { updateCinema } = this.props;
+    const { updateCinema, updateMovie } = this.props;
     const token = await this.getAuthentication();
+    // Updating the cinema dictionary with updated cinemas
     const cinemas = await this.getCinemas(token);
     updateCinema(cinemas.data);
-    console.log("Loggign cinemas: ", cinemas)
+    // Doing the same for movies
+    const movies = await this.getMovies(token);
+    updateMovie(movies.data);
   }
 
   render() {
@@ -63,8 +73,4 @@ Main.propTypes = {
   }).isRequired,
 };
 
-export default connect(null, { updateCinema })(Main); // returns a connected component
-
-// <View style={styles.logoBorder}>
-//
-// </View>
+export default connect(null, { updateCinema, updateMovie })(Main); // returns a connected component

@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 // import data from '../../resources/data';
 import data from '../../resources/cinemas';
-import Header from '../../components/CinemaList/index';
+import CinemaList from '../../components/CinemaList/index';
 
 import CinemaHandler from '../../components/Handler/cinemaHandler';
 
@@ -20,7 +20,7 @@ class Cinemas extends React.Component {
 
     return (
       <View>
-        <Header />
+        <CinemaList />
       </View>
     );
   }
