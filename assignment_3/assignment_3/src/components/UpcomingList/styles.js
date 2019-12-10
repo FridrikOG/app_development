@@ -1,9 +1,7 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet } from 'react-native';
 import {
-  white, blue, orange, lightorange, black, darkorange
+  white, blue, orange, lightorange, black, darkorange, lightblue,
 } from '../../styles/colors';
-
-const { width: winWidth } = Dimensions.get('window');
 
 export default StyleSheet.create({
   container: {
@@ -11,9 +9,11 @@ export default StyleSheet.create({
   },
   type: {
     width: '100%',
-    fontSize: 30,
+    fontSize: 20,
     padding: 10,
-    backgroundColor: blue,
+    backgroundColor: lightblue,
+    borderBottomWidth: 5,
+    borderColor: blue,
     color: black,
   },
   movie: {
@@ -22,7 +22,7 @@ export default StyleSheet.create({
     height: 300,
     alignItems: 'center',
     borderColor: white,
-    backgroundColor: orange,
+    backgroundColor: white,
     paddingBottom: 10,
     borderRadius: 12,
     shadowColor: '#000',
@@ -37,17 +37,19 @@ export default StyleSheet.create({
     justifyContent: 'space-around',
   },
   title: {
-    fontSize: 20,
+    fontSize: 15,
     width: '100%',
-    backgroundColor: darkorange,
-    color: white,
+    fontWeight: 'bold',
+    color: black,
+    borderBottomWidth: 3,
+    backgroundColor: lightorange,
+    borderColor: darkorange,
     paddingTop: 5,
     paddingBottom: 5,
     textAlign: 'center',
   },
   year: {
-    padding:10,
-    backgroundColor: lightorange,
+    padding: 10,
     width: '100%',
     textAlign: 'center',
   },
@@ -59,12 +61,11 @@ export default StyleSheet.create({
     width: '100%',
     backgroundColor: 'black',
     alignItems: 'center',
-    borderRadius: 12,
   },
   trailerButton: {
     marginTop: 5,
     padding: 10,
-    backgroundColor: 'white',
+    backgroundColor: white,
     borderRadius: 12,
     shadowColor: '#000',
     shadowOffset: {

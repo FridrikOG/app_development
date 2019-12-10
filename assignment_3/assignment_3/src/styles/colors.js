@@ -4,3 +4,4 @@ export const orange = '#ff8080';
 export const lightorange = '#ffcccc';
 export const black = '#333333';
 export const darkorange = '#ff5050';
+export const lightblue = '#e6ffff';
