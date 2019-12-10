@@ -14,27 +14,12 @@ import CinemaHandler from '../../components/Handler/cinemaHandler';
 
 class Cinemas extends React.Component {
 
-  async getCinemas(token) {
-    return data;
-  }
-
-  async getAuthentication() {
-    const promise = await axios.post('http://api.kvikmyndir.is/authenticate', { username: 'johann', password: 'johann123' });
-    return promise.data.token;
-  }
-
-  async componentDidMount() {
-    const token = await this.getAuthentication();
-    const cinemas = await this.getCinemas(token);
-  }
-
   render() {
     const { navigation } = this.props;
     const { navigate } = navigation;
 
     return (
       <View>
-        <CinemaHandler />
         <Header />
       </View>
     );
