@@ -40,7 +40,6 @@ const CinemaList = (props) => {
 
 
 const mapStateToProps = (reduxStoreState) => {
-  console.log("all the stuff: ", reduxStoreState);
   return {
     cinema: reduxStoreState.cinema,
     movies: reduxStoreState.movies,

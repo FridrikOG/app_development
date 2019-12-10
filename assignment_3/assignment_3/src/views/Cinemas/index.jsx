@@ -8,7 +8,6 @@ import {
 // import data from '../../resources/data';
 import data from '../../resources/cinemas';
 import CinemaList from '../../components/CinemaList/index';
-
 import CinemaHandler from '../../components/Handler/cinemaHandler';
 
 
@@ -25,5 +24,4 @@ class Cinemas extends React.Component {
     );
   }
 }
-// export default connect(null, { updateCinema, incrementCounter, decrementCounter })(Cinemas); // returns a connected component
 export default Cinemas;
