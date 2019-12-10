@@ -5,6 +5,8 @@ import {
 import { connect } from 'react-redux';
 import styles from './styles';
 
+import { updateCurrentCinemaMovies } from '../../actions/currentCinemaMoviesAction';
+
 const movieInformation = (movie) => {
   const newMovieInfo = {
     thumbnail: movie.poster,
@@ -16,7 +18,6 @@ const movieInformation = (movie) => {
 };
 
 const getGenresString = (genres) => {
-  console.log('SENDING IN ',genres)
   let string = '';
   for(index in genres) {
     string += genres[index]['NameEN	'] + ',';
@@ -24,8 +25,14 @@ const getGenresString = (genres) => {
   return string;
 }
 const MovieList = (props) => {
+  
+  state = {
+    currentCinemaMovies: {}
+  }
+
   let moviesBelongingToCinema = [];
   let movieList = [];
+  let addCinemaMovies = []
   for (x in props.movies) {
     for (y in props.movies[x].showtimes) {
       if(props.movies[x].showtimes[0].cinema.id === props.cinemaId ) {
@@ -34,9 +41,12 @@ const MovieList = (props) => {
           movieList.push(newMovie.title);
           moviesBelongingToCinema.push(newMovie);
         }
+        addCinemaMovies.push(props.movies[x])
       }
     }
   }
+  //const { updateCurrentCinemaMovies } = props;
+  // updateCurrentCinemaMovies(addCinemaMovies);
   // console.log("LOGGING MOVIES: ", moviesBelongingToCinema)
   return (
     <ScrollView style={styles.container}>
@@ -55,7 +65,7 @@ const MovieList = (props) => {
         }) => (
           <TouchableOpacity
             style={styles.movie}
-            onPress={() => props.navigate('MovieDetails', { cinemaId: props.cinemaId, title })}
+            onPress={() => props.navigate('MovieDetails', { cinemaId: props.cinemaId, title, currentMoviesList: addCinemaMovies })}
           >
             <Image style={styles.image} source={{ uri: thumbnail }} />
             <View style={styles.details}>
@@ -71,8 +81,8 @@ const MovieList = (props) => {
 // onPress={() => props.navigate('MovieDetails', { cinemaId: props.cinemaId, movieId: id })}
 const mapStateToProps = (reduxStoreState) => {
   return {
-    cinema: reduxStoreState.cinema,
+    cinema: reduxStoreState.cinemas,
     movies: reduxStoreState.movies,
   }
 };
-export default connect(mapStateToProps)(MovieList);
+export default connect(mapStateToProps, updateCurrentCinemaMovies)(MovieList);
