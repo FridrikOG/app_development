@@ -23,7 +23,7 @@ class CinemaDetails extends React.Component {
     }
     return (
       <View>
-        <Text> {cinema.id}  </Text>
+        <Text> {cinema.id} {cinema.name} {cinema.website} {cinema.phone} {cinema.address} {cinema.city} {cinema.description} </Text>
       <MovieList cinemaId = {cinemaId}/>
       </View>
     );
