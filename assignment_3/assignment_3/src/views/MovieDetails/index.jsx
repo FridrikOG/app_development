@@ -27,9 +27,9 @@ class MovieDetails extends React.Component {
     const array = currentMoviesList.filter(x => x.title === title);
     // First index accessed since filter always returns an array
     const movieShowingArray = array[0]
-    const schedule = movieShowingArray.showtimes
+    const schedule = movieShowingArray.showtimes[0].schedule
     let theCinema = ''
-    console.log("logging genres :", movieShowingArray.genres)
+    console.log("logging schedule :", schedule)
     // console.log("OVER HERE : ", movieShowingArray, schedule)
 
     return (
@@ -42,7 +42,6 @@ class MovieDetails extends React.Component {
           Genre: {this.getGenresString(movieShowingArray.genres)}
         </Text>
           <Image source={{ uri: movieShowingArray.poster }} />
-        
       </ScrollView>
     );
   }
