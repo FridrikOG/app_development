@@ -23,7 +23,7 @@ const CinemaList = (props) => {
             id, name, website,
           },
         }) => (
-          <TouchableOpacity style={styles.cinema}>
+          <TouchableOpacity style={styles.cinema} onPress={() => props.navigate('CinemaDetails', { cinemaId: id })}>
             <ImageBackground style={styles.backgroundImage} source={bg}>
               <Text style={styles.cinemaName}>
                 {name}
@@ -36,7 +36,7 @@ const CinemaList = (props) => {
     </ScrollView>
   );
 };
-
+// onPress={() => props.navigate('CinemaDetails', { cinemaId: id })}
 
 const mapStateToProps = (reduxStoreState) => {
   // console.log("all the stuff: ", reduxStoreState.cinema)
