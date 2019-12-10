@@ -19,7 +19,7 @@ class Cinemas extends React.Component {
 
     return (
       <View>
-        <CinemaList />
+        <CinemaList navigate={navigate} />
       </View>
     );
   }

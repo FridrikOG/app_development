@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import {
-  white, blue, orange, lightorange, black, darkorange,
+  white, blue, orange, lightorange, black, darkorange, lightblue
 } from '../../styles/colors';
 
 export default StyleSheet.create({
@@ -11,9 +11,11 @@ export default StyleSheet.create({
   },
   title: {
     width: '100%',
-    fontSize: 30,
+    fontSize: 20,
     padding: 10,
-    backgroundColor: blue,
+    backgroundColor: lightblue,
+    borderBottomWidth: 5,
+    borderColor: blue,
     color: black,
   },
   flatList: {
