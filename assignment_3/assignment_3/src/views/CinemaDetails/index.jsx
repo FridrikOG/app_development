@@ -13,7 +13,7 @@ class CinemaDetails extends React.Component {
     const cinemaId = this.props.navigation.state.params.cinemaId;
     return (
       <ScrollView>
-        <MovieList cinemaId={cinemaId} />
+        <MovieList cinemaId={cinemaId} navigate={this.props.navigation.navigate} />
       </ScrollView>
     );
   }

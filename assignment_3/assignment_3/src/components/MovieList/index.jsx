@@ -42,10 +42,13 @@ const MovieList = (props) => {
         style={styles.flatList}
         renderItem={({
           item: {
-            released, thumbnail, title, genres
+            id, released, thumbnail, title, genres
           },
         }) => (
-          <TouchableOpacity style={styles.cinema} onPress={() => props.navigate('CinemaDetails', { cinemaId: id })}>
+          <TouchableOpacity
+            style={styles.cinema}
+            onPress={() => props.navigate('MovieDetails', { cinemaId: props.cinemaId, title })}
+          >
             <ImageBackground style={styles.backgroundImage} source={thumbnail}>
               <Text style={styles.cinemaName}>
                 {released}
@@ -58,8 +61,7 @@ const MovieList = (props) => {
     </ScrollView>
   );
 };
-// onPress={() => props.navigate('CinemaDetails', { cinemaId: id })}
-
+// onPress={() => props.navigate('MovieDetails', { cinemaId: props.cinemaId, movieId: id })}
 const mapStateToProps = (reduxStoreState) => {
   return {
     cinema: reduxStoreState.cinema,
