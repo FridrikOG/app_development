@@ -11,10 +11,18 @@ import MovieList from '../../components/MovieList/index';
 class CinemaDetails extends React.Component {
   render() {
     const cinemaId = this.props.navigation.state.params.cinemaId;
+    const cinemas = this.props.cinemas;
+    let cinema = ''
+    for (x in cinemas) {
+      if (cinemas[x].id === cinemaId){
+        cinema = cinemas[x]
+      }
+    }
     return (
-      <ScrollView>
-        <MovieList cinemaId={cinemaId} navigate={this.props.navigation.navigate} />
-      </ScrollView>
+      <View>
+        <Text> {cinema.id} {cinema.name} {cinema.website} {cinema.phone} {cinema.address} {cinema.city} {cinema.description} </Text>
+      <MovieList cinemaId={cinemaId} navigate={this.props.navigation.navigate} />
+      </View>
     );
   }
 }
@@ -23,6 +31,5 @@ const mapStateToProps = (reduxStoreState) => {
     cinemas: reduxStoreState.cinemas,
   }
 };
-
 
 export default connect(mapStateToProps)(CinemaDetails);
