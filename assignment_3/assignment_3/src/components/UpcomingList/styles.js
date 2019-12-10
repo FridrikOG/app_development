@@ -9,6 +9,13 @@ export default StyleSheet.create({
   container: {
     paddingBottom: 40,
   },
+  type: {
+    width: '100%',
+    fontSize: 30,
+    padding: 10,
+    backgroundColor: blue,
+    color: black,
+  },
   movie: {
     flexDirection: 'column',
     width: 170,

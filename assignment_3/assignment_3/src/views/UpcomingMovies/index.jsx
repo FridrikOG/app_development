@@ -9,6 +9,7 @@ import {
 import { Dimensions } from 'react-native';
 import styles from './styles';
 import Video from '../../components/videoPlayer';
+import UpcomingList from '../../components/UpcomingList';
 
 
 class UpcomingMovies extends React.Component {
@@ -37,13 +38,6 @@ class UpcomingMovies extends React.Component {
     this.setState({ upMovies: upcomingMovies });
   }
 
-  hasTrailer(trailers){
-    console.log(trailers[0].results[0]);
-    if (trailers[0].results[0] == undefined) {
-      return false;
-    }
-    return true;
-  }
 
   render() {
     const { navigation } = this.props;
@@ -54,31 +48,7 @@ class UpcomingMovies extends React.Component {
     return (
       <ScrollView style={styles.container}>
         {navigate}
-        <FlatList
-          numColumns={2}
-          data={moviesData}
-          renderItem={({
-            item: {
-              id, poster, title, year, trailers,
-            },
-          }) => (
-          <View style={styles.movie}>
-            <View style={styles.imageWrapper}>
-              <Image style={styles.image} source={{uri: poster}} />
-            </View>
-            <Text style={styles.title}>
-              {title}
-            </Text>
-            <Text style={styles.year}>
-              Release Date: {year}
-            </Text>
-            <TouchableOpacity style={styles.trailerButton} onPress={() => console.log(!(this.hasTrailer(trailers)))}>
-              <Text>Watch Trailer</Text>
-            </TouchableOpacity>
-          </View>
-          )}
-          keyextractor={(item, id) => `${id}`}
-        />
+        <UpcomingList moviesData={moviesData} />
       </ScrollView>
     );
   }
