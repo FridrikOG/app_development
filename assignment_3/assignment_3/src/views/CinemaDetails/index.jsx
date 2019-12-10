@@ -2,11 +2,12 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 import {
-  ScrollView, Text
+  ScrollView, Text, View,
 } from 'react-native';
 // import data from '../../resources/data';
 import { connect } from 'react-redux';
 import MovieList from '../../components/MovieList/index';
+import styles from './styles';
 
 class CinemaDetails extends React.Component {
   render() {
@@ -18,9 +19,42 @@ class CinemaDetails extends React.Component {
         cinema = cinemas[x]
       }
     }
+    console.log(cinema.description);
     return (
       <ScrollView>
-        <Text> {cinema.id} {cinema.name} {cinema.website} {cinema.phone} {cinema.address} {cinema.city} {cinema.description} </Text>
+        <View style={styles.cinemaInfo}>
+          <Text style={styles.title}>Cinema Information:</Text>
+          <Text style={styles.cinemaName}>
+            Name:
+            {' '}
+            {cinema.name}
+          </Text>
+          <Text style={styles.cinemaDescription}>
+            Description:
+            {' '}
+            {cinema.description}
+          </Text>
+          <Text style={styles.cinemaAddress}>
+            Address:
+            {' '}
+            {cinema.address}
+          </Text>
+          <Text style={styles.cinemaCity}>
+            City:
+            {' '}
+            {cinema.city}
+          </Text>
+          <Text style={styles.cinemaWebsite}>
+            Website:
+            {' '}
+            {cinema.website}
+          </Text>
+          <Text style={styles.cinemaPhone}>
+            Phone:
+            {' '}
+            {cinema.phone}
+          </Text>
+        </View>
         <MovieList cinemaId={cinemaId} navigate={this.props.navigation.navigate} />
       </ScrollView>
     );

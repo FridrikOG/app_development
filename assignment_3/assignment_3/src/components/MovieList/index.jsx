@@ -16,10 +16,13 @@ const movieInformation = (movie) => {
 };
 
 const getGenresString = (genres) => {
-  console.log('SENDING IN ',genres)
   let string = '';
   for(index in genres) {
-    string += genres[index]['NameEN	'] + ',';
+    if(index == 0) {
+      string += genres[index]['NameEN	'];
+    } else {
+      string += ', ' + genres[index]['NameEN	'];
+    }
   }
   return string;
 }
@@ -40,10 +43,7 @@ const MovieList = (props) => {
   // console.log("LOGGING MOVIES: ", moviesBelongingToCinema)
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.title}>
-        Welcome to the cinema of ID
-        {props.cinemaId}
-      </Text>
+      <Text style={styles.title}>Movies Available</Text>
       <FlatList
         numColumns={1}
         data={moviesBelongingToCinema}
@@ -59,8 +59,14 @@ const MovieList = (props) => {
           >
             <Image style={styles.image} source={{ uri: thumbnail }} />
             <View style={styles.details}>
-              <Text>{title}</Text>
-              <Text>{getGenresString(genres)}</Text>
+              <Text style={styles.movieTitle}>
+                {title}
+              </Text>
+              <Text style={styles.genres}>
+                Genres:
+                {' '}
+                {getGenresString(genres)}
+              </Text>
             </View>
           </TouchableOpacity>
         )}
@@ -68,7 +74,7 @@ const MovieList = (props) => {
     </ScrollView>
   );
 };
-// onPress={() => props.navigate('MovieDetails', { cinemaId: props.cinemaId, movieId: id })}
+
 const mapStateToProps = (reduxStoreState) => {
   return {
     cinema: reduxStoreState.cinema,
