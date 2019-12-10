@@ -13,11 +13,11 @@ const CinemaList = (props) => {
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.title}>
-        Cinemas
+        Cinema Screen
       </Text>
       <FlatList
         numColumns={2}
-        data={props.cinema.sort((a, b) => a.name.localeCompare(b.name))}
+        data={props.cinemas.sort((a, b) => a.name.localeCompare(b.name))}
         style={styles.flatList}
         renderItem={({
           item: {
@@ -41,7 +41,7 @@ const CinemaList = (props) => {
 
 const mapStateToProps = (reduxStoreState) => {
   return {
-    cinema: reduxStoreState.cinema,
+    cinemas: reduxStoreState.cinemas,
     movies: reduxStoreState.movies,
   }
 };

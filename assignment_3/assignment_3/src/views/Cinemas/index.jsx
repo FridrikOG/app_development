@@ -9,6 +9,7 @@ import {
 import data from '../../resources/cinemas';
 import CinemaList from '../../components/CinemaList/index';
 import CinemaHandler from '../../components/Handler/cinemaHandler';
+import { connect } from 'react-redux';
 
 
 class Cinemas extends React.Component {
@@ -16,6 +17,7 @@ class Cinemas extends React.Component {
   render() {
     const { navigation } = this.props;
     const { navigate } = navigation;
+    console.log("LOGIGNG CINEMAS: ", this.props.cinemas)
 
     return (
       <View>
@@ -24,4 +26,12 @@ class Cinemas extends React.Component {
     );
   }
 }
-export default Cinemas;
+
+const mapStateToProps = (reduxStoreState) => {
+return {
+  cinemas: reduxStoreState.cinemas,
+}
+};
+
+
+export default connect(mapStateToProps)(Cinemas);

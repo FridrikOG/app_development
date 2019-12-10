@@ -7,22 +7,34 @@ import {
 } from 'react-native';
 // import data from '../../resources/data';
 import data from '../../resources/cinemas';
-
+import MovieList from '../../components/MovieList/index';
 import CinemaHandler from '../../components/Handler/cinemaHandler';
-
+import { connect } from 'react-redux';
 
 class CinemaDetails extends React.Component {
   render() {
     const cinemaId = this.props.navigation.state.params.cinemaId;
+    
+    
+    // cinemas = this.props.cinemas;
+    // for (x in cinemas) {
+
+    // }
+
     return (
       <View>
-        <Text>
-          this is id:
-          {cinemaId}
-        </Text>
+        <Text> {this.c} </Text>
+      <MovieList cinemaId = {cinemaId}/>
       </View>
     );
   }
 }
-// export default connect(null, { updateCinema, incrementCounter, decrementCounter })(Cinemas); // returns a connected component
-export default CinemaDetails;
+const mapStateToProps = (reduxStoreState) => {
+return {
+  cinemas: reduxStoreState.cinemas,
+}
+};
+
+
+export default connect(mapStateToProps)(CinemaDetails);
+
