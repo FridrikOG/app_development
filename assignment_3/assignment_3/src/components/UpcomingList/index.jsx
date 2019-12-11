@@ -80,7 +80,6 @@ class UpcomingList extends React.Component {
 // />
 
 const mapStateToProps = (reduxStoreState) => {
-  // console.log("all the stuff: ", reduxStoreState.cinema)
   return {
     cinema: reduxStoreState.cinema,
     upcomingMovies: reduxStoreState.upcomingMovies
