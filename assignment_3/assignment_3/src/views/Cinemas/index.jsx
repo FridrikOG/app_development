@@ -1,14 +1,9 @@
 /* eslint-disable react/prefer-stateless-function */
 import React from 'react';
-import PropTypes from 'prop-types';
-import axios from 'axios';
 import {
-  View, Text,
+  View,
 } from 'react-native';
-// import data from '../../resources/data';
-import data from '../../resources/cinemas';
 import CinemaList from '../../components/CinemaList/index';
-import CinemaHandler from '../../components/Handler/cinemaHandler';
 import { connect } from 'react-redux';
 
 

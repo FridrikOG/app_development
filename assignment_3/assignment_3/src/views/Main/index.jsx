@@ -2,13 +2,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  View, Text, Image, TouchableOpacity, ImageBackground,
+  View, Text, TouchableOpacity, ImageBackground,
 } from 'react-native';
 import bg from '../../resources/images/bg.png';
-import logo from '../../resources/images/theatre.png';
 import styles from './styles';
 import axios from 'axios';
-import CinemaHandler from '../../components/Handler/cinemaHandler';
 import { connect } from 'react-redux';
 import { updateCinema } from '../../actions/cinemaActions';
 import { updateMovie } from '../../actions/movieActions';
@@ -33,7 +31,6 @@ class Main extends React.Component {
     // For some reason you have to send the token this way, can't send it in the url
     const url = 'http://api.kvikmyndir.is/theaters'
     const test = await axios.get(url, {headers: {'x-access-token' : token}})
-    // Making sure the button isn't available until the data has been loaded
     return test;
   }
   // Gets all the movies from the API
@@ -45,6 +42,7 @@ class Main extends React.Component {
   async getUpcomingMovies(token){
     const url = 'http://api.kvikmyndir.is/upcoming'
     const upcomingMovies = await axios.get(url, {headers: {'x-access-token' : token}})
+    // Making sure the button isn't available until the data has been loaded
     this.setState( {buttonAvail: true})
     return upcomingMovies;
   }
@@ -77,7 +75,6 @@ class Main extends React.Component {
     const { navigation } = this.props;
     const { navigate } = navigation;
     const { buttonAvail } = this.state
-    console.log("logging buttonAvail: ", buttonAvail)
     return (
       <View style={styles.container}>
         <ImageBackground style={styles.backgroundImage} source={bg} resizeMode="repeat">
