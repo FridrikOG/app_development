@@ -1,120 +1,28 @@
-// import React from 'react';
-// import Video from 'react-native-video';
-// import MediaControls, { PLAYER_STATES } from 'react-native-media-controls';
-// import {
-//   Image, View, Text, TouchableOpacity,
-// } from 'react-native';
-// import styles from './styles';
-// import NativeModal from 'react-native-modal';
-//
-//
-// export default class VideoComponent extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       currentTime: 0,
-//       duration: 0,
-//       isFullScreen: false,
-//       isLoading: true,
-//       paused: false,
-//       playerState: PLAYER_STATES.PLAYING,
-//       screenType: 'content',
-//     };
-//   }
-//   onSeek = seek => {
-//     //Handler for change in seekbar
-//     this.videoPlayer.seek(seek);
-//   };
-//
-//   onPaused = playerState => {
-//     //Handler for Video Pause
-//     this.setState({
-//       paused: !this.state.paused,
-//       playerState,
-//     });
-//   };
-//
-//   onReplay = () => {
-//     //Handler for Replay
-//     this.setState({ playerState: PLAYER_STATES.PLAYING });
-//     this.videoPlayer.seek(0);
-//   };
-//
-//   onProgress = data => {
-//     const { isLoading, playerState } = this.state;
-//     // Video Player will continue progress even if the video already ended
-//     if (!isLoading && playerState !== PLAYER_STATES.ENDED) {
-//       this.setState({ currentTime: data.currentTime });
-//     }
-//   };
-//
-//   onLoad = data => this.setState({ duration: data.duration, isLoading: false });
-//
-//   onLoadStart = data => this.setState({ isLoading: true });
-//
-//   onEnd = () => this.setState({ playerState: PLAYER_STATES.ENDED });
-//
-//   onError = () => alert('Oh! ', error);
-//
-//   exitFullScreen = () => {
-//     alert('Exit full screen');
-//   };
-//
-//   enterFullScreen = () => {};
-//
-//   onFullScreen = () => {
-//     if (this.state.screenType == 'content')
-//       this.setState({ screenType: 'cover' });
-//     else this.setState({ screenType: 'content' });
-//   };
-//   renderToolbar = () => (
-//     <View>
-//       <Text> toolbar </Text>
-//     </View>
-//   );
-//
-//   onSeeking = currentTime => this.setState({ currentTime });
-//
-//   render() {
-//     const {
-//       isOpen, closeVideo, url
-//     } = this.props;
-//     return(
-//       <NativeModal
-//         isVisible={isOpen}
-//         hasBackdrop
-//         onBackButtonPress={closeVideo}
-//         onSwipeComplete={closeVideo}
-//         SwipeDirection={['up', 'down']}
-//       >
-//         <View>
-//           <Text>Trailer</Text>
-//           <Video
-//           onEnd={this.onEnd}
-//           onLoad={this.onLoad}
-//           onLoadStart={this.onLoadStart}
-//           onProgress={this.onProgress}
-//           paused={this.state.paused}
-//           ref={videoPlayer => (this.videoPlayer = videoPlayer)}
-//           resizeMode={this.state.screenType}
-//           onFullScreen={this.state.isFullScreen}
-//           source={{ uri: "https://www.youtube.com/embed/F95Fk255I4M?rel=0" }}
-//          />
-//         <MediaControls
-//             duration={this.state.duration}
-//             isLoading={this.state.isLoading}
-//             mainColor="#333"
-//             onFullScreen={this.onFullScreen}
-//             onPaused={this.onPaused}
-//             onReplay={this.onReplay}
-//             onSeek={this.onSeek}
-//             onSeeking={this.onSeeking}
-//             playerState={this.state.playerState}
-//             progress={this.state.currentTime}
-//             toolbar={this.renderToolbar()}
-//         />
-//         </View>
-//       </NativeModal>
-//     );
-//   }
-// }
+import React from 'react';
+import {
+  Image, View, Text, TouchableOpacity,
+} from 'react-native';
+import NativeModal from 'react-native-modal';
+import styles from './styles';
+
+const VideoModal = ({ isOpen, closeVideo, url }) => (
+  <NativeModal
+    isVisible={isOpen}
+    onBackButtonPress={closeVideo}
+    onSwipeComplete={closeVideo}
+    SwipeDirection={['up', 'down']}
+  >
+    <View><Text>Something</Text></View>
+  </NativeModal>
+);
+// <View>
+//   <Text>Trailer</Text>
+//   <Video
+//     source={{ uri: 'https://www.youtube.com/embed/F95Fk255I4M?rel=0' }}// Can be a URL or a local file.
+//     ref={(ref) => { this.player = ref; }}// Store reference
+//     onBuffer={this.onBuffer}// Callback when remote video is buffering
+//     onError={this.videoError}// Callback when video cannot be loaded
+//     style={styles.backgroundVideo}
+//   />
+// </View>
+export default VideoModal;

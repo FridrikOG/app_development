@@ -17,7 +17,6 @@ const CinemaList = (props) => {
       <TouchableOpacity onPress={() => props.navigate('UpcomingMovies')} >
         <Text>Upcoming movies</Text>
       </TouchableOpacity >
-      
       <FlatList
         numColumns={2}
         // We have to display this by alphabetical order
