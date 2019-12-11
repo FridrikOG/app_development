@@ -1,8 +1,8 @@
 import React from 'react';
-import NativeModal from 'react-native-modal';
 import {
-  View, Text, TouchableOpacity, WebView
+  Image, View, Text, TouchableOpacity,
 } from 'react-native';
+import NativeModal from 'react-native-modal';
 import styles from './styles';
 
 const VideoModal = ({ isOpen, closeVideo, url }) => (
@@ -25,7 +25,14 @@ const VideoModal = ({ isOpen, closeVideo, url }) => (
     </NativeModal>
   </View>
 );
-
-
-
+// <View>
+//   <Text>Trailer</Text>
+//   <Video
+//     source={{ uri: 'https://www.youtube.com/embed/F95Fk255I4M?rel=0' }}// Can be a URL or a local file.
+//     ref={(ref) => { this.player = ref; }}// Store reference
+//     onBuffer={this.onBuffer}// Callback when remote video is buffering
+//     onError={this.videoError}// Callback when video cannot be loaded
+//     style={styles.backgroundVideo}
+//   />
+// </View>
 export default VideoModal;
