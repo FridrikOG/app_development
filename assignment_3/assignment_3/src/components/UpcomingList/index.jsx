@@ -5,16 +5,13 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import styles from './styles';
-import VideoModal from '../VideoPlayer';
-import { Video } from 'expo-av';
-
+// import VideoModal from '../VideoPlayer';
 
 
 class UpcomingList extends React.Component {
   state = {
     upMovies: [],
     videoOpen: false,
-    currentTrailer: '',
   };
 
   // Some movies do not have trailers
@@ -51,7 +48,7 @@ class UpcomingList extends React.Component {
 
 
   render() {
-    const { videoOpen, currentTrailer } = this.state;
+    const { videoOpen } = this.state;
     
     return (
       <View>
@@ -80,7 +77,7 @@ class UpcomingList extends React.Component {
               </Text>
               <TouchableOpacity
                 style={[styles.trailerButton, (this.hasTrailer(trailers) ? {} : { opacity: 0.3 })]}
-                onPress={() => this.setState({currentTrailer: trailers[0].results[0].url, videoOpen: true})}
+                onPress={() => this.setState({videoOpen: true})}
                 disabled={!(this.hasTrailer(trailers))}
               >
                 <Text>Watch Trailer</Text>
@@ -89,11 +86,15 @@ class UpcomingList extends React.Component {
           )}
           keyextractor={ item => item.title}
         />
-        <VideoModal isOpen={videoOpen} closeVideo={() => this.setState({videoOpen: false})} url={currentTrailer} />
       </View>
     );
   }
 }
+// <VideoModal
+//   isOpen={videoOpen}
+//   closeVideo={() => this.setState({videoOpen: false})}
+//   url={" "}
+// />
 
 const mapStateToProps = (reduxStoreState) => {
   return {
