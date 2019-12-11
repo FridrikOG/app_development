@@ -34,6 +34,21 @@ class UpcomingList extends React.Component {
   //   }
   // }
 
+  getReleaseDate(title) {
+    let newArray = []
+    let movies = this.props.upcomingMovies
+    console.log("inside")
+    for (x in movies) {
+      if (movies[x].title === title){
+        console.log("logging the movie data: ", movies[x]['release-dateIS'])
+        return movies[x]['release-dateIS'];
+
+      }
+    }
+
+
+  }
+
   render() {
     const { videoOpen, currentTrailer } = this.state;
     return (
@@ -43,7 +58,7 @@ class UpcomingList extends React.Component {
         </Text>
         <FlatList
           numColumns={2}
-          data={this.props.upcomingMovies}
+          data={this.props.upcomingMovies.sort((a,b) => b['release-dateIS'].localeCompare(a['release-dateIS'] ))}
           renderItem={({
             item: {
               id, poster, title, year, trailers,
@@ -58,7 +73,7 @@ class UpcomingList extends React.Component {
               </Text>
               <Text style={styles.year}>
                 Release Date:
-                {year}
+                {this.getReleaseDate(title)}
               </Text>
               <TouchableOpacity
                 style={[styles.trailerButton, (this.hasTrailer(trailers) ? {} : { opacity: 0.3 })]}
