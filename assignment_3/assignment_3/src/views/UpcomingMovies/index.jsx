@@ -30,9 +30,4 @@ class UpcomingMovies extends React.Component {
     );
   }
 }
-// <Video
-//   isOpen={videoOpen}
-//   closeVideo={() => this.setState({ videoOpen: false })}
-//   url={"https://www.youtube.com/embed/F95Fk255I4M?rel=0"}
-// />
 export default UpcomingMovies;

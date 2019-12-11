@@ -14,9 +14,9 @@ const CinemaList = (props) => {
       <Text style={styles.title}>
         Cinema Screen
       </Text>
-      <TouchableOpacity onPress={() => props.navigate('UpcomingMovies')} >
-        <Text>Upcoming movies</Text>
-      </TouchableOpacity >
+      <TouchableOpacity style={styles.upcomingBtn} onPress={() => props.navigate('UpcomingMovies')}>
+        <Text style={styles.upcomingText}>View Upcoming movies</Text>
+      </TouchableOpacity>
       <FlatList
         numColumns={2}
         // We have to display this by alphabetical order

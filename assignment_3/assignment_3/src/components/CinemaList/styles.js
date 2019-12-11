@@ -18,6 +18,25 @@ export default StyleSheet.create({
     borderColor: blue,
     color: black,
   },
+  upcomingBtn: {
+    padding: 15,
+    margin: 10,
+    backgroundColor: orange,
+    alignSelf: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.20,
+    shadowRadius: 1.41,
+    elevation: 4,
+  },
+  upcomingText: {
+    fontSize: 20,
+    color: white,
+    fontWeight: 'bold',
+  },
   flatList: {
     width: '100%',
     marginTop: 10,
