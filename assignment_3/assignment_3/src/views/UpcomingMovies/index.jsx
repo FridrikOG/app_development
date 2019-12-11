@@ -8,7 +8,6 @@ import {
 // import data from '../../resources/data';
 import { Dimensions } from 'react-native';
 import styles from './styles';
-import Video from '../../components/videoPlayer';
 import UpcomingList from '../../components/UpcomingList';
 
 
