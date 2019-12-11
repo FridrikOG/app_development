@@ -8,11 +8,11 @@ import CinemaDetails from '../views/CinemaDetails';
 import MovieDetails from '../views/MovieDetails';
 
 const StackNavigator = createStackNavigator({
+  UpcomingMovies,
   Main,
   Cinemas,
   CinemaDetails,
   MovieDetails,
-  UpcomingMovies,
 });
 
 export default createAppContainer(StackNavigator);

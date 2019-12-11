@@ -43,7 +43,7 @@ class MovieDetails extends React.Component {
             </Text>
             <Text style={styles.purchase}>Purchase a ticket now!</Text>
             <FlatList
-              numColumns={2}
+              numColumns={3}
               data={schedule}
               style={styles.flatList}
               renderItem={({
@@ -57,22 +57,22 @@ class MovieDetails extends React.Component {
               )}
             />
             <Text style={styles.text}>
-              Plot:
+              <Text style={styles.bolding}>Plot:</Text>
               {' '}
               {movieShowingArray.plot}
             </Text>
             <Text style={styles.text}>
-              Duration:
+              <Text style={styles.bolding}>Duration:</Text>
               {' '}
               {movieShowingArray.durationMinutes}
             </Text>
             <Text style={styles.text}>
-              Year of release:
+              <Text style={styles.bolding}>Year of release:</Text>
               {' '}
               {movieShowingArray.omdb[0].Released}
             </Text>
             <Text style={styles.text}>
-              Genre:
+              <Text style={styles.bolding}>Genre:</Text>
               {' '}
               {this.getGenresString(movieShowingArray.genres)}
             </Text>

@@ -5,8 +5,17 @@ import {
 
 export default StyleSheet.create({
   cinemaInfo: {
-    backgroundColor: lightblue,
     padding: 15,
+    borderRadius: 12,
+    margin: 10,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.20,
+    shadowRadius: 1.41,
+    elevation: 2,
   },
   title: {
     fontSize: 20,

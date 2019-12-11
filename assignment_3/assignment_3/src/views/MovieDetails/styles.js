@@ -17,8 +17,14 @@ export default StyleSheet.create({
     margin: 20,
     backgroundColor: white,
     padding: 15,
-    borderWidth: 3,
-    borderColor: blue,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.20,
+    shadowRadius: 1.41,
+    elevation: 4,
   },
   movieTitle: {
     fontSize: 18,
@@ -32,6 +38,10 @@ export default StyleSheet.create({
     alignSelf: 'center',
     marginTop: 20,
   },
+  bolding: {
+    fontWeight: 'bold',
+    color: 'black',
+  },
   flatList: {
     flexDirection: 'row',
     margin: 10,
@@ -42,6 +52,8 @@ export default StyleSheet.create({
     borderColor: blue,
     borderWidth: 2,
     padding: 10,
+    marginRight: 8,
+    marginBottom: 10,
   },
   timeText: {
     textAlign: 'center',
@@ -55,7 +67,7 @@ export default StyleSheet.create({
   text: {
     marginBottom: 10,
     paddingBottom: 5,
-    borderBottomWidth: 1,
-    borderColor: darkorange,
+    color: '#404040',
+    textAlign: 'justify',
   },
 });
