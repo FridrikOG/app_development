@@ -5,13 +5,16 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import styles from './styles';
-// import VideoModal from '../VideoPlayer';
+import VideoModal from '../VideoPlayer';
+import { Video } from 'expo-av';
+
 
 
 class UpcomingList extends React.Component {
   state = {
     upMovies: [],
     videoOpen: false,
+    currentTrailer: '',
   };
 
   // Some movies do not have trailers
@@ -25,31 +28,14 @@ class UpcomingList extends React.Component {
     }
     return true;
   }
-  getTrailer(trailers) {
-    if(this.hasTrailer(trailers)) {
-      return trailers[0].results[0].url;
-    }
-    return;
-  }
-  getReleaseDate(title) {
-    let newArray = []
-    let movies = this.props.upcomingMovies
-    console.log("inside")
-    for (x in movies) {
-      if (movies[x].title === title){
-        console.log("logging the movie data: ", movies[x]['release-dateIS'])
-        return movies[x]['release-dateIS'];
-
-      }
-    }
-
-
-  }
-
+  // getTrailer(trailers){
+  //   if(this.hasTrailer(trailers)) {
+  //     this.setState({currentTrailer: trailers[0].results[0].url, videoOpen: true});
+  //   }
+  // }
 
   render() {
-    const { videoOpen } = this.state;
-    
+    const { videoOpen, currentTrailer } = this.state;
     return (
       <View>
         <Text style={styles.type}>
@@ -57,11 +43,11 @@ class UpcomingList extends React.Component {
         </Text>
         <FlatList
           numColumns={2}
-          data={this.props.upcomingMovies.sort((a,b) => b['release-dateIS'].localeCompare(a['release-dateIS'] ))}
+          data={this.props.upcomingMovies}
           renderItem={({
             item: {
               id, poster, title, year, trailers,
-            }
+            },
           }) => (
             <View style={styles.movie}>
               <View style={styles.imageWrapper}>
@@ -71,30 +57,25 @@ class UpcomingList extends React.Component {
                 {title}
               </Text>
               <Text style={styles.year}>
-                Release Date: 
-                {this.getReleaseDate(title)}
-                
+                Release Date:
+                {year}
               </Text>
               <TouchableOpacity
                 style={[styles.trailerButton, (this.hasTrailer(trailers) ? {} : { opacity: 0.3 })]}
-                onPress={() => this.setState({videoOpen: true})}
+                onPress={() => this.setState({currentTrailer: trailers[0].results[0].url, videoOpen: true})}
                 disabled={!(this.hasTrailer(trailers))}
               >
                 <Text>Watch Trailer</Text>
               </TouchableOpacity>
             </View>
           )}
-          keyextractor={ item => item.title}
+          keyextractor={(item, id) => `${id}`}
         />
+        <VideoModal isOpen={videoOpen} closeVideo={() => this.setState({videoOpen: false})} url={currentTrailer} />
       </View>
     );
   }
 }
-// <VideoModal
-//   isOpen={videoOpen}
-//   closeVideo={() => this.setState({videoOpen: false})}
-//   url={" "}
-// />
 
 const mapStateToProps = (reduxStoreState) => {
   return {
