@@ -6,15 +6,16 @@ import {
 import { connect } from 'react-redux';
 import styles from './styles';
 
+// Some movies do not have trailers
+const hasTrailer = (trailers) => {
+  // If it is undefined
+  if (trailers[0] === undefined) {
+    return false;
+  }
+  return true;
+}
 
 const UpcomingList = (props) => {
-  function hasTrailer(trailers) {
-    console.log(trailers[0]);
-    if (trailers[0] === undefined) {
-      return false;
-    }
-    return true;
-  }
   return (
     <View>
       <Text style={styles.type}>
