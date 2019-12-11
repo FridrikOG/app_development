@@ -12,36 +12,53 @@ import CinemaHandler from '../../components/Handler/cinemaHandler';
 import { connect } from 'react-redux';
 import { updateCinema } from '../../actions/cinemaActions';
 import { updateMovie } from '../../actions/movieActions';
+import { updateUpcomingMovies } from '../../actions/upcomingMoviesAction';
 
-// import data from '../../resources/data';
+
 
 class Main extends React.Component {
 
   state = {
+    buttonAvail: false,
+    // Here we have all the cinemas from the API
     cinema: {},
+    // Here we have all the movies from the API
     movies: {},
+    // Here we have all the upcoming movies from the API
+    upcomingMovies: {},
   }
 
+  // Gets all the cinemas from the API
   async getCinemas(token) {
+    // For some reason you have to send the token this way, can't send it in the url
     const url = 'http://api.kvikmyndir.is/theaters'
-    const header = { 'x-access-token ' : token }
     const test = await axios.get(url, {headers: {'x-access-token' : token}})
+    // Making sure the button isn't available until the data has been loaded
     return test;
   }
+  // Gets all the movies from the API
   async getMovies(token) {
     const url = 'http://api.kvikmyndir.is/movies'
-    const header = { 'x-access-token ' : token }
     const movies = await axios.get(url, {headers: {'x-access-token' : token}})
     return movies;
   }
+  async getUpcomingMovies(token){
+    const url = 'http://api.kvikmyndir.is/upcoming'
+    const upcomingMovies = await axios.get(url, {headers: {'x-access-token' : token}})
+    this.setState( {buttonAvail: true})
+    return upcomingMovies;
+  }
 
+
+  // Here we send a request everytime the app is opened so we can authenticate ourselves
+  // The token is active 24 hours
   async getAuthentication() {
     const promise = await axios.post('http://api.kvikmyndir.is/authenticate', { username: 'johann', password: 'johann123' });
     return promise.data.token;
   }
 
   async componentDidMount() {
-    const { updateCinema, updateMovie } = this.props;
+    const { updateCinema, updateMovie, updateUpcomingMovies } = this.props;
     const token = await this.getAuthentication();
     // Updating the cinema dictionary with updated cinemas
     const cinemas = await this.getCinemas(token);
@@ -49,17 +66,24 @@ class Main extends React.Component {
     // Doing the same for movies
     const movies = await this.getMovies(token);
     updateMovie(movies.data);
+    // Doing the same for upcoming movies
+    const upcomingMovies = await this.getUpcomingMovies(token);
+    //console.log("logging upcoming :" ,upcomingMovies.data)
+    updateUpcomingMovies(upcomingMovies.data)
+
   }
 
   render() {
     const { navigation } = this.props;
     const { navigate } = navigation;
+    const { buttonAvail } = this.state
+    console.log("logging buttonAvail: ", buttonAvail)
     return (
       <View style={styles.container}>
         <ImageBackground style={styles.backgroundImage} source={bg} resizeMode="repeat">
           <Text style={styles.title}>SOFRITO</Text>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText} onPress={() => navigate('Cinemas')}>VIEW CINEMAS</Text>
+          <TouchableOpacity disabled={!buttonAvail} style={styles.button} onPress={() => navigate('Cinemas')}>
+            <Text  style={styles.buttonText} >VIEW CINEMAS</Text>
           </TouchableOpacity>
         </ImageBackground>
       </View>
@@ -73,4 +97,4 @@ Main.propTypes = {
   }).isRequired,
 };
 
-export default connect(null, { updateCinema, updateMovie })(Main); // returns a connected component
+export default connect(null, { updateCinema, updateMovie, updateUpcomingMovies })(Main); // returns a connected component
