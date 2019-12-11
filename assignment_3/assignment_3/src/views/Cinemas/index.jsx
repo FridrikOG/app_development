@@ -17,7 +17,6 @@ class Cinemas extends React.Component {
   render() {
     const { navigation } = this.props;
     const { navigate } = navigation;
-    console.log("LOGIGNG CINEMAS: ", this.props.cinemas)
 
     return (
       <View>

@@ -14,7 +14,12 @@ const CinemaList = (props) => {
     <ScrollView style={styles.container}>
       <Text style={styles.title}>
         Cinema Screen
+
       </Text>
+      <TouchableOpacity onPress={() => props.navigate('UpcomingMovies')} >
+        <Text>Upcoming movies</Text>
+      </TouchableOpacity >
+      
       <FlatList
         numColumns={2}
         data={props.cinemas.sort((a, b) => a.name.localeCompare(b.name))}
