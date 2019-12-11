@@ -23,7 +23,7 @@ const UpcomingList = (props) => {
       </Text>
       <FlatList
         numColumns={2}
-        data={props.moviesData}
+        data={props.upcomingMovies}
         renderItem={({
           item: {
             id, poster, title, year, trailers,
@@ -58,8 +58,8 @@ const UpcomingList = (props) => {
 const mapStateToProps = (reduxStoreState) => {
   // console.log("all the stuff: ", reduxStoreState.cinema)
   return {
-    counter: 'sdflsaldf',
-    cinema: reduxStoreState.cinema
+    cinema: reduxStoreState.cinema,
+    upcomingMovies: reduxStoreState.upcomingMovies
   }
 };
 
