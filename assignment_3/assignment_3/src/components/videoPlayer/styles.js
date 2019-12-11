@@ -1,9 +1,10 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 
 
 export default StyleSheet.create({
   container: {
     backgroundColor: 'white',
+    marginTop: (Platform.OS === 'android') ? 20 : 0,
   },
   video: {
     margin: 15,

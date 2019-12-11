@@ -14,7 +14,6 @@ const VideoModal = ({ isOpen, closeVideo, url }) => (
       SwipeDirection={['up', 'down']}
     >
       <Text>Trailer</Text>
-      //webview
       <WebView
         style={ styles.WebViewContainer }
         javaScriptEnabled={true}
