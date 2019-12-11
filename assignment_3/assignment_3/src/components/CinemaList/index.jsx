@@ -9,7 +9,6 @@ import bg from '../../resources/images/movie-film.png';
 
 
 const CinemaList = (props) => {
-  // console.log("logging props ", props)
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.title}>
@@ -20,6 +19,7 @@ const CinemaList = (props) => {
       </TouchableOpacity >
       <FlatList
         numColumns={2}
+        // We have to display this by alphabetical order
         data={props.cinemas.sort((a, b) => a.name.localeCompare(b.name))}
         style={styles.flatList}
         renderItem={({
@@ -40,9 +40,10 @@ const CinemaList = (props) => {
     </ScrollView>
   );
 };
-// onPress={() => props.navigate('CinemaDetails', { cinemaId: id })}
 
+// Gets the information from the redux state
 const mapStateToProps = (reduxStoreState) => {
+  console.log("variable ", reduxStoreState.upcomingMovies)
   return {
     cinemas: reduxStoreState.cinemas,
     movies: reduxStoreState.movies,

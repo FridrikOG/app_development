@@ -22,16 +22,13 @@ class MovieDetails extends React.Component {
   }
 
   render() {
-    const { title, cinemaId, currentMoviesList } = this.props.navigation.state.params;
+    const { title, currentMoviesList } = this.props.navigation.state.params;
     // Current movie list has all the movies being shown at the cinema, we filter out
     // to only the selected title
     const array = currentMoviesList.filter(x => x.title === title);
     // First index accessed since filter always returns an array
     const movieShowingArray = array[0]
     const schedule = movieShowingArray.showtimes[0].schedule
-    let theCinema = '';
-    console.log('logging schedule :', schedule)
-    // console.log("OVER HERE : ", movieShowingArray, schedule)
 
     return (
       <ScrollView style={styles.container}>
@@ -88,6 +85,5 @@ const mapStateToProps = (reduxStoreState) => {
     movies: reduxStoreState.movies,
   }
 };
-
 
 export default connect(mapStateToProps)(MovieDetails);
