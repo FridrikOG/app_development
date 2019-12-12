@@ -13,14 +13,14 @@ class CinemaDetails extends React.Component {
   render() {
     const cinemaId = this.props.navigation.state.params.cinemaId;
     const cinemas = this.props.cinemas;
-    
+
     let cinema = ''
     for (x in cinemas) {
       if (cinemas[x].id === cinemaId){
         cinema = cinemas[x]
       }
     }
-    console.log(cinema.description);
+    console.log(cinema);
     return (
       <ScrollView>
         <View style={styles.cinemaInfo}>
@@ -38,7 +38,7 @@ class CinemaDetails extends React.Component {
           <Text style={styles.cinemaAddress}>
             Address:
             {' '}
-            {cinema.address}
+            {cinema['address	']}
           </Text>
           <Text style={styles.cinemaCity}>
             City:
