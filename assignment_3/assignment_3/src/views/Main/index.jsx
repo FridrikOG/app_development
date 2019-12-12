@@ -66,7 +66,6 @@ class Main extends React.Component {
     updateMovie(movies.data);
     // Doing the same for upcoming movies
     const upcomingMovies = await this.getUpcomingMovies(token);
-    //console.log("logging upcoming :" ,upcomingMovies.data)
     updateUpcomingMovies(upcomingMovies.data)
 
   }

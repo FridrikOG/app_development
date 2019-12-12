@@ -3,12 +3,12 @@ import React from 'react';
 import {
   View,
 } from 'react-native';
-import CinemaList from '../../components/CinemaList/index';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import CinemaList from '../../components/CinemaList/index';
 
 
 class Cinemas extends React.Component {
-
   render() {
     const { navigation } = this.props;
     const { navigate } = navigation;
@@ -21,10 +21,15 @@ class Cinemas extends React.Component {
   }
 }
 
-const mapStateToProps = (reduxStoreState) => {
-return {
+const mapStateToProps = (reduxStoreState) => ({
   cinemas: reduxStoreState.cinemas,
-}
+});
+
+
+Cinemas.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 

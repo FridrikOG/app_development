@@ -12,10 +12,7 @@ class CinemaHandler extends React.Component {
     }
 
     render() {
-      // console.log(this.props)
       const { updateCinema } = this.props;
-      // console.log("logging updateCinema: ", this.props)
-      // updateCinema(data);
       const { counter } = this.state;
       return (
         null

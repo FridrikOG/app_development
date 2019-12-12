@@ -6,8 +6,6 @@ import {
 import { connect } from 'react-redux';
 import styles from './styles';
 import VideoModal from '../VideoPlayer';
-import { Video } from 'expo-av';
-
 
 
 class UpcomingList extends React.Component {
@@ -28,11 +26,6 @@ class UpcomingList extends React.Component {
     }
     return true;
   }
-  // getTrailer(trailers){
-  //   if(this.hasTrailer(trailers)) {
-  //     this.setState({currentTrailer: trailers[0].results[0].url, videoOpen: true});
-  //   }
-  // }
 
   getReleaseDate(title) {
     let newArray = []
@@ -42,11 +35,8 @@ class UpcomingList extends React.Component {
       if (movies[x].title === title){
         console.log("logging the movie data: ", movies[x]['release-dateIS'])
         return movies[x]['release-dateIS'];
-
       }
     }
-
-
   }
 
   render() {
@@ -61,7 +51,7 @@ class UpcomingList extends React.Component {
           data={this.props.upcomingMovies.sort((a,b) => b['release-dateIS'].localeCompare(a['release-dateIS'] ))}
           renderItem={({
             item: {
-              id, poster, title, year, trailers,
+              poster, title, trailers,
             },
           }) => (
             <View style={styles.movie}>

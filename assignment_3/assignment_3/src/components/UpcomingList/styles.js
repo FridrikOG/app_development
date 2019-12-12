@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import {
-  white, blue, orange, lightorange, black, darkorange, lightblue,
+  white, blue, lightorange, black, darkorange, lightblue,
 } from '../../styles/colors';
 
 export default StyleSheet.create({
