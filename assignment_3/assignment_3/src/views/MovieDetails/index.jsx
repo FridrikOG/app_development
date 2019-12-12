@@ -22,7 +22,10 @@ class MovieDetails extends React.Component {
   }
 
   render() {
-    const { title, currentMoviesList } = this.props.navigation.state.params;
+    const { navigation } = this.props;
+    const { state } = navigation;
+    const { params } = state;
+    const { title, currentMoviesList } = params;
     // Current movie list has all the movies being shown at the cinema, we filter out
     // to only the selected title
     const array = currentMoviesList.filter((x) => x.title === title);
@@ -89,6 +92,8 @@ MovieDetails.propTypes = {
     navigate: PropTypes.func.isRequired,
     title: PropTypes.func.isRequired,
     currentMovieList: PropTypes.func.isRequired,
+    state: PropTypes.func.isRequired,
+
   }).isRequired,
 };
 

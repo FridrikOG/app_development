@@ -1,8 +1,9 @@
 import React from 'react';
 import {
-  View, Text, ScrollView, FlatList, TouchableOpacity, Image, ImageBackground
+  View, Text, ScrollView, FlatList, TouchableOpacity, Image,
 } from 'react-native';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types'; 
 import styles from './styles';
 
 
@@ -12,8 +13,8 @@ const movieInformation = (movie) => {
     thumbnail: movie.poster,
     title: movie.title,
     year: movie.year,
-    genres: movie.genres
-  }
+    genres: movie.genres,
+  };
   return newMovieInfo;
 };
 // This function is meant to solve a probem with the API
@@ -26,26 +27,27 @@ const getGenresString = (genres) => {
       if (index === 0) {
         string += genre['NameEN	'];
       } else {
-        string += ', ' + genre['NameEN	'];
+        string += `, ${  genre['NameEN	']}`;
       }
-    }
+    },
   );
   return string;
-}
+};
 
 
 const MovieList = (props) => {
+  const { cinemaId } = props;
   // List to be displayed to the user as movies belonging to the cinema
-  let moviesBelongingToCinema = [];
+  const moviesBelongingToCinema = [];
   // List that keeps track of the titles that have been added to the moviesBelongingToCinema list
-  let movieList = [];
+  const movieList = [];
   // List that has all the movies belonging to the cinema in duplicates
   // This is to be sent forward and displayed at another time since we need to be the screening tmes
-  let addCinemaMovies = []
+  const addCinemaMovies = [];
   props.movies.map(
     // eslint-disable-next-line prefer-arrow-callback
     function (item) {
-      if (item.showtimes[0].cinema.id === props.cinemaId) {
+      if (item.showtimes[0].cinema.id === cinemaId) {
         const newMovie = movieInformation(item);
         if (movieList.indexOf(newMovie.title) === -1) {
           movieList.push(newMovie.title);
@@ -53,7 +55,7 @@ const MovieList = (props) => {
         }
         addCinemaMovies.push(item);
       }
-    }
+    },
   );
 
 
@@ -66,7 +68,7 @@ const MovieList = (props) => {
         style={styles.flatList}
         renderItem={({
           item: {
-            year, thumbnail, title, genres
+            year, thumbnail, title, genres,
           },
         }) => (
           <TouchableOpacity
@@ -96,10 +98,12 @@ const MovieList = (props) => {
   );
 };
 
-const mapStateToProps = (reduxStoreState) => {
-  return {
-    cinema: reduxStoreState.cinemas,
-    movies: reduxStoreState.movies,
-  }
+const mapStateToProps = (reduxStoreState) => ({
+  cinema: reduxStoreState.cinemas,
+  movies: reduxStoreState.movies,
+});
+
+MovieList.propTypes = {
+  cinemaId: PropTypes.func.isRequired,
 };
 export default connect(mapStateToProps)(MovieList);
