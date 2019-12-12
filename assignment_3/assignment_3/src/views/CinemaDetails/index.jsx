@@ -13,14 +13,9 @@ class CinemaDetails extends React.Component {
   render() {
     const cinemaId = this.props.navigation.state.params.cinemaId;
     const cinemas = this.props.cinemas;
-
-    let cinema = ''
-    for (x in cinemas) {
-      if (cinemas[x].id === cinemaId){
-        cinema = cinemas[x]
-      }
-    }
-    console.log(cinema);
+    //filtering out the cinema with the cinemaId
+    const filtered = cinemas.filter((element) => element.id === cinemaId);
+    const cinema = filtered[0];
     return (
       <ScrollView>
         <View style={styles.cinemaInfo}>

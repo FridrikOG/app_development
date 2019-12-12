@@ -36,7 +36,7 @@ const MovieList = (props) => {
   let moviesBelongingToCinema = [];
   // List that keeps track of the titles that have been added to the moviesBelongingToCinema list
   let movieList = [];
-  // List that has all the movies belonging to the cinema in duplicates 
+  // List that has all the movies belonging to the cinema in duplicates
   // This is to be sent forward and displayed at another time since we need to be the screening tmes
   let addCinemaMovies = []
   for (x in props.movies) {
@@ -53,6 +53,8 @@ const MovieList = (props) => {
       }
     }
   }
+
+
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.title}>Movies Available</Text>
