@@ -29,6 +29,7 @@ const getGenresString = (genres) => {
       if (index === 0) {
         string += genre['NameEN	'];
       } else {
+        // This is to fix a problem caused by the API
         string += `, ${genre['NameEN	']}`;
       }
     },
@@ -50,10 +51,14 @@ const MovieList = (props) => {
     (item) => {
       if (item.showtimes[0].cinema.id === cinemaId) {
         const newMovie = movieInformation(item);
+        // If the movie is not already in the list then we add it
         if (movieList.indexOf(newMovie.title) === -1) {
+          // Keeping track of added titles
           movieList.push(newMovie.title);
+          // Movies that will be displayed
           moviesBelongingToCinema.push(newMovie);
         }
+        // All the movies belonging to the cinema
         addCinemaMovies.push(item);
       }
     },
