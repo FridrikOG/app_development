@@ -4,9 +4,6 @@ import {
 } from '../../styles/colors';
 
 export default StyleSheet.create({
-  container: {
-    paddingBottom: 40,
-  },
   type: {
     width: '100%',
     fontSize: 20,
@@ -15,6 +12,10 @@ export default StyleSheet.create({
     borderBottomWidth: 5,
     borderColor: blue,
     color: black,
+  },
+  FlatList: {
+    borderWidth: 1,
+    borderColor: 'red',
   },
   movie: {
     flexDirection: 'column',
