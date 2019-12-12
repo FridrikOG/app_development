@@ -6,8 +6,6 @@ import {
 import { connect } from 'react-redux';
 import styles from './styles';
 import VideoModal from '../VideoPlayer';
-import { Video } from 'expo-av';
-
 
 
 class UpcomingList extends React.Component {
@@ -28,25 +26,15 @@ class UpcomingList extends React.Component {
     }
     return true;
   }
-  // getTrailer(trailers){
-  //   if(this.hasTrailer(trailers)) {
-  //     this.setState({currentTrailer: trailers[0].results[0].url, videoOpen: true});
-  //   }
-  // }
-
+  //get release date for each movie
   getReleaseDate(title) {
     let newArray = []
     let movies = this.props.upcomingMovies
-    console.log("inside")
     for (x in movies) {
       if (movies[x].title === title){
-        console.log("logging the movie data: ", movies[x]['release-dateIS'])
         return movies[x]['release-dateIS'];
-
       }
     }
-
-
   }
 
   render() {
@@ -58,10 +46,11 @@ class UpcomingList extends React.Component {
         </Text>
         <FlatList
           numColumns={2}
+          //ordering the upcoming movies
           data={this.props.upcomingMovies.sort((a,b) => b['release-dateIS'].localeCompare(a['release-dateIS'] ))}
           renderItem={({
             item: {
-              id, poster, title, year, trailers,
+              poster, title, trailers,
             },
           }) => (
             <View style={styles.movie}>
@@ -76,6 +65,7 @@ class UpcomingList extends React.Component {
                 {this.getReleaseDate(title)}
               </Text>
               <TouchableOpacity
+                //if there is no trailer the button will be disabled and it will look different
                 style={[styles.trailerButton, (this.hasTrailer(trailers) ? {} : { opacity: 0.3 })]}
                 onPress={() => this.setState({currentTrailer: trailers[0].results[0].url, videoOpen: true})}
                 disabled={!(this.hasTrailer(trailers))}

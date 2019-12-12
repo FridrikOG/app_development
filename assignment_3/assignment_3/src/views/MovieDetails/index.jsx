@@ -6,29 +6,32 @@ import {
 import { connect } from 'react-redux';
 import styles from './styles';
 import bg from '../../resources/images/moviebg.jpg';
+import PropTypes from 'prop-types';
 
 class MovieDetails extends React.Component {
-
   getGenresString(genres) {
     let string = '';
-    for(index in genres) {
-      if(index == 0) {
+    for (index in genres) {
+      if (index == 0) {
         string += genres[index]['NameEN	'];
       } else {
-        string += ', ' + genres[index]['NameEN	'];
+        string += `, ${genres[index]['NameEN	']}`;
       }
     }
     return string;
   }
 
   render() {
-    const { title, currentMoviesList } = this.props.navigation.state.params;
+    const { navigation } = this.props;
+    const { state } = navigation;
+    const { params } = state;
+    const { title, currentMoviesList } = params;
     // Current movie list has all the movies being shown at the cinema, we filter out
     // to only the selected title
-    const array = currentMoviesList.filter(x => x.title === title);
+    const array = currentMoviesList.filter((x) => x.title === title);
     // First index accessed since filter always returns an array
-    const movieShowingArray = array[0]
-    const schedule = movieShowingArray.showtimes[0].schedule
+    const movieShowingArray = array[0];
+    const { schedule } = movieShowingArray.showtimes[0];
 
     return (
       <ScrollView style={styles.container}>
@@ -79,11 +82,19 @@ class MovieDetails extends React.Component {
     );
   }
 }
-const mapStateToProps = (reduxStoreState) => {
-  return {
-    cinemas: reduxStoreState.cinemas,
-    movies: reduxStoreState.movies,
-  }
+const mapStateToProps = (reduxStoreState) => ({
+  cinemas: reduxStoreState.cinemas,
+  movies: reduxStoreState.movies,
+});
+
+MovieDetails.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+    title: PropTypes.func.isRequired,
+    currentMovieList: PropTypes.func.isRequired,
+    state: PropTypes.func.isRequired,
+
+  }).isRequired,
 };
 
 export default connect(mapStateToProps)(MovieDetails);

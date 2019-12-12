@@ -1,14 +1,14 @@
 import React from 'react';
 import NativeModal from 'react-native-modal';
 import {
-  View, Text, TouchableOpacity, Image
+  View, Text, TouchableOpacity, Image,
 } from 'react-native';
 import { WebView } from 'react-native-webview';
 import styles from './styles';
-import back from '../../resources/images/left-arroww.png'
+import back from '../../resources/images/left-arroww.png';
 
 const VideoModal = ({ isOpen, closeVideo, url }) => (
-  <View style={styles.container}>
+  <View style={(isOpen ? { width: 500, heigh: 500 } : {})}>
     <NativeModal
       isVisible={isOpen}
       hasBackDrop
@@ -18,8 +18,8 @@ const VideoModal = ({ isOpen, closeVideo, url }) => (
     >
       <WebView
         style={styles.WebViewContainer}
-        javaScriptEnabled={true}
-        domStorageEnabled={true}
+        javaScriptEnabled
+        domStorageEnabled
         source={{ uri: url }}
       />
       <TouchableOpacity style={styles.closeBtn} onPress={closeVideo}>
@@ -29,7 +29,6 @@ const VideoModal = ({ isOpen, closeVideo, url }) => (
     </NativeModal>
   </View>
 );
-
 
 
 export default VideoModal;

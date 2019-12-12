@@ -1,20 +1,16 @@
 import { StyleSheet } from 'react-native';
 import {
-  white, blue, orange, lightorange, black, darkorange, lightblue,
+  white, blue, lightorange, black, darkorange, lightblue,
 } from '../../styles/colors';
 
 export default StyleSheet.create({
-  container: {
-    paddingBottom: 40,
-  },
   type: {
     width: '100%',
     fontSize: 20,
     padding: 10,
-    backgroundColor: lightblue,
-    borderBottomWidth: 5,
-    borderColor: blue,
+    backgroundColor: blue,
     color: black,
+    fontWeight: 'bold',
   },
   movie: {
     flexDirection: 'column',
