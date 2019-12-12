@@ -13,10 +13,9 @@ export default StyleSheet.create({
     width: '100%',
     fontSize: 20,
     padding: 10,
-    backgroundColor: lightblue,
-    borderBottomWidth: 5,
-    borderColor: blue,
+    backgroundColor: blue,
     color: black,
+    fontWeight: 'bold',
   },
   upcomingBtn: {
     padding: 15,

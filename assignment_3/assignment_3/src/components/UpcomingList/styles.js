@@ -8,14 +8,9 @@ export default StyleSheet.create({
     width: '100%',
     fontSize: 20,
     padding: 10,
-    backgroundColor: lightblue,
-    borderBottomWidth: 5,
-    borderColor: blue,
+    backgroundColor: blue,
     color: black,
-  },
-  FlatList: {
-    borderWidth: 1,
-    borderColor: 'red',
+    fontWeight: 'bold',
   },
   movie: {
     flexDirection: 'column',
