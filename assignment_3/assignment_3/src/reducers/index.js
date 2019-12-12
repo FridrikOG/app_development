@@ -5,8 +5,8 @@ import currentMovies from './currentCinemaMoviesReducer';
 import upcomingMovies from './upcomingMoviesReducer';
 
 export default combineReducers({
-    cinemas,
-    movies,
-    currentMovies,
-    upcomingMovies
+  cinemas,
+  movies,
+  currentMovies,
+  upcomingMovies,
 });
