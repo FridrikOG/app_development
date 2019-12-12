@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import {
-  View, Text, ScrollView, FlatList, Image, TouchableOpacity
+ ScrollView,
 } from 'react-native';
 // import data from '../../resources/data';
 import { Dimensions } from 'react-native';
@@ -19,8 +19,6 @@ class UpcomingMovies extends React.Component {
   render() {
     const { navigation } = this.props;
     const { navigate } = navigation;
-    const { upMovies, videoOpen } = this.state;
-    const moviesData = upMovies.data;
 
     return (
       <ScrollView style={styles.container}>
