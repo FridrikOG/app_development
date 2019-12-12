@@ -20,13 +20,16 @@ const movieInformation = (movie) => {
 // Where the string has gaps
 const getGenresString = (genres) => {
   let string = '';
-  for(index in genres) {
-    if(index == 0) {
-      string += genres[index]['NameEN	'];
-    } else {
-      string += ', ' + genres[index]['NameEN	'];
+  genres.map(
+    // eslint-disable-next-line prefer-arrow-callback
+    function (genre, index) {
+      if (index === 0) {
+        string += genre['NameEN	'];
+      } else {
+        string += ', ' + genre['NameEN	'];
+      }
     }
-  }
+  );
   return string;
 }
 
@@ -39,20 +42,19 @@ const MovieList = (props) => {
   // List that has all the movies belonging to the cinema in duplicates
   // This is to be sent forward and displayed at another time since we need to be the screening tmes
   let addCinemaMovies = []
-  for (x in props.movies) {
-    for (y in props.movies[x].showtimes) {
-      // Since movies belonging to a cinema can come in duplicates due to
-      // Duplicate viewing we have to make sure we only get one title
-      if(props.movies[x].showtimes[0].cinema.id === props.cinemaId ) {
-        let newMovie = movieInformation(props.movies[x]);
-        if(movieList.indexOf(newMovie.title) === -1) {
+  props.movies.map(
+    // eslint-disable-next-line prefer-arrow-callback
+    function (item) {
+      if (item.showtimes[0].cinema.id === props.cinemaId) {
+        const newMovie = movieInformation(item);
+        if (movieList.indexOf(newMovie.title) === -1) {
           movieList.push(newMovie.title);
           moviesBelongingToCinema.push(newMovie);
         }
-        addCinemaMovies.push(props.movies[x])
+        addCinemaMovies.push(item);
       }
     }
-  }
+  );
 
 
   return (
