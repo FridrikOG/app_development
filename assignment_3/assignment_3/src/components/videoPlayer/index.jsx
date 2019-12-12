@@ -8,7 +8,7 @@ import styles from './styles';
 import back from '../../resources/images/left-arroww.png';
 
 const VideoModal = ({ isOpen, closeVideo, url }) => (
-  <View style={styles.container}>
+  <View style={(isOpen ? { width: 500, heigh: 500 } : {})}>
     <NativeModal
       isVisible={isOpen}
       hasBackDrop
