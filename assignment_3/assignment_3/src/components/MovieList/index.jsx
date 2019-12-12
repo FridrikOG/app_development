@@ -1,9 +1,11 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable react/prop-types */
 import React from 'react';
 import {
   View, Text, ScrollView, FlatList, TouchableOpacity, Image,
 } from 'react-native';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types'; 
+import PropTypes from 'prop-types';
 import styles from './styles';
 
 
@@ -27,7 +29,7 @@ const getGenresString = (genres) => {
       if (index === 0) {
         string += genre['NameEN	'];
       } else {
-        string += `, ${  genre['NameEN	']}`;
+        string += `, ${genre['NameEN	']}`;
       }
     },
   );
@@ -36,7 +38,7 @@ const getGenresString = (genres) => {
 
 
 const MovieList = (props) => {
-  const { cinemaId } = props;
+  const { navigate, cinemaId, movies } = props;
   // List to be displayed to the user as movies belonging to the cinema
   const moviesBelongingToCinema = [];
   // List that keeps track of the titles that have been added to the moviesBelongingToCinema list
@@ -44,9 +46,8 @@ const MovieList = (props) => {
   // List that has all the movies belonging to the cinema in duplicates
   // This is to be sent forward and displayed at another time since we need to be the screening tmes
   const addCinemaMovies = [];
-  props.movies.map(
-    // eslint-disable-next-line prefer-arrow-callback
-    function (item) {
+  movies.map(
+    (item) => {
       if (item.showtimes[0].cinema.id === cinemaId) {
         const newMovie = movieInformation(item);
         if (movieList.indexOf(newMovie.title) === -1) {
@@ -73,7 +74,7 @@ const MovieList = (props) => {
         }) => (
           <TouchableOpacity
             style={styles.movie}
-            onPress={() => props.navigate('MovieDetails', { cinemaId: props.cinemaId, title, currentMoviesList: addCinemaMovies })}
+            onPress={() => navigate('MovieDetails', { cinemaId: props.cinemaId, title, currentMoviesList: addCinemaMovies })}
           >
             <Image style={styles.image} source={{ uri: thumbnail }} />
             <View style={styles.details}>
@@ -104,6 +105,12 @@ const mapStateToProps = (reduxStoreState) => ({
 });
 
 MovieList.propTypes = {
-  cinemaId: PropTypes.func.isRequired,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+    title: PropTypes.func.isRequired,
+    cinemas: PropTypes.func.isRequired,
+    state: PropTypes.func.isRequired,
+  }).isRequired,
 };
+
 export default connect(mapStateToProps)(MovieList);

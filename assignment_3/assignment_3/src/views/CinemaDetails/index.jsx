@@ -14,7 +14,6 @@ import styles from './styles';
 class CinemaDetails extends React.Component {
   render() {
     const { navigation } = this.props;
-    const { navigate } = navigation;
     const { state } = navigation;
     const { params } = state;
     const { cinemaId } = params;
@@ -57,7 +56,7 @@ class CinemaDetails extends React.Component {
             {cinema.phone}
           </Text>
         </View>
-        <MovieList cinemaId={cinemaId} navigate={{ navigate }} />
+        <MovieList cinemaId={cinemaId} navigate={navigation.navigate} />
       </ScrollView>
     );
   }
