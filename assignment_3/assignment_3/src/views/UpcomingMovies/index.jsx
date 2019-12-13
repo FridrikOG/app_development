@@ -1,12 +1,10 @@
 /* eslint-disable react/prefer-stateless-function */
 import React from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import {
- ScrollView,
+  ScrollView,
 } from 'react-native';
 // import data from '../../resources/data';
-import { Dimensions } from 'react-native';
 import UpcomingList from '../../components/UpcomingList';
 
 
