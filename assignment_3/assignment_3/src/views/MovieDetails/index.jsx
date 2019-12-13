@@ -8,6 +8,8 @@ import styles from './styles';
 import bg from '../../resources/images/moviebg.jpg';
 import PropTypes from 'prop-types';
 
+// Shows details about a single movie
+// Should show all the viewing times for it
 class MovieDetails extends React.Component {
   getGenresString(genres) {
     let string = '';

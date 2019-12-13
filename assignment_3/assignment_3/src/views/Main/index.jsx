@@ -13,7 +13,8 @@ import { updateMovie } from '../../actions/movieActions';
 import { updateUpcomingMovies } from '../../actions/upcomingMoviesAction';
 
 
-
+// This class acts as a portal to the rest of the app
+// It loads all the data using reducers
 class Main extends React.Component {
 
   state = {

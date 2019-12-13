@@ -61,6 +61,7 @@ class CinemaDetails extends React.Component {
     );
   }
 }
+// Getting information about the state using Redux
 const mapStateToProps = (reduxStoreState) => ({
   cinemas: reduxStoreState.cinemas,
 });
