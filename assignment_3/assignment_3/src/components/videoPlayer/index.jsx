@@ -4,6 +4,7 @@ import {
   View, Text, TouchableOpacity, Image,
 } from 'react-native';
 import { WebView } from 'react-native-webview';
+import PropTypes from 'prop-types';
 import styles from './styles';
 import back from '../../resources/images/left-arroww.png';
 
@@ -29,6 +30,12 @@ const VideoModal = ({ isOpen, closeVideo, url }) => (
     </NativeModal>
   </View>
 );
+
+VideoModal.propTypes = {
+  isOpen: PropTypes.func.isRequired,
+  closeVideo: PropTypes.func.isRequired,
+  url: PropTypes.func.isRequired,
+};
 
 
 export default VideoModal;
