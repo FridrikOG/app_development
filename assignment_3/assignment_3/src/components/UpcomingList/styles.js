@@ -48,6 +48,7 @@ export default StyleSheet.create({
     padding: 10,
     width: '100%',
     textAlign: 'center',
+    flexDirection: 'column',
   },
   image: {
     width: 120,

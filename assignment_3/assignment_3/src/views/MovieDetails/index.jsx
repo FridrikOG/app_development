@@ -69,7 +69,7 @@ class MovieDetails extends React.Component {
             <Text style={styles.text}>
               <Text style={styles.bolding}>Year of release:</Text>
               {' '}
-              {movieShowingArray.omdb[0].Released}
+              {movieShowingArray.year}
             </Text>
             <Text style={styles.text}>
               <Text style={styles.bolding}>Genre:</Text>
