@@ -61,8 +61,8 @@ class UpcomingList extends React.Component {
                 {title}
               </Text>
               <Text style={styles.year}>
-                <Text>Release Date:</Text>
-                <Text>{this.getReleaseDate(title)}</Text>
+                Release Date:
+                {this.getReleaseDate(title)}
               </Text>
               <TouchableOpacity
                 //if there is no trailer the button will be disabled and it will look different
