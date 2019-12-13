@@ -28,6 +28,7 @@ class Main extends React.Component {
 
   // Gets all the cinemas from the API
   async getCinemas(token) {
+    console.disableYellowBox = true;
     // For some reason you have to send the token this way, can't send it in the url
     const url = 'http://api.kvikmyndir.is/theaters'
     const test = await axios.get(url, {headers: {'x-access-token' : token}})
@@ -36,7 +37,10 @@ class Main extends React.Component {
   // Gets all the movies from the API
   async getMovies(token) {
     const url = 'http://api.kvikmyndir.is/movies'
-    const movies = await axios.get(url, {headers: {'x-access-token' : token}})
+    const movies = await axios.get(url, {headers: {'x-access-token' : token, 'pragma': 'no-cache',
+    'cache-control': 'no-cache'}})
+    console.log("Logigng movies: ", movies.data[13])
+
     return movies;
   }
   async getUpcomingMovies(token){

@@ -49,17 +49,19 @@ const MovieList = (props) => {
   const addCinemaMovies = [];
   movies.map(
     (item) => {
-      if (item.showtimes[0].cinema.id === cinemaId) {
-        const newMovie = movieInformation(item);
-        // If the movie is not already in the list then we add it
-        if (movieList.indexOf(newMovie.title) === -1) {
-          // Keeping track of added titles
-          movieList.push(newMovie.title);
-          // Movies that will be displayed
-          moviesBelongingToCinema.push(newMovie);
-        }
+      for (x in item.showtimes){
+        if (item.showtimes[x].cinema.id === cinemaId) {
+          const newMovie = movieInformation(item);
+          // If the movie is not already in the list then we add it
+          if (movieList.indexOf(newMovie.title) === -1) {
+            // Keeping track of added titles
+            movieList.push(newMovie.title);
+            // Movies that will be displayed
+            moviesBelongingToCinema.push(newMovie);
+          }
         // All the movies belonging to the cinema
         addCinemaMovies.push(item);
+      }
       }
     },
   );
